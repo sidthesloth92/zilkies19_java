@@ -1,89 +1,126 @@
 package io.ztech.collections;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 public class SailorProblem {
-	
-	private static HashMap<Integer, ArrayList<Integer>> groupA = new HashMap<>();
-	private static HashMap<Integer, ArrayList<Integer>> groupB = new HashMap<>();
-	
+
+	private HashMap<Integer, ArrayList<Integer>> groupA = new HashMap<>();
+	private HashMap<Integer, ArrayList<Integer>> groupB = new HashMap<>();
+	private HashMap<Integer, String> fruitMap = new HashMap<>();
+	private HashMap<Integer, String> fishMap = new HashMap<>();
+
 	public void getCount(int numberOfSailors) {
 		Scanner sc = new Scanner(System.in);
-		for (int i = 0; i < numberOfSailors/2; i++) {
+		System.out.print("\nEnter the number of fruits: ");
+		int numberOfFruits = sc.nextInt();
+		sc.nextLine();
+		System.out.println("\nEnter the fruit types: ");
+		for (int i = 0; i < numberOfFruits; i++) {
+			fruitMap.put(i, sc.nextLine());
+		}
+		for (int i = 0; i < numberOfSailors / 2; i++) {
 			System.out.println("\nSailor " + i + ":");
-			int total = 0;
 			ArrayList<Integer> list = new ArrayList<>();
-			System.out.print("\nEnter the number of apples you have found: ");
-			int apples = sc.nextInt();
-			total += apples;
-			list.add(apples);
-			System.out.print("Enter the number of oranges you have found: ");
-			int oranges = sc.nextInt();
-			total += oranges;
-			list.add(oranges);
-			System.out.print("Enter the number of mangos you have found: ");
-			int mangoes = sc.nextInt();
-			total += mangoes;
-			list.add(mangoes);
-			list.add(total);
+			for (int j = 0; j < numberOfFruits; j++) {
+				System.out.print("Enter the number of " + fruitMap.get(j) + " you have found: ");
+				list.add(sc.nextInt());
+			}
 			groupA.put(i, list);
 		}
-		for (int i = numberOfSailors/2; i < numberOfSailors; i++) {
+
+		System.out.println("\nEnter the number of fish: ");
+		int numberOfFish = sc.nextInt();
+		sc.nextLine();
+		System.out.println("\nEnter the fish types: ");
+		for (int i = 0; i < numberOfFish; i++) {
+			fishMap.put(i, sc.nextLine());
+		}
+
+		for (int i = numberOfSailors / 2; i < numberOfSailors; i++) {
 			System.out.println("\nSailor " + i + ":");
-			int total = 0;
 			ArrayList<Integer> list = new ArrayList<>();
-			System.out.print("\nEnter the number of large fish you have found: ");
-			int largeFish = sc.nextInt();
-			total += largeFish;
-			list.add(largeFish);
-			System.out.print("Enter the number of small fish you have found: ");
-			int smallFish = sc.nextInt();
-			total += smallFish;
-			list.add(smallFish);
-			list.add(total);
+			for (int j = 0; j < numberOfFish; j++) {
+				System.out.print("Enter the number of " + fishMap.get(j) + " you have found: ");
+				list.add(sc.nextInt());
+			}
 			groupB.put(i, list);
-		}		
+		}
 	}
-	
+
 	public void printCount() {
-		int totalApples = 0, totalOranges = 0, totalMangoes = 0, totalFruits = 0;
-		int totalLargeFish = 0, totalSmallFish = 0, totalFish = 0;
+		groupA = sortByValues(groupA);
+		groupB = sortByValues(groupB);
+
+		int groupATotal = 0, groupBTotal = 0;
+		Iterator<Map.Entry<Integer, ArrayList<Integer>>> itr = groupA.entrySet().iterator();
 		System.out.println("\nGroup A:");
-		for (Map.Entry<Integer, ArrayList<Integer>> m : groupA.entrySet()) {
+		while (itr.hasNext()) {
+			Map.Entry<Integer, ArrayList<Integer>> m = itr.next();
 			ArrayList<Integer> list = m.getValue();
-			System.out.println("\nSailor " + m.getKey() + ":");
-			System.out.println("Number of apples: " + list.get(0));
-			System.out.println("Number of oranges: " + list.get(1));
-			System.out.println("Number of mangoes: " + list.get(2));
-			System.out.println("Total fruits collected by sailor " + m.getKey() + " = " + list.get(3));
-			totalApples += list.get(0);
-			totalOranges += list.get(1);
-			totalMangoes += list.get(2);
-			totalFruits += list.get(3);
+			System.out.println("\nSailor " + m.getKey() + ":\n----------");
+			int totalFruits = 0;
+			for (int i = 0; i < list.size(); i++) {
+				System.out.println(fruitMap.get(i) + ": " + list.get(i));
+				totalFruits += list.get(i);
+			}
+			System.out.println("Total number of fruits: " + totalFruits);
+			groupATotal += totalFruits;
 		}
+
+		itr = groupB.entrySet().iterator();
 		System.out.println("\nGroup B:");
-		for (Map.Entry<Integer, ArrayList<Integer>> m : groupB.entrySet()) {
+		while (itr.hasNext()) {
+			Map.Entry<Integer, ArrayList<Integer>> m = itr.next();
 			ArrayList<Integer> list = m.getValue();
-			System.out.println("\nSailor " + m.getKey() + ":");
-			System.out.println("Number of large fish: " + list.get(0));
-			System.out.println("Number of small fish: " + list.get(1));
-			System.out.println("Total fish collected by sailor " + m.getKey() + " = " + list.get(2));
-			totalLargeFish += list.get(0);
-			totalSmallFish += list.get(1);
-			totalFish += list.get(2);
+			System.out.println("\nSailor " + m.getKey() + ":\n----------");
+			int totalFish = 0;
+			for (int i = 0; i < list.size(); i++) {
+				System.out.println(fishMap.get(i) + ": " + list.get(i));
+				totalFish += list.get(i);
+			}
+			System.out.println("Total number of fish: " + totalFish);
+			groupBTotal += totalFish;
 		}
-		System.out.println("\nTotal number of apples collected = " + totalApples);
-		System.out.println("Total number of oranges collected = " + totalOranges);
-		System.out.println("Total number of mangoes collected = " + totalMangoes);
-		System.out.println("Total number of large fish collected = " + totalLargeFish);
-		System.out.println("Total number of small fish collected = " + totalSmallFish);
-		System.out.println("\nTotal number of fruits collected = " + totalFruits);
-		System.out.println("Total number of fish collected = " + totalFish);		
+		System.out.println("\nTotal number of fruits collected = " + groupATotal);
+		System.out.println("Total number of fish collected = " + groupBTotal);
 	}
-	
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private static HashMap<Integer, ArrayList<Integer>> sortByValues(HashMap<Integer, ArrayList<Integer>> map) {
+		List list = new LinkedList(map.entrySet());
+		
+		Collections.sort(list, new CountComparator());
+
+		HashMap sortedHashMap = new LinkedHashMap();
+		for (Iterator it = list.iterator(); it.hasNext();) {
+			Map.Entry entry = (Map.Entry) it.next();
+			sortedHashMap.put(entry.getKey(), entry.getValue());
+		}
+		return sortedHashMap;
+	}
+
+/*	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public HashMap sort(HashMap group) {
+		List list = new LinkedList(group.entrySet());
+		Collections.sort(list, new CountComparator());
+
+		HashMap<Integer, ArrayList<Integer>> sortedGroup = new HashMap<Integer, ArrayList<Integer>>();
+		for (Iterator it = list.iterator(); it.hasNext();) {
+			Map.Entry entry = (Map.Entry) it.next();
+			sortedGroup.put((Integer) entry.getKey(), (ArrayList<Integer>) entry.getValue());
+		}
+		return sortedGroup;
+	}
+*/
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Enter the total number of sailors: ");
