@@ -1,0 +1,94 @@
+create database ZilkerDB;
+
+use ZilkerDB;
+
+create table customer(cust_id int PRIMARY KEY NOT NULL CHECK(cust_id >= 100 AND cust_id <= 10000), cust_name varchar(25), annual_revenue int DEFAULT 20000, cust_type varchar(20) CHECK(cust_type = 'manufacturer' OR cust_type = 'wholesaler' OR cust_type = 'retailer'));
+
+insert into customer(cust_id,cust_name,annual_revenue,cust_type) values(100,'Revathi',1000000,'manufacturer'),(101,'Richa',1800000,'wholesaler');
+
+insert into customer(cust_id,cust_name,annual_revenue,cust_type) values(102,'Rishi',1000000,'retailer'),(103,'Rijesh',4000000,'wholesaler'),(104,'Kalyan',4800000,'wholesaler'),(311,'Karthik',5500000,'retailer');
+
+create table truck(truck_num int PRIMARY KEY NOT NULL,driver_name varchar(25));
+
+create table city(city_name varchar(25),population int);
+
+insert into city VALUES('London',100000000);
+
+alter table city modify column population bigint;
+
+insert into city(city_name,population) VALUES('Paris',120000000),('Rome',200000000),('Panama City',1230000000),('San Fransisco',20000000),('Sioux City',5000000000),('Manhattan',10000000),('Los Angeles',7000),('Baltimore',2000),('Denver',1000),('St.Louis',5000);
+
+insert into truck(truck_num,driver_name) VALUES(100,'Jensen'),(101,'Sasi'),(102,'Hrithik'),(103,'Jake Stinson');
+
+create table shipment(shipment_num int PRIMARY KEY NOT NULL,cust_id int,weight int DEFAULT 10 CHECK(weight < 100),truck_num int,destination varchar(25),ship_date date,FOREIGN KEY(cust_id) REFERENCES customer(cust_id) ON DELETE CASCADE,FOREIGN KEY(truck_num) REFERENCES truck(truck_num) ON DELETE SET NULL);
+
+alter table city ADD CONSTRAINT PK_CityName PRIMARY KEY(city_name);
+
+alter table shipment ADD CONSTRAINT FK_Destination FOREIGN KEY(destination) REFERENCES city(city_name) ON DELETE SET NULL;
+
+insert into shipment(shipment_num,cust_id,weight,truck_num,destination,ship_date) VALUES(100,100,500,100,'London',null);
+
+insert into shipment(shipment_num,cust_id,weight,truck_num,destination,ship_date) VALUES(101,101,100,102,'Paris',null);
+
+insert into shipment(shipment_num,cust_id,weight,truck_num,destination,ship_date) VALUES(102,101,300,103,'London',null),(103,101,10,102,'Panama City','2003-12-12'),(104,101,20,101,'Los Angeles',null),(105,102,200,102,'Rome',null),(106,100,50,101,'Sioux City','2003-09-18'),(107,104,500,100,'Manhattan',null),(108,103,50,103,'San Fransisco',null),(109,104,25,101,'San Fransisco',null),(110,102,200,103,'London','1998-10-11'),(111,103,100,101,'London','1999-09-09'),(112,104,500,100,'London','1988-06-18'),(113,104,200,100,'London','1998-10-11'),(114,104,50,103,'Manhattan','2003-05-29');
+
+insert into shipment(shipment_num,cust_id,weight,truck_num,destination,ship_date) VALUES(115,100,75,103,'Los Angeles','2002-09-17'),(116,101,55,102,'Baltimore','2002-06-01'),(117,103,45,101,'Paris',null),(118,103,45,100,'Rome',null),(119,103,45,102,'Los Angeles',null),(120,104,45,102,'London',null),(121,100,150,102,'Sioux City',null),(122,101,500,102,'Manhattan',null),(123,102,250,102,'San Fransisco','2002-07-31'),(124,311,0.5,102,'Denver',null),(125,311,100,102,'St.Louis',null);
+
+alter table shipment modify column weight float;
+
+update shipment set weight = 0.5 where shipment_num = 124;
+
+
+Queries:
+
+a) select distinct cust_name from customer join shipment on customer.cust_id = shipment.cust_id where destination = 'Sioux City';
+
+b) select distinct destination from customer join shipment on customer.cust_id = shipment.cust_id where annual_revenue < 1000000;
+
+c) select distinct city_name,population from city join shipment on city.city_name = shipment.destination where weight > 100;
+
+d) select distinct cust_name from customer join shipment on customer.cust_id = shipment.cust_id where annual_revenue  > 5000000 AND weight < 1;
+
+e) select distinct cust_name from customer join shipment on customer.cust_id = shipment.cust_id where (annual_revenue  > 5000000 AND weight < 1) OR destination = 'San Fransisco';
+
+f) select driver_name from customer join shipment on customer.cust_id = shipment.cust_id join truck on shipment.truck_num = truck.truck_num join city on shipment.destination = city.city_name where annual_revenue > 4000000 and population < 10000;
+
+g) select city_name from city join shipment on city.city_name = shipment.destination join customer on customer.cust_id = shipment.cust_id where annual_revenue > 15000000;
+
+h) select distinct driver_name from shipment join truck on shipment.truck_num = truck.truck_num where weight >100;
+
+i) select distinct cust_name, annual_revenue from shipment join customer on shipment.cust_id = customer.cust_id where weight > 100;
+
+j) select distinct cust_name,annual_revenue from customer join shipment on customer.cust_id = shipment.cust_id join truck on shipment.truck_num = truck.truck_num where driver_name = 'Jensen';
+
+k) select cust_name,cust_id from(select cust_id,count(distinct truck_num)as truck_count from shipment group by cust_id) as t natural join customer where t.truck_count = (select count(*) from truck);
+
+l) select destination from(select destination,count(distinct cust_id) as cust_count from shipment group by destination) as t where t.cust_count = (select count(*) from customer);
+
+m) select driver_name,truck_num from(select truck_num,count(distinct destination) as dest_count from shipment group by truck_num) as t natural join truck where t.dest_count = (select count(*) from city);
+
+n) select distinct cust_name from customer join shipment on customer.cust_id = shipment.cust_id where cust_type = 'manufacturer' OR destination = 'St.Louis';
+
+o) select distinct city_name from shipment join city on shipment.destination = city.city_name where population > 1000000 and cust_id = 311 and weight = 100;
+
+p) select distinct cust_name,annual_revenue from customer join shipment on customer.cust_id = shipment.cust_id join truck on shipment.truck_num = truck.truck_num where driver_name = 'Jensen';
+
+q) select distinct cust_name from customer join shipment on customer.cust_id = shipment.cust_id join city on shipment.destination = city.city_name where annual_revenue > 10000000 and weight < 1 and population < 10000;
+
+r.a) create view revenue_one as select * from customer where annual_revenue < 1000000;
+
+r.b) create view revenue_two as select * from customer where annual_revenue between 1000000 and 5000000;
+
+r.c) create view revenue_three as select * from customer where annual_revenue > 5000000;
+
+s.a) select driver_name from revenue_three join shipment on revenue_three.cust_id = shipment.cust_id join truck on shipment.truck_num = truck.truck_num where destination = 'Denver';
+
+s.b) select distinct city_name,population from revenue_two join shipment on revenue_two.cust_id = shipment.cust_id join city on city.city_name = shipment.destination;
+
+s.c) select driver_name,population from revenue_two join shipment on revenue_two.cust_id = shipment.cust_id join city on city.city_name = shipment.destination join truck on shipment.truck_num = truck.truck_num where annual_revenue < 1000000;
+
+
+
+
+
+
