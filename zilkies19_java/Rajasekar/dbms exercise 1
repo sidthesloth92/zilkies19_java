@@ -1,0 +1,734 @@
+rajasekar@rajasekar-Lenovo-V110-15IKB:~$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 3
+Server version: 5.7.23-0ubuntu0.16.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use assignment
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables
+    -> ;
++----------------------+
+| Tables_in_assignment |
++----------------------+
+| city                 |
+| customer             |
+| truck                |
++----------------------+
+3 rows in set (0.00 sec)
+
+mysql> desc customer;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| custid        | int(5)      | YES  |     | NULL    |       |
+| custname      | varchar(50) | YES  |     | NULL    |       |
+| annualrevenue | int(30)     | YES  |     | 20000   |       |
+| custtype      | varchar(30) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc city;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| cityname   | varchar(30) | YES  |     | NULL    |       |
+| population | int(20)     | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> create table shipment(
+    -> shipment int(30),
+    -> custid int(5),
+    -> weight int(5),
+    -> truck int(5),
+    -> designation varchar(30),
+    -> shipdate varchar(30)
+    -> ,FOREIGN KEY (custid) REFERENCES customer(custid)
+    -> );
+ERROR 1215 (HY000): Cannot add foreign key constraint
+mysql> create table shipment( shipment int(30), custid int(5), weight int(5), truck int(5), designation varchar(30), shipdate varchar(30));
+Query OK, 0 rows affected (0.43 sec)
+
+mysql> desc customer
+    -> ;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| custid        | int(5)      | YES  |     | NULL    |       |
+| custname      | varchar(50) | YES  |     | NULL    |       |
+| annualrevenue | int(30)     | YES  |     | 20000   |       |
+| custtype      | varchar(30) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into customer values(100,'Revathi',1000000,'manufacturer');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into customer values(101,'Richa',1800000,'wholesaler');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into customer values(102,'Rishi',1000000,'retailer');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into customer values(103,'Rijesh',4000000,'wholesaler');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into customer values(104,'kalyan',4800000,'wholesaler');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into customer values(311,'karthik',5500000,'retailer');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from customer;
++--------+----------+---------------+--------------+
+| custid | custname | annualrevenue | custtype     |
++--------+----------+---------------+--------------+
+|    100 | Revathi  |       1000000 | manufacturer |
+|    101 | Richa    |       1800000 | wholesaler   |
+|    102 | Rishi    |       1000000 | retailer     |
+|    103 | Rijesh   |       4000000 | wholesaler   |
+|    104 | kalyan   |       4800000 | wholesaler   |
+|    311 | karthik  |       5500000 | retailer     |
++--------+----------+---------------+--------------+
+6 rows in set (0.01 sec)
+
+mysql> desc shipment;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| shipment    | int(30)     | YES  |     | NULL    |       |
+| custid      | int(5)      | YES  |     | NULL    |       |
+| weight      | int(5)      | YES  |     | NULL    |       |
+| truck       | int(5)      | YES  |     | NULL    |       |
+| designation | varchar(30) | YES  |     | NULL    |       |
+| shipdate    | varchar(30) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> insert into shipment values(100,100,500,100,'London','null');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into shipment values(101,101,100,102,'Paris','null');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into shipment values(102^[[2~^[[2~^[[2~^[[2~^[[2~^[[2~^[[2~^[[2~^[[1]+  Stopped                 mysql -u root -p
+rajasekar@rajasekar-Lenovo-V110-15IKB:~$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 4
+Server version: 5.7.23-0ubuntu0.16.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> select *from shipment;
+ERROR 1046 (3D000): No database selected
+mysql> use assignment;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select *from shipment;
++----------+--------+--------+-------+-------------+----------+
+| shipment | custid | weight | truck | designation | shipdate |
++----------+--------+--------+-------+-------------+----------+
+|      100 |    100 |    500 |   100 | London      | null     |
+|      101 |    101 |    100 |   102 | Paris       | null     |
++----------+--------+--------+-------+-------------+----------+
+2 rows in set (0.00 sec)
+
+mysql> insert into shipment values(102,101,300,103,'London','null');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into shipment values(103,101,10,102,'Panama City','12-Dec-03');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into shipment values(104,101,20,101,'Los Angeles','12-Dec-03');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> update shipment set shipdate='null' where designation='Los Angeles';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> insert into shipment values(105,102,200,102,'Rome','null');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into shipment values(106,100,50,101,'sioux city','18-Sep-03');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into shipment values(107,104,500,100,'manhattan','null');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into shipment values(108,103,50,103,'san francisco','null');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into shipment values(109,104,25,101,'san francisco','null');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into shipment values(110,102,200,103,'London','11-oct-98');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into shipment values(111,103,100,101,'London','09-sep-99');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into shipment values(112,104,500,100,'London','18-jun-88');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into shipment values(113,104,200,100,'London','11-oct-98');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into shipment values(114,104,50,103,'manhattan','29-may-03');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into shipment values(115,100,75,103,'LOs Angeles','17-sep-02');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> update shipment set designation='Los Angeles' where shipdate='17-sep-02'; 
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> insert into shipment values(116,101,55,102,'baltimore','01-jul-02');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into shipment values(117,103,45,101,'paris','null');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into shipment values(118,103,45,100,'rome','null');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into shipment values(119,103,45,102,'Los Angeles','null');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into shipment values(120,104,45,102,'London','null');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into shipment values(121,100,150,102,'sioux city','null');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into shipment values(122,101,500,102,'manhattan','null');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into shipment values(123,102,250,102,'san francisco','31-jul-02'); 
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into shipment values(124,311,1,102,'denver','null');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into shipment values(125,311,100,102,'st.louis','null');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select *from shipment;
++----------+--------+--------+-------+---------------+-----------+
+| shipment | custid | weight | truck | designation   | shipdate  |
++----------+--------+--------+-------+---------------+-----------+
+|      100 |    100 |    500 |   100 | London        | null      |
+|      101 |    101 |    100 |   102 | Paris         | null      |
+|      102 |    101 |    300 |   103 | London        | null      |
+|      103 |    101 |     10 |   102 | Panama City   | 12-Dec-03 |
+|      104 |    101 |     20 |   101 | Los Angeles   | null      |
+|      105 |    102 |    200 |   102 | Rome          | null      |
+|      106 |    100 |     50 |   101 | sioux city    | 18-Sep-03 |
+|      107 |    104 |    500 |   100 | manhattan     | null      |
+|      108 |    103 |     50 |   103 | san francisco | null      |
+|      109 |    104 |     25 |   101 | san francisco | null      |
+|      110 |    102 |    200 |   103 | London        | 11-oct-98 |
+|      111 |    103 |    100 |   101 | London        | 09-sep-99 |
+|      112 |    104 |    500 |   100 | London        | 18-jun-88 |
+|      113 |    104 |    200 |   100 | London        | 11-oct-98 |
+|      114 |    104 |     50 |   103 | manhattan     | 29-may-03 |
+|      115 |    100 |     75 |   103 | Los Angeles   | 17-sep-02 |
+|      116 |    101 |     55 |   102 | baltimore     | 01-jul-02 |
+|      117 |    103 |     45 |   101 | paris         | null      |
+|      118 |    103 |     45 |   100 | rome          | null      |
+|      119 |    103 |     45 |   102 | Los Angeles   | null      |
+|      120 |    104 |     45 |   102 | London        | null      |
+|      121 |    100 |    150 |   102 | sioux city    | null      |
+|      122 |    101 |    500 |   102 | manhattan     | null      |
+|      123 |    102 |    250 |   102 | san francisco | 31-jul-02 |
+|      124 |    311 |      1 |   102 | denver        | null      |
+|      125 |    311 |    100 |   102 | st.louis      | null      |
++----------+--------+--------+-------+---------------+-----------+
+26 rows in set (0.00 sec)
+
+mysql> desc truck;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| truck      | int(10)     | YES  |     | NULL    |       |
+| drivername | varchar(30) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into truck values(100,'jensen');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into truck values(101,'sasi');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into truck values(102,'hrithik');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into truck values(103,'jake stinson');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select *from truck;
++-------+--------------+
+| truck | drivername   |
++-------+--------------+
+|   100 | jensen       |
+|   101 | sasi         |
+|   102 | hrithik      |
+|   103 | jake stinson |
++-------+--------------+
+4 rows in set (0.00 sec)
+
+mysql> desc city;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| cityname   | varchar(30) | YES  |     | NULL    |       |
+| population | int(20)     | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into city values('london',100000000);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into city values('paris',120000000);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into city values('rome',200000000);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into city values('panama city',1230000000);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into city values('san francisco',20000000);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into city values('sioux city',5000000000);
+ERROR 1264 (22003): Out of range value for column 'population' at row 1
+mysql> insert into city values('sioux city',500000000);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into city values('manhattan',10000000);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into city values('Los Angeles',7000);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into city values('baltimore',2000);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into city values('denver',1000);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into city values('st.louis',5000);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select *from city;
++---------------+------------+
+| cityname      | population |
++---------------+------------+
+| london        |  100000000 |
+| paris         |  120000000 |
+| rome          |  200000000 |
+| panama city   | 1230000000 |
+| san francisco |   20000000 |
+| sioux city    |  500000000 |
+| manhattan     |   10000000 |
+| Los Angeles   |       7000 |
+| baltimore     |       2000 |
+| denver        |       1000 |
+| st.louis      |       5000 |
++---------------+------------+
+11 rows in set (0.00 sec)
+
+mysql> update city set cityname='London' where population=100000000;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update shipment set designation='paris' where shipment=101;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update shipment set designation='panama city' where shipment=103;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update shipment set designation='rome' where shipment=105;
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> alter table customer add PRIMARY KEY (custid);
+Query OK, 0 rows affected (0.98 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc customer;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| custid        | int(5)      | NO   | PRI | NULL    |       |
+| custname      | varchar(50) | YES  |     | NULL    |       |
+| annualrevenue | int(30)     | YES  |     | 20000   |       |
+| custtype      | varchar(30) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table truck add PRIMARY KEY (truck);
+Query OK, 0 rows affected (0.85 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc city;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| cityname   | varchar(30) | YES  |     | NULL    |       |
+| population | int(20)     | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> alter table city add PRIMARY KEY (cityname);
+Query OK, 0 rows affected (0.76 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table shipment add FOREIGN KEY (custid) REFERENCES customer(custid) ON DELETE CASCADE;
+Query OK, 26 rows affected (1.19 sec)
+Records: 26  Duplicates: 0  Warnings: 0
+
+mysql> alter table shipment add FOREIGN KEY (truck) REFERENCES truck(truck) ON DELETE SET NULL;
+Query OK, 26 rows affected (1.61 sec)
+Records: 26  Duplicates: 0  Warnings: 0
+
+mysql> alter table shipment add FOREIGN KEY (designation) REFERENCES city(cityname) ON DELETE SET NULL;
+Query OK, 26 rows affected (1.23 sec)
+Records: 26  Duplicates: 0  Warnings: 0
+
+mysql> desc shipment;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| shipment    | int(30)     | YES  |     | NULL    |       |
+| custid      | int(5)      | YES  | MUL | NULL    |       |
+| weight      | int(5)      | YES  |     | NULL    |       |
+| truck       | int(5)      | YES  | MUL | NULL    |       |
+| designation | varchar(30) | YES  | MUL | NULL    |       |
+| shipdate    | varchar(30) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+##a)
+
+mysql> select custid,custname from customer where custid IN (select custid from shipment where designation='sioux city');
++--------+----------+
+| custid | custname |
++--------+----------+
+|    100 | Revathi  |
++--------+----------+
+1 row in set (0.01 sec)
+
+
+
+
+
+
+
+##b)
+
+mysql> select designation from shipment where custid IN(select custid from customer where annualrevenue<1000000);
+Empty set (0.00 sec)
+
+
+
+
+
+
+
+##c)
+
+mysql> select cityname,population from city where cityname IN(select designation from shipment where weight>100);
++---------------+------------+
+| cityname      | population |
++---------------+------------+
+| London        |  100000000 |
+| manhattan     |   10000000 |
+| rome          |  200000000 |
+| san francisco |   20000000 |
+| sioux city    |  500000000 |
++---------------+------------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+
+##d)
+
+mysql> select custid,custname from customer where annualrevenue>5000000 && custid IN(select custid from shipment where weight<=1);
++--------+----------+
+| custid | custname |
++--------+----------+
+|    311 | karthik  |
++--------+----------+
+1 row in set (0.00 sec)
+
+
+
+
+
+##e)
+
+mysql> select custid,custname from customer where annualrevenue>5000000 && custid IN(select custid from shipment where weight<=1 OR designation='san francisco');
++--------+----------+
+| custid | custname |
++--------+----------+
+|    311 | karthik  |
++--------+----------+
+1 row in set (0.00 sec)
+
+mysql> select customer.custid,customer.custname from customer INNER JOIN shipment ON customer.custid=shipment.custid where customer.annualrevenue>5000000 AND shipment.weight<=1 OR shipment.designation='san francisco';
++--------+----------+
+| custid | custname |
++--------+----------+
+|    103 | Rijesh   |
+|    104 | kalyan   |
+|    102 | Rishi    |
+|    311 | karthik  |
++--------+----------+
+4 rows in set (0.00 sec)
+
+
+
+##f)
+
+mysql> select drivername from truck where truck IN(select truck from shipment where custid IN(select custid from customer where annualrevenue>20000000)AND designation IN(select cityname from city where population>1000000));
+Empty set (0.00 sec)
+
+
+
+
+##g)
+
+mysql> select designation from shipment where custid IN(select custid from customer where annualrevenue>15000000);
+Empty set (0.00 sec)
+
+
+
+
+##h)
+
+mysql> select drivername from truck where truck IN (select truck from shipment where weight>100);
++--------------+
+| drivername   |
++--------------+
+| jensen       |
+| hrithik      |
+| jake stinson |
++--------------+
+3 rows in set (0.00 sec)
+
+
+
+
+##i)
+
+mysql> select custname,annualrevenue from customer where custid IN(select custid from shipment where weight>100);
++----------+---------------+
+| custname | annualrevenue |
++----------+---------------+
+| Revathi  |       1000000 |
+| Richa    |       1800000 |
+| Rishi    |       1000000 |
+| kalyan   |       4800000 |
++----------+---------------+
+4 rows in set (0.01 sec)
+
+
+
+
+
+
+
+##j)
+
+mysql> select custname,annualrevenue from customer where custid IN(select custid from shipment where truck IN(select truck from truck where drivername='jensen'));
++----------+---------------+
+| custname | annualrevenue |
++----------+---------------+
+| Revathi  |       1000000 |
+| Rijesh   |       4000000 |
+| kalyan   |       4800000 |
++----------+---------------+
+3 rows in set (0.00 sec)
+
+
+##k)
+
+mysql> select custname from customer where (select count(distinct(truck))from shipment where shipment.custid=customer.custid) >= (select count(truck) from truck);
++----------+
+| custname |
++----------+
+| Revathi  |
+| Rijesh   |
+| kalyan   |
++----------+
+3 rows in set (0.00 sec)
+
+
+
+
+##l)
+mysql> select cityname from city where (select count(distinct(custid)) from shipment where designation=cityname)>=(select count(custid) from customer);
+Empty set (0.00 sec)
+
+
+##n)
+
+mysql> select custname from customer where custtype='manufacturer' OR custid IN(select custid from shipment where designation='st.louis');
++----------+
+| custname |
++----------+
+| Revathi  |
+| karthik  |
++----------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+##o)
+
+mysql> select cityname,population from city where population>1000000 AND cityname IN(select designation from shipment where custid=311 AND weight=100);
+Empty set (0.00 sec)
+
+
+
+
+##p)
+
+mysql> select truck from truck where drivername='jake stinson' AND truck NOT IN(select truck from shipment where designation='denver');
++-------+
+| truck |
++-------+
+|   103 |
++-------+
+1 row in set (0.00 sec)
+
+
+
+
+
+
+##q)
+
+mysql> select custname from customer where annualrevenue>10000000 AND custid IN (select custid from shipment where weight<=1 AND designation IN(select cityname from city where population>10000));
+Empty set (0.00 sec)
+
+
+
+
+
+##r)
+
+mysql> create view r1 as select custid,custname from customer where annualrevenue<1000000;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> create view r15 as select custid,custname from customer where annualrevenue>1000000 and annualrevenue<5000000;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> create view r5 as select custid,custname from customer where annualrevenue>5000000;
+Query OK, 0 rows affected (0.32 sec)
+
+##r.a)
+
+mysql> select * from r1;
+Empty set (0.01 sec)
+
+
+##r.b)
+
+mysql> select * from r15;
++--------+----------+
+| custid | custname |
++--------+----------+
+|    101 | Richa    |
+|    103 | Rijesh   |
+|    104 | kalyan   |
++--------+----------+
+3 rows in set (0.00 sec)
+
+##r.c)
+
+mysql> select * from r5;
++--------+----------+
+| custid | custname |
++--------+----------+
+|    311 | karthik  |
++--------+----------+
+1 row in set (0.00 sec)
+
+
+
+##s)
+
+
+##s.a)
+
+mysql> select drivername from truck where truck IN(select truck from shipment where designation='Los Angeles' AND custid IN(select custid from r5));
+Empty set (0.03 sec)
+
+
+
+##s.b)
+
+mysql> select cityname,population from city where cityname IN(select designation from shipment where custid IN(select custid from r15));
++---------------+------------+
+| cityname      | population |
++---------------+------------+
+| baltimore     |       2000 |
+| London        |  100000000 |
+| Los Angeles   |       7000 |
+| manhattan     |   10000000 |
+| panama city   | 1230000000 |
+| paris         |  120000000 |
+| rome          |  200000000 |
+| san francisco |   20000000 |
++---------------+------------+
+8 rows in set (0.00 sec)
+
+
+##s.c)
+
+mysql> SELECT truck.drivername, city.population FROM truck INNER JOIN shipment ON truck.truck=shipment.truck INNER JOIN city ON city.cityname=shipment.designation INNER JOIN r1 ON r1.custid=shipment.custid;
+Empty set (0.00 sec)
+
