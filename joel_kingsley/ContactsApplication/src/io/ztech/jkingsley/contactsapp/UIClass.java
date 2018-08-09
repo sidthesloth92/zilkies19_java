@@ -9,7 +9,9 @@ import java.util.logging.Logger;
 import io.ztech.jkingsley.contactsapp.beans.Contact;
 import io.ztech.jkingsley.contactsapp.beans.Email;
 import io.ztech.jkingsley.contactsapp.beans.PhoneNumber;
-import io.ztech.jkingsley.contactsapp.dao.DBLibrary;
+import io.ztech.jkingsley.contactsapp.dao.EditEmail;
+import io.ztech.jkingsley.contactsapp.dao.EditPhone;
+import io.ztech.jkingsley.contactsapp.services.DBLibrary;
 
 public class UIClass implements KeyListener{
 
@@ -20,12 +22,12 @@ public class UIClass implements KeyListener{
 		Scanner scanner = new Scanner(System.in);
 
 		while (true) {
-			System.out.println("\n------");
-			System.out.println("Menu");
-			System.out.println("1. Add Contact");
-			System.out.println("2. Update Contact");
-			System.out.println("3. Display User");
-			System.out.println("Enter any other key to exit.");
+			LOGGER.info("\n------");
+			LOGGER.info("Menu");
+			LOGGER.info("1. Add Contact");
+			LOGGER.info("2. Update Contact");
+			LOGGER.info("3. Display User");
+			LOGGER.info("Enter any other number to exit.");
 
 			while(!scanner.hasNext());
 			
@@ -40,7 +42,13 @@ public class UIClass implements KeyListener{
 				
 			case 2:
 				Long userId = InputHandler.inputIdForUpdateContact();
-				System.out.println("Selected user ID is " + userId);
+				
+				if(userId == -1L) {
+					LOGGER.info("There are no users to update");
+					break;
+				}
+				
+				LOGGER.info("Selected user ID is " + userId);
 				
 				int updateType = InputHandler.inputTypeOfUpdate();
 				
@@ -48,32 +56,50 @@ public class UIClass implements KeyListener{
 				case 1:
 					String firstName = InputHandler.inputNewFirstName();
 					DBLibrary.updateFirstName(userId, firstName);
-					System.out.println("First Name Updated");
+					LOGGER.info("First Name Updated");
 					break;
 				case 2:
 					String lastName = InputHandler.inputNewLastName();
 					DBLibrary.updateLastName(userId, lastName);
-					System.out.println("Last Name Updated");
+					LOGGER.info("Last Name Updated");
 					break;
 				case 3:
 					ArrayList<PhoneNumber> phoneNumbers = DBLibrary.getPhoneNumbersOfUser(userId);
 					for(int i=0;i<phoneNumbers.size();i++) {
-						System.out.println(i+1 + ". " + phoneNumbers.get(i).toString());
+						LOGGER.info(i+1 + ". " + phoneNumbers.get(i).toString());
 					}
 					int numberSelected = InputHandler.selectNumberToUpdate(phoneNumbers.size());
-					Long phoneNumber = InputHandler.inputNewPhoneNumber(phoneNumbers.get(numberSelected));
-					DBLibrary.updatePhoneNumber(userId,phoneNumbers.get(numberSelected),phoneNumber);
-					System.out.println("Phone number updated");
+					
+					PhoneNumber oldPhoneNumber = phoneNumbers.get(numberSelected);
+					
+					PhoneNumber newPhoneNumber = new PhoneNumber();
+					newPhoneNumber.putNumber(InputHandler.inputNewPhoneNumber(phoneNumbers.get(numberSelected)));
+					newPhoneNumber.setPhoneType(phoneNumbers.get(numberSelected).getPhoneType());
+					
+					EditPhone editPhone = new EditPhone();
+					editPhone.setOldPhoneNumber(oldPhoneNumber);
+					editPhone.setNewPhoneNumber(newPhoneNumber);
+					editPhone.setUserId(userId);
+					
+					DBLibrary.updatePhoneNumber(editPhone);
+					LOGGER.info("Phone number updated");
 					break;
 				case 4:
 					ArrayList<Email> emails = DBLibrary.getEmailsOfUser(userId);
 					for(int i=0;i<emails.size();i++) {
-						System.out.println(i+1 + ". " + emails.get(i).getAddress());
+						LOGGER.info(i+1 + ". " + emails.get(i).getAddress());
 					}
 					int numberSelected1 = InputHandler.selectNumberToUpdate(emails.size());
-					String email = InputHandler.inputNewEmail(emails.get(numberSelected1));
-					DBLibrary.updateEmail(userId,emails.get(numberSelected1),email);
-					System.out.println("Email Id Updated");
+					Email newEmail = new Email();
+					newEmail.putAddress(InputHandler.inputNewEmail(emails.get(numberSelected1)));
+					
+					EditEmail editEmail = new EditEmail();
+					editEmail.setOldEmail(emails.get(numberSelected1));
+					editEmail.setNewEmail(newEmail);
+					editEmail.setUserId(userId);
+					
+					DBLibrary.updateEmail(editEmail);
+					LOGGER.info("Email Id Updated");
 					break;
 				}
 			
@@ -81,33 +107,51 @@ public class UIClass implements KeyListener{
 			
 			case 3:
 				Long userId1 = InputHandler.inputIdForDisplayContact();
-				System.out.println("Selected user ID is " + userId1);
+				
+				if(userId1 == -1L) {
+					LOGGER.info("There are no users to display");
+					break;
+				}
+				
+				LOGGER.info("Selected user ID is " + userId1);
 				Contact contact1 = DBLibrary.getContact(userId1);
-				System.out.println("Name: " + contact1.user.getFirstName() + " " + contact1.user.getLastName());
-				System.out.println("Home Numbers:");
+				LOGGER.info("Name: " + contact1.user.getFirstName() + " " + contact1.user.getLastName());
+				LOGGER.info("Home Numbers:");
 				for(int i=0;i<contact1.homeNumbers.size();i++) {
-					System.out.print(contact1.homeNumbers.get(i).getNumber().toString() + ", ");
+					System.out.print(contact1.homeNumbers.get(i).getNumber().toString());
+					if(i < contact1.homeNumbers.size()-1) {
+						System.out.print(", ");
+					}
 				}
-				System.out.println("");
-				System.out.println("Mobile Numbers:");
+				LOGGER.info("");
+				LOGGER.info("Mobile Numbers:");
 				for(int i=0;i<contact1.mobileNumbers.size();i++) {
-					System.out.print(contact1.mobileNumbers.get(i).getNumber().toString() + ", ");
+					System.out.print(contact1.mobileNumbers.get(i).getNumber().toString());
+					if(i < contact1.mobileNumbers.size()-1) {
+						System.out.print(", ");
+					}
 				}
-				System.out.println("");
-				System.out.println("Office Numbers:");
+				LOGGER.info("");
+				LOGGER.info("Office Numbers:");
 				for(int i=0;i<contact1.officeNumbers.size();i++) {
-					System.out.print(contact1.officeNumbers.get(i).getNumber().toString() + ", ");
+					System.out.print(contact1.officeNumbers.get(i).getNumber().toString());
+					if(i < contact1.officeNumbers.size()-1) {
+						System.out.print(", ");
+					}
 				}
-				System.out.println("");
+				LOGGER.info("");
 				System.out.print("Email:");
 				for(int i=0;i<contact1.emails.size();i++) {
-					System.out.print(contact1.emails.get(i).getAddress() + ", ");
+					System.out.print(contact1.emails.get(i).getAddress());
+					if(i < contact1.emails.size()-1) {
+						System.out.print(", ");
+					}
 				}
 				
 				break;
 			default:
 				scanner.close();
-				System.out.println("Exiting...");
+				LOGGER.info("Exiting...");
 				return;
 			}
 
@@ -124,7 +168,7 @@ public class UIClass implements KeyListener{
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		if(arg0.getKeyCode() == 27) {
-			System.out.println("ESC pressed");
+			LOGGER.info("ESC pressed");
 		}
 	}
 

@@ -4,13 +4,11 @@ import java.util.ArrayList;
 
 public class Count extends Thread{
 	
-	public static ArrayList<Integer> queue = new ArrayList<>();
+	public static ArrayList<Customer> queue = new ArrayList<>();
 	int threadNumber;
-	long processingTime;
 	
-	public Count(int threadNumber,long processingTime){
+	public Count(int threadNumber){
 		this.threadNumber = threadNumber;
-		this.processingTime = processingTime;
 	}
 	
 	@Override
@@ -18,23 +16,22 @@ public class Count extends Thread{
 		// TODO Auto-generated method stub
 		super.run();
 		while(!queue.isEmpty()) {
-			int customerNumber = -1;
+			Customer customer = null;
 			synchronized(queue) {
 				if(queue.isEmpty()) {
 					return;
 				}
-				customerNumber = queue.get(0); 
-				System.out.println(customerNumber + " entering thread " + threadNumber);
+				customer = queue.get(0); 
+				System.out.println(customer.getCustomerNumber() + " entering thread " + threadNumber);
 				queue.remove(0);
 			}
 			
 			try {
-				Thread.sleep(this.processingTime);
+				Thread.sleep(customer.getProcessingTime());
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println(customerNumber + " left thread " + threadNumber );
+			System.out.println(customer.getCustomerNumber() + " left thread " + threadNumber );
 		}
 	}
 
