@@ -5,7 +5,8 @@ import java.util.logging.Logger;
 
 import io.ztech.contact.bean.Details;
 import io.ztech.contact.constants.ConstantDisplayStatements;
-import io.ztech.contact.services.DaoImplementation;
+import io.ztech.contact.dao.DaoImplementation;
+import io.ztech.contact.utils.Validation;
 
 public class ContactHome {
 	public static final Logger logger = Logger.getLogger("ContactHome");
@@ -35,7 +36,7 @@ public class ContactHome {
 			homeNumber = input.nextLine();
 			if(homeNumber.equals("-1"))
 			{
-				homeNumber=null;
+				homeNumber=" ";
 				break;
 			}
 			if (Validation.validateHomeNumber(homeNumber)) {
@@ -48,7 +49,7 @@ public class ContactHome {
 			officeNumber = input.nextLine();
 			if(officeNumber.equals("-1"))
 			{
-				officeNumber=null;
+				officeNumber=" ";
 				break;
 			}
 			if (Validation.validateofficeNumber(officeNumber)) {
@@ -62,7 +63,7 @@ public class ContactHome {
 			mobileNumber = input.nextLine();
 			if(mobileNumber.equals("-1"))
 			{
-				mobileNumber=null;
+				mobileNumber=" ";
 				break;
 			}
 			if (Validation.validatemobileNumber(mobileNumber)) {
@@ -93,7 +94,7 @@ public class ContactHome {
 			logger.info(ConstantDisplayStatements.ENTEROFFICENUMBER+ConstantDisplayStatements.END);
 			number = input.nextLine();
 			if(number.equals("-1")) {
-				number=null;
+				number=" ";
 				break;
 			}
 			if(Validation.validateofficeNumber(number)) {
@@ -108,7 +109,7 @@ public class ContactHome {
 			logger.info(ConstantDisplayStatements.ENTERHOMENUMBER+ConstantDisplayStatements.END);
 			number = input.nextLine();
 			if(number.equals("-1")) {
-				number=null;
+				number=" ";
 				flag1=false;
 			}
 			if(Validation.validateHomeNumber(number))
@@ -124,7 +125,7 @@ public class ContactHome {
 			logger.info(ConstantDisplayStatements.ENTERMOBILENUMBER+ConstantDisplayStatements.END);
 			number = input.nextLine();
 			if(number.equals("-1")) {
-				number=null;
+				number=" ";
 				break;
 			}
 			if(Validation.validatemobileNumber(number))
@@ -136,13 +137,17 @@ public class ContactHome {
 		}
 		if(option==4) {
 			input.nextLine();
-			logger.info(ConstantDisplayStatements.ENTEREMAIL+ConstantDisplayStatements.END);
+			do {
+			logger.info(ConstantDisplayStatements.ENTEREMAIL);
 			email=input.nextLine();
-			if(email.equals("-1")){
-					email=null;
-		}
+			if(Validation.validateEmail(email))
+			{
+				flag1=false;
+			}
+			}while(flag1);
 			DaoImplementation.updateEmailDetails(email, name);
-		}
+		
+			}
 	}
 
 	public static void main(String[] args) {

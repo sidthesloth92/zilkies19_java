@@ -14,10 +14,10 @@ public class ConstantDisplayStatements {
  public static final String SORTOPTION="1.Ascending 2.Descending";
  public static final String UPDATE="Updation";
  public static final String DELETE="Delete";
- public static final String INVALIDEMAIL="Enter a Valid Email";
- public static final String INVALIDHOME="Enter a Valid Home Number";
- public static final String INVALIDOFFICE="Enter a Valid Office Number";
- public static final String INVALIDMOBILE="Enter a Valid Mobile Number";
+ public static final String INVALIDEMAIL="Enter a Valid Email ";
+ public static final String INVALIDHOME="Enter a Valid Home Number Must be 91422*";
+ public static final String INVALIDOFFICE="Enter a Valid Office Number Must be 91422*";
+ public static final String INVALIDMOBILE="Enter a Valid Mobile Number Must be 91 (6-9)";
  public static final String RECORDUPDATE="RECORD UPDATED FOR ";
  public static final String ADDSUCESS="Added Succesfully";
  public static final String PERSONIDTODELETE="Enter the Person Id from the Table to Delete";

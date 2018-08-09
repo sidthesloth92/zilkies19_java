@@ -1,4 +1,4 @@
-package io.ztech.contact.services;
+package io.ztech.contact.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,18 +8,17 @@ import java.util.Scanner;
 import java.util.logging.Logger;
 
 import io.ztech.contact.bean.Details;
-import io.ztech.contact.dao.DatabaseConfig;
 import io.ztech.contact.constants.*;;
 
 public class DaoImplementation {
 	public static final Logger logger = Logger.getLogger("SqlStatements");
 	static Scanner input = new Scanner(System.in);
 
-	public static void display(Strings det, int id) {
+	public static void display(Details det, int id) {
 
-		System.out.println("ID:  " + id + "\n" + "FIRSTNAME:  " + det.firstName + "\n" + "LASTNAME:  " + det.lastName
-				+ "\n" + "HOMENUMBER:  " + det.homeNumber + "\n" + "OFFICENUMBER  " + det.officeNumber + "\n"
-				+ "MOBILENUMBER  :" + det.mobileNumber + "\n" + "EMAIL  :" + det.email + "\n");
+		System.out.println("ID:  " + id + "\n" + "FIRSTNAME:  " + det.getFirstName() + "\n" + "LASTNAME:  " + det.getLastName()
+				+ "\n" + "HOMENUMBER:  " + det.getHomeNumber() + "\n" + "OFFICENUMBER:" + det.getOfficeNumber() + "\n"
+				+ "MOBILENUMBER:" + det.getMobileNumber() + "\n" + "EMAIL  :" + det.getEmail() + "\n");
 
 	}
 
@@ -41,7 +40,7 @@ public class DaoImplementation {
 			statement2.executeUpdate();
 			logger.info(ConstantDisplayStatements.RECORDUPDATE + name);
 			con.commit();
-			con.close();
+
 		} catch (Exception e) {
 			System.out.println(e);
 			try {
@@ -49,11 +48,17 @@ public class DaoImplementation {
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
-	
 	}
-	
+
 	public static void updateDetails(String number, String name, int option) {
 		Connection con = DatabaseConfig.getConnection();
 		try {
@@ -73,13 +78,19 @@ public class DaoImplementation {
 			statement2.executeUpdate();
 			logger.info(ConstantDisplayStatements.RECORDUPDATE + name);
 			con.commit();
-			con.close();
 		} catch (Exception e) {
 			System.out.println(e);
 			try {
 				con.rollback();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
+			}
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}
@@ -118,8 +129,6 @@ public class DaoImplementation {
 			statement5.executeUpdate();
 			logger.info(ConstantDisplayStatements.ADDSUCESS);
 			con.commit();
-			con.close();
-
 		} catch (Exception e) {
 			System.out.println(e);
 			try {
@@ -127,12 +136,19 @@ public class DaoImplementation {
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public static void selectDetails(int choice) {
 		Connection con = DatabaseConfig.getConnection();
-		Strings det = new Strings();
+		Details det=new Details();
 		if (choice == 1) {
 			try {
 				con.setAutoCommit(false);
@@ -141,30 +157,29 @@ public class DaoImplementation {
 				int id = 0;
 				while (rs.next()) {
 					id = rs.getInt("person_id");
-					det.firstName = rs.getString("firstname");
-					det.lastName = rs.getString("lastname");
+					det.setFirstName(rs.getString("firstname"));
+					det.setLastName(rs.getString("lastname"));
 					PreparedStatement statement2 = con.prepareStatement(SqlConstantQueries.SELCONTACTID);
 					statement2.setInt(1, id);
 					ResultSet res = statement2.executeQuery();
 					while (res.next()) {
 						int contact_id = res.getInt("contact_id");
 						if (contact_id == 1)
-							det.officeNumber = res.getString("number");
+							det.setOfficeNumber(res.getString("number"));
 						else if (contact_id == 2)
-							det.homeNumber = res.getString("number");
+							det.setHomeNumber(res.getString("number")) ;
 						else
-							det.mobileNumber = res.getString("number");
+							det.setMobileNumber(res.getString("number"));;
 					}
 					PreparedStatement statement3 = con.prepareStatement(SqlConstantQueries.SELEMAIL);
 					statement3.setInt(1, id);
 					ResultSet res1 = statement3.executeQuery();
 					while (res1.next()) {
-						det.email = res1.getString("email");
+						det.setEmail(res1.getString("email"));
 					}
 					display(det, id);
 				}
 				con.commit();
-				con.close();
 			} catch (Exception e) {
 				System.out.println(e);
 				try {
@@ -172,6 +187,13 @@ public class DaoImplementation {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+				}
+			} finally {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		} else {
@@ -182,30 +204,29 @@ public class DaoImplementation {
 				int id = 0;
 				while (rs.next()) {
 					id = rs.getInt("person_id");
-					det.firstName = rs.getString("firstname");
-					det.lastName = rs.getString("lastname");
+					det.setFirstName(rs.getString("firstname"));
+					det.setLastName(rs.getString("lastname"));
 					PreparedStatement statement2 = con.prepareStatement(SqlConstantQueries.SELCONTACTID);
 					statement2.setInt(1, id);
 					ResultSet res = statement2.executeQuery();
 					while (res.next()) {
 						int contact_id = res.getInt("contact_id");
 						if (contact_id == 1)
-							det.officeNumber = res.getString("number");
+							det.setOfficeNumber(res.getString("number"));
 						else if (contact_id == 2)
-							det.homeNumber = res.getString("number");
+							det.setHomeNumber(res.getString("number")) ;
 						else
-							det.mobileNumber = res.getString("number");
+							det.setMobileNumber(res.getString("number"));;
 					}
 					PreparedStatement statement3 = con.prepareStatement(SqlConstantQueries.SELEMAIL);
 					statement3.setInt(1, id);
 					ResultSet res1 = statement3.executeQuery();
 					while (res1.next()) {
-						det.email = res1.getString("email");
+						det.setEmail(res1.getString("email"));
 					}
 					display(det, id);
 				}
 				con.commit();
-				con.close();
 			} catch (Exception e) {
 				System.out.println(e);
 				try {
@@ -214,13 +235,20 @@ public class DaoImplementation {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+			} finally {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
 
 	public static void delete(String name) {
 		Connection con = DatabaseConfig.getConnection();
-		Strings det = new Strings();
+		Details det = new Details();
 		try {
 			con.setAutoCommit(false);
 			PreparedStatement statement1 = con.prepareStatement(SqlConstantQueries.SELDETAILPERSON);
@@ -229,25 +257,25 @@ public class DaoImplementation {
 			int id = 0;
 			while (rs.next()) {
 				id = rs.getInt("person_id");
-				det.firstName = rs.getString("firstname");
-				det.lastName = rs.getString("lastname");
+				det.setFirstName(rs.getString("firstname"));
+				det.setLastName(rs.getString("lastname")); ;
 				PreparedStatement statement2 = con.prepareStatement(SqlConstantQueries.SELCONTACTID);
 				statement2.setInt(1, id);
 				ResultSet res = statement2.executeQuery();
 				while (res.next()) {
 					int contact_id = res.getInt("contact_id");
 					if (contact_id == 1)
-						det.officeNumber = res.getString("number");
+						det.setOfficeNumber(res.getString("number"));
 					else if (contact_id == 2)
-						det.homeNumber = res.getString("number");
+						det.setHomeNumber(res.getString("number")) ;
 					else
-						det.mobileNumber = res.getString("number");
+						det.setMobileNumber(res.getString("number"));;
 				}
 				PreparedStatement statement3 = con.prepareStatement(SqlConstantQueries.SELEMAIL);
 				statement3.setInt(1, id);
 				ResultSet res1 = statement3.executeQuery();
 				while (res1.next()) {
-					det.email = res1.getString("email");
+					det.setEmail(res1.getString("email"));
 				}
 				display(det, id);
 			}
@@ -257,13 +285,19 @@ public class DaoImplementation {
 			statement2.setInt(1, id);
 			statement2.executeUpdate();
 			con.commit();
-			con.close();
 		} catch (Exception e) {
 			System.out.println(e);
 			try {
 				con.rollback();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
+			}
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}

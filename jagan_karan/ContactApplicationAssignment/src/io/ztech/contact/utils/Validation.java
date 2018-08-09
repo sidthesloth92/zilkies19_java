@@ -1,4 +1,4 @@
-package io.ztech.contact;
+package io.ztech.contact.utils;
 
 import java.util.logging.Logger;
 
@@ -8,7 +8,7 @@ public class Validation {
 	public static final Logger logger = Logger.getLogger("Validation");
 
 	public static boolean validateEmail(String email) {
-		if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+		if (!email.matches("^[a-zA-Z0-9.-_]+@[a-zA-Z]+[.][a-zA-Z]{2,10}([.][a-zA-Z]{2,10})*")) {
 			logger.info(ConstantDisplayStatements.INVALIDEMAIL);
 			return false;
 		} else {
@@ -36,7 +36,7 @@ public class Validation {
 	}
 
 	public static boolean validatemobileNumber(String number) {
-		if (number.matches("^91[6-9][0-9]{10}")) {
+		if (number.matches("91[6-9][0-9]{10}")) {
 			return true;
 		}else {
 			logger.info(ConstantDisplayStatements.INVALIDMOBILE);
