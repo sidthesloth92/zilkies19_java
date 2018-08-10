@@ -1,0 +1,62 @@
+a. select distinct cust.cust_id,cust.cust_name from Customer cust,Shipment ship where cust.cust_id=ship.cust_id and ship.destination='Sioux City' 
+
+b. Select distinct city.city_name from City city,Shipment ship,Customer cust where cust.annual_revenue<1000000 and cust.cust_id=ship.cust_id and ship.destination=city.city_name;
+
+c. Select distinct city.city_name,city.population from City city,Shipment ship where ship.weight>100 and ship.destination=city.city_name;
+
+d. select cust.cust_name from Customer cust,Shipment ship where cust.annual_revenue>5000000 and cust.cust_id=ship.cust_id and ship.weight<=1;
+
+e.select distinct cust.cust_name from Customer cust, Shipment ship where cust.cust_id=ship.cust_id and cust.annual_revenue>5000000 and (ship.weight<=1 or ship.destination='San Francisco') ;
+
+f. select distinct truck.truck_id from Truck truck,Shipment ship,City city,Customer cust where truck.truck_id=ship.truck_id and ship.destination=city.city_name and ship.cust_id=cust.cust_id and city.population>1000000 and cust.annual_revenue>2000000;
+
+g. select city.city_name from City city,Shipment ship,Customer cust where city.city_name=ship.destination and ship.cust_id=cust.cust_id and cust.annual_revenue>15000000; 
+
+h. select distinct truck.truck_id,truck.driver_name from Truck truck,Shipment ship where truck.truck_id=ship.truck_id and ship.weight>100;
+
+i. select distinct cust.cust_id,cust.cust_name,cust.annual_revenue from Customer cust,Shipment ship where cust.cust_id=ship.cust_id and ship.cust_id>100;
+
+j. select distinct cust.cust_id,cust.cust_name,cust.annual_revenue from Customer cust,Shipment ship,Truck truck where cust.cust_id=ship.cust_id and ship.truck_id=truck.truck_id and truck.driver_name='Jensen';
+
+n. select distinct cust.cust_name from Customer cust,Shipment ship where cust.cust_id=ship.cust_id and (cust.cust_type='manufacturer' or ship.destination='St. Louis');
+
+o. select city.city_name from City city,Shipment ship where city.population>1000000 and city.city_name=ship.destination and ship.cust_id=100 and ship.cust_id=311;
+
+p. select ship.shipment_id,ship.cust_id,ship.weight,ship.truck_id,ship.destination,ship.ship_date from Shipment ship,Truck truck where truck.truck_id=ship.truck_id and truck.driver_name='Jake Stinson' and ship.destination!='Denver';
+
+q. select cust.cust_id,cust.cust_name,cust.cust_type,cust.annual_revenue from Customer cust,Shipment ship,City city where cust.annual_revenue>1000000 and  cust.cust_id=ship.cust_id and ship.weight<=1 and ship.destination=city.city_name and city.population<10000;
+
+r. 
+	a. create view RevenueOneMillion as select * from Customer where annual_revenue<1000000;
+
+	select * from RevenueOneMillion;
+
+	b. create view RevenueBetweenMillion as select * from Customer where annual_revenue between 1000000 and 5000000;
+	
+	select * from RevenueBetweenMillion;
+	
+	c. create view RevenueOverMillion as select * from Customer where annual_revenue>5000000;
+	
+	select * from RevenueOverMillion;
+
+s. 
+	a. select truck.driver_name from RevenueOverMillion overmillion,Shipment ship,Truck truck where truck.truck_id=ship.truck_id and 		
+	ship.destination='Los Angeles' and ship.cust_id=overmillion.cust_id;		
+
+	b. select distinct city.city_name from RevenueBetweenMillion million,Shipment ship,City city where million.cust_id=ship.cust_id and 		
+	ship.destination=city.city_name;
+
+	c. select truck.driver_name,city.city_name,city.population from RevenueOneMillion million,Shipment ship,City city,Truck truck where 	
+
+	truck.truck_id=ship.truck_id and ship.cust_id=million.cust_id and ship.destination=city.city_name;
+
+
+k. select distinct cust_id,cust_name from Customer where cust_id in (select SubTable.cust_id from(select Shipment.cust_id,count(distinct truck_id) as counts from Shipment,Customer where Customer.cust_id=Shipment.cust_id group by Shipment.cust_id) as SubTable where SubTable.counts=4);
+
+l. select city_name from City where city_name in (select SubTable.destination from(select destination,count(distinct cust_id) as counts from Shipment,City where Shipment.destination=City.city_name group by Shipment.destination) as SubTable where SubTable.counts=(select count(cust_id) from Customer));
+
+m. select truck_id from Truck where  exists (select truck_id from (select Shipment.truck_id,count(destination) as counts from Shipment,Truck where Shipment.truck_id=Truck.truck_id group by truck_id) as SubTable where SubTable.counts=(select count(city_name) from City));
+
+
+
+
