@@ -67,6 +67,8 @@ public class Source {
 		
 		int locatedAt = performTernarySearch(list,0,list.size()-1,elementToSearch);
 		System.out.println("Element present at:" + locatedAt);
+		
+		sc.close();
 	}
 
 }
