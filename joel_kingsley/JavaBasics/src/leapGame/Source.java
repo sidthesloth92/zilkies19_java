@@ -35,6 +35,7 @@ public class Source {
 		} else {
 			System.out.println("False");
 		}
+		sc.close();
 	}
 
 }
