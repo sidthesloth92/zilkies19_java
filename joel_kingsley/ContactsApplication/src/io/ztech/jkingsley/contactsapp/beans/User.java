@@ -33,7 +33,7 @@ public class User {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return this.getId() + " : " + this.getFirstName() + " " + this.getLastName();
+		return "(User ID - " + this.getId() + ") : " + this.getFirstName() + " " + this.getLastName();
 	}
 	
 	

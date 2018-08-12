@@ -25,6 +25,8 @@ public class Source {
 		}
 		
 		System.out.println("Result:" + result);
+		
+		sc.close();
 	}
 }
 	

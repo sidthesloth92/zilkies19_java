@@ -88,11 +88,11 @@ public class Source {
 				}
 					break;
 				case 0:
+					sc.close();
 					return;
 			}
 			System.out.println("------------");
 		} while(true);
-		
 	}
 
 }

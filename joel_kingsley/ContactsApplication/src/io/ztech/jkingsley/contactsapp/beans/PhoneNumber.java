@@ -1,8 +1,8 @@
 package io.ztech.jkingsley.contactsapp.beans;
 
 public class PhoneNumber {
-	Long number;
-	String phoneType;
+	public Long number;
+	public String phoneType;
 
 	public Long getNumber() {
 		return number;
