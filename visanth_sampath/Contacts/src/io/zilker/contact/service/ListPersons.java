@@ -23,7 +23,7 @@ public class ListPersons {
 			}
 		}
 		catch (Exception e) {
-			
+			e.getStackTrace();
 		}
 		finally {
 		}

@@ -12,8 +12,7 @@ import io.zilker.contact.constants.SqlConstants;
 public class AddPerson {
 	public static Scanner scanner = new Scanner(System.in);
 	private static int choice, option, li;
-	private static String firstName, emailInput, lastName, mobileNumber, countryCode, homeNumberInput,
-			homeCountryCodeInput, areaCodeInput, officeNumberInput, extensionInput;
+	private static String firstName, emailInput, lastName, mobileNumber, countryCode;
 	public static Connection connection;
 	public static PreparedStatement preparedStatement;
 	public static Person newPerson = new Person();
@@ -26,9 +25,10 @@ public class AddPerson {
 		try {
 			preparedStatement = connection.prepareStatement(SqlConstants.INSERT_NAMES);
 			preparedStatement.setString(1, newPerson.getFirstName());
-			preparedStatement.setString(2, newPerson.getFirstName());
+			preparedStatement.setString(2, newPerson.getLastName());
 			preparedStatement.executeUpdate();
 		} catch (Exception e) {
+			e.getStackTrace();
 		}
 
 	}
@@ -59,7 +59,7 @@ public class AddPerson {
 				}
 			} while (option == 1);
 		} catch (Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 	}
 
@@ -81,6 +81,7 @@ public class AddPerson {
 					} else {
 						log.info(Applicationconstants.WRONG_MAIL);
 					}
+
 				}
 			} while (option == 1);
 			newPerson.setEmail(email);
@@ -92,7 +93,7 @@ public class AddPerson {
 				preparedStatement.executeUpdate();
 			}
 		} catch (Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 
 	}
@@ -102,19 +103,21 @@ public class AddPerson {
 		try {
 			ArrayList<String> mobileNumber = new ArrayList<String>();
 			ArrayList<String> mobileCountryCode = new ArrayList<String>();
+
 			do {
 				log.info(Applicationconstants.DECIDER);
 				option = scanner.nextInt();
 				if (option == 1) {
 					log.info(Applicationconstants.ENTER_MOBILE_NUMBER);
-					String mobileFiresultSett = scanner.next();
-					if (mobileFiresultSett.length() != 10) {
+					String mobileNumberinput = scanner.next();
+					if (mobileNumberinput.length() != 10) {
 						log.info(Applicationconstants.WRONG_MOBILE);
 						continue;
 					}
-					mobileNumber.add(mobileFiresultSett);
+					mobileNumber.add(mobileNumberinput);
 					log.info(Applicationconstants.ENTER_COUNTRY_CODE);
-					mobileCountryCode.add(scanner.next());
+					String countrycodeInput = scanner.next();
+					mobileCountryCode.add(countrycodeInput);
 				}
 			} while (option == 1);
 			newPerson.setMobile(mobileNumber, mobileCountryCode);
@@ -128,13 +131,12 @@ public class AddPerson {
 				preparedStatement.executeUpdate();
 			}
 		} catch (Exception e) {
-			log.info(e.toString());
-		}
-		finally {
-			if(preparedStatement!=null) {
+			e.getStackTrace();
+		} finally {
+			if (preparedStatement != null) {
 				preparedStatement.close();
 			}
-			
+
 		}
 
 	}
@@ -150,13 +152,13 @@ public class AddPerson {
 				option = scanner.nextInt();
 				if (option == 1) {
 					log.info(Applicationconstants.ENTER_HOME_NUMBER);
-					homeNumberInput = scanner.next();
+					String homeNumberInput = scanner.next();
 					homeNumber.add(homeNumberInput);
 					log.info(Applicationconstants.ENTER_COUNTRY_CODE);
-					homeCountryCodeInput = scanner.next();
+					String homeCountryCodeInput = scanner.next();
 					homeCountryCode.add(homeCountryCodeInput);
 					log.info(Applicationconstants.ENTER_AREA_CODE);
-					areaCodeInput = scanner.next();
+					String areaCodeInput = scanner.next();
 					areaCode.add(areaCodeInput);
 				}
 			} while (option == 1);
@@ -174,7 +176,7 @@ public class AddPerson {
 			}
 
 		} catch (Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 
 	}
@@ -189,18 +191,17 @@ public class AddPerson {
 				option = scanner.nextInt();
 				if (option == 1) {
 					log.info(Applicationconstants.ENTER_OFFICE);
-					officeNumberInput = scanner.next();
+					String officeNumberInput = scanner.next();
 					officeNumber.add(officeNumberInput);
 					log.info(Applicationconstants.ENTER_EXTENSION);
-					extensionInput = scanner.next();
-					extension.add(extensionInput);					
+					String extensionInput = scanner.next();
+					extension.add(extensionInput);
 				}
-
 			} while (option == 1);
 			newPerson.setOffice(officeNumber, extension);
 			officeNumber = newPerson.getOfficeNumber();
 			extension = newPerson.getExtension();
-			for(int i=0;i<officeNumber.size();i++) {
+			for (int i = 0; i < officeNumber.size(); i++) {
 				preparedStatement = connection.prepareStatement(SqlConstants.INSERT_OFFICE);
 				preparedStatement.setInt(1, li);
 				preparedStatement.setString(2, officeNumber.get(i));
@@ -208,7 +209,7 @@ public class AddPerson {
 				preparedStatement.executeUpdate();
 			}
 		} catch (Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 
 	}
@@ -273,8 +274,8 @@ public class AddPerson {
 			connection.commit();
 
 		} catch (Exception e) {
-			log.info(e.toString());
-		} 
+			e.getStackTrace();
+		}
 	}
 
 	// main function

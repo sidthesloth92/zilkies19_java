@@ -20,7 +20,7 @@ public class DbUtils {
 			connection = DriverManager.getConnection(url, userName, password);
 		}
 		catch(Exception e){
-			
+			e.getStackTrace();
 		}
 		return connection;
 	}
@@ -33,7 +33,7 @@ public class DbUtils {
 			}
 		}
 		catch(Exception e) {
-			
+			e.getStackTrace();
 		}
 	}
 	//connect DB and call add method  
@@ -43,7 +43,7 @@ public class DbUtils {
 			AddPerson.addMain(connection);
 		}
 		catch(Exception e){
-			
+			e.getStackTrace();
 		}
 		finally {
 			closeConnection();
@@ -57,7 +57,7 @@ public class DbUtils {
 			DeleteMain.deleteMainOptions(connection);
 		}
 		catch(Exception e){
-			
+			e.getStackTrace();
 		}
 		finally {
 			closeConnection();
@@ -71,7 +71,7 @@ public class DbUtils {
 			DisplayRecords.displayAllRecordsMain(connection);
 		}
 		catch(Exception e) {
-			
+			e.getStackTrace();
 		}
 		finally {
 			closeConnection();
@@ -85,7 +85,7 @@ public class DbUtils {
 				UpdatePerson.updateMain(connection);
 			}
 			catch(Exception e){
-				
+				e.getStackTrace();
 			}
 			finally {
 				closeConnection();

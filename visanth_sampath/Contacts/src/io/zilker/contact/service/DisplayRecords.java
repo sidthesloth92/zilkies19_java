@@ -27,7 +27,7 @@ public class DisplayRecords {
 						+ resultSet.getInt("table_id"));
 			}
 		} catch (Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 	}
 
@@ -44,7 +44,7 @@ public class DisplayRecords {
 				log.info(resultSet.getString("mail") + " " + resultSet.getInt("table_id"));
 			}
 		} catch (Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 
 	}
@@ -63,7 +63,7 @@ public class DisplayRecords {
 						+ resultSet.getString("area_code") + " " + resultSet.getInt("table_id"));
 			}
 		} catch (Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 
 	}
@@ -82,7 +82,7 @@ public class DisplayRecords {
 						+ resultSet.getInt("table_id"));
 			}
 		} catch (Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 
 	}
@@ -104,7 +104,7 @@ public class DisplayRecords {
 				log.info(Applicationconstants.PATTERN);
 			}
 		} catch (Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 
 	}
