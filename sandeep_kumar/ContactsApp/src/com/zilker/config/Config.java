@@ -1,4 +1,4 @@
-package com.zilker.dbConfig;
+package com.zilker.config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
-public class DbConfig {
+public class Config {
 	public static final Logger logger = Logger.getLogger("DbConfig.class");
 	public static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	public static final String DB_URL = "jdbc:mysql://localhost/contact_db?autoReconnect=true&useSSL=false";
