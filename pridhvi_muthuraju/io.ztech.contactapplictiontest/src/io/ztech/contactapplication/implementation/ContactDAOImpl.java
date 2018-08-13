@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+import com.mysql.cj.xdevapi.UpdateParams;
 import com.sun.xml.internal.bind.v2.runtime.output.Pcdata;
 
 import io.ztech.contactapplication.beans.EmailDetails;
@@ -25,6 +26,7 @@ public class ContactDAOImpl implements ContactDAO {
 	private final Logger logger = Logger.getLogger(ContactDAOImpl.class.getName());
 	private Connection con = null;
 	private PreparedStatement pst = null;
+	private ResultSet res = null;
 
 	@Override
 	public void addNewName(NameDetails nameDetails) throws SQLException {
@@ -40,6 +42,7 @@ public class ContactDAOImpl implements ContactDAO {
 		} finally {
 			DBUtils.closeConnection(con, pst, null);
 		}
+
 	}
 
 	@Override
@@ -69,7 +72,6 @@ public class ContactDAOImpl implements ContactDAO {
 				logger.info(AppConstants.MOBILE_NUMBER);
 				mobileDetails.setMobileNumber(sc.next());
 			} while (!Validator.validateNumber(mobileDetails.getMobileNumber()));
-
 		}
 	}
 
@@ -85,7 +87,6 @@ public class ContactDAOImpl implements ContactDAO {
 				logger.info(AppConstants.HOME_NUMBER);
 				homeDetails.setHomeNumber(sc.next());
 			} while (!Validator.validateNumber(homeDetails.getHomeNumber()));
-
 		}
 	}
 
@@ -133,7 +134,7 @@ public class ContactDAOImpl implements ContactDAO {
 		nameDetails.setFirstName(sc.next());
 		logger.info(AppConstants.LAST_NAME);
 		nameDetails.setLastName(sc.next());
-		if (Validator.isNamePresent(nameDetails.getFirstName(), nameDetails.getLastName())) {
+		if (Validator.isDuplicate(nameDetails.getFirstName(), nameDetails.getLastName(), emailDetails.getEmail())) {
 			try {
 				con = DBUtils.getConnection();
 				pst = con.prepareStatement(SQLConstants.SELECT_BY_NAME);
@@ -156,14 +157,74 @@ public class ContactDAOImpl implements ContactDAO {
 
 	@Override
 	public void updateContact(NameDetails nameDetails, EmailDetails emailDetails) throws SQLException {
-		updateOffice(nameDetails, new OfficeDetails());
-		updateMobile(nameDetails, new MobileDetails());
-		updateHome(nameDetails, new HomeDetails());
-		updateEmail(nameDetails, emailDetails);
+		editOffice(nameDetails, new OfficeDetails());
+		editMobile(nameDetails, new MobileDetails());
+		editHome(nameDetails, new HomeDetails());
+		editEmail(nameDetails, emailDetails);
+	}
+
+	@Override
+	public void printOffice(NameDetails nameDetails, OfficeDetails officeDetails) throws SQLException {
+		
+		try {
+			con = DBUtils.getConnection();
+			pst = con.prepareStatement(SQLConstants.SELECT_OFFICE);
+			pst.setString(1, nameDetails.getFirstName());
+			pst.setString(2, nameDetails.getLastName());
+			res = pst.executeQuery();
+
+		} catch (SQLException e) {
+			logger.info(AppConstants.SQL_ERROR);
+		} finally {
+			int count = 0;
+			while (res.next()) {
+				count++;
+				logger.info(res.getInt("contact_id") + "\t" + res.getInt("office_id") + "\t"
+						+ res.getString("office_extension") + "\t" + res.getString("office_number"));
+			}
+			if (count == 0) {
+				logger.info(AppConstants.NTNG_TO_UPDATE);
+				editOffice(nameDetails, new OfficeDetails());
+				return;
+			}
+			DBUtils.closeConnection(con, pst, null);
+		}
 	}
 
 	@Override
 	public void updateOffice(NameDetails nameDetails, OfficeDetails officeDetails) throws SQLException {
+
+		printOffice(nameDetails, officeDetails);
+
+		logger.info(AppConstants.OFFICE_ID);
+		int officeId = sc.nextInt();
+
+		do {
+			logger.info(AppConstants.OFFICE_EXTENSION);
+			officeDetails.setOfficeExtension(sc.next());
+			logger.info(AppConstants.OFFICE_NUMBER);
+			officeDetails.setOfficeNumber(sc.next());
+		} while (!Validator.validateOfficeNumber(officeDetails.getOfficeExtension(), officeDetails.getOfficeNumber()));
+
+		try {
+			con = DBUtils.getConnection();
+			pst = con.prepareStatement(SQLConstants.UPDATE_OFFICE);
+			pst.setString(1, officeDetails.getOfficeExtension());
+			pst.setString(2, officeDetails.getOfficeNumber());
+			pst.setString(3, nameDetails.getFirstName());
+			pst.setString(4, nameDetails.getLastName());
+			pst.setInt(4, officeId);
+			pst.executeUpdate();
+
+		} catch (SQLException e) {
+			logger.info(AppConstants.SQL_ERROR);
+		} finally {
+			DBUtils.closeConnection(con, pst, null);
+		}
+	}
+
+	@Override
+	public void editOffice(NameDetails nameDetails, OfficeDetails officeDetails) throws SQLException {
 		logger.info(AppConstants.ADD_UPDATE_OFFICE);
 		String choice = sc.next();
 		if (choice.equals("n"))
@@ -172,84 +233,81 @@ public class ContactDAOImpl implements ContactDAO {
 			do {
 				logger.info(AppConstants.OFFICE_EXTENSION);
 				officeDetails.setOfficeExtension(sc.next());
-				logger.info(AppConstants.OFFICE_EXTENSION);
-				officeDetails.setOfficeNumber(sc.next());
-			} while (!Validator.validateOfficeNumber(officeDetails.getOfficeExtension(),
-					officeDetails.getOfficeNumber()));
-
-			try {
-				con = DBUtils.getConnection();
-				pst = con.prepareStatement(SQLConstants.ADD_OFFICE);
-				pst.setString(1, nameDetails.getFirstName());
-				pst.setString(2, nameDetails.getLastName());
-				pst.setString(3, officeDetails.getOfficeExtension());
-				pst.setString(4, officeDetails.getOfficeNumber());
-				pst.executeUpdate();
-
-			} catch (SQLException e) {
-				logger.info(AppConstants.SQL_ERROR);
-			} finally {
-				DBUtils.closeConnection(con, pst, null);
-			}
-
-		} else if (choice.equals("u")) {
-
-			ResultSet res = null;
-			try {
-				con = DBUtils.getConnection();
-				pst = con.prepareStatement(SQLConstants.SELECT_OFFICE);
-				pst.setString(1, nameDetails.getFirstName());
-				pst.setString(2, nameDetails.getLastName());
-				res = pst.executeQuery();
-
-			} catch (SQLException e) {
-				logger.info(AppConstants.SQL_ERROR);
-			} finally {
-				int count = 0;
-				while (res.next()) {
-					count++;
-					logger.info(res.getInt("contact_id") + "\t" + res.getInt("office_id") + "\t"
-							+ res.getString("office_extension") + "\t" + res.getString("office_number"));
-				}
-				if (count == 0) {
-					logger.info(AppConstants.NTNG_TO_UPDATE);
-					updateOffice(nameDetails, new OfficeDetails());
-					return;
-				}
-				DBUtils.closeConnection(con, pst, null);
-			}
-
-			logger.info(AppConstants.OFFICE_ID);
-			int officeId = sc.nextInt();
-
-			do {
-				logger.info(AppConstants.OFFICE_EXTENSION);
-				officeDetails.setOfficeExtension(sc.next());
 				logger.info(AppConstants.OFFICE_NUMBER);
 				officeDetails.setOfficeNumber(sc.next());
 			} while (!Validator.validateOfficeNumber(officeDetails.getOfficeExtension(),
 					officeDetails.getOfficeNumber()));
 
-			try {
-				con = DBUtils.getConnection();
-				pst = con.prepareStatement(SQLConstants.UPDATE_OFFICE);
-				pst.setString(1, officeDetails.getOfficeExtension());
-				pst.setString(2, officeDetails.getOfficeNumber());
-				pst.setString(3, nameDetails.getFirstName());
-				pst.setString(4, nameDetails.getLastName());
-				pst.setInt(4, officeId);
-				pst.executeUpdate();
+			insertOffice(nameDetails, officeDetails);
+		} else if (choice.equals("u")) {
+			updateOffice(nameDetails, officeDetails);
+		}
+	}
 
-			} catch (SQLException e) {
-				logger.info(AppConstants.SQL_ERROR);
-			} finally {
-				DBUtils.closeConnection(con, pst, null);
+	@Override
+	public void printMobile(NameDetails nameDetails, MobileDetails mobileDetails) throws SQLException {
+		
+		try {
+			con = DBUtils.getConnection();
+			pst = con.prepareStatement(SQLConstants.SELECT_BY_ID_MOBILE);
+			pst.setString(1, nameDetails.getFirstName());
+			pst.setString(2, nameDetails.getLastName());
+			res = pst.executeQuery();
+
+		} catch (SQLException e) {
+			logger.info(AppConstants.SQL_ERROR);
+		} finally {
+
+			int count = 0;
+			while (res.next()) {
+				count++;
+				logger.info(res.getInt("contact_id") + "\t" + res.getInt("mobile_id") + "\t"
+						+ res.getString("country_code") + "\t" + res.getString("mobile_number"));
 			}
+			if (count == 0) {
+				logger.info(AppConstants.NTNG_TO_UPDATE);
+				editMobile(nameDetails, new MobileDetails());
+				return;
+			}
+			DBUtils.closeConnection(con, pst, null);
 		}
 	}
 
 	@Override
 	public void updateMobile(NameDetails nameDetails, MobileDetails mobileDetails) throws SQLException {
+
+		printMobile(nameDetails, mobileDetails);
+
+		logger.info(AppConstants.MOBILE_ID);
+		int mobileId = sc.nextInt();
+		do {
+			logger.info(AppConstants.COUNTRY_CODE);
+			mobileDetails.setMobileCountryCode(sc.next());
+		} while (!Validator.validateCountryCode(mobileDetails.getMobileCountryCode()));
+		do {
+			logger.info(AppConstants.MOBILE_NUMBER);
+			mobileDetails.setMobileNumber(sc.next());
+		} while (!Validator.validateNumber(mobileDetails.getMobileNumber()));
+
+		try {
+			con = DBUtils.getConnection();
+			pst = con.prepareStatement(SQLConstants.UPDATE_MOBILE);
+			pst.setString(1, mobileDetails.getMobileCountryCode());
+			pst.setString(2, mobileDetails.getMobileNumber());
+			pst.setString(3, nameDetails.getFirstName());
+			pst.setString(4, nameDetails.getLastName());
+			pst.setInt(5, mobileId);
+			pst.executeUpdate();
+
+		} catch (SQLException e) {
+			logger.info(AppConstants.SQL_ERROR);
+		} finally {
+			DBUtils.closeConnection(con, pst, null);
+		}
+	}
+
+	@Override
+	public void editMobile(NameDetails nameDetails, MobileDetails mobileDetails) throws SQLException {
 		logger.info(AppConstants.ADD_UPDATE_MOBILE);
 		String choice = sc.next();
 		if (choice.equals("n"))
@@ -265,80 +323,75 @@ public class ContactDAOImpl implements ContactDAO {
 				mobileDetails.setMobileNumber(sc.next());
 			} while (!Validator.validateNumber(mobileDetails.getMobileNumber()));
 
-			try {
-				con = DBUtils.getConnection();
-				pst = con.prepareStatement(SQLConstants.UPDATE_MOBILE);
-				pst.setString(1, nameDetails.getFirstName());
-				pst.setString(2, nameDetails.getLastName());
-				pst.setString(3, mobileDetails.getMobileCountryCode());
-				pst.setString(4, mobileDetails.getMobileNumber());
-				pst.executeUpdate();
-
-			} catch (SQLException e) {
-				logger.info(AppConstants.SQL_ERROR);
-			} finally {
-				DBUtils.closeConnection(con, pst, null);
-			}
+			insertMobile(nameDetails, mobileDetails);
 
 		} else if (choice.equals("u")) {
+			updateMobile(nameDetails, mobileDetails);
+		}
+	}
 
-			ResultSet res = null;
-			try {
-				con = DBUtils.getConnection();
-				pst = con.prepareStatement(SQLConstants.SELECT_BY_ID_MOBILE);
-				pst.setString(1, nameDetails.getFirstName());
-				pst.setString(2, nameDetails.getLastName());
-				res = pst.executeQuery();
+	@Override
+	public void printHome(NameDetails nameDetails, HomeDetails homeDetails) throws SQLException {
+		
+		try {
+			con = DBUtils.getConnection();
+			pst = con.prepareStatement(SQLConstants.SELECT_BY_ID_HOME);
+			pst.setString(1, nameDetails.getFirstName());
+			pst.setString(2, nameDetails.getLastName());
+			res = pst.executeQuery();
 
-			} catch (SQLException e) {
-				logger.info(AppConstants.SQL_ERROR);
-			} finally {
-
-				int count = 0;
-				while (res.next()) {
-					count++;
-					logger.info(res.getInt("contact_id") + "\t" + res.getInt("mobile_id") + "\t"
-							+ res.getString("country_code") + "\t" + res.getString("mobile_number"));
-				}
-				if (count == 0) {
-					logger.info(AppConstants.NTNG_TO_UPDATE);
-					updateMobile(nameDetails, new MobileDetails());
-					return;
-				}
-				DBUtils.closeConnection(con, pst, null);
+		} catch (SQLException e) {
+			logger.info(AppConstants.SQL_ERROR);
+		} finally {
+			int count = 0;
+			while (res.next()) {
+				count++;
+				logger.info(res.getInt("contact_id") + "\t" + res.getInt("home_id") + "\t" + res.getString("area_code")
+						+ "\t" + res.getString("home_number"));
 			}
-
-			logger.info(AppConstants.MOBILE_ID);
-			int mobileId = sc.nextInt();
-			do {
-				logger.info(AppConstants.COUNTRY_CODE);
-				mobileDetails.setMobileCountryCode(sc.next());
-			} while (!Validator.validateCountryCode(mobileDetails.getMobileCountryCode()));
-			do {
-				logger.info(AppConstants.MOBILE_NUMBER);
-				mobileDetails.setMobileNumber(sc.next());
-			} while (!Validator.validateNumber(mobileDetails.getMobileNumber()));
-
-			try {
-				con = DBUtils.getConnection();
-				pst = con.prepareStatement(SQLConstants.ALTER_MOBILE);
-				pst.setString(1, mobileDetails.getMobileCountryCode());
-				pst.setString(2, mobileDetails.getMobileNumber());
-				pst.setString(3, nameDetails.getFirstName());
-				pst.setString(4, nameDetails.getLastName());
-				pst.setInt(5, mobileId);
-				pst.executeUpdate();
-
-			} catch (SQLException e) {
-				logger.info(AppConstants.SQL_ERROR);
-			} finally {
-				DBUtils.closeConnection(con, pst, null);
+			if (count == 0) {
+				logger.info(AppConstants.NTNG_TO_UPDATE);
+				editHome(nameDetails, new HomeDetails());
+				return;
 			}
+			DBUtils.closeConnection(con, pst, null);
 		}
 	}
 
 	@Override
 	public void updateHome(NameDetails nameDetails, HomeDetails homeDetails) throws SQLException {
+
+		printHome(nameDetails, homeDetails);
+
+		logger.info(AppConstants.HOME_ID);
+		int homeId = sc.nextInt();
+		do {
+			logger.info(AppConstants.AREA_CODE);
+			homeDetails.setHomeAreaCode(sc.next());
+		} while (!Validator.validateAreaCode(homeDetails.getHomeAreaCode()));
+		do {
+			logger.info(AppConstants.HOME_NUMBER);
+			homeDetails.setHomeNumber(sc.next());
+		} while (!Validator.validateNumber(homeDetails.getHomeNumber()));
+		try {
+			con = DBUtils.getConnection();
+			pst = con.prepareStatement(SQLConstants.UPDATE_HOME);
+			pst.setString(1, homeDetails.getHomeAreaCode());
+			pst.setString(2, homeDetails.getHomeNumber());
+			pst.setString(3, nameDetails.getFirstName());
+			pst.setString(4, nameDetails.getLastName());
+			pst.setInt(4, homeId);
+			pst.executeUpdate();
+
+		} catch (SQLException e) {
+			logger.info(AppConstants.SQL_ERROR);
+		} finally {
+			DBUtils.closeConnection(con, pst, null);
+		}
+	}
+
+	@Override
+	public void editHome(NameDetails nameDetails, HomeDetails homeDetails) throws SQLException {
 		logger.info(AppConstants.ADD_UPDATE_HOME);
 		String choice = sc.next();
 		if (choice.equals("n"))
@@ -355,78 +408,69 @@ public class ContactDAOImpl implements ContactDAO {
 				homeDetails.setHomeNumber(sc.next());
 			} while (!Validator.validateNumber(homeDetails.getHomeNumber()));
 
-			try {
-				con = DBUtils.getConnection();
-				pst = con.prepareStatement(SQLConstants.ALTER_HOME);
-				pst.setString(1, nameDetails.getFirstName());
-				pst.setString(2, nameDetails.getLastName());
-				pst.setString(3, homeDetails.getHomeAreaCode());
-				pst.setString(4, homeDetails.getHomeNumber());
-				pst.executeUpdate();
-
-			} catch (SQLException e) {
-				logger.info(AppConstants.SQL_ERROR);
-			} finally {
-				DBUtils.closeConnection(con, pst, null);
-			}
+			insertHome(nameDetails, homeDetails);
 
 		} else if (choice.equals("u")) {
+			updateHome(nameDetails, homeDetails);
+		}
+	}
 
-			ResultSet res = null;
-			try {
-				con = DBUtils.getConnection();
-				pst = con.prepareStatement(SQLConstants.SELECT_BY_ID_HOME);
-				pst.setString(1, nameDetails.getFirstName());
-				pst.setString(2, nameDetails.getLastName());
-				res = pst.executeQuery();
+	@Override
+	public void printEmail(NameDetails nameDetails, EmailDetails emailDetails) throws SQLException {
+		
+		try {
+			con = DBUtils.getConnection();
+			pst = con.prepareStatement(SQLConstants.SELECT_BY_ID_EMAIL);
+			pst.setString(1, nameDetails.getFirstName());
+			pst.setString(2, nameDetails.getLastName());
+			res = pst.executeQuery();
 
-			} catch (SQLException e) {
-				logger.info(AppConstants.SQL_ERROR);
-			} finally {
-				int count = 0;
-				while (res.next()) {
-					count++;
-					logger.info(res.getInt("contact_id") + "\t" + res.getInt("home_id") + "\t"
-							+ res.getString("area_code") + "\t" + res.getString("home_number"));
-				}
-				if (count == 0) {
-					logger.info(AppConstants.NTNG_TO_UPDATE);
-					updateHome(nameDetails, new HomeDetails());
-					return;
-				}
-				DBUtils.closeConnection(con, pst, null);
+		} catch (SQLException e) {
+			logger.info(AppConstants.SQL_ERROR);
+		} finally {
+			int count = 0;
+			while (res.next()) {
+				count++;
+				logger.info(
+						res.getInt("contact_id") + "\t" + res.getInt("emailid_id") + "\t" + res.getString("email_id"));
 			}
-
-			logger.info(AppConstants.HOME_ID);
-			int homeId = sc.nextInt();
-			do {
-				logger.info(AppConstants.AREA_CODE);
-				homeDetails.setHomeCountryCode(sc.next());
-			} while (!Validator.validateAreaCode(homeDetails.getHomeAreaCode()));
-			do {
-				logger.info(AppConstants.HOME_NUMBER);
-				homeDetails.setHomeNumber(sc.next());
-			} while (!Validator.validateNumber(homeDetails.getHomeNumber()));
-			try {
-				con = DBUtils.getConnection();
-				pst = con.prepareStatement(SQLConstants.UPDATE_HOME);
-				pst.setString(1, homeDetails.getHomeAreaCode());
-				pst.setString(2, homeDetails.getHomeNumber());
-				pst.setString(3, nameDetails.getFirstName());
-				pst.setString(4, nameDetails.getLastName());
-				pst.setInt(4, homeId);
-				pst.executeUpdate();
-
-			} catch (SQLException e) {
-				logger.info(AppConstants.SQL_ERROR);
-			} finally {
-				DBUtils.closeConnection(con, pst, null);
+			if (count == 0) {
+				logger.info(AppConstants.NTNG_TO_UPDATE);
+				editEmail(nameDetails, emailDetails);
+				return;
 			}
+			DBUtils.closeConnection(con, pst, null);
 		}
 	}
 
 	@Override
 	public void updateEmail(NameDetails nameDetails, EmailDetails emailDetails) throws SQLException {
+
+		logger.info(AppConstants.EMAIL_ID);
+		int emailidId = sc.nextInt();
+		do {
+			logger.info(AppConstants.EMAIL);
+			emailDetails.setEmail(sc.next());
+		} while (!Validator.validateEmail(emailDetails.getEmail()));
+
+		try {
+			con = DBUtils.getConnection();
+			pst = con.prepareStatement(SQLConstants.UPDATE_EMAIL);
+			pst.setString(1, emailDetails.getEmail());
+			pst.setString(2, nameDetails.getFirstName());
+			pst.setString(3, nameDetails.getLastName());
+			pst.setInt(4, emailidId);
+			pst.executeUpdate();
+
+		} catch (SQLException e) {
+			logger.info(AppConstants.SQL_ERROR);
+		} finally {
+			DBUtils.closeConnection(con, pst, null);
+		}
+	}
+
+	@Override
+	public void editEmail(NameDetails nameDetails, EmailDetails emailDetails) throws SQLException {
 		logger.info(AppConstants.ADD_UPDATE_EMAIL);
 		String choice = sc.next();
 		if (choice.equals("n"))
@@ -438,68 +482,10 @@ public class ContactDAOImpl implements ContactDAO {
 				emailDetails.setEmail(sc.next());
 			} while (!Validator.validateEmail(emailDetails.getEmail()));
 
-			try {
-				con = DBUtils.getConnection();
-				pst = con.prepareStatement(SQLConstants.INSERT_EMAIL);
-				pst.setString(1, nameDetails.getFirstName());
-				pst.setString(2, nameDetails.getLastName());
-				pst.setString(3, emailDetails.getEmail());
-				pst.executeUpdate();
-
-			} catch (SQLException e) {
-				logger.info(AppConstants.SQL_ERROR);
-			} finally {
-				DBUtils.closeConnection(con, pst, null);
-			}
+			insertEmail(nameDetails, emailDetails);
 
 		} else if (choice.equals("u")) {
-
-			ResultSet res = null;
-			try {
-				con = DBUtils.getConnection();
-				pst = con.prepareStatement(SQLConstants.SELECT_BY_ID_EMAIL);
-				pst.setString(1, nameDetails.getFirstName());
-				pst.setString(2, nameDetails.getLastName());
-				res = pst.executeQuery();
-
-			} catch (SQLException e) {
-				logger.info(AppConstants.SQL_ERROR);
-			} finally {
-				int count = 0;
-				while (res.next()) {
-					count++;
-					logger.info(res.getInt("contact_id") + "\t" + res.getInt("emailid_id") + "\t"
-							+ res.getString("email_id"));
-				}
-				if (count == 0) {
-					logger.info(AppConstants.NTNG_TO_UPDATE);
-					updateEmail(nameDetails, emailDetails);
-					return;
-				}
-				DBUtils.closeConnection(con, pst, null);
-			}
-
-			logger.info(AppConstants.EMAIL_ID);
-			int emailidId = sc.nextInt();
-			do {
-				logger.info(AppConstants.EMAIL);
-				emailDetails.setEmail(sc.next());
-			} while (!Validator.validateEmail(emailDetails.getEmail()));
-
-			try {
-				con = DBUtils.getConnection();
-				pst = con.prepareStatement(SQLConstants.UPDATE_EMAIL);
-				pst.setString(1, emailDetails.getEmail());
-				pst.setString(2, nameDetails.getFirstName());
-				pst.setString(3, nameDetails.getLastName());
-				pst.setInt(4, emailidId);
-				pst.executeUpdate();
-
-			} catch (SQLException e) {
-				logger.info(AppConstants.SQL_ERROR);
-			} finally {
-				DBUtils.closeConnection(con, pst, null);
-			}
+			updateEmail(nameDetails, emailDetails);
 		}
 	}
 
@@ -517,7 +503,7 @@ public class ContactDAOImpl implements ContactDAO {
 		con = DBUtils.getConnection();
 
 		pst = con.prepareStatement(sort);
-		ResultSet res = pst.executeQuery();
+		res = pst.executeQuery();
 
 		while (res.next()) {
 
@@ -540,19 +526,19 @@ public class ContactDAOImpl implements ContactDAO {
 
 			logger.info(res.getInt(1) + "\n" + res.getString(2) + "\n" + res.getString(3));
 
-			while (off.next()) {
+			while (off.next() && off.getString(3) != null) {
 				logger.info(AppConstants.OFFICE_NUMBER_PRINT + off.getString(3) + "-" + off.getString(4) + ", ");
 			}
 
-			while (mob.next()) {
+			while (mob.next() && mob.getString(3) != null) {
 				logger.info(AppConstants.MOBILE_NUMBER_PRINT + mob.getString(3) + "-" + mob.getString(4) + ", ");
 			}
 
-			while (home.next()) {
+			while (home.next() && home.getString(3) != null) {
 				logger.info(AppConstants.HOME_NUMBER_PRINT + home.getString(3) + "-" + home.getString(4) + ", ");
 			}
 
-			while (email.next()) {
+			while (email.next() && email.getString(3) != null) {
 				logger.info(AppConstants.EMAIL_PRINT + email.getString(3) + ", ");
 			}
 
