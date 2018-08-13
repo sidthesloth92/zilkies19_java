@@ -1,8 +1,8 @@
-1,10,banana
-2,20,apple
-3,30,banana
-2,20,banana
-3,10,apple
-4,50,bigfish
-5,10,smallfish
-6,10,smallfish
+muthu,banana,10
+varun,apple,20
+raghu,banana,10
+varun,banana,5
+muthu,apple,10
+surya,bigfish,20
+saro,smallfish,30
+surya,smallfish,10

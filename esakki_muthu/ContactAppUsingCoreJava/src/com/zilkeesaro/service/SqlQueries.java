@@ -1,4 +1,4 @@
-package com.zilkeesaro.dao;
+package com.zilkeesaro.service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,9 +11,10 @@ import java.util.logging.Logger;
 import com.zilkeesaro.beans.Details;
 import com.zilkeesaro.constants.SqlConstants;
 import com.zilkeesaro.constants.Strings;
-import com.zilkeesaro.service.ScanInputs;
+import com.zilkeesaro.dao.DatabaseConfig;
+import com.zilkeesaro.dao.DisplayDao;
 
-public class Queries {
+public class SqlQueries {
 
 	// String first_name,last_name,e_mail,mobile_number,home,office;
 
@@ -25,50 +26,63 @@ public class Queries {
 
 	ScanInputs inputs = new ScanInputs();
 	
+	DisplayDao displayDao=new DisplayDao();
+	
 	String msg="";
 
-	public static final Logger logger = Logger.getLogger(Queries.class.getName());
+	public static final Logger logger = Logger.getLogger(SqlQueries.class.getName());
 
 	public void addContact(Details details) throws SQLException {
 
 		conn = DatabaseConfig.getConnection();
-
+		
+		PreparedStatement prepareStmt=null;
+		
+		//PreparedStatement prepareStmt1,prepareStmt2,prepareStmt3,prepareStmt4;
+		
+		ResultSet set = null;
+		
+		
 		try {
 			conn.setAutoCommit(false);
 
 			contact_id = 1;
 
-			PreparedStatement prepareStmt = null;
-
 			prepareStmt = conn.prepareStatement(SqlConstants.SELECT_MAX);
 
-			ResultSet set = prepareStmt.executeQuery();
+			set = prepareStmt.executeQuery();
 
 			while (set.next()) {
 				contact_id = contact_id + set.getInt(1);
 			}
+			
+			prepareStmt.close();
 
 			prepareStmt = conn.prepareStatement(SqlConstants.ADD_CONTACTS);
 
 			prepareStmt.setInt(1, contact_id);
 
-			prepareStmt.setString(2, details.getFirst_name());
+			prepareStmt.setString(2, details.getFirst_name());				
 
 			prepareStmt.setString(3, details.getLast_name());
 
 			prepareStmt.setString(4, details.getE_mail());
 
 			prepareStmt.executeUpdate();
+			
+			prepareStmt.close();
 
 			prepareStmt = conn.prepareStatement(SqlConstants.ADD_PHONE);
 
 			prepareStmt.setInt(1, contact_id);
 
-			prepareStmt.setInt(2, 1);
-
+			prepareStmt.setInt(2, 1);			
+			
 			prepareStmt.setString(3, details.getMobile_number());
 
 			prepareStmt.executeUpdate();
+			
+			prepareStmt.close();
 
 			prepareStmt = conn.prepareStatement(SqlConstants.ADD_PHONE);
 
@@ -79,6 +93,8 @@ public class Queries {
 			prepareStmt.setString(3, details.getOffice());
 
 			prepareStmt.executeUpdate();
+			
+			prepareStmt.close();
 
 			prepareStmt = conn.prepareStatement(SqlConstants.ADD_PHONE);
 
@@ -102,15 +118,22 @@ public class Queries {
 
 		} finally {
 
-			conn.close();
+			//conn.close();
+			
+			DatabaseConfig.CloseConnection(set, prepareStmt, conn);
+			
 
 		}
 
 	}
 
-	public void SortList(int option) throws SQLException {
+	public void SortList(int option,Details details) throws SQLException {
 
 		PreparedStatement prepareStmt = null;
+		
+		PreparedStatement IndividualPrepareStmt=null;
+		
+		ResultSet set=null;
 
 		conn = DatabaseConfig.getConnection();
 
@@ -128,28 +151,29 @@ public class Queries {
 				prepareStmt = conn.prepareStatement(SqlConstants.SORT_BY_FIRST_NAME);
 			}
 
-			ResultSet set = prepareStmt.executeQuery();
+			set = prepareStmt.executeQuery();
 
 			int sno = 1;
 
 			while (set.next()) {
 
-				PreparedStatement individualStatement = conn.prepareStatement(SqlConstants.LIST_BY_ID);
+				IndividualPrepareStmt = conn.prepareStatement(SqlConstants.LIST_BY_ID);
 
-				individualStatement.setInt(1, contact_id);
+				IndividualPrepareStmt.setInt(1, set.getInt("contact_id"));
 
-				ResultSet list = individualStatement.executeQuery();
+				ResultSet list = IndividualPrepareStmt.executeQuery();
 				
-				Display(sno,set,list);
+				Display(sno,set,list,details);
 
 				sno++;
 			}
+			
 			System.out.println();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			conn.close();
+			DatabaseConfig.CloseConnection(set, prepareStmt, conn);
 		}
 
 	}
@@ -159,6 +183,8 @@ public class Queries {
 		conn = DatabaseConfig.getConnection();
 
 		PreparedStatement prepareStmt = null;
+		
+		ResultSet set=null;
 
 		logger.info(Strings.CONTACT_ID);
 		
@@ -237,13 +263,19 @@ public class Queries {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			DatabaseConfig.CloseConnection(set, prepareStmt, conn);
 		}
 
 	}
 	
-	public void Delete()
+	public void Delete(Details details)
 	{
 		conn=DatabaseConfig.getConnection();
+		
+		ResultSet set=null;
+		
+		PreparedStatement prepareStmt=null;
 		
 		//System.out.println("Enter Contact Id..");
 		
@@ -255,19 +287,18 @@ public class Queries {
 			
 			conn.setAutoCommit(false);
 
-			PreparedStatement preparedStmt=null;
 			
-			preparedStmt=conn.prepareStatement(SqlConstants.DEL_PHONE);
+			prepareStmt=conn.prepareStatement(SqlConstants.DEL_PHONE);
 			
-			preparedStmt.setInt(1, contact_id);
+			prepareStmt.setInt(1, contact_id);
 
-			preparedStmt.executeUpdate();
+			prepareStmt.executeUpdate();
 			
-			preparedStmt=conn.prepareStatement(SqlConstants.DEL_CONTACT);
+			prepareStmt=conn.prepareStatement(SqlConstants.DEL_CONTACT);
 			
-			preparedStmt.setInt(1,contact_id);
+			prepareStmt.setInt(1,contact_id);
 			
-			if (preparedStmt.executeUpdate() == 1) {
+			if (prepareStmt.executeUpdate() == 1) {
 				
 				//System.out.println(contact_id + " is Deleted Successfully");
 				
@@ -282,6 +313,8 @@ public class Queries {
 			}
 			
 			conn.commit();
+			
+			
 
 		} catch (Exception e) {
 			
@@ -294,59 +327,56 @@ public class Queries {
 			
 			e.printStackTrace();
 		}finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
+				DatabaseConfig.CloseConnection(set, prepareStmt, conn);
+			
 		}
 	}
 	
-	public void Display(int sno,ResultSet set,ResultSet list) {
+	public void Display(int sno,ResultSet set,ResultSet list,Details details) {
 		try {
 		
 		contact_id = set.getInt("contact_id");
+		
+		details.sno=sno;
 
-		System.out.println(Strings.NEW_LINE);
-
-		System.out.println(sno + ")");
-
-		System.out.format(Strings.STRING_SPACE, Strings.CID, set.getString("contact_id"));
-
-		System.out.println();
-
-		System.out.format(Strings.STRING_SPACE, Strings.NAME, set.getString("first_name") + " " + set.getString("last_name"));
-
-		System.out.println();
+		details.setContact_id(contact_id);
+		
+		details.setE_mail(set.getString("email"));
+		
+		details.setFirst_name(set.getString("first_name"));
+		
+		details.setLast_name(set.getString("last_name"));
+		
 		
 		while (list.next()) {
 
 			if (list.getString("phone_type").equals("1")) {
 				
-				System.out.format(Strings.STRING_SPACE, Strings.MOBILE_NUMBER, list.getString("phone_no"));
+				details.setMobile_number(list.getString("phone_no"));
 
 			}
 			if (list.getString("phone_type").equals("2")) {
 
-				System.out.format(Strings.STRING_SPACE, Strings.OFFICE_NUMBER, list.getString("phone_no"));
+				details.setOffice(list.getString("phone_no"));
 
 			}
 			if (list.getString("phone_type").equals("3")) {
-
-				System.out.format(Strings.STRING_SPACE, Strings.HOME_NUMBER, list.getString("phone_no"));
+				
+				details.setHome(list.getString("phone_no"));
 
 			}
-			System.out.println();
 
 		}
-
-		System.out.format(Strings.STRING_SPACE, Strings.E_MAIL, set.getString("email"));
-
-		System.out.println();
-
 		
-		}catch(Exception e) {}
+		displayDao.DisplaySortedValues(details);
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+			
+			
+		}
 	}
 
 }
