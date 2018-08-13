@@ -32,7 +32,7 @@ public class ContactApplication {
 			
 		}
 		catch(Exception e) {
-			System.out.println(e);
+			e.getStackTrace();
 		}
 		finally {
 			DbUtils.closeConnection();

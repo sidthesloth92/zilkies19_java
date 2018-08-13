@@ -24,7 +24,7 @@ public class DeleteMain {
 			preparedStatement.executeUpdate();
 		}
 		catch(Exception e) {
-			
+			e.getStackTrace();
 		}
 	}
 	
@@ -36,7 +36,7 @@ public class DeleteMain {
 			preparedStatement.executeUpdate();
 		}
 		catch(Exception e) {
-			
+			e.getStackTrace();
 		}
 	}
 	
@@ -48,7 +48,7 @@ public class DeleteMain {
 			preparedStatement.executeUpdate();
 		}
 		catch(Exception e) {
-			
+			e.getStackTrace();
 		}
 	}
 	//delete entire office
@@ -59,7 +59,7 @@ public class DeleteMain {
 			preparedStatement.executeUpdate();
 		}
 		catch(Exception e) {
-			
+			e.getStackTrace();
 		}
 	}
 	
@@ -71,7 +71,7 @@ public class DeleteMain {
 			preparedStatement.executeUpdate();
 		}
 		catch(Exception e) {
-			
+			e.getStackTrace();
 		}
 	}
 	
@@ -86,7 +86,7 @@ public class DeleteMain {
 			con.commit();
 		}
 		catch(Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 		
 	}
@@ -98,7 +98,7 @@ public class DeleteMain {
 			preparedStatement.executeUpdate();
 		}
 		catch(Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 		
 	}
@@ -111,7 +111,7 @@ public class DeleteMain {
 			preparedStatement.executeUpdate();
 		}
 		catch(Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 		
 	}
@@ -124,7 +124,7 @@ public class DeleteMain {
 			preparedStatement.executeUpdate();
 		}
 		catch(Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 		
 	}
@@ -137,7 +137,7 @@ public class DeleteMain {
 			preparedStatement.executeUpdate();
 		}
 		catch(Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 		
 	}
@@ -182,7 +182,7 @@ public class DeleteMain {
 			}
 		}
 		catch(Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 	}
 	
@@ -222,7 +222,7 @@ public class DeleteMain {
 			}
 		}
 		catch(Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 		
 	}

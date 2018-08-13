@@ -21,7 +21,7 @@ public class LastInserted {
 			}
 		}
 		catch(Exception e) {
-			
+			e.getStackTrace();
 		}
 		finally {
 		}
