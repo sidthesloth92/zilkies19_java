@@ -29,7 +29,7 @@ public class ModifyValues {
 			pst.executeUpdate();
 			con.commit();
 		} catch (Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 	}
 
@@ -46,7 +46,7 @@ public class ModifyValues {
 			pst.setInt(3, rowId);
 			pst.executeUpdate();
 		} catch (Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 	}
 
@@ -60,7 +60,7 @@ public class ModifyValues {
 			pst.setInt(2, rowId);
 			pst.executeUpdate();
 		} catch (Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 	}
 
@@ -77,7 +77,7 @@ public class ModifyValues {
 			pst.setInt(3, rowId);
 			pst.executeUpdate();
 		} catch (Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 	}
 
@@ -89,7 +89,7 @@ public class ModifyValues {
 			rowId = scanner.nextInt();
 			modifyOfficeRow(rowId, con);
 		} catch (Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 	}
 
@@ -109,7 +109,7 @@ public class ModifyValues {
 			pst.setInt(4, rowId);
 			pst.executeUpdate();
 		} catch (Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 	}
 
@@ -121,7 +121,7 @@ public class ModifyValues {
 			rowId = scanner.nextInt();
 			modifyHomeRow(rowId, con);
 		} catch (Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 	}
 
@@ -133,7 +133,7 @@ public class ModifyValues {
 			rowId = scanner.nextInt();
 			modifyMailRow(rowId, con);
 		} catch (Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 	}
 
@@ -145,7 +145,7 @@ public class ModifyValues {
 			rowId = scanner.nextInt();
 			modifyMobileRow(rowId, con);
 		} catch (Exception e) {
-			log.info(e.toString());
+			e.getStackTrace();
 		}
 	}
 
@@ -190,7 +190,7 @@ public class ModifyValues {
 			option = scanner.nextInt();
 			modifyMainOptions(option, con, false);
 		} catch (Exception e) {
-
+			e.getStackTrace();
 		}
 	}
 	/*
