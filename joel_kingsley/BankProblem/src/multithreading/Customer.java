@@ -3,8 +3,8 @@ package multithreading;
 public class Customer {
 	int customerNumber;
 	Long processingTime = 1000L;
-	
-	public Customer(int customerNumber,Long processingTime) {
+
+	public Customer(int customerNumber, Long processingTime) {
 		this.customerNumber = customerNumber;
 		this.processingTime = processingTime;
 	}
@@ -24,6 +24,5 @@ public class Customer {
 	public void setProcessingTime(Long processingTime) {
 		this.processingTime = processingTime;
 	}
-	
-	
+
 }
