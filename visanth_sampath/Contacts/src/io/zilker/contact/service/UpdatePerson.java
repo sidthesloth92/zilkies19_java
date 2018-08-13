@@ -77,7 +77,7 @@ public class UpdatePerson {
 			displayOptions(idOfUser,con);
 		}
 		catch(Exception e) {
-			
+			e.getStackTrace();
 		}
 		
 	}

@@ -2,7 +2,7 @@ package io.ztech.contactapplication.beans;
 
 public class HomeDetails {
 
-	private String homeAreaCode, homeCountryCode, homeNumber;
+	private String homeAreaCode, homeNumber;
 
 	public String getHomeAreaCode() {
 
@@ -12,16 +12,6 @@ public class HomeDetails {
 	public void setHomeAreaCode(String homeAreaCode) {
 
 		this.homeAreaCode = homeAreaCode;
-	}
-
-	public String getHomeCountryCode() {
-
-		return homeCountryCode;
-	}
-
-	public void setHomeCountryCode(String homeCountryCode) {
-
-		this.homeCountryCode = homeCountryCode;
 	}
 
 	public String getHomeNumber() {
