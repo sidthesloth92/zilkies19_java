@@ -15,7 +15,6 @@ public class Validator {
 	private static final Logger logger = Logger.getLogger(Validator.class.getName());
 	private static Connection con = null;
 	private static PreparedStatement pst = null;
-	// private ResultSet rs = null;
 
 	public static boolean validateName(String firstName, String lastName) {
 		for (int i = 0; i < firstName.length(); i++)
@@ -64,29 +63,7 @@ public class Validator {
 				email);
 	}
 
-	public static boolean isNamePresent(String fname, String lname) throws SQLException {
-
-		ResultSet res = null;
-		try {
-			con = DBUtils.getConnection();
-			pst = con.prepareStatement("select first_name,last_name from contact");
-			res = pst.executeQuery();
-
-		} catch (SQLException e) {
-			logger.info("Error connecting it with MySQL");
-		} finally {
-			while (res.next()) {
-				if (res.getString(1).equals(fname) && res.getString(2).equals(lname)) {
-					return true;
-				}
-			}
-			DBUtils.closeConnection(con, pst, null);
-		}
-
-		return false;
-	}
-
-	public boolean isDuplicate(String fname, String lname, String email, Connection con) throws SQLException {
+	public static boolean isDuplicate(String fname, String lname, String email) throws SQLException {
 		ResultSet em = null;
 		ResultSet res = null;
 		try {

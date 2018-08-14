@@ -20,5 +20,36 @@ public class DatabaseConfig {
 		
 		return conn;
 	}
+	
+	public static void CloseConnection(ResultSet set,PreparedStatement prepareStmt,Connection conn)
+	{
+		
+		if(set==null) {
+			
+		}else {
+			try {
+				set.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(prepareStmt==null) {
+			try {
+				prepareStmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(conn==null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 
 }

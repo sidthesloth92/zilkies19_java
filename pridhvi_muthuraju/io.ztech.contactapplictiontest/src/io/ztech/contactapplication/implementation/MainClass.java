@@ -15,11 +15,9 @@ public class MainClass {
 
 	public static final Logger logger = Logger.getLogger(MainClass.class.getName());
 
-	private static Scanner s;
-
 	public static void main(String[] args) {
 		try {
-			s = new Scanner(System.in);
+			Scanner s = new Scanner(System.in);
 			int option;
 			EmailDetails emailDetails = new EmailDetails();
 			HomeDetails homeDetails = new HomeDetails();
@@ -56,6 +54,7 @@ public class MainClass {
 					break;
 				}
 				case 7: {
+					s.close();
 					System.exit(0);
 					break;
 				}

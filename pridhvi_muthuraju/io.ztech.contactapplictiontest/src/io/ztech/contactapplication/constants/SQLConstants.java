@@ -22,14 +22,14 @@ public class SQLConstants {
 			+ "contact_id=(select contact_id from contact where first_name=?&&last_name=?)";
 	public static final String UPDATE_OFFICE = "update office set office_extension=?,office_number=? where contact_id="
 			+ "(select contact_id from contact where first_name=?&&last_name=?) and office_id=?";
-	public static final String UPDATE_MOBILE = "insert into mobile (contact_id,country_code,mobile_number)values("
-			+ " (select contact_id from contact where first_name=?&&last_name=?),?,?)";
+	//public static final String UPDATE_MOBILE = "insert into mobile (contact_id,country_code,mobile_number)values("
+	//		+ " (select contact_id from contact where first_name=?&&last_name=?),?,?)";
 	public static final String SELECT_BY_ID_MOBILE = "select * from mobile where "
 			+ "contact_id=(select contact_id from contact where first_name=?&&last_name=?)";
-	public static final String ALTER_MOBILE = "update mobile set country_code=?,mobile_number=? where contact_id="
+	public static final String UPDATE_MOBILE = "update mobile set country_code=?,mobile_number=? where contact_id="
 			+ "(select contact_id from contact where first_name=?&&last_name=?) and mobile_id=?";
-	public static final String ALTER_HOME = "insert into home (contact_id,area_code,home_number)values("
-			+ " (select contact_id from contact where first_name=?&&last_name=?),?,?)";
+//	public static final String ALTER_HOME = "insert into home (contact_id,area_code,home_number)values("
+	//		+ " (select contact_id from contact where first_name=?&&last_name=?),?,?)";
 	public static final String SELECT_BY_ID_HOME = "select * from home where "
 			+ "contact_id=(select contact_id from contact where first_name=?&&last_name=?)";
 	public static final String UPDATE_HOME = "update home set area_code=?,home_number=? where contact_id="
