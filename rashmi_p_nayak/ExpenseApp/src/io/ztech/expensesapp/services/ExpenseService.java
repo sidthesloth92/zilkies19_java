@@ -1,6 +1,7 @@
 package io.ztech.expensesapp.services;
 
 import io.ztech.expensesapp.beans.Expense;
+import io.ztech.expensesapp.beans.GroupPayment;
 import io.ztech.expensesapp.beans.User;
 import io.ztech.expensesapp.exceptions.LoginFailedException;
 import io.ztech.expensesapp.exceptions.UsernameAlreadyExistsException;
@@ -42,5 +43,18 @@ public class ExpenseService {
 	public User showAllExpense(User activeUser) {
 		User user = expenseDelegate.showAllExpense(activeUser);
 		return user;
+	}
+	
+	public User viewGroups(User activeUser) {
+		User user = expenseDelegate.viewGroups(activeUser);
+		return user;
+	}
+	
+	public void createGroups(User activeUser) {
+		expenseDelegate.createGroups(activeUser);
+	}
+	
+	public void addExpenseMembers(GroupPayment groupPayment) {
+		expenseDelegate.addExpenseMembers(groupPayment);
 	}
 }

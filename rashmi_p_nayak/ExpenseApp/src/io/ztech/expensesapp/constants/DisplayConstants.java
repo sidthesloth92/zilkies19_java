@@ -21,7 +21,9 @@ public class DisplayConstants {
 	public static final String CATEGORY_TYPES = "1.Utilities \n2.Travel \n3.Education \nEnter choice:";
 	public static final String EXPENSE_TYPES = "1.Food \n2.Water \n3.Fuel \n4.Clothing \n5.Other  \nEnter choice:";
 	public static final String MY_EXPENSE_OPTIONS = "1.Add new expense \n2.Show All expenses \nEnter choice:";
-	
+	public static final String GROUP_MENU = "1.View Groups \n2.Create Group \nEnter choice:";
+	public static final String ENTER_GROUP_NAME = "Enter group name: ";
+	public static final String ENTER_NO_OF_MEMBERS = "Enter no.of members: ";
 	private DisplayConstants() {
 
 	}

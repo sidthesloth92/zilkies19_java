@@ -2,24 +2,33 @@ package io.ztech.expensesapp.beans;
 
 public class ExpenseMember extends User {
 	boolean pending;
-	float amount;
+	float totalAmount;
+	float amountPaid;
 
 	
+
+		public void setPending(boolean pending) {
+		this.pending = pending;
+	}
 
 	public boolean isPending() {
 		return pending;
 	}
 
-	public void setPending(boolean pending) {
-		this.pending = pending;
+	public float getTotalAmount() {
+		return totalAmount;
 	}
 
-	public float getAmount() {
-		return amount;
+	public void setTotalAmount(float totalAmount) {
+		this.totalAmount = totalAmount;
 	}
 
-	public void setAmount(float amount) {
-		this.amount = amount;
+	public float getAmountPaid() {
+		return amountPaid;
 	}
 
+	public void setAmountPaid(float amountPaid) {
+		this.amountPaid = amountPaid;
+	}
+	
 }
