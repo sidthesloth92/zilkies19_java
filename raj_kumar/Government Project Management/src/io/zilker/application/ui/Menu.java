@@ -4,6 +4,8 @@ import java.util.Scanner;
 import java.util.logging.Logger;
 
 import io.zilker.application.constants.DisplayConstants;
+import io.zilker.application.logsession.ContractorLog;
+import io.zilker.application.logsession.UserLog;
 import io.zilker.application.utils.StatusCheck;
 
 
@@ -31,11 +33,12 @@ public class Menu {
 					userUI.displayAllprojects();
 					break;
 				case 2:
-					while(userUI.userLogin()) {
-						userMenu.displayUserMenu();
-						break;
+					UserLog userLog = userUI.userLogin();
+					if(userLog.getUSER_ID() != 0) {
+						userMenu.displayUserMenu(userLog);
+					}else {
+						LOGGER.info("Login Information Incorrect !");
 					}
-					LOGGER.info("Login Information Incorrect !");
 					break;
 				case 3:
 					userUI.getUserInput();
@@ -44,8 +47,10 @@ public class Menu {
 					contractorUI.getContractorInput();
 					break;
 				case 5: 
-					while(contractorUI.contractorLogin()) {
-						contractorMenu.displayContractorMenu();
+					ContractorLog contractorLog = contractorUI.contractorLogin();
+					if(contractorLog.getCONTR_ID() != 0) {
+						contractorMenu.displayContractorMenu(contractorLog);
+					}else {
 						break;
 					}
 					LOGGER.info("Login Information Incorrect !");

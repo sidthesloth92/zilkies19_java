@@ -9,8 +9,9 @@ import io.zilker.application.beans.ApprovedProject;
 import io.zilker.application.beans.Comments;
 import io.zilker.application.beans.Response;
 import io.zilker.application.beans.User;
+import io.zilker.application.constants.DisplayConstants;
 import io.zilker.application.constants.ValidationConstants;
-import io.zilker.application.loginfo.UserLog;
+import io.zilker.application.logsession.UserLog;
 import io.zilker.application.service.DisplayProjects;
 import io.zilker.application.service.UserServices;
 import io.zilker.application.utils.UserValidation;
@@ -64,7 +65,7 @@ public class UserUI {
 	}
 	
 	// Making the User Login
-	public boolean userLogin() {
+	public UserLog userLogin() {
 		LOGGER.info("Enter the User Name");
 		String username = in.next();
 		LOGGER.info("Enter the Password !");
@@ -72,8 +73,8 @@ public class UserUI {
 		return userService.userLogin(username, password);
 	}
 	// To Check if the User is Logged in 
-	public boolean isLoggedIn() {
-		if(UserLog.getUSER_ID() == 0) {
+	public boolean isLoggedIn(UserLog userLog) {
+		if(userLog.getUSER_ID() == 0) {
 			return false;
 		}else {
 			return true;
@@ -81,63 +82,68 @@ public class UserUI {
 	}
 	
 	// To get the Projects in the Users Location
-	public void projectsInLocation() {
-		int userID = UserLog.getUSER_ID();
+	public void projectsInLocation(UserLog userLog) {
+		int userID = userLog.getUSER_ID();
 		ArrayList<ApprovedProject> projectList = displayProjects.projectsInLocationSer(userID);
-		for (ApprovedProject project : projectList) { 		      
-	           System.out.print(project.getProjectID()+"         ");
-	           System.out.print(project.getProjectName()+"   ");
-	           System.out.print(project.getProjectStatus()+"   "); 
-	           System.out.print(project.getStartDate()+"   ");
-	           System.out.print(project.getEndDate()+"   ");
-	           System.out.print(project.getContrID()+"   ");
-	           System.out.print(project.getLocation()+"   ");
-	           System.out.print(project.getEstCost()+"   ");
-	           System.out.println(project.getDescription()+" ");
-	    }
+		if(!projectList.isEmpty()) {
+			for (ApprovedProject project : projectList) { 		      
+		           System.out.print(project.getProjectID()+"         ");
+		           System.out.print(project.getProjectName()+"   ");
+		           System.out.print(project.getProjectStatus()+"   "); 
+		           System.out.print(project.getStartDate()+"   ");
+		           System.out.print(project.getEndDate()+"   ");
+		           System.out.print(project.getContrID()+"   ");
+		           System.out.print(project.getLocation()+"   ");
+		           System.out.print(project.getEstCost()+"   ");
+		           System.out.println(project.getDescription()+" ");
+		    }
+		}else {
+			LOGGER.info("Sorry, No Projects in Your Location !");
+		}
+		
 	}
 	
 	
 	public void displayAllprojects() {
-		 ArrayList<ApprovedProject> projectList = displayProjects.displayProjects();
-		System.out.println("Project ID | Project Name | Status | Start | End | Contractor ID | Location | Cost");
+		ArrayList<ApprovedProject> projectList = displayProjects.displayProjects();
+		LOGGER.info(DisplayConstants.ALL_PROJECTS);
 		for (ApprovedProject project : projectList) { 		      
-	           System.out.print(project.getProjectID()+"         ");
-	           System.out.print(project.getProjectName()+"   ");
-	           System.out.print(project.getProjectStatus()+"   "); 
-	           System.out.print(project.getStartDate()+"   ");
-	           System.out.print(project.getEndDate()+"   ");
-	           System.out.print(project.getContrID()+"   ");
-	           System.out.print(project.getLocation()+"   ");
-	           System.out.print(project.getEstCost()+"   ");
+	           System.out.print(project.getProjectID()+"        ");
+	           System.out.print(project.getProjectName()+"      ");
+	           System.out.print(project.getProjectStatus()+"     "); 
+	           System.out.print(project.getStartDate()+"     ");
+	           System.out.print(project.getEndDate()+"     ");
+	           System.out.print(project.getContrID()+"     ");
+	           System.out.print(project.getLocation()+"     ");
+	           System.out.print(project.getEstCost()+"     ");
 	           System.out.println(project.getDescription()+" ");
 	    }
 	}
 	
-	public void detailDisplay(int projectID) {
-		System.out.println("Hy Inside detailDisplay !");
+	public void detailDisplay(int projectID, UserLog userLog) {
 		String comment;
 		ArrayList<ApprovedProject> projectList = displayProjects.detailDisplay(projectID);
 		for (ApprovedProject project : projectList) {
-	           System.out.print(project.getProjectID()+"      ");
-	           System.out.print(project.getProjectName()+"   ");
-	           System.out.print(project.getProjectStatus()+"   "); 
-	           System.out.print(project.getStartDate()+"   ");
-	           System.out.print(project.getEndDate()+"   ");
-	           System.out.print(project.getContrID()+"   ");
-	           System.out.print(project.getLocation()+"   ");
-	           System.out.print(project.getEstCost()+"   ");
-	           System.out.println(project.getDescription());
+	           System.out.print(project.getProjectID()+" ");
+	           System.out.println("Project Name: "+project.getProjectName()+"\n");
+	           System.out.println("Status: "+project.getProjectStatus()+"\n"); 
+	           System.out.println("Contractor Name: "+userService.getContractor(project.getContrID())+"\n");
+	           System.out.println("Start Date: "+project.getStartDate()+"\n");
+	           System.out.print("End Date: "+project.getEndDate());
+	           System.out.println(project.getContrID()+"\n");
+	           System.out.println("Location is: "+project.getLocation()+"\n");
+	           System.out.println("Estimated Cost is: "+project.getEstCost()+"\n");
+	           System.out.println("Description: "+project.getDescription()+"\n");
 	    }
-		
 		ArrayList<Response> responseList = displayProjects.getResponses(projectID);
 		if(responseList.isEmpty()) {
 			LOGGER.info("No Response Found !");
 		}else {
 			System.out.println("The Response is ");
 			for (Response response : responseList) { 		      
-		           System.out.print(response.getResponseText()+" ");
+		           System.out.println(response.getResponseText()+" ");
 		    }
+			System.out.println("");
 		}
 		ArrayList<Comments> commentsList = displayProjects.getComments(projectID);
 		if(commentsList.isEmpty()) {
@@ -154,12 +160,10 @@ public class UserUI {
 		if(commentOption == -1) {
 			LOGGER.info("Enter your Comment for Project ID "+projectID);
 			comment = in.nextLine();
-			userService.addComment(UserLog.getUSER_ID(), projectID, comment);
+			userService.addComment(userLog.getUSER_ID(), projectID, comment);
 			
 		}
 	}
-	
-	
 	
 }
 

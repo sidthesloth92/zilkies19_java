@@ -5,7 +5,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Logger;
 
 import io.zilker.application.beans.Project;
@@ -13,9 +18,8 @@ import io.zilker.application.beans.RequestedProject;
 import io.zilker.application.config.ConnectionConfig;
 import io.zilker.application.constants.SQLConstants;
 
-public class AdminDAO extends ConnectionConfig{
+public class AdminDAO{
 	private static final Logger LOGGER = Logger.getLogger(AdminDAO.class.getName());
-	static Connection con = getConnection();
 	public void executionResult(String firstName, boolean result) {
 		if(result == true) {
 			LOGGER.info("Details of "+firstName+" Not Saved");
@@ -25,8 +29,11 @@ public class AdminDAO extends ConnectionConfig{
 	}
 	
 	public void insertNewProject(Project project) {
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
+		ResultSet rs = null;
 		try {
-			PreparedStatement preparedStmt = con.prepareStatement(SQLConstants.INSERT_NEW_PROJECT);
+			preparedStmt = con.prepareStatement(SQLConstants.INSERT_NEW_PROJECT);
 			preparedStmt.setString(1, project.getProjectName());
 			preparedStmt.setString(2, project.getLocation());
 			preparedStmt.setString(3, project.getDescription());
@@ -34,6 +41,8 @@ public class AdminDAO extends ConnectionConfig{
 		}catch(SQLException e) {
 			System.out.println("An Error Occured !");
 			e.printStackTrace();
+		}finally{
+			ConnectionConfig.closeConnection(con, preparedStmt, rs);
 		}
 	}
 	
@@ -46,10 +55,12 @@ public class AdminDAO extends ConnectionConfig{
 	}
 	
 	public ArrayList<RequestedProject> displayRequestedProjects() {
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
 		ArrayList<RequestedProject> requestedList = new ArrayList<>();
 		ResultSet rs = null;
 		try {
-			PreparedStatement preparedStmt = con.prepareStatement(SQLConstants.DISPLAY_REQUESTED_PROJ);
+			preparedStmt = con.prepareStatement(SQLConstants.DISPLAY_REQUESTED_PROJ);
 			rs = preparedStmt.executeQuery();
 			while(rs.next()) {
 				RequestedProject requestedProject = new RequestedProject();
@@ -62,17 +73,20 @@ public class AdminDAO extends ConnectionConfig{
 				requestedProject.setDescription(rs.getString("DESCRIPTION"));
 				requestedList.add(requestedProject);
 			}
-			closeConnection(con, preparedStmt, rs);
 		}catch(SQLException e) {
 			e.printStackTrace();
+		}finally {
+			ConnectionConfig.closeConnection(con, preparedStmt, rs);
 		}
 		return requestedList;
 	}
 	
 	public void approveProjectDAO(int requestID) {
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
 		ResultSet rs = null;
 		try {
-			PreparedStatement preparedStmt = con.prepareStatement(SQLConstants.GET_REQUESTED_PROJ);
+			preparedStmt = con.prepareStatement(SQLConstants.GET_REQUESTED_PROJ);
 			preparedStmt.setInt(1, requestID);
 			rs = preparedStmt.executeQuery();
 			rs.next();
@@ -99,13 +113,18 @@ public class AdminDAO extends ConnectionConfig{
 	}
 	
 	public void dailyStatusCheck() {
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
+		ResultSet rs = null;
 		try {
-			PreparedStatement preparedStmt = con.prepareStatement(SQLConstants.GET_DELAYED_STATUS);
-			java.util.Date utilDate = new java.util.Date();
-			java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-			preparedStmt.setDate(1, sqlDate);
-			System.out.println(sqlDate);
-			ResultSet rs = preparedStmt.executeQuery();
+			preparedStmt = con.prepareStatement(SQLConstants.GET_DELAYED_STATUS);
+			//Date endDate = new Date();
+			//System.out.println(endDate);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			System.out.println(dateFormat.format(new Date()));
+			//System.out.println(java.time.LocalDate.now()); 
+			preparedStmt.setString(1, dateFormat.format(new Date()));
+			rs = preparedStmt.executeQuery();
 			while(rs.next()) {
 				// Changing the Status of the Project ID
 				PreparedStatement preparedStmtUpdate = con.prepareStatement(SQLConstants.UPDATE_STATUS);
@@ -114,7 +133,22 @@ public class AdminDAO extends ConnectionConfig{
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
+		}finally {
+			ConnectionConfig.closeConnection(con, preparedStmt, rs);
 		}
+	}
+	
+	public static Date dateFormatter(String date) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		Date date2=null;
+		try {
+		    //Parsing the String
+		    date2 = dateFormat.parse(date);
+		} catch (ParseException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+		return date2;
 	}
 }
 

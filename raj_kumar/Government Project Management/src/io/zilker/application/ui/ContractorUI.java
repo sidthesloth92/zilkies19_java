@@ -12,8 +12,10 @@ import io.zilker.application.beans.ApprovedProject;
 import io.zilker.application.beans.AvailableProject;
 import io.zilker.application.beans.Contractor;
 import io.zilker.application.constants.DisplayConstants;
-import io.zilker.application.loginfo.ContractorLog;
+import io.zilker.application.constants.ValidationConstants;
+import io.zilker.application.logsession.ContractorLog;
 import io.zilker.application.service.ContractorServices;
+import io.zilker.application.utils.UserValidation;
 
 
 public class ContractorUI {
@@ -26,10 +28,18 @@ public class ContractorUI {
 		
 		LOGGER.info("Enter the Contartor Name !");
 		name = in.nextLine();
+		while(!UserValidation.isValid(name, ValidationConstants.NAME_VALIDATION)) {
+			LOGGER.info("You Have Entered a Invalid Name ! Enter Again");
+			name = in.nextLine();
+		}
 		contractor.name.setName(name);
 		
 		LOGGER.info("Enter the Contractor Email !");
 		String email = in.nextLine();
+		while(!UserValidation.isValid(email, ValidationConstants.EMAIL)) {
+			LOGGER.info("You Have Entered a Invalid Name ! Enter Again");
+			email = in.nextLine();
+		}
 		contractor.setEmail(email);
 		
 		LOGGER.info("Enter the Contractor Password !");
@@ -38,6 +48,10 @@ public class ContractorUI {
 		
 		LOGGER.info("Enter the Company Name !");
 		companyName = in.nextLine();
+		while(!UserValidation.isValid(companyName, ValidationConstants.NAME_VALIDATION)) {
+			LOGGER.info("You Have Entered a Invalid Name ! Enter Again");
+			companyName = in.nextLine();
+		}
 		contractor.company.setCompany(companyName);
 		
 		LOGGER.info("Enter the Annual Revenue of your Company !");
@@ -46,25 +60,38 @@ public class ContractorUI {
 		
 		LOGGER.info("Enter the Number of client your company has !");
 		noOfClients = in.nextLine();
+		while(!UserValidation.isValid(String.valueOf(noOfClients), ValidationConstants.NO_OF_CLIENT)) {
+			LOGGER.info("You Have Entered a Invalid Name ! Enter Again");
+			noOfClients = in.nextLine();
+		}
 		contractor.client.setNoOfClient(Integer.parseInt(noOfClients));
 		
 		contractorServices.contractorCreationService(contractor);
 	}
-	public boolean contractorLogin() {
+	public ContractorLog contractorLogin() {
 		LOGGER.info("Enter your Email !");
 		String email = in.next();
 		LOGGER.info("Enter your Password !");
 		String password = in.next();
 		return contractorServices.contractorLoginService(email, password);
+		
 	}
 	
-	public void tenderRequestInput(int projectID) {
-		int CONTR_ID = ContractorLog.getCONTR_ID();
+	public void tenderRequestInput(int projectID, ContractorLog contractorLog) {
+		int CONTR_ID = contractorLog.getCONTR_ID();
 		LOGGER.info("Your CONTR_ID is: "+CONTR_ID+" ! \nEnter the start eg: (12-08-1997)");
 		String startDate = in.next();
+		while(!UserValidation.isValid(startDate, ValidationConstants.DATE_VALIDATION)) {
+			LOGGER.info("You Have Entered a Invalid Date ! Enter Again");
+			startDate = in.nextLine();
+		}
 		Date start = dateFormatter(startDate);
 		LOGGER.info("Enter the End Date !");
 		String endDate = in.next();
+		while(!UserValidation.isValid(endDate, ValidationConstants.DATE_VALIDATION)) {
+			LOGGER.info("You Have Entered a Invalid Date ! Enter Again");
+			endDate = in.nextLine();
+		}
 		Date end = dateFormatter(endDate);
 		LOGGER.info("Enter the estimated Cost !");
 		long estCost = in.nextLong();
@@ -74,19 +101,18 @@ public class ContractorUI {
 	
 	public static Date dateFormatter(String date) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-		Date date2=null;
+		Date dateToReturn=null;
 		try {
-		    //Parsing the String
-		    date2 = dateFormat.parse(date);
+		    dateToReturn = dateFormat.parse(date);
 		} catch (ParseException e) {
-		    // TODO Auto-generated catch block
+			LOGGER.info("Enter a Valid Date !");
 		    e.printStackTrace();
 		}
-		return date2;
+		return dateToReturn;
 	}
 	
-	public void contractorProjects() {
-		int contractorID = ContractorLog.getCONTR_ID();
+	public void contractorProjects(ContractorLog contractorLog) {
+		int contractorID = contractorLog.getCONTR_ID();
 		ArrayList<ApprovedProject> contractorProj = contractorServices.getContractorProject(contractorID);
 		for (ApprovedProject project : contractorProj) { 		      
 	           System.out.print(project.getProjectID()+" ");
@@ -97,8 +123,8 @@ public class ContractorUI {
 	    }
 	}
 	
-	public void viewDelayedProjects() {
-		int contractorID = ContractorLog.getCONTR_ID();
+	public void viewDelayedProjects(ContractorLog contractorLog) {
+		int contractorID = contractorLog.getCONTR_ID();
 		ArrayList<ApprovedProject> map = contractorServices.delayedProjects(contractorID);
 		if(!map.isEmpty()) {
 			for (ApprovedProject project : map) { 		      
@@ -108,8 +134,11 @@ public class ContractorUI {
 		           System.out.print(project.getStartDate()+" ");
 		           System.out.println(project.getEndDate()+" ");
 		    }
-			LOGGER.info("Enter the project ID you want to Select !");
+			LOGGER.info("Enter the project ID you want to Select ! else -1 to Exit");
 			int ID = in.nextInt();
+			if(ID == -1) {
+				return;
+			}
 			ArrayList<ApprovedProject> listOfDelayed = contractorServices.viewDelayedDetail(ID, contractorID);
 			for (ApprovedProject project : listOfDelayed) { 		      
 		           System.out.print(project.getProjectID()+" ");

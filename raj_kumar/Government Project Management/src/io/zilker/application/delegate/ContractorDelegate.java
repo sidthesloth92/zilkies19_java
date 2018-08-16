@@ -8,14 +8,19 @@ import io.zilker.application.beans.AvailableProject;
 import io.zilker.application.beans.Contractor;
 import io.zilker.application.beans.Response;
 import io.zilker.application.dao.ContractorDAO;
+import io.zilker.application.hash.Password;
+import io.zilker.application.logsession.ContractorLog;
 
 public class ContractorDelegate {
 	ContractorDAO contractorDAO = new ContractorDAO();
 	public void contractorCreationService(Contractor contractor) {
+		String hashedPassword = Password.getSecurePassword(contractor.getPassword());
+		contractor.setPassword(hashedPassword);
 		contractorDAO.contractorCreation(contractor);
 	}
-	public boolean contractorLoginService(String email, String password) {
-		return contractorDAO.isPresent(email, password);
+	public ContractorLog contractorLoginService(String email, String password) {
+		String hashedPassword = Password.getSecurePassword(password);
+		return contractorDAO.isPresent(email, hashedPassword);
 	}
 	public void requestTender(int projectID, int contractorID, Date start, Date end, long estCost) {
 		contractorDAO.tenderRequest(projectID, contractorID, start, end, estCost);
@@ -39,5 +44,8 @@ public class ContractorDelegate {
 	}
 	public ArrayList<Response> getResponses(int projectID){
 		return contractorDAO.displayResponse(projectID);
+	}
+	public void projectCompleted(int projectID) {
+		contractorDAO.projectCompleted(projectID);
 	}
 }

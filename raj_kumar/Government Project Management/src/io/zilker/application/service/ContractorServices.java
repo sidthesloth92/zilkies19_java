@@ -8,13 +8,14 @@ import io.zilker.application.beans.ApprovedProject;
 import io.zilker.application.beans.AvailableProject;
 import io.zilker.application.beans.Contractor;
 import io.zilker.application.delegate.ContractorDelegate;
+import io.zilker.application.logsession.ContractorLog;
 
 public class ContractorServices {
 	ContractorDelegate contractorDelegate = new ContractorDelegate();
 	public void contractorCreationService(Contractor contractor) {
 		contractorDelegate.contractorCreationService(contractor);
 	}
-	public boolean contractorLoginService(String email, String password) {
+	public ContractorLog contractorLoginService(String email, String password) {
 		return contractorDelegate.contractorLoginService(email, password);
 	}
 	public void requestTender(int projectID, int contractorID, Date start, Date end, long estCost) {
@@ -36,5 +37,8 @@ public class ContractorServices {
 	}
 	public ArrayList<AvailableProject> displayProjects() {
 		return contractorDelegate.displayProjects();
+	}
+	public void projectCompleted(int projectID) {
+		contractorDelegate.projectCompleted(projectID);
 	}
 }

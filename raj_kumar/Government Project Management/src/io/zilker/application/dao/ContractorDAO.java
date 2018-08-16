@@ -13,11 +13,10 @@ import io.zilker.application.beans.Contractor;
 import io.zilker.application.beans.Response;
 import io.zilker.application.config.ConnectionConfig;
 import io.zilker.application.constants.SQLConstants;
-import io.zilker.application.loginfo.ContractorLog;
+import io.zilker.application.logsession.ContractorLog;
 
-public class ContractorDAO extends ConnectionConfig{
+public class ContractorDAO {
 	private static final Logger LOGGER = Logger.getLogger(ContractorDAO.class.getName());
-	static Connection con = getConnection();
 	public void executionResult(String firstName, boolean result) {
 		if(result == true) {
 			LOGGER.info("Details of "+firstName+" Not Saved");
@@ -27,8 +26,11 @@ public class ContractorDAO extends ConnectionConfig{
 	}
 	
 	public void contractorCreation(Contractor contractor) {
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
+		ResultSet rs = null;
 		try {
-			PreparedStatement preparedStmt = con.prepareStatement(SQLConstants.CONTRACTOR_CREATION);
+			preparedStmt = con.prepareStatement(SQLConstants.CONTRACTOR_CREATION);
 			preparedStmt.setString(1, contractor.name.getName());
 			preparedStmt.setString(2, contractor.getPassword());
 			preparedStmt.setString(3, contractor.company.getCompany());
@@ -39,10 +41,14 @@ public class ContractorDAO extends ConnectionConfig{
 		}catch(Exception e) {
 			LOGGER.info("An Error Occured inside contractCreation");
 			e.printStackTrace();
+		}finally {
+			ConnectionConfig.closeConnection(con, preparedStmt, rs);
 		}
 	}
 	
 	public ArrayList<AvailableProject> viewAvailableProjects() { 
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
 		ArrayList<AvailableProject> listOfAvailable = new ArrayList<>();
 		ResultSet rs = null;
 		try {
@@ -58,39 +64,48 @@ public class ContractorDAO extends ConnectionConfig{
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			ConnectionConfig.closeConnection(con, preparedStmt, rs);
 		}
 		return listOfAvailable;
 	}
 	
-	public boolean isPresent(String email, String password) {
-		boolean isPresent = false;
+	public ContractorLog isPresent(String email, String password) {
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
+		ResultSet rs = null;
+		ContractorLog contractorLog = new ContractorLog();
 		try {
-			PreparedStatement preparedStmt = con.prepareStatement(SQLConstants.CONTRACTOR_PRESENT);
+			preparedStmt = con.prepareStatement(SQLConstants.CONTRACTOR_PRESENT);
 			preparedStmt.setString(1, email);
 			preparedStmt.setString(2, password);
-			ResultSet rs = preparedStmt.executeQuery();
+			rs = preparedStmt.executeQuery();
 			if(rs.next()) {
-				ContractorLog.setCONTR_ID(rs.getInt("CONTR_ID"));
-				isPresent = true;
+				contractorLog.setCONTR_ID(rs.getInt("CONTR_ID"));
+				contractorLog.setContractorName(rs.getString("CONTR_NAME"));
 			}else {
-				isPresent = false;
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			ConnectionConfig.closeConnection(con, preparedStmt, rs);
 		}
-		return isPresent;
+		return contractorLog;
 	}
 	
 	
 	public void tenderRequest(int projectID, int CONTR_ID, Date start, Date end, long estCost) {
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
+		ResultSet rs = null;
 		java.sql.Date startDate = new java.sql.Date(start.getTime());
 		java.sql.Date endDate = new java.sql.Date(end.getTime());
 		try {
 			PreparedStatement preparedStmtAvailable = con.prepareStatement(SQLConstants.SELECT_UNAPPROVED);
 			preparedStmtAvailable.setInt(1, projectID);
-			ResultSet rs = preparedStmtAvailable.executeQuery();
+			rs = preparedStmtAvailable.executeQuery();
 			rs.next();
-			PreparedStatement preparedStmt = con.prepareStatement(SQLConstants.TENDER_REQUEST);
+			preparedStmt = con.prepareStatement(SQLConstants.TENDER_REQUEST);
 			preparedStmt.setInt(1, CONTR_ID);
 			preparedStmt.setString(2, rs.getString("PROJ_NAME"));
 			preparedStmt.setDate(3, startDate);
@@ -102,14 +117,18 @@ public class ContractorDAO extends ConnectionConfig{
 			executionResult(String.valueOf(CONTR_ID), preparedStmt.execute());
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			ConnectionConfig.closeConnection(con, preparedStmt, rs);
 		}
 	}
 	
 	public ArrayList<ApprovedProject> getProjects(int contractorID) {
-		ArrayList<ApprovedProject> listOfProjects = new ArrayList<>();
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
 		ResultSet rs = null;
+		ArrayList<ApprovedProject> listOfProjects = new ArrayList<>();
 		try {
-			PreparedStatement preparedStmt = con.prepareStatement(SQLConstants.CONTRACTOR_PROJECT);
+			preparedStmt = con.prepareStatement(SQLConstants.CONTRACTOR_PROJECT);
 			preparedStmt.setInt(1, contractorID);
 			rs = preparedStmt.executeQuery();
 			while(rs.next()) {
@@ -126,15 +145,19 @@ public class ContractorDAO extends ConnectionConfig{
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			ConnectionConfig.closeConnection(con, preparedStmt, rs);
 		}
 		return listOfProjects;
 	}
 	
 	public ArrayList<ApprovedProject> delayedProjectsDAO(int contractorID) {
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
 		ResultSet rs = null;
 		ArrayList<ApprovedProject> listOfProject = new ArrayList<>();
 		try {
-			PreparedStatement preparedStmt = con.prepareStatement(SQLConstants.GET_DELAYED_PROJ);
+			preparedStmt = con.prepareStatement(SQLConstants.GET_DELAYED_PROJ);
 			preparedStmt.setString(1, "Delayed");
 			preparedStmt.setInt(2, contractorID);
 			rs = preparedStmt.executeQuery();
@@ -152,14 +175,18 @@ public class ContractorDAO extends ConnectionConfig{
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			ConnectionConfig.closeConnection(con, preparedStmt, rs);
 		}
 		return listOfProject;
 	}
 	public ArrayList<ApprovedProject> viewDelayedDetail(int ID, int contractorID) {
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
 		ResultSet rs = null;
 		ArrayList<ApprovedProject> listOfProjects = new ArrayList<>();
 		try {
-			PreparedStatement preparedStmt = con.prepareStatement(SQLConstants.VIEW_DELAYED_DETAIL);
+			preparedStmt = con.prepareStatement(SQLConstants.VIEW_DELAYED_DETAIL);
 			preparedStmt.setString(1, "Delayed");
 			preparedStmt.setInt(2, contractorID);
 			rs = preparedStmt.executeQuery();
@@ -177,25 +204,34 @@ public class ContractorDAO extends ConnectionConfig{
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			ConnectionConfig.closeConnection(con, preparedStmt, rs);
 		}
 		return listOfProjects;
 	}
 	
 	public void addResponseDAO(int projectID, int contractorID, String response) {
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
+		ResultSet rs = null;
 		try {
-			PreparedStatement preparedStmt = con.prepareStatement(SQLConstants.ADD_RESPONSE);
+			preparedStmt = con.prepareStatement(SQLConstants.ADD_RESPONSE);
 			preparedStmt.setInt(1, projectID);
 			preparedStmt.setString(2, response);
 			executionResult(String.valueOf(projectID), preparedStmt.execute());
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			ConnectionConfig.closeConnection(con, preparedStmt, rs);
 		}
 	}
 	public ArrayList<Response> displayResponse(int projectID) {
-		ArrayList<Response> responsesList = new ArrayList<>();
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
 		ResultSet rs = null;
+		ArrayList<Response> responsesList = new ArrayList<>();
 		try {
-			PreparedStatement preparedStmt = con.prepareStatement(SQLConstants.VIEW_RESPONSE);
+			preparedStmt = con.prepareStatement(SQLConstants.VIEW_RESPONSE);
 			preparedStmt.setInt(1, projectID);
 			rs = preparedStmt.executeQuery();
 			while(rs.next()) {
@@ -206,8 +242,25 @@ public class ContractorDAO extends ConnectionConfig{
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			ConnectionConfig.closeConnection(con, preparedStmt, rs);
 		}
 		return responsesList;
+	}
+	
+	public void projectCompleted(int projectID) {
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
+		ResultSet rs = null;
+		try {
+			preparedStmt = con.prepareStatement(SQLConstants.PROJECT_COMPLETED);
+			preparedStmt.setInt(1, projectID);
+			preparedStmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			ConnectionConfig.closeConnection(con, preparedStmt, rs);
+		}
 	}
 }
 

@@ -11,11 +11,12 @@ import io.zilker.application.beans.Comments;
 import io.zilker.application.beans.User;
 import io.zilker.application.config.ConnectionConfig;
 import io.zilker.application.constants.SQLConstants;
-import io.zilker.application.loginfo.UserLog;
+import io.zilker.application.hash.Password;
+import io.zilker.application.logsession.UserLog;
 
-public class UserDAO extends ConnectionConfig{
+public class UserDAO {
 	private static final Logger LOGGER = Logger.getLogger(UserDAO.class.getName());
-	static Connection con = getConnection();
+	
 	public void executionResult(String firstName, boolean result) {
 		if(result == true) {
 			LOGGER.info("Details of "+firstName+" Not Saved");
@@ -25,10 +26,12 @@ public class UserDAO extends ConnectionConfig{
 	}
 	
 	public ArrayList<ApprovedProject> displayProjects() {
-		ArrayList<ApprovedProject> projectList = new ArrayList<>();
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
 		ResultSet rs = null;
+		ArrayList<ApprovedProject> projectList = new ArrayList<>();
 		try {
-			PreparedStatement preparedStmt = con.prepareStatement(SQLConstants.DISPLAY_PROJECTS);
+			preparedStmt = con.prepareStatement(SQLConstants.DISPLAY_PROJECTS);
 			rs = preparedStmt.executeQuery();
 			while(rs.next()) {
 				ApprovedProject project = new ApprovedProject();
@@ -45,13 +48,18 @@ public class UserDAO extends ConnectionConfig{
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			ConnectionConfig.closeConnection(con, preparedStmt, rs);
 		}
 		return projectList;
 	}
 	
 	public void userCreation(User user) {
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
+		ResultSet rs = null;
 		try {
-			PreparedStatement preparedStmt = con.prepareStatement(SQLConstants.USER_CREATION);
+			preparedStmt = con.prepareStatement(SQLConstants.USER_CREATION);
 			preparedStmt.setString(1, user.user.getUsername());
 			preparedStmt.setString(2, user.user.getFirstName());
 			preparedStmt.setString(3, user.user.getLastName());
@@ -61,15 +69,38 @@ public class UserDAO extends ConnectionConfig{
 		}catch(Exception e) {
 			System.out.println("An Error Occured !");
 			e.printStackTrace();
+		}finally {
+			ConnectionConfig.closeConnection(con, preparedStmt, rs);
 		}
+	}
+	public String getContractorName(int contrID) {
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
+		ResultSet rs = null;
+		String contrName = null;
+		try {
+			preparedStmt = con.prepareStatement(SQLConstants.GET_CONTR_NAME);
+			preparedStmt.setInt(1, contrID);
+			rs = preparedStmt.executeQuery();
+			rs.next();
+			contrName = rs.getString("CONTR_NAME");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			ConnectionConfig.closeConnection(con, preparedStmt, rs);
+		}
+		return contrName;
 	}
 	
 	public boolean isUserPresentDAO(String username) {
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
+		ResultSet rs = null;
 		boolean returnValue = false;
 		try {
-			PreparedStatement preparedStmt = con.prepareStatement(SQLConstants.SELECT_USER_NAME);
+			preparedStmt = con.prepareStatement(SQLConstants.SELECT_USER_NAME);
 			preparedStmt.setString(1, username);
-			ResultSet rs = preparedStmt.executeQuery();
+			rs = preparedStmt.executeQuery();
 			if(!rs.next()) {
 				returnValue = false;
 			}else {
@@ -77,36 +108,45 @@ public class UserDAO extends ConnectionConfig{
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			ConnectionConfig.closeConnection(con, preparedStmt, rs);
 		}
 		return returnValue;
 	}
 	
-	public boolean isUserPresentDAO(String username, String password) {
-		boolean returnValue = false;
+	public UserLog isUserPresentDAO(String username, String password) {
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
+		ResultSet rs = null;
+		UserLog userLog = new UserLog();
 		try {
-			PreparedStatement preparedStmt = con.prepareStatement(SQLConstants.USER_LOGIN);
+			preparedStmt = con.prepareStatement(SQLConstants.USER_LOGIN);
 			preparedStmt.setString(1, username);
-			preparedStmt.setString(2, password);
-			ResultSet rs = preparedStmt.executeQuery();
+			String hashedPassword = Password.getSecurePassword(password);
+			System.out.println(hashedPassword);
+			preparedStmt.setString(2, hashedPassword);
+			rs = preparedStmt.executeQuery();
 			if(!rs.next()) {
-				returnValue = false;
 			}else {
-				UserLog.setUSER_ID(rs.getInt("USER_ID"));
-				returnValue = true;
+				// Need to convert to a Non static variable 
+				userLog.setUSER_ID(rs.getInt("USER_ID"));
+				userLog.setUserName(rs.getString("USERNAME"));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			ConnectionConfig.closeConnection(con, preparedStmt, rs);
 		}
-		return returnValue;
+		return userLog;
 	}
 	
 	public ArrayList<ApprovedProject> projectDetails(int projectID) {
-		// Need to change all ResultSet to HashMap data and pass it  
-		System.out.println("Inside User DAO !");
-		ArrayList<ApprovedProject> projectList = new ArrayList<>();
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
 		ResultSet rs = null;
+		ArrayList<ApprovedProject> projectList = new ArrayList<>();
 		try {
-			PreparedStatement preparedStmt = con.prepareStatement(SQLConstants.PROJ_DETAIL);
+			preparedStmt = con.prepareStatement(SQLConstants.PROJ_DETAIL);
 			preparedStmt.setInt(1, projectID);
 			rs = preparedStmt.executeQuery();
 			while(rs.next()) {
@@ -124,17 +164,20 @@ public class UserDAO extends ConnectionConfig{
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			ConnectionConfig.closeConnection(con, preparedStmt, rs);
 		}
 		return projectList;
 	}
 	
 	public ArrayList<Comments> getComments(int projectID) {
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
 		ResultSet rs = null;
 		ResultSet rsUser = null;
-		// Need to change all ResultSet to HashMap data and pass it 
 		ArrayList<Comments> commentList = new ArrayList<>();
 		try {
-			PreparedStatement preparedStmt = con.prepareStatement(SQLConstants.GET_COMMENTS);
+			preparedStmt = con.prepareStatement(SQLConstants.GET_COMMENTS);
 			preparedStmt.setInt(1, projectID);
 			rs = preparedStmt.executeQuery();
 			while(rs.next()) {
@@ -150,15 +193,20 @@ public class UserDAO extends ConnectionConfig{
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			ConnectionConfig.closeConnection(con, preparedStmt, rs);
 		}
 		return commentList;
 	}
 	
 	public void addComment(int userID, int projectID, String comment) {
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
+		ResultSet rs = null;
 		java.util.Date utilDate = new java.util.Date();
 	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 		try {
-			PreparedStatement preparedStmt = con.prepareStatement(SQLConstants.ADD_COMMENT);
+			preparedStmt = con.prepareStatement(SQLConstants.ADD_COMMENT);
 			preparedStmt .setInt(1, projectID);
 			preparedStmt.setString(2, comment);
 			preparedStmt.setDate(3, sqlDate);
@@ -166,15 +214,18 @@ public class UserDAO extends ConnectionConfig{
 			executionResult(String.valueOf(userID), preparedStmt.execute());
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			ConnectionConfig.closeConnection(con, preparedStmt, rs);
 		}
 	}
 	
 	public ArrayList<ApprovedProject> projectInMyLocation(int userID) {
-		// Need to change all ResultSet to HashMap data and pass it 
+		PreparedStatement preparedStmt = null;
+		Connection con = ConnectionConfig.getConnection();
 		ArrayList<ApprovedProject> projectList = new ArrayList<ApprovedProject>();
 		ResultSet rsInLocation = null;
 		try {
-			PreparedStatement preparedStmt = con.prepareStatement(SQLConstants.GET_USER_LOCATION);
+			preparedStmt = con.prepareStatement(SQLConstants.GET_USER_LOCATION);
 			preparedStmt.setInt(1, userID);
 			ResultSet rsLocation = preparedStmt.executeQuery();
 			rsLocation.next();
@@ -184,6 +235,7 @@ public class UserDAO extends ConnectionConfig{
 			rsInLocation = preparedStmtProj.executeQuery();
 			while(rsInLocation.next()) {
 				ApprovedProject project = new ApprovedProject();
+				project.setProjectID(rsInLocation.getInt("PROJ_ID"));
 				project.setProjectName(rsInLocation.getString("PROJ_NAME"));
 				project.setStartDate(rsInLocation.getDate("START_DATE"));
 				project.setEndDate(rsInLocation.getDate("END_DATE"));
@@ -196,6 +248,8 @@ public class UserDAO extends ConnectionConfig{
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			ConnectionConfig.closeConnection(con, preparedStmt, rsInLocation);
 		}
 		return projectList;
 	}

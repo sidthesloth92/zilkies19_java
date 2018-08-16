@@ -6,4 +6,5 @@ public class DisplayConstants {
 	public static final String CONTRACTOR_MENU = "\n======================\n1. View My Projects\n2. View Available Projects\n3. View Delayed Projects\n4. Exit\n=====================";
 	public static final String USER_MENU = "\n=============================\n1. View All Projects\n2. View Projects in my location\n3. Exit\n===============================";
 	public static final String DELAYED_MENU = "\n======================\n1. Add a Response for the Delay\n2. Exit\n=======================";
+	public static final String ALL_PROJECTS = "Project ID | Project Name | Status | Start | End | Contractor ID | Location | Cost | Description ";
 }
