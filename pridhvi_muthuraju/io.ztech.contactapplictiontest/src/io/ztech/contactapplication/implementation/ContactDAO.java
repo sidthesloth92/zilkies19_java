@@ -24,13 +24,29 @@ public interface ContactDAO {
 	public void enterUpdateName(NameDetails nameDetails, EmailDetails emailDetails) throws SQLException;
 
 	public void updateContact(NameDetails nameDetails, EmailDetails emailDetails) throws SQLException;
+	
+	public void printOffice(NameDetails nameDetails, OfficeDetails officeDetails) throws SQLException;
 
+	public void editOffice(NameDetails nameDetails, OfficeDetails officeDetails) throws SQLException;
+	
 	public void updateOffice(NameDetails nameDetails, OfficeDetails officeDetails) throws SQLException;
+	
+	public void printMobile(NameDetails nameDetails, MobileDetails mobileDetails) throws SQLException;
+
+	public void editMobile(NameDetails nameDetails, MobileDetails mobileDetails) throws SQLException;
 
 	public void updateMobile(NameDetails nameDetails, MobileDetails mobileDetails) throws SQLException;
+	
+	public void printHome(NameDetails nameDetails, HomeDetails homeDetails) throws SQLException;
 
+	public void editHome(NameDetails nameDetails, HomeDetails homeDetails) throws SQLException;
+	
 	public void updateHome(NameDetails nameDetails, HomeDetails homeDetails) throws SQLException;
+	
+	public void printEmail(NameDetails nameDetails, EmailDetails emailDetails) throws SQLException ;
 
+	public void editEmail(NameDetails nameDetails, EmailDetails emailDetails) throws SQLException;
+	
 	public void updateEmail(NameDetails nameDetails, EmailDetails emailDetails) throws SQLException;
 
 	public void searchByFirstName(NameDetails nameDetails, EmailDetails emailDetails, HomeDetails homeDetails,

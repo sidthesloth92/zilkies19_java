@@ -21,14 +21,6 @@ public class ConnectionConfig {
 		return con;
 	}
 	public static void closeConnection(Connection con, PreparedStatement pst) {
-		if(con != null) {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 		if(pst != null) {
 			try {
 				pst.close();
@@ -37,6 +29,15 @@ public class ConnectionConfig {
 				e.printStackTrace();
 			}
 		}
+		if(con != null) {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
 	
 }

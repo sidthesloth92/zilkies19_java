@@ -1,44 +1,28 @@
 package com.zilker.application.constants;
 
 public class Constants {
-	public final String insertionIntoContactDetail = "INSERT INTO CONTACT_DETAILS (FIRST_NAME, LAST_NAME) VALUES (?, ?)";
-	public final String gettingID = "SELECT MAX(CONTACT_ID) FROM CONTACT_DETAILS";
-	public final String insertionIntoMobile = "INSERT INTO MOBILE_NUMBER (CONTACT_ID, EXTENSION, MOB_NUMBER) VALUES (?, ?, ?)";
-	public final String insertIntoHome = "INSERT INTO HOME (CONTACT_ID, AREA_CODE, HOME_NUMBER) VALUES (?, ?, ?)";
-	public final String insertIntoOffice = "INSERT INTO OFFICE (CONTACT_ID, OFF_EXT, OFF_NUMBER) VALUES (?, ?, ?)";
-	public final String insertIntoEmail = "INSERT INTO EMAIL (CONTACT_ID, EMAIL) VALUES (?, ?)";
-	public final String searchingWithFirstName = "SELECT CONTACT_ID, FIRST_NAME, LAST_NAME FROM CONTACT_DETAILS WHERE FIRST_NAME LIKE ?";
-	public final String mobileDisplay = "SELECT * FROM MOBILE_NUMBER WHERE CONTACT_ID = ?";
-	public final String homeDisplay = "SELECT * FROM HOME WHERE CONTACT_ID = ?";
-	public final String officeDisplay = "SELECT * FROM OFFICE WHERE CONTACT_ID = ?";
-	public final String emailDisplay = "SELECT * FROM EMAIL WHERE CONTACT_ID = ?";
-	public final String sortByFirstName = "SELECT * FROM CONTACT_DETAILS ORDER BY FIRST_NAME";
-	public final String sortByLastName = "SELECT * FROM CONTACT_DETAILS ORDER BY FIRST_NAME DESC";
-	public final String selectByFirstAndLast = "SELECT CONTACT_ID, FIRST_NAME, LAST_NAME FROM CONTACT_DETAILS WHERE FIRST_NAME = ? AND LAST_NAME = ?";
-	public final String updateMobileNumber = "UPDATE MOBILE_NUMBER SET EXTENSION = ?, MOB_NUMBER = ? WHERE CONTACT_ID = ? AND ID = ?";
-	public final String updateHomeNumber = "UPDATE HOME SET AREA_CODE = ?, HOME_NUMBER = ? WHERE CONTACT_ID = ? AND ID = ?";
-	public final String updateOfficeNumber = "UPDATE OFFICE SET OFF_EXT = ?, OFF_NUMBER = ? WHERE CONTACT_ID = ? AND ID = ?";
-	public final String updateEmail = "UPDATE EMAIL SET EMAIL = ? WHERE CONTACT_ID = ? AND ID = ?";
-	
-	public void addAnotherNumberPrint() {
-		System.out.println("Enter What type of Information you want to add");
-		System.out.println("1 .Mobile Number");
-		System.out.println("2. Office Number");
-		System.out.println("3. Home Number");
-		System.out.println("4. Email");
-	}
-	public void optionAlreadyExists() {
-		System.out.println("A Contact with the name already exists !");
-		System.out.println("1. Try a New Name ");
-		System.out.println("2. Add Another Number or Email");
-	}
-	public void displayMenu() {
-		System.out.println("===========================");
-		System.out.println("1. Creation");
-		System.out.println("2. Update Contact");
-		System.out.println("3. Sort Contact By First Name");
-		System.out.println("4. Sort Contact By Last Name");
-		System.out.println("5. Exit");
-		System.out.println("============================");
-	}
+	public final static String insertionIntoContactDetail = "INSERT INTO CONTACT_DETAILS (FIRST_NAME, LAST_NAME) VALUES (?, ?)";
+	public final static String gettingID = "SELECT MAX(CONTACT_ID) FROM CONTACT_DETAILS";
+	public final static String insertionIntoMobile = "INSERT INTO MOBILE_NUMBER (CONTACT_ID, EXTENSION, MOB_NUMBER) VALUES (?, ?, ?)";
+	public final static String insertIntoHome = "INSERT INTO HOME (CONTACT_ID, AREA_CODE, HOME_NUMBER) VALUES (?, ?, ?)";
+	public final static String insertIntoOffice = "INSERT INTO OFFICE (CONTACT_ID, OFF_EXT, OFF_NUMBER) VALUES (?, ?, ?)";
+	public final static String insertIntoEmail = "INSERT INTO EMAIL (CONTACT_ID, EMAIL) VALUES (?, ?)";
+	public final static String searchingWithFirstName = "SELECT CONTACT_ID, FIRST_NAME, LAST_NAME FROM CONTACT_DETAILS WHERE FIRST_NAME LIKE ?";
+	public final static String mobileDisplay = "SELECT * FROM MOBILE_NUMBER WHERE CONTACT_ID = ?";
+	public final static String homeDisplay = "SELECT * FROM HOME WHERE CONTACT_ID = ?";
+	public final static String OFFICE_DISPLAY = "SELECT * FROM OFFICE WHERE CONTACT_ID = ?";
+	public final static String EMAIL_DISPLAY = "SELECT * FROM EMAIL WHERE CONTACT_ID = ?";
+	public final static String SORT_BY_FIRST_NAME = "SELECT * FROM CONTACT_DETAILS ORDER BY FIRST_NAME";
+	public final static String SORT_BY_LAST_NAME = "SELECT * FROM CONTACT_DETAILS ORDER BY FIRST_NAME";
+	public final static String SELECT_BY_FIRST_LAST = "SELECT CONTACT_ID, FIRST_NAME, LAST_NAME FROM CONTACT_DETAILS WHERE FIRST_NAME = ? AND LAST_NAME = ?";
+	public final static String UPDATE_MOBILE_NUMBER = "UPDATE MOBILE_NUMBER SET EXTENSION = ?, MOB_NUMBER = ? WHERE CONTACT_ID = ? AND ID = ?";
+	public final static String UPDATE_HOME_NUMBER = "UPDATE HOME SET AREA_CODE = ?, HOME_NUMBER = ? WHERE CONTACT_ID = ? AND ID = ?";
+	public final static String UPDATE_OFFICE_NUM = "UPDATE OFFICE SET OFF_EXT = ?, OFF_NUMBER = ? WHERE CONTACT_ID = ? AND ID = ?";
+	public final static String UPDATE_EMAIL = "UPDATE EMAIL SET EMAIL = ? WHERE CONTACT_ID = ? AND ID = ?";
+	public final static String E_PATTERN = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,6}$";
+	public final static String MOB_PATTERN = "^[789]\\d{9}$";
+	public final static String LANDLINE_PATTERN = "^[1-9][0-9]{6}";
+	public final static String MOBILE_EX = "^[1-9][0-9]{1}";
+	public final static String LAND_LINE_EX = "^[1-9][0-9]{2,3}";
+	public final static String NAME_REG_EX = "^[A-Za-z0-9]+";
 }
