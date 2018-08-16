@@ -3,7 +3,7 @@ package io.ztech.jkingsley.captainofship;
 public class Sailor {
 	Long sailorId;
 	String userName;
-	
+
 	public Sailor(Long sailorId, String userName) {
 		super();
 		this.sailorId = sailorId;
@@ -15,7 +15,5 @@ public class Sailor {
 		// TODO Auto-generated method stub
 		return sailorId + " : " + userName;
 	}
-	
-	
-	
+
 }

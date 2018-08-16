@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.mysql.cj.Constants;
-
 import io.ztech.jkingsley.contactsapp.beans.Contact;
 import io.ztech.jkingsley.contactsapp.beans.Email;
 import io.ztech.jkingsley.contactsapp.beans.HomeNumber;
@@ -18,12 +16,11 @@ import io.ztech.jkingsley.contactsapp.beans.PhoneNumber;
 import io.ztech.jkingsley.contactsapp.beans.User;
 import io.ztech.jkingsley.contactsapp.constants.Fields;
 import io.ztech.jkingsley.contactsapp.constants.Queries;
-import io.ztech.jkingsley.contactsapp.dao.EditEmail;
-import io.ztech.jkingsley.contactsapp.dao.EditPhone;
+import io.ztech.jkingsley.contactsapp.dao.EmailDAO;
+import io.ztech.jkingsley.contactsapp.dao.PhoneDAO;
 
 public class DBLibrary {
-	
-	
+
 	public static void addContact(Contact contact) {
 		Long userId;
 		userId = addUser(contact.user);
@@ -64,7 +61,7 @@ public class DBLibrary {
 			try {
 				insertPhone = connection.prepareStatement(Queries.INSERT_PHONE_QUERY);
 			} catch (SQLException e) {
-				
+
 				e.printStackTrace();
 			}
 
@@ -75,7 +72,7 @@ public class DBLibrary {
 
 				insertPhone.executeUpdate();
 			} catch (SQLException e) {
-				
+
 				e.printStackTrace();
 			}
 
@@ -90,7 +87,7 @@ public class DBLibrary {
 
 				insertPhone.executeUpdate();
 			} catch (SQLException e) {
-				
+
 				e.printStackTrace();
 			}
 
@@ -219,14 +216,14 @@ public class DBLibrary {
 		}
 		return null;
 	}
-	
+
 	public static Contact getContact(Long userId) {
 		Contact contact = new Contact();
 		contact.user = getUser(userId);
 		contact.emails = getEmailsOfUser(userId);
 		ArrayList<PhoneNumber> phoneNumbers = getPhoneNumbersOfUser(userId);
-		for(int i=0;i<phoneNumbers.size();i++) {
-			switch(phoneNumbers.get(i).getPhoneType()) {
+		for (int i = 0; i < phoneNumbers.size(); i++) {
+			switch (phoneNumbers.get(i).getPhoneType()) {
 			case Fields.PHONE_HOME_TYPE:
 				HomeNumber homeNumber = new HomeNumber();
 				homeNumber.putNumber(phoneNumbers.get(i).getNumber());
@@ -248,18 +245,18 @@ public class DBLibrary {
 		}
 		return contact;
 	}
-	
+
 	public static User getUser(Long userId) {
 		DBUtils dbUtils = new DBUtils();
-		
+
 		Connection connection = dbUtils.getConnection();
-		
+
 		User user = new User();
 
 		try {
 			PreparedStatement getUser = connection.prepareStatement(Queries.DISPLAY_USER_QUERY);
 			getUser.setLong(1, userId);
-			
+
 			ResultSet rs = getUser.executeQuery();
 
 			if (rs.first()) {
@@ -275,23 +272,23 @@ public class DBLibrary {
 		}
 		return null;
 	}
-	
+
 	public static ArrayList<PhoneNumber> getPhoneNumbersOfUser(Long userId) {
 		DBUtils dbUtils = new DBUtils();
-		
+
 		Connection connection = dbUtils.getConnection();
-		
+
 		ArrayList<PhoneNumber> phoneNumbers = new ArrayList<>();
-	
+
 		PreparedStatement getPhoneNumbers;
 		try {
 			getPhoneNumbers = connection.prepareStatement(Queries.DISPLAY_USER_PHONE_NUMBERS);
 			getPhoneNumbers.setLong(1, userId);
 			ResultSet rs = getPhoneNumbers.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				String phoneType = rs.getString(Fields.PHONE_KEY_TYPE);
-				switch(phoneType) {
+				switch (phoneType) {
 				case Fields.PHONE_OFFICE_TYPE:
 					PhoneNumber officeNumber = new PhoneNumber();
 					officeNumber.putNumber(rs.getLong(Fields.PHONE_KEY_NUMBER));
@@ -315,50 +312,50 @@ public class DBLibrary {
 				}
 			}
 			return phoneNumbers;
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
-			 
+		}
+
 		return null;
 	}
-	
+
 	public static ArrayList<Email> getEmailsOfUser(Long userId) {
 		DBUtils dbUtils = new DBUtils();
-		
+
 		Connection connection = dbUtils.getConnection();
-		
+
 		ArrayList<Email> emails = new ArrayList<>();
-	
+
 		PreparedStatement getEmails;
 		try {
 			getEmails = connection.prepareStatement(Queries.DISPLAY_USER_EMAILS);
 			getEmails.setLong(1, userId);
 			ResultSet rs = getEmails.executeQuery();
-			
-			while(rs.next()) {
-					Email email = new Email();
-					email.putAddress(rs.getString(Fields.EMAIL_KEY_MAIL));
-					emails.add(email);
+
+			while (rs.next()) {
+				Email email = new Email();
+				email.putAddress(rs.getString(Fields.EMAIL_KEY_MAIL));
+				emails.add(email);
 			}
 			return emails;
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
-			 
+		}
+
 		return null;
 	}
 
-	public static void updatePhoneNumber(EditPhone editPhone) {
+	public static void updatePhoneNumber(PhoneDAO editPhone) {
 		// TODO Auto-generated method stub
 		DBUtils dbUtils = new DBUtils();
 
@@ -371,16 +368,16 @@ public class DBLibrary {
 			updatePhoneNumber.setLong(2, editPhone.getUserId());
 			updatePhoneNumber.setString(3, editPhone.getOldPhoneNumber().getPhoneType());
 			updatePhoneNumber.setLong(4, editPhone.getOldPhoneNumber().getNumber());
-			
+
 			updatePhoneNumber.executeUpdate();
-	
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public static void updateEmail(EditEmail editEmail) {
+	public static void updateEmail(EmailDAO editEmail) {
 		// TODO Auto-generated method stub
 		DBUtils dbUtils = new DBUtils();
 
@@ -394,11 +391,11 @@ public class DBLibrary {
 			updateEmail.setString(3, editEmail.getOldEmail().getAddress());
 
 			updateEmail.executeUpdate();
-	
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
 }

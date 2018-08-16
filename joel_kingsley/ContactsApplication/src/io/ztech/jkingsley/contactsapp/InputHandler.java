@@ -12,12 +12,13 @@ import io.ztech.jkingsley.contactsapp.beans.OfficeNumber;
 import io.ztech.jkingsley.contactsapp.beans.PhoneNumber;
 import io.ztech.jkingsley.contactsapp.beans.User;
 import io.ztech.jkingsley.contactsapp.constants.Fields;
+import io.ztech.jkingsley.contactsapp.constants.Titles;
 import io.ztech.jkingsley.contactsapp.constants.ValidationLibrary;
 import io.ztech.jkingsley.contactsapp.services.DBLibrary;
 
 public final class InputHandler {
 
-	private static final Logger LOGGER = Logger.getLogger(UIClass.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(Application.class.getName());
 	private static Scanner scanner = new Scanner(System.in);
 
 	public static enum Update {
@@ -29,15 +30,15 @@ public final class InputHandler {
 		scanner = new Scanner(System.in);
 		Contact contact = new Contact();
 
-		LOGGER.info("Enter First Name:");
+		LOGGER.info(Titles.FIRST_NAME);
 		String firstName = scanner.nextLine();
 		contact.user.setFirstName(firstName);
 
-		LOGGER.info("Enter Last Name:");
+		LOGGER.info(Titles.LAST_NAME);
 		String lastName = scanner.nextLine();
 		contact.user.setLastName(lastName);
 
-		LOGGER.info("Enter Mobile Numbers(Enter -1 to skip):");
+		LOGGER.info(Titles.MOBILE_NUMBERS_LOOP);
 		Long mobileNumber = -1L;
 		do {
 			mobileNumber = scanner.nextLong();
@@ -46,11 +47,11 @@ public final class InputHandler {
 				mobile.putNumber(mobileNumber);
 				contact.mobileNumbers.add(mobile);
 			} else if (mobileNumber != -1) {
-				LOGGER.info("Not a valid mobile number");
+				LOGGER.info(Titles.INVALID_MOBILE_NUMBER);
 			}
 		} while (mobileNumber != -1);
 
-		LOGGER.info("Enter Office Numbers(Enter -1 to skip):");
+		LOGGER.info(Titles.OFFICE_NUMBERS_LOOP);
 		Long officeNumber = -1L;
 		do {
 			officeNumber = scanner.nextLong();
@@ -59,11 +60,11 @@ public final class InputHandler {
 				officeObj.putNumber(officeNumber);
 				contact.officeNumbers.add(officeObj);
 			} else if (officeNumber != -1) {
-				LOGGER.info("Not a valid office number");
+				LOGGER.info(Titles.INVALID_OFFICE_NUMBER);
 			}
 		} while (officeNumber != -1);
 
-		LOGGER.info("Enter Home Numbers(Enter -1 to skip):");
+		LOGGER.info(Titles.HOME_NUMBERS_LOOP);
 		Long homeNumber = -1L;
 		do {
 			homeNumber = scanner.nextLong();
@@ -72,13 +73,13 @@ public final class InputHandler {
 				homeObj.putNumber(homeNumber);
 				contact.homeNumbers.add(homeObj);
 			} else if (homeNumber != -1) {
-				LOGGER.info("Not a valid home number");
+				LOGGER.info(Titles.INVALID_HOME_NUMBER);
 			}
 		} while (homeNumber != -1);
 
 		scanner.nextLine();
 
-		LOGGER.info("Enter Email Ids(Enter -1 to skip):");
+		LOGGER.info(Titles.EMAIL_IDS_LOOP);
 		String email = "";
 		do {
 			email = scanner.nextLine();
@@ -87,7 +88,7 @@ public final class InputHandler {
 				emailObj.putAddress(email);
 				contact.emails.add(emailObj);
 			} else if (!email.equals("-1")) {
-				LOGGER.info("Not a valid email Id");
+				LOGGER.info(Titles.INVALID_EMAIL);
 			}
 		} while (!email.equals("-1"));
 
@@ -104,7 +105,7 @@ public final class InputHandler {
 			return -1L;
 		}
 
-		LOGGER.info("Enter User number to update:");
+		LOGGER.info(Titles.USER_OPTION_UPDATE);
 
 		int n = 0;
 
@@ -127,7 +128,7 @@ public final class InputHandler {
 			return -1L;
 		}
 
-		LOGGER.info("Enter User number to display(1 - " + users.size() + ") :");
+		LOGGER.info(Titles.USER_OPTION_DISPLAY + "(1 - " + users.size() + ") :");
 
 		int n = 0;
 
@@ -142,11 +143,11 @@ public final class InputHandler {
 	}
 
 	public static int inputTypeOfUpdate() {
-		LOGGER.info("What do you want to update?");
-		LOGGER.info("1. First Name");
-		LOGGER.info("2. Last Name");
-		LOGGER.info("3. Phone Number");
-		LOGGER.info("4. Email ID");
+		LOGGER.info(Titles.WHAT_TO_UPDATE);
+		LOGGER.info(Titles.FIRST_NAME_1);
+		LOGGER.info(Titles.LAST_NAME_2);
+		LOGGER.info(Titles.PHONE_NUMBER_3);
+		LOGGER.info(Titles.EMAIL_ID_4);
 
 		scanner = new Scanner(System.in);
 		int n = 0;
@@ -162,7 +163,7 @@ public final class InputHandler {
 
 	public static String inputNewFirstName() {
 
-		LOGGER.info("Enter new first name:");
+		LOGGER.info(Titles.NEW_FIRST_NAME);
 		String firstName = scanner.next();
 		scanner.nextLine();
 
@@ -171,7 +172,7 @@ public final class InputHandler {
 
 	public static String inputNewLastName() {
 
-		LOGGER.info("Enter new last name:");
+		LOGGER.info(Titles.NEW_LAST_NAME);
 		String lastName = scanner.next();
 		scanner.nextLine();
 
@@ -179,15 +180,14 @@ public final class InputHandler {
 	}
 
 	public static int selectNumberToUpdate(int listSize) {
-		// TODO Auto-generated method stub
 		int n = 0;
 
 		while (n <= 0 || n > listSize) {
-			LOGGER.info("Enter option to update(1 - " + listSize + "):");
+			LOGGER.info(Titles.OPTION_UPDATE + "(1 - " + listSize + "):");
 			n = scanner.nextInt();
 			scanner.nextLine();
 			if (n <= 0 || n > listSize) {
-				LOGGER.info("Enter a valid option");
+				LOGGER.info(Titles.INVALID_OPTION);
 			}
 		}
 
@@ -195,36 +195,35 @@ public final class InputHandler {
 	}
 
 	public static Long inputNewPhoneNumber(PhoneNumber phoneNumber) {
-		// TODO Auto-generated method stub
 		Long newPhoneNumber = 0L;
 
 		switch (phoneNumber.getPhoneType()) {
 		case Fields.PHONE_OFFICE_TYPE:
 
 			do {
-				LOGGER.info("Enter new office number:");
+				LOGGER.info(Titles.NEW_OFFICE_NUMBER);
 				newPhoneNumber = scanner.nextLong();
 				if (!ValidationLibrary.isValidOfficeNumber(newPhoneNumber)) {
-					LOGGER.info("Enter a valid office number");
+					LOGGER.info(Titles.INVALID_OFFICE_NUMBER);
 				}
 			} while (!ValidationLibrary.isValidOfficeNumber(newPhoneNumber));
 			break;
 		case Fields.PHONE_HOME_TYPE:
 
 			do {
-				LOGGER.info("Enter new home number:");
+				LOGGER.info(Titles.NEW_HOME_NUMBER);
 				newPhoneNumber = scanner.nextLong();
 				if (!ValidationLibrary.isValidHomeNumber(newPhoneNumber)) {
-					LOGGER.info("Enter a valid home number");
+					LOGGER.info(Titles.INVALID_HOME_NUMBER);
 				}
 			} while (!ValidationLibrary.isValidHomeNumber(newPhoneNumber));
 			break;
 		case Fields.PHONE_MOBILE_TYPE:
 			do {
-				LOGGER.info("Enter new mobile number:");
+				LOGGER.info(Titles.NEW_MOBILE_NUMBER);
 				newPhoneNumber = scanner.nextLong();
 				if (!ValidationLibrary.isValidMobileNumber(newPhoneNumber)) {
-					LOGGER.info("Enter a valid mobile number");
+					LOGGER.info(Titles.INVALID_MOBILE_NUMBER);
 				}
 			} while (!ValidationLibrary.isValidMobileNumber(newPhoneNumber));
 			break;
@@ -234,14 +233,13 @@ public final class InputHandler {
 	}
 
 	public static String inputNewEmail(Email email) {
-		// TODO Auto-generated method stub
 		String newEmail = "";
 
 		do {
-			LOGGER.info("Enter new Email Id:");
+			LOGGER.info(Titles.INVALID_EMAIL);
 			newEmail = scanner.nextLine();
 			if (!ValidationLibrary.isValidEmail(newEmail)) {
-				LOGGER.info("Enter a valid Email Id");
+				LOGGER.info(Titles.INVALID_EMAIL);
 			}
 		} while (!ValidationLibrary.isValidEmail(newEmail));
 

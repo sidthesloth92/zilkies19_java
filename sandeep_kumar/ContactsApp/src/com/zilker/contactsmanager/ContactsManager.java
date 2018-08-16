@@ -1,35 +1,30 @@
 package com.zilker.contactsmanager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
 import java.util.logging.*;
 
-//package com.zilker.contactsmanager;
 import com.zilker.beans.Beans;
+import com.zilker.sqlconstants.SqlConstants;
+import com.zilker.utils.*;
 
 public class ContactsManager extends Beans {
+	public static Scanner in = new Scanner(System.in);
 	public static final Logger logger = Logger.getLogger("ContactsManager.class");
 	public static boolean proceed;
 	public static String getInput;
 
-	public String scanFirstname() {
+	public String scanName() {
 		proceed = true;
 		do {
-			System.out.println("Enter the First Name");
+			System.out.println("Enter the Name");
 			getInput = in.nextLine();
-			if (validateFirstName(getInput)) {
+			if (Validator.validate(getInput, "[a-zA-Z]+")) {
 				proceed = false;
 			}
-		} while (proceed);
-		return getInput;
-	}
-
-	public String scanLastname() {
-		proceed = true;
-		do {
-			System.out.println("Enter the Last Name");
-			getInput = in.nextLine();
-			if (validateLastName(getInput)) {
-				proceed = false;
+			else {
+				System.err.println(SqlConstants.INVALID_INPUT);
 			}
 		} while (proceed);
 		return getInput;
@@ -40,9 +35,12 @@ public class ContactsManager extends Beans {
 		if (getInput.equals("-1")) {
 			return "terminate";
 		}
-		if (validateOfficeNumber(getInput)) {
+		if (Validator.validate(getInput, "^\\+[0-9]{2,4}-[0-9]{3,4}-[0-9]{4,7}$")) {
 			return getInput;
-		} 
+		}
+		else {
+			System.err.println(SqlConstants.INVALID_INPUT);
+		}
 		return "falseInput";
 	}
 
@@ -69,8 +67,11 @@ public class ContactsManager extends Beans {
 		if (getInput.equals("-1")) {
 			return "terminate";
 		}
-		if (validateHomeNumber(getInput)) {
+		if (Validator.validate(getInput, "^\\+[0-9]{2,4}-[0-9]{3,4}-[0-9]{4,7}$")) {
 			return getInput;
+		}
+		else {
+			System.err.println(SqlConstants.INVALID_INPUT);
 		}
 		return "falseInput";
 	}
@@ -98,8 +99,11 @@ public class ContactsManager extends Beans {
 		if (getInput.equals("-1")) {
 			return "terminate";
 		}
-		if (validateMobileNumber(getInput)) {
+		if (Validator.validate(getInput, "^\\+[0-9]{2,4}-[0-9]{10}")) {
 			return getInput;
+		}
+		else {
+			System.err.println(SqlConstants.INVALID_INPUT);
 		}
 		return "falseInput";
 	}
@@ -114,7 +118,7 @@ public class ContactsManager extends Beans {
 				if (getInput.equals("terminate")) {
 					proceed = false;
 					continue;
-				} else if (!getInput.equals("flaseInput")) {
+				} else if (!getInput.equals("falseInput")) {
 					mobileList.add(getInput);
 				}
 			} while (proceed);
@@ -127,8 +131,11 @@ public class ContactsManager extends Beans {
 		if (getInput.equals("-1")) {
 			return "terminate";
 		}
-		if (validateEmail(getInput)) {
+		if (Validator.validate(getInput, "^[a-zA-Z0-9.-_]+@[a-zA-Z]+[.][a-zA-Z]{2,10}([.][a-zA-Z]{2,10})*")) {
 			return getInput;
+		}
+		else {
+			System.err.println(SqlConstants.INVALID_INPUT);
 		}
 		return "falseInput";
 	}
@@ -152,104 +159,108 @@ public class ContactsManager extends Beans {
 	}
 
 	public int scanId() {
-		int id = in.nextInt();in.nextLine();
+		int id = in.nextInt();
+		in.nextLine();
 		return id;
 	}
 
 	public void addContacts() {
-		String fname = this.scanFirstname();
-		this.setFname(fname);
-
-		String lname = this.scanLastname();
-		this.setLname(lname);
-
-		ArrayList<String> office = new ArrayList<String>();
-		office = this.scanOfficeList();
-		this.setOffice(office);
-
-		ArrayList<String> home = new ArrayList<String>();
-		home = this.scanHomeList();
-		this.setHome(home);
-
-		ArrayList<String> mobile = new ArrayList<String>();
-		mobile = this.scanMobileList();
-		this.setMobile(mobile);
-
-		ArrayList<String> email = new ArrayList<String>();
-		email = this.scanEmailList();
-		this.setEmail(email);
+		this.setFirstName(this.scanName());
+		this.setLastName(this.scanName());
+		this.setOffice(this.scanOfficeList());
+		this.setHome(this.scanHomeList());
+		this.setMobile(this.scanMobileList());
+		this.setEmail(this.scanEmailList());
+		if(ContactsDAO.insertContact(this)) {
+			System.out.println("Successfully Added!");
+		}
 	}
 
 	public void updateContacts() {
 		boolean doNotExit = false;
+		String updateData="";
+		int id=0,option=0;
 		do {
-			String name = this.scanFirstname();
-			if (ContactsDAO.printDetails(name)) {
+			String name = this.scanName();
+			if (printDetails(ContactsDAO.getDetails(name,SqlConstants.GET_ALL_DETAILS))) {
 				break;
 			}
 		} while (true);
 		do {
-			System.out.println("Choose an Option to Update 1.FirstName 2.LastName 3.Others 4.Exit");
-			int option = in.nextInt();
+			System.out.println(SqlConstants.UPDATE_MENU);
+			option = in.nextInt();
 			switch (option) {
 			case 1:
-				System.out.println("Enter id of the Firstname to be Updated");
-				int id = this.scanId();
-				String updateData = this.scanFirstname();
-				ContactsDAO.updateFirstName(updateData, id);
+				System.out.println(SqlConstants.ID_FIRSTNAME+"Updated");
+				id = this.scanId();
+				updateData = this.scanName();
+				if(ContactsDAO.updateFirstName(updateData, id)) {
+					System.out.println(SqlConstants.UPDATION_SUCCESS);
+				}
+				else {
+					System.err.println(SqlConstants.UPDATION_ERROR);
+				}
 				break;
 			case 2:
-				System.out.println("Enter id of the Lastname to be Updated");
+				System.out.println(SqlConstants.ID_LASTNAME+"Updated");
 				id = this.scanId();
-				updateData = this.scanLastname();
-				ContactsDAO.updateLastName(updateData, id);
+				updateData = this.scanName();
+				if(ContactsDAO.updateLastName(updateData, id)){
+					System.out.println(SqlConstants.DELETION_SUCCESS);
+				}
+				else {
+					System.err.println(SqlConstants.DELETION_ERROR);
+				}
 				break;
 			case 3:
-				System.out.println("Enter id of the field to be Updated");
+				System.out.println(SqlConstants.ID_FIELD+"Updated");
 				id = this.scanId();
 				if (ContactsDAO.findTypeById(id).equals("office")) {
 					System.out.println("Enter Office Number");
 					do {
 						updateData = this.scanOfficeNumber();
-						if(!updateData.equals("falseInput") || !updateData.equals("terminate")) {
+						if (!updateData.equals("falseInput") || !updateData.equals("terminate")) {
 							break;
 						}
-					}while(true);
-					ContactsDAO.updateNumberList(updateData, id);
+					} while (true);
+					
 				} else if (ContactsDAO.findTypeById(id).equals("home")) {
 					System.out.println("Enter Home Number");
 					do {
 						updateData = this.scanHomeNumber();
-						if(!updateData.equals("falseInput") || !updateData.equals("terminate")) {
+						if (!updateData.equals("falseInput") || !updateData.equals("terminate")) {
 							break;
 						}
-					}while(true);
-					ContactsDAO.updateNumberList(updateData, id);
+					} while (true);
 				} else if (ContactsDAO.findTypeById(id).equals("mobile")) {
 					System.out.println("Enter Mobile Number");
 					do {
 						updateData = this.scanMobileNumber();
-						if(!updateData.equals("falseInput") || !updateData.equals("terminate")) {
+						if (!updateData.equals("falseInput") || !updateData.equals("terminate")) {
 							break;
 						}
-					}while(true);
-					ContactsDAO.updateNumberList(updateData, id);
+					} while (true);
 				} else if (ContactsDAO.findTypeById(id).equals("email")) {
 					System.out.println("Enter E-mail");
 					do {
 						updateData = this.scanEmail();
-						if(updateData.equals("falseInput") || updateData.equals("terminate")) {
+						if (updateData.equals("falseInput") || updateData.equals("terminate")) {
 							continue;
 						}
 						break;
-					}while(true);
-					ContactsDAO.updateNumberList(updateData, id);
+					} while (true);
+				}
+				if(ContactsDAO.updateNumberList(updateData, id)){
+					System.out.println(SqlConstants.UPDATION_SUCCESS);
+				}
+				else {
+					System.err.println(SqlConstants.UPDATION_ERROR);
 				}
 				break;
 			case 4:
 				break;
 			default:
-				System.out.println("Enter Valid Option");
+				System.out.println(SqlConstants.VALID_OPTION);
 				doNotExit = true;
 				break;
 			}
@@ -258,35 +269,36 @@ public class ContactsManager extends Beans {
 
 	public void deleteContacts() {
 		boolean doNotExit = false;
+		int option=0, id=0;
 		do {
-			String name = this.scanFirstname();
-			if (ContactsDAO.printDetails(name)) {
+			String name = this.scanName();
+			if (printDetails(ContactsDAO.getDetails(name,SqlConstants.GET_ALL_DETAILS))) {
 				break;
 			}
 		} while (true);
 		do {
-			System.out.println("Choose an Option to Update 1.FirstName 2.LastName 3.Others 4.Exit");
-			int option = in.nextInt();
+			System.out.println(SqlConstants.DELETE_MENU);
+			option = in.nextInt();
 			switch (option) {
 			case 1:
-				System.out.println("Enter id of the Firstname to be Deleted");
-				int id = this.scanId();
+				System.out.println(SqlConstants.ID_FIRSTNAME+"Deleted");
+				id = this.scanId();
 				ContactsDAO.deleteName(id);
 				break;
 			case 2:
-				System.out.println("Enter id of the Lastname to be Deleted");
+				System.out.println(SqlConstants.ID_LASTNAME+"Deleted");
 				id = this.scanId();
 				ContactsDAO.deleteName(id);
 				break;
 			case 3:
-				System.out.println("Enter id of the field to be Deleted");
+				System.out.println(SqlConstants.ID_FIELD+"Deleted");
 				id = this.scanId();
 				ContactsDAO.deleteNumberList(id);
 				break;
 			case 4:
 				break;
 			default:
-				System.out.println("Enter Valid Option");
+				System.out.println(SqlConstants.VALID_OPTION);
 				doNotExit = true;
 			}
 		} while (doNotExit);
@@ -294,36 +306,36 @@ public class ContactsManager extends Beans {
 
 	public void displayContacts() {
 		boolean doNotExit = false;
+		int option =0;
 		do {
-			System.out.println("1.Sort by FisrstName 2.Sort By LastName 3.Exit");
-			int option = in.nextInt();
+			System.out.println(SqlConstants.DISPLAY_MENU);
+			option = in.nextInt();
 			switch (option) {
 			case 1:
-				ContactsDAO.sortList(1);
+				printDetails(ContactsDAO.getDetails(null,SqlConstants.SORT_BY_FNAME));
 				break;
 			case 2:
-				ContactsDAO.sortList(2);
+				printDetails(ContactsDAO.getDetails(null,SqlConstants.SORT_BY_LNAME));
 				break;
 			case 3:
 				break;
 			default:
-				System.out.println("Enter Valid Option");
+				System.out.println(SqlConstants.VALID_OPTION);
 				doNotExit = true;
 			}
 		} while (doNotExit);
 	}
 
-	public static void main(String args[]) {
+	public static void displayMenu() {
 		int option = 0;
 		do {
-			System.out.println("1.Add 2.Update 3.Delete 4.Display 5.Exit");
+			System.out.println(SqlConstants.MAIN_MENU);
 			option = in.nextInt();
 			in.nextLine();
 			switch (option) {
 			case 1:
 				ContactsManager newUser = new ContactsManager();
 				newUser.addContacts();
-				ContactsDAO.insertContact(newUser);
 				break;
 			case 2:
 				ContactsManager updateUser = new ContactsManager();
@@ -340,10 +352,34 @@ public class ContactsManager extends Beans {
 			case 5:
 				break;
 			default:
-				System.out.println("Enter Valid Option");
+				System.out.println(SqlConstants.VALID_OPTION);
 				break;
 			}
 		} while (option != 5);
 
+	}
+	
+	public static boolean printDetails(ArrayList<HashMap<String, String>> result) {
+		int unique=0;
+		if(result.isEmpty()) {
+			System.err.println("No Records Found!");
+			return false;
+		}
+		for(HashMap<String, String> map:result) {
+			if(unique!=Integer.parseInt(map.get("list_id"))) {
+				unique=Integer.parseInt(map.get("list_id"));
+				System.out.println("*****************************");
+				System.out.println("id: "+map.get("list_id"));
+				System.out.println("firstname: "+map.get("firstname"));
+				System.out.println("lastname: "+map.get("lastname"));
+			}
+			System.out.println("id: "+map.get("num_id")+" - "+map.get("type")+": "+map.get("contactdata"));
+		}
+		System.out.println("*****************************");
+		return true;
+	}
+
+	public static void main(String args[]) {
+		displayMenu();
 	}
 }

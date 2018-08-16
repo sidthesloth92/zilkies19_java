@@ -3,26 +3,25 @@ package com.zilker.beans;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Beans extends Validation {
-	protected static Scanner in=new Scanner(System.in);
-	private String fname;
-	private String lname;
+public class Beans{
+	private String firstname;
+	private String lastname;
 	private ArrayList<String> office = new ArrayList<String>();
 	private ArrayList<String> home = new ArrayList<String>();
 	private ArrayList<String> mobile = new ArrayList<String>();
 	private ArrayList<String> email = new ArrayList<String>();
 	
-	public String getFname() {
-		return this.fname;
+	public String getFirstName() {
+		return this.firstname;
 	}
-	public void setFname(String fname) {
-		this.fname = fname;
+	public void setFirstName(String firstname) {
+		this.firstname = firstname;
 	}
-	public String getLname() {
-		return this.lname;
+	public String getLastName() {
+		return this.lastname;
 	}
-	public void setLname(String lname) {
-		this.lname = lname;
+	public void setLastName(String lastname) {
+		this.lastname = lastname;
 	}
 	public ArrayList<String> getOffice() {
 		return this.office;
