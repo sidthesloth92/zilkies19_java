@@ -1,6 +1,7 @@
 package io.ztech.expensesapp.delegates;
 
 import io.ztech.expensesapp.beans.Expense;
+import io.ztech.expensesapp.beans.Group;
 import io.ztech.expensesapp.beans.GroupPayment;
 import io.ztech.expensesapp.beans.User;
 import io.ztech.expensesapp.constants.DisplayConstants;
@@ -32,10 +33,11 @@ public class ExpenseDelegate {
 	}
 
 	public void addNewExpense(Expense expense) {
-		if(expense instanceof Expense)
-		expenseDao.addNewExpense(expense);
-		if(expense instanceof GroupPayment)
-			expenseDao.addGroupExpense((GroupPayment)expense);
+		if (expense instanceof GroupPayment)
+			expenseDao.addGroupExpense((GroupPayment) expense);
+		else
+			expenseDao.addNewExpense(expense);
+
 	}
 
 	public User showAllExpense(User activeUser) {
@@ -43,17 +45,26 @@ public class ExpenseDelegate {
 		User user = expenseDao.showAllExpenses(activeUser);
 		return user;
 	}
-	
+
 	public User viewGroups(User activeUser) {
 		User user = expenseDao.viewGroups(activeUser);
 		return user;
 	}
-	
+
 	public void createGroups(User activeUser) {
 		expenseDao.createGroups(activeUser);
 	}
-	
+
 	public void addExpenseMembers(GroupPayment groupPayment) {
 		expenseDao.addExpenseMembers(groupPayment);
+	}
+
+	public Group viewGroupExpenses(Group activeGroup) {
+		Group group = expenseDao.viewGroupExpenses(activeGroup);
+		return group;
+	}
+
+	public void editExpenseLimit(User activeUser) {
+		expenseDao.editExpenseLimit(activeUser);
 	}
 }

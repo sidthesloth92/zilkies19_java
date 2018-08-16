@@ -7,6 +7,23 @@ public class Expense {
 	int typeId;
 	String description;
 	float amount;
+	String category;
+	String type;
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public int geteId() {
 		return eId;

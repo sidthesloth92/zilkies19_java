@@ -36,3 +36,4 @@ public class GroupPayment extends Expense {
 	}
 
 }
+

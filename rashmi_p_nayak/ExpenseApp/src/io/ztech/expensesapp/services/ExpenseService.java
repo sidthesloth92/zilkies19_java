@@ -1,6 +1,7 @@
 package io.ztech.expensesapp.services;
 
 import io.ztech.expensesapp.beans.Expense;
+import io.ztech.expensesapp.beans.Group;
 import io.ztech.expensesapp.beans.GroupPayment;
 import io.ztech.expensesapp.beans.User;
 import io.ztech.expensesapp.exceptions.LoginFailedException;
@@ -56,5 +57,14 @@ public class ExpenseService {
 	
 	public void addExpenseMembers(GroupPayment groupPayment) {
 		expenseDelegate.addExpenseMembers(groupPayment);
+	}
+	
+	public Group viewGroupExpenses(Group activeGroup) {
+		Group group = expenseDelegate.viewGroupExpenses(activeGroup);
+		return group;
+	}
+	
+	public void editExpenseLimit(User activeUser) {
+		expenseDelegate.editExpenseLimit(activeUser);
 	}
 }
