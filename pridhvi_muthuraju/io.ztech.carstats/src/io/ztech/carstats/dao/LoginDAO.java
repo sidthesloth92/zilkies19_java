@@ -12,7 +12,7 @@ import io.ztech.carstats.dbutils.DBUtils;
 
 public class LoginDAO {
 
-	private final Logger logger = Logger.getLogger(OutputDAO.class.getName());
+	private final Logger logger = Logger.getLogger(FetchDetailsDAO.class.getName());
 	private Connection con = null;
 	private PreparedStatement pst = null;
 

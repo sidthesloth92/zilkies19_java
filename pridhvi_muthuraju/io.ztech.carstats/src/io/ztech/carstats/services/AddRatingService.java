@@ -6,9 +6,9 @@ import io.ztech.carstats.beans.User;
 import io.ztech.carstats.delegate.AddRatingDelegate;
 
 public class AddRatingService {
-	AddRatingDelegate arDelegate = new AddRatingDelegate();
+	AddRatingDelegate addRatingDelegate = new AddRatingDelegate();
 
 	public boolean addRating(Specification specification, Rating rating, User user) {
-		return arDelegate.addRating(specification, rating, user);
+		return addRatingDelegate.addRating(specification, rating, user);
 	}
 }

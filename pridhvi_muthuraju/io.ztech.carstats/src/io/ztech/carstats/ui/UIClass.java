@@ -14,13 +14,13 @@ import io.ztech.carstats.services.*;
 
 public class UIClass {
 
-	OutputService oserv = new OutputService();
-	AddCarService addCarServ = new AddCarService();
-	CheckLoginService checkLoginServ = new CheckLoginService();
-	LoginService loginServ = new LoginService();
-	DeleteCarService deleteCarServ = new DeleteCarService();
-	AddStatisticsService addStatisticsServ = new AddStatisticsService();
-	AddRatingService addRatingServ = new AddRatingService();
+	FetchDetailsService fetchdetailsService = new FetchDetailsService();
+	AddCarService addCarService = new AddCarService();
+	CheckLoginService checkLoginService = new CheckLoginService();
+	LoginService loginService = new LoginService();
+	DeleteCarService deleteCarService = new DeleteCarService();
+	AddStatisticsService addStatisticsService = new AddStatisticsService();
+	AddRatingService addRatingService = new AddRatingService();
 	RequestCarService requestCarService = new RequestCarService();
 
 	public static final Logger logger = Logger.getLogger(UIClass.class.getName());
@@ -40,7 +40,7 @@ public class UIClass {
 			user.setUserName(sc.next());
 			logger.info("Enter password:");
 			user.setPassword(sc.next());
-			if (!checkLoginServ.isUser(user)) {
+			if (!checkLoginService.isUser(user)) {
 				logger.info("User doesn't exist wanna signin?(y/n)");
 				if (sc.next().equals("y"))
 					this.getSignupUI();
@@ -48,7 +48,7 @@ public class UIClass {
 				break;
 		}
 
-		if (checkLoginServ.isAdmin(user)) {
+		if (checkLoginService.isAdmin(user)) {
 			return this.putLoginAdminUI();
 		} else {
 			return this.putLoginUserUI();
@@ -58,7 +58,7 @@ public class UIClass {
 	public boolean putLoginUserUI() throws SQLException {
 
 		user.setAdminStatus(AppConstants.USER);
-		loginServ.login();
+		loginService.login();
 		this.userMenu();
 		return true;
 	}
@@ -66,7 +66,7 @@ public class UIClass {
 	public boolean putLoginAdminUI() throws SQLException {
 
 		user.setAdminStatus(AppConstants.ADMIN);
-		loginServ.login();
+		loginService.login();
 		this.adminMenu();
 		return true;
 	}
@@ -82,12 +82,14 @@ public class UIClass {
 				logger.info("Enter password:");
 				user.setPassword(sc.next());
 			} while (!Validator.validatePassword(user.getPassword()));
-		} while (checkLoginServ.isUser(user));
+			if (checkLoginService.isUser(user))
+				logger.info("Username already exists, please try a new one!");
+		} while (checkLoginService.isUser(user));
 		return this.putSignupUI();
 	}
 
 	public boolean putSignupUI() throws SQLException {
-		if (!loginServ.signup(user)) {
+		if (!loginService.signup(user)) {
 			return false;
 		}
 		this.getLoginUI();
@@ -126,7 +128,7 @@ public class UIClass {
 	}
 
 	public boolean displayCarsUI() throws SQLException {
-		HashMap<Integer, ArrayList<String>> cars = oserv.getCars(make, carType);
+		HashMap<Integer, ArrayList<String>> cars = fetchdetailsService.getCars(make, carType);
 		if (cars == null)
 			return false;
 		for (Map.Entry<Integer, ArrayList<String>> entry : cars.entrySet()) {
@@ -153,7 +155,7 @@ public class UIClass {
 	}
 
 	public boolean displayMakesUI() throws SQLException {
-		HashMap<Integer, String> makes = oserv.displayMakes();
+		HashMap<Integer, String> makes = fetchdetailsService.displayMakes();
 		if (makes == null)
 			return false;
 		for (Map.Entry<Integer, String> entry : makes.entrySet()) {
@@ -163,7 +165,7 @@ public class UIClass {
 	}
 
 	public boolean displayCarTypesUI() throws SQLException {
-		HashMap<Integer, String> carTypes = oserv.displayCarTypes();
+		HashMap<Integer, String> carTypes = fetchdetailsService.displayCarTypes();
 		if (carTypes == null)
 			return false;
 		for (Map.Entry<Integer, String> entry : carTypes.entrySet()) {
@@ -173,7 +175,7 @@ public class UIClass {
 	}
 
 	public boolean displayRatingUI() {
-		HashMap<String, Rating> ratings = oserv.displayRating(specification);
+		HashMap<String, Rating> ratings = fetchdetailsService.displayRating(specification);
 		for (Map.Entry<String, Rating> entry : ratings.entrySet()) {
 			logger.info("Username:" + entry.getKey() + "\nRating:" + entry.getValue().getRating() + "\nReview:"
 					+ entry.getValue().getReview());
@@ -182,7 +184,7 @@ public class UIClass {
 	}
 
 	public boolean displayStatisticsUI() {
-		ArrayList<Statistics> statistics = oserv.displayStatistics(specification);
+		ArrayList<Statistics> statistics = fetchdetailsService.displayStatistics(specification);
 		for (Statistics statistic : statistics)
 			logger.info("Year:" + statistic.getStatisticsYear() + "\n" + statistic.getSaleCount());
 		return true;
@@ -196,7 +198,7 @@ public class UIClass {
 		statistics.setStatisticsYear(sc.nextInt());
 		logger.info("Enter Sales Count:");
 		statistics.setSaleCount(sc.nextInt());
-		addStatisticsServ.addStatistics(specification, statistics);
+		addStatisticsService.addStatistics(specification, statistics);
 	}
 
 	public void addRatingUI() throws SQLException {
@@ -205,7 +207,7 @@ public class UIClass {
 		sc.nextLine();
 		logger.info("Enter Review(500 words):");
 		rating.setReview(sc.nextLine());
-		addRatingServ.addRating(specification, rating, user);
+		addRatingService.addRating(specification, rating, user);
 	}
 
 	public void addCarUI() throws SQLException {
@@ -257,7 +259,7 @@ public class UIClass {
 		} else {
 			specification.setCarStatus("UNAPPROVED");
 		}
-		addCarServ.addCar(carType, make, specification);
+		addCarService.addCar(carType, make, specification);
 	}
 
 	public boolean deleteCarUI() throws SQLException {
@@ -269,7 +271,7 @@ public class UIClass {
 		}
 		logger.info("Confirm Delete?(y/n)");
 		if (sc.next().equals("y"))
-			return deleteCarServ.deleteCar(specification);
+			return deleteCarService.deleteCar(specification);
 		else
 			return true;
 	}
@@ -286,15 +288,18 @@ public class UIClass {
 		}
 	}
 
-	public void getRequests() {
-		ArrayList<Request> requests = requestCarService.getRequests();
+	public boolean getRequests() {
+		ArrayList<Request> requests = requestCarService.getRequests(user);
+		if (requests == null)
+			return false;
 		for (Request request : requests) {
 			logger.info(request.getRequestId() + " " + request.getCarId() + " " + request.getUserName());
 		}
+		return true;
 	}
 
 	public void getCarUI(Request request) {
-		specification = oserv.getCar(request);
+		specification = fetchdetailsService.getCar(request);
 		logger.info(specification.getCarId() + " " + specification.getCarName() + " " + specification.getEngineType()
 				+ " " + specification.getCylinder() + " " + specification.getDisplacement() + " "
 				+ specification.getTransmission() + " " + specification.getPower() + " " + specification.getTorque()
@@ -303,8 +308,9 @@ public class UIClass {
 				+ specification.getDrivetrain() + " " + specification.getPrice() + " " + specification.getCarStatus());
 	}
 
-	public void reviewAddRequestsUI() throws SQLException {
-		this.getRequests();
+	public boolean reviewAddRequestsUI() throws SQLException {
+		if (!this.getRequests())
+			return false;
 		logger.info("Enter Request ID to review:");
 		request.setRequestId(sc.nextInt());
 		this.getCarUI(request);
@@ -314,6 +320,7 @@ public class UIClass {
 		} else {
 			this.deleteCarUI();
 		}
+		return true;
 	}
 
 	public boolean carMenu() throws SQLException {
@@ -330,7 +337,7 @@ public class UIClass {
 				break;
 			}
 			case 3: {
-				if (!user.getAdminStatus().equals("USER")) {
+				if (!User.getLoginStatus()) {
 					logger.info("Please login to add your rating!!");
 					return true;
 				}
@@ -346,7 +353,7 @@ public class UIClass {
 
 	public boolean userMenu() throws SQLException {
 		while (true) {
-			logger.info("1.Car by Make\n2.Car by Type\n3.Request Add Car\n4.Logout");
+			logger.info("1.Car by Make\n2.Car by Type\n3.Request Add Car\n4.Show Pending Requests\n5.Logout");
 			int choice = sc.nextInt();
 			switch (choice) {
 			case 1: {
@@ -365,8 +372,12 @@ public class UIClass {
 				break;
 			}
 			case 4: {
+				this.getRequests();
+				break;
+			}
+			case 5: {
 				this.clearAll(make, carType);
-				loginServ.logout();
+				loginService.logout();
 				return true;
 			}
 			}
@@ -395,12 +406,13 @@ public class UIClass {
 			}
 			case 4: {
 				this.clearAll(make, carType);
-				this.reviewAddRequestsUI();
+				if (!this.reviewAddRequestsUI())
+					logger.info("No requests to review!");
 				break;
 			}
 			case 5: {
 				this.clearAll(make, carType);
-				loginServ.logout();
+				loginService.logout();
 				return true;
 			}
 			}

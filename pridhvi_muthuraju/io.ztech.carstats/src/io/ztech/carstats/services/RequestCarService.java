@@ -9,17 +9,17 @@ import io.ztech.carstats.beans.User;
 import io.ztech.carstats.delegate.RequestCarDelegate;
 
 public class RequestCarService {
-	RequestCarDelegate rcDelegate = new RequestCarDelegate();
+	RequestCarDelegate requestCarDelegate = new RequestCarDelegate();
 
 	public boolean addCarUserRequest(Request request, User user, Specification specification) throws SQLException {
-		return rcDelegate.addCarUserRequest(request, user, specification);
+		return requestCarDelegate.addCarUserRequest(request, user, specification);
 	}
 
-	public ArrayList<Request> getRequests() {
-		return rcDelegate.getRequests();
+	public ArrayList<Request> getRequests(User user) {
+		return requestCarDelegate.getRequests(user);
 	}
 
 	public boolean approveCar(Specification specification, Request request) {
-		return rcDelegate.approveCar(specification, request);
+		return requestCarDelegate.approveCar(specification, request);
 	}
 }

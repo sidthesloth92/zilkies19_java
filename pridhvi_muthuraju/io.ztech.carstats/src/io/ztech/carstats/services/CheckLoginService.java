@@ -7,14 +7,14 @@ import io.ztech.carstats.delegate.CheckLoginDelegate;
 
 public class CheckLoginService {
 
-	CheckLoginDelegate clDelegate = new CheckLoginDelegate();
+	CheckLoginDelegate checkLoginDelegate = new CheckLoginDelegate();
 
 	public boolean isUser(User user) throws SQLException {
-		return clDelegate.isUser(user);
+		return checkLoginDelegate.isUser(user);
 	}
 	
 	
 	public boolean isAdmin(User user) throws SQLException {
-		return clDelegate.isAdmin(user);
+		return checkLoginDelegate.isAdmin(user);
 	}
 }

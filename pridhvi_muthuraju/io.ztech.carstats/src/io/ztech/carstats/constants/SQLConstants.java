@@ -20,7 +20,14 @@ public class SQLConstants {
 	public static String SELECT_REQUEST_ID = "select request_id from request order by request_id DESC LIMIT 1";
 	public static String APPROVE_CAR = "update specification set car_status='APPROVED' where car_id=?";
 	public static String SELECT_ALL_REQUEST = "select * from request";
+	public static String SELECT_REQUEST = "select * from request where user_name=?";
 	public static String SELECT_CAR = "select * from specification where car_id in(select car_id "
 			+ "from request where request_id=?)";
 	public static String DELETE_REQUEST = "delete from request where request_id=?";
+	public static String INSERT_STATISTICS = "insert into statistics(car_id,statistics_year,sale_count) values (?,?,?)";
+	public static String IS_USER = "select count(*) from users where user_name=? and user_password=?";
+	public static String IS_ADMIN = "select count(*) from users where user_name=? and"
+			+ " user_password=? and admin_status='ADMIN'";
+	public static String SELECT_RATING = "select user_name,rating,review from rating where car_id=?";
+	public static String SELECT_STATISTICS = "select statistics_year,sale_count from statistics where car_id=?";
 }

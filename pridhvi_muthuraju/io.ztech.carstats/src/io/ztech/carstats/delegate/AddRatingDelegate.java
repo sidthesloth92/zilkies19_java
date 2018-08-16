@@ -6,9 +6,9 @@ import io.ztech.carstats.beans.User;
 import io.ztech.carstats.dao.AddRatingDAO;
 
 public class AddRatingDelegate {
-	AddRatingDAO ardao = new AddRatingDAO();
+	AddRatingDAO addRatingDAO = new AddRatingDAO();
 
 	public boolean addRating(Specification specification, Rating rating, User user) {
-		return ardao.addRating(specification, rating, user);
+		return addRatingDAO.addRating(specification, rating, user);
 	}
 }

@@ -16,7 +16,7 @@ import io.ztech.carstats.dbutils.DBUtils;
 
 public class RequestCarDAO {
 
-	private final Logger logger = Logger.getLogger(OutputDAO.class.getName());
+	private final Logger logger = Logger.getLogger(FetchDetailsDAO.class.getName());
 	private Connection con = null;
 	private PreparedStatement pst = null;
 	private ResultSet res = null;;
@@ -70,17 +70,21 @@ public class RequestCarDAO {
 		return true;
 	}
 
-	public ArrayList<Request> getRequests() {
+	public ArrayList<Request> getRequests(User user) {
 		ArrayList<Request> requests = new ArrayList<>();
 		try {
 			con = DBUtils.getConnection();
-			pst = con.prepareStatement(SQLConstants.SELECT_ALL_REQUEST);
+			if (user.getAdminStatus().equals("USER")) {
+				pst = con.prepareStatement(SQLConstants.SELECT_REQUEST);
+				pst.setString(1, user.getUserName());
+			} else
+				pst = con.prepareStatement(SQLConstants.SELECT_ALL_REQUEST);
 			res = pst.executeQuery();
 			while (res.next()) {
 				Request request = new Request();
-				request.setRequestId(res.getInt("request_id"));
-				request.setCarId(res.getInt("car_id"));
-				request.setUserName(res.getString("user_name"));
+				request.setRequestId(res.getInt(AppConstants.REQUEST_ID));
+				request.setCarId(res.getInt(AppConstants.CAR_ID));
+				request.setUserName(res.getString(AppConstants.USER_NAME));
 				requests.add(request);
 			}
 		} catch (SQLException e) {
@@ -89,7 +93,10 @@ public class RequestCarDAO {
 		} finally {
 			DBUtils.closeConnection(con, pst, null);
 		}
-		return requests;
+		if (requests.isEmpty())
+			return null;
+		else
+			return requests;
 	}
 
 	public boolean deleteRequest(Request request) {

@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import io.ztech.carstats.beans.User;
 import io.ztech.carstats.constants.AppConstants;
+import io.ztech.carstats.constants.SQLConstants;
 import io.ztech.carstats.dbutils.DBUtils;
 
 public class CheckLoginDAO {
@@ -20,7 +21,7 @@ public class CheckLoginDAO {
 		boolean flag = true;
 		try {
 			con = DBUtils.getConnection();
-			pst = con.prepareStatement("select count(*) from users where user_name=? and user_password=?");
+			pst = con.prepareStatement(SQLConstants.IS_USER);
 			pst.setString(1, user.getUserName());
 			pst.setString(2, user.getPassword());
 			res = pst.executeQuery();
@@ -40,8 +41,7 @@ public class CheckLoginDAO {
 		boolean flag = true;
 		try {
 			con = DBUtils.getConnection();
-			pst = con.prepareStatement(
-					"select count(*) from users where user_name=? and" + " user_password=? and admin_status='ADMIN'");
+			pst = con.prepareStatement(SQLConstants.IS_ADMIN);
 			pst.setString(1, user.getUserName());
 			pst.setString(2, user.getPassword());
 			res = pst.executeQuery();

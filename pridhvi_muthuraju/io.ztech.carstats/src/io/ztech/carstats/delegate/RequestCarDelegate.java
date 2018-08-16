@@ -9,18 +9,18 @@ import io.ztech.carstats.beans.User;
 import io.ztech.carstats.dao.RequestCarDAO;
 
 public class RequestCarDelegate {
-	RequestCarDAO rcdao = new RequestCarDAO();
+	RequestCarDAO requestDAO = new RequestCarDAO();
 
 	public boolean addCarUserRequest(Request request, User user, Specification specification) throws SQLException {
-		return rcdao.addCarUserRequest(request, user, specification) && rcdao.getRequestId(request);
+		return requestDAO.addCarUserRequest(request, user, specification) && requestDAO.getRequestId(request);
 	}
 
-	public ArrayList<Request> getRequests() {
-		return rcdao.getRequests();
+	public ArrayList<Request> getRequests(User user) {
+		return requestDAO.getRequests(user);
 	}
 
 	public boolean approveCar(Specification specification, Request request) {
-		rcdao.deleteRequest(request);
-		return rcdao.approveCar(specification);
+		requestDAO.deleteRequest(request);
+		return requestDAO.approveCar(specification);
 	}
 }

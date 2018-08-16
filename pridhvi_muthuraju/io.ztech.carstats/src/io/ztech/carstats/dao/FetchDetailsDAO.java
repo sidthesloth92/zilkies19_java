@@ -11,8 +11,8 @@ import io.ztech.carstats.dbutils.*;
 import io.ztech.carstats.beans.*;
 import io.ztech.carstats.constants.*;
 
-public class OutputDAO {
-	private final Logger logger = Logger.getLogger(OutputDAO.class.getName());
+public class FetchDetailsDAO {
+	private final Logger logger = Logger.getLogger(FetchDetailsDAO.class.getName());
 	private Connection con = null;
 	private PreparedStatement pst = null;
 	private ResultSet res = null;
@@ -29,7 +29,7 @@ public class OutputDAO {
 		} catch (SQLException e) {
 			logger.info(AppConstants.SQL_ERROR);
 		} finally {
-			DBUtils.closeConnection(con, pst, null);
+			DBUtils.closeConnection(con, pst, res);
 		}
 		if (makes.isEmpty())
 			return null;
@@ -50,7 +50,7 @@ public class OutputDAO {
 		} catch (SQLException e) {
 			logger.info(AppConstants.SQL_ERROR);
 		} finally {
-			DBUtils.closeConnection(con, pst, null);
+			DBUtils.closeConnection(con, pst, res);
 		}
 		if (carTypes.isEmpty())
 			return null;
@@ -63,19 +63,19 @@ public class OutputDAO {
 		HashMap<String, Rating> ratings = new HashMap<String, Rating>();
 		try {
 			con = DBUtils.getConnection();
-			pst = con.prepareStatement("select user_name,rating,review from rating where car_id=?");
+			pst = con.prepareStatement(SQLConstants.SELECT_RATING);
 			pst.setInt(1, specification.getCarId());
 			res = pst.executeQuery();
 			while (res.next()) {
 				Rating rating = new Rating();
-				rating.setRating(res.getString("rating"));
-				rating.setReview(res.getString("review"));
-				ratings.put(res.getString("user_name"), rating);
+				rating.setRating(res.getString(AppConstants.RATING));
+				rating.setReview(res.getString(AppConstants.REVIEW));
+				ratings.put(res.getString(AppConstants.USER_NAME), rating);
 			}
 		} catch (SQLException e) {
 			logger.info(AppConstants.SQL_ERROR);
 		} finally {
-			DBUtils.closeConnection(con, pst, null);
+			DBUtils.closeConnection(con, pst, res);
 		}
 		return ratings;
 	}
@@ -84,19 +84,19 @@ public class OutputDAO {
 		ArrayList<Statistics> statistics = new ArrayList<>();
 		try {
 			con = DBUtils.getConnection();
-			pst = con.prepareStatement("select statistics_year,sale_count from statistics where car_id=?");
+			pst = con.prepareStatement(SQLConstants.SELECT_STATISTICS);
 			pst.setInt(1, specification.getCarId());
 			res = pst.executeQuery();
 			while (res.next()) {
 				Statistics statistic = new Statistics();
-				statistic.setStatisticsYear(res.getInt("statistics_year"));
-				statistic.setSaleCount(res.getInt("sale_count"));
+				statistic.setStatisticsYear(res.getInt(AppConstants.STATISTICS_YEAR));
+				statistic.setSaleCount(res.getInt(AppConstants.SALE_COUNT));
 				statistics.add(statistic);
 			}
 		} catch (SQLException e) {
 			logger.info(AppConstants.SQL_ERROR);
 		} finally {
-			DBUtils.closeConnection(con, pst, null);
+			DBUtils.closeConnection(con, pst, res);
 		}
 		return statistics;
 	}
@@ -135,7 +135,7 @@ public class OutputDAO {
 		} catch (SQLException e) {
 			logger.info(AppConstants.SQL_ERROR);
 		} finally {
-			DBUtils.closeConnection(con, pst, null);
+			DBUtils.closeConnection(con, pst, res);
 		}
 		return cars;
 	}
@@ -149,27 +149,27 @@ public class OutputDAO {
 			res = pst.executeQuery();
 
 			while (res.next()) {
-				specification.setCarId(res.getInt("car_id"));
-				specification.setAbs(res.getString("abs"));
-				specification.setAirbag(res.getString("airbag"));
-				specification.setCarName(res.getString("car_name"));
-				specification.setCarStatus(res.getString("car_status"));
-				specification.setCylinder(res.getInt("cylinder"));
-				specification.setDisplacement(res.getInt("displacement"));
-				specification.setDrivetrain(res.getString("drivetrain"));
-				specification.setEngineType(res.getString("engine_type"));
-				specification.setFuelCapacity(res.getInt("fuel_capacity"));
-				specification.setKerbWeight(res.getInt("kerb_weight"));
-				specification.setPower(res.getInt("power"));
-				specification.setPrice(res.getInt("price"));
-				specification.setTorque(res.getInt("torque"));
-				specification.setTransmission(res.getInt("transmission"));
-				specification.setWheelbase(res.getInt("wheelbase"));
+				specification.setCarId(res.getInt(AppConstants.CAR_ID));
+				specification.setAbs(res.getString(AppConstants.ABS));
+				specification.setAirbag(res.getString(AppConstants.AIRBAG));
+				specification.setCarName(res.getString(AppConstants.CAR_NAME));
+				specification.setCarStatus(res.getString(AppConstants.CAR_STATUS));
+				specification.setCylinder(res.getInt(AppConstants.CYLINDER));
+				specification.setDisplacement(res.getInt(AppConstants.DISPLACEMENT));
+				specification.setDrivetrain(res.getString(AppConstants.DRIVETRAIN));
+				specification.setEngineType(res.getString(AppConstants.ENGINE_TYPE));
+				specification.setFuelCapacity(res.getInt(AppConstants.FUEL_CAPACITY));
+				specification.setKerbWeight(res.getInt(AppConstants.KERB_WEIGHT));
+				specification.setPower(res.getInt(AppConstants.POWER));
+				specification.setPrice(res.getInt(AppConstants.PRICE));
+				specification.setTorque(res.getInt(AppConstants.TORQUE));
+				specification.setTransmission(res.getInt(AppConstants.TRANSMISSION));
+				specification.setWheelbase(res.getInt(AppConstants.WHEELBASE));
 			}
 		} catch (SQLException e) {
 			logger.info(AppConstants.SQL_ERROR);
 		} finally {
-			DBUtils.closeConnection(con, pst, null);
+			DBUtils.closeConnection(con, pst, res);
 		}
 		return specification;
 	}

@@ -5,8 +5,8 @@ import io.ztech.carstats.delegate.DeleteCarDelegate;
 
 public class DeleteCarService {
 
-	DeleteCarDelegate dcDelegate =new DeleteCarDelegate();
+	DeleteCarDelegate deleteCarDelegate =new DeleteCarDelegate();
 	public boolean deleteCar(Specification specification) {
-		return dcDelegate.deleteCar(specification);
+		return deleteCarDelegate.deleteCar(specification);
 	}
 }

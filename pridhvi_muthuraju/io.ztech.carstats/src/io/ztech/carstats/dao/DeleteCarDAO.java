@@ -2,9 +2,9 @@ package io.ztech.carstats.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Logger;
+
 import io.ztech.carstats.beans.Specification;
 import io.ztech.carstats.constants.AppConstants;
 import io.ztech.carstats.constants.SQLConstants;
@@ -15,7 +15,6 @@ public class DeleteCarDAO {
 	private final Logger logger = Logger.getLogger(DeleteCarDAO.class.getName());
 	private Connection con = null;
 	private PreparedStatement pst = null;
-	private ResultSet res = null;
 
 	public boolean deleteCar(Specification specification) {
 		try {

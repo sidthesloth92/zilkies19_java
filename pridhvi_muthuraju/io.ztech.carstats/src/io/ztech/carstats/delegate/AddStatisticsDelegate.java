@@ -5,8 +5,8 @@ import io.ztech.carstats.beans.Statistics;
 import io.ztech.carstats.dao.AddStatisticsDAO;
 
 public class AddStatisticsDelegate {
-	AddStatisticsDAO asdao=new AddStatisticsDAO();
+	AddStatisticsDAO addStatisticsDAO=new AddStatisticsDAO();
 	public boolean addStatistics(Specification specification, Statistics statistics) {
-		return asdao.addStatistics(specification, statistics);
+		return addStatisticsDAO.addStatistics(specification, statistics);
 	}
 }

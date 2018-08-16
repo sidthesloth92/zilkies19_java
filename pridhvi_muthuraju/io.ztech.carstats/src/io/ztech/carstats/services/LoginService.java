@@ -5,17 +5,17 @@ import io.ztech.carstats.delegate.LoginDelegate;
 
 public class LoginService {
 
-	LoginDelegate lDelegate = new LoginDelegate();
+	LoginDelegate loginDelegate = new LoginDelegate();
 
 	public boolean login() {
-		return lDelegate.logoutLogin(true);
+		return loginDelegate.logoutLogin(true);
 	}
 
 	public boolean logout() {
-		return lDelegate.logoutLogin(false);
+		return loginDelegate.logoutLogin(false);
 	}
 
 	public boolean signup(User user) {
-		return lDelegate.signup(user) && this.logout();
+		return loginDelegate.signup(user) && this.logout();
 	}
 }

@@ -5,16 +5,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Logger;
+
 import io.ztech.carstats.beans.CarType;
 import io.ztech.carstats.beans.Make;
 import io.ztech.carstats.beans.Specification;
-import io.ztech.carstats.beans.Statistics;
 import io.ztech.carstats.constants.AppConstants;
 import io.ztech.carstats.constants.SQLConstants;
 import io.ztech.carstats.dbutils.DBUtils;
 
 public class AddCarDAO {
-	private final Logger logger = Logger.getLogger(OutputDAO.class.getName());
+	private final Logger logger = Logger.getLogger(FetchDetailsDAO.class.getName());
 	private Connection con = null;
 	private PreparedStatement pst = null;
 	private ResultSet res = null;
