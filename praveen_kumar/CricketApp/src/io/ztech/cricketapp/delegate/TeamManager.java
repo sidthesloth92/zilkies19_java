@@ -44,4 +44,8 @@ public class TeamManager {
 	public void addNewPlayer(Player newPlayer) {
 		dao.insertPlayer(newPlayer);
 	}
+	
+	public Team fetchTeam(int teamId) {
+		return dao.fetchTeam(teamId);
+	}
 }
