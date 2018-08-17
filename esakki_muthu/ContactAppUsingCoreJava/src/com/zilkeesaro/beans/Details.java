@@ -13,9 +13,29 @@ public class Details {
 	public String first_name;
 
 	public String last_name;
+	
+	public int contact_id;
+	
+	public int sno;
 
 	Scanner in = new Scanner(System.in);
 
+	public int getSno() {
+		return sno;
+	}
+	
+	public void setSno(int sno) {
+		this.sno=sno;
+	}
+	
+	public int getContact_id() {
+		return contact_id;
+	}
+	
+	public void setContact_id(int contact_id) {
+		this.contact_id=contact_id;
+	}
+	
 	public String getHome() {
 		return home;
 	}
