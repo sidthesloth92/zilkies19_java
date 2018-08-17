@@ -36,7 +36,7 @@ public class ExpenseDelegate {
 	public void addNewExpense(Expense expense) {
 		if (expense instanceof GroupPayment)
 			expenseDao.addGroupExpense((GroupPayment) expense);
-		else
+		if(expense instanceof Expense)
 			expenseDao.addNewExpense(expense);
 
 	}

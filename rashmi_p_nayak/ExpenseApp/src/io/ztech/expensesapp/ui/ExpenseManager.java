@@ -70,6 +70,8 @@ public class ExpenseManager {
 	}
 
 	public void signUp() {
+		
+		
 		while (true) {
 			try {
 				logger.info("\n");

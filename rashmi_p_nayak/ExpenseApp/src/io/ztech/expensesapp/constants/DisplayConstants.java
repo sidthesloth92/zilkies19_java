@@ -10,7 +10,7 @@ public class DisplayConstants {
 	public static final String ENTER_NEW_PASSWORD = "\nEnter a password [Minimum of 6 characters] : ";
 	public static final String CONFIRM_PASSWORD = "\nConfirm password : ";
 	public static final String ADD_EXPENSE_LIMIT = "\nSet your expense limit : ";
-	public static final String ENTER_USERNAME_EMAIL = "\nEnter username or Registered email id:";
+	public static final String ENTER_USERNAME_EMAIL = "\nEnter username :";
 	public static final String ENTER_PASSWORD = "\nEnter password:";
 	public static final String PASSWORD_ERROR = "\nPasswords don't match or password strength insufficient! Please re-enter details!";
 	public static final String INVALID_EMAILID = "\nEnter valid email id!";
@@ -32,7 +32,7 @@ public class DisplayConstants {
 	public static final String GROUP_MENU = "\n================\n" + "    MY GROUPS   \n" + "================\n"
 			+ "1.View Groups   \n" + "2.Create Group  \n" + "3.Go Back       \n" + "Enter choice:";
 	public static final String ENTER_GROUP_NAME = "\nEnter group name: ";
-	public static final String ENTER_NO_OF_MEMBERS = "\nEnter no.of members: ";
+	public static final String ENTER_NO_OF_MEMBERS = "\nEnter no.of members (excluding you) : ";
 	public static final String SUCCESSFUL_SIGNUP = "\nUser signed up successfully!";
 	public static final String SUCCESSFUL_LOGIN = "\nUser Logged in successfully!";
 	public static final String EXPENSE_ADDED = "\nExpense added successfully!";
