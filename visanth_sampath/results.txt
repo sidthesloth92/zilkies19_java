@@ -1,0 +1,48 @@
+a. select cust_name from customer inner join shipment on customer.cust_id = shipment.cust_id and shipment.destination = 'Sioux City';
+
+b.select shipment.destination from customer inner join shipment on customer.cust_id = shipment.cust_id where customer.annual_revenue < 1000000;
+
+c. select city_name , population from city inner join shipment on city.city_name = shipment.destination and shipment.weight>100;
+
+
+d. select cust_name from (select sum(weight) as k,shipment.cust_id,customer.annual_revenue, customer.cust_name from shipment inner join customer where customer.cust_id = shipment.cust_id group by shipment.cust_id)x where x.annual_revenue > 500000 and x.k<1;
+
+e. select distinct customer.cust_name from customer inner join shipment on customer.cust_id = shipment.cust_id where (shipment.weight < 1 or shipment.destination = 'San Francisco') and customer.annual_revenue > 5000000;
+
+
+f.select distinct truck.driver_name from truck where truck_no in (select truck_no from shipment where desination in (select city_name from city where population > 1000000) and cust_id in (select cust_id from customer where annual_revenue > 2000000));
+
+
+g.select distinct destination from customer inner join shipment where customer.cust_id = shipment.cust_id and customer .annual_revenue  > 1500000;
+
+h. select driver_name from truck where truck_no in (select distinct truck_no from shipment where weight>100);
+
+i. select cust_name,annual_revenue from customer where cust_id in(select cust_id from shipment where weight > 100);
+
+j. select distinct cust_name, annual_revenue from customer inner join shipment where customer.cust_id = shipment. cust_id and shipment.truck_no in(select truck_no from truck where driver_name = 'Jensen');
+
+k. select distinct cust_name from customer where (select count(truck_no) from truck) = (select count(distinct truck_no) from shipment where shipment.cust_id = customer.cust_id);
+
+l.select distinct city.city_name from city where (select count(cust_id) from customer) = (select count(distinct shipment.cust_id) from shipment where shipment.destination = city.city_name);
+
+m.select distinct truck.driver_name from truck where (select count(city_name) from city) = (select count(distinct shipment.destination) from shipment where shipment.truck_no = truck.truck_no);
+
+n. select distinct cust_name from customer inner join shipment where shipment.cust_id = customer.cust_id and (shipment. destination = 'St. Louis' or customer.cust_type = 'manufacturer'); 
+
+o. select city_name from city inner join shipment on city.city_name = shipment.destination and city.population > 1000000 and shipment.cust_id = 311 and shipment.weight = 100;
+
+p. select * from shipment where truck_no in(select truck_no from truck where driver_name ='Jake Stinson') and destination != 'Denver'; 
+
+q.select cust_name from customer where annual_revenue > 10000000 and EXISTS (select * from shipment inner join city on shipment.destination = city.city_name where city.population < 10000 and shipment.weight < 1 and customer.cust_id = shipment.cust_id);
+
+r.a create view customers_under_million_revenue as select distinct cust_name from customer where annual_revenue < 1000000;
+
+r.b create view customers_between_one_and_five_million as select distinct cust_name from customer where annual_revenue >= 1000000 and annual_revenue <= 5000000;
+
+r.c create view customers_above_5_million as select distinct cust_name from customer where annual_revenue > 5000000;
+
+s.a create view drivers_shipped_above_5_million_los_angeles as select distinct truck.driver_name from truck inner join shipment on truck.truck_no = shipment.truck_no where shipment.destination = 'Los Angeles' and shipment.cust_id in (select cust_id from customer where annual_revenue > 5000000);
+
+s.b create view population_city_shipments_from_one_to_five_million as select distinct city.population from city inner join shipment on city.city_name = shipment.destination where shipment.cust_id in (select cust_id from customer where annual_revenue >= 1000000 and annual_revenue <= 5000000);
+
+s.c create view truck_driver_and_population_below_one_million as select distinct truck.driver_name, city.population from (((truck inner join shipment on truck.truck_no = shipment.truck_no) inner join customer on shipment.cust_id = customer.cust_id) inner join city on shipment.destination = city.city_name) where customer.annual_revenue < 1000000;
