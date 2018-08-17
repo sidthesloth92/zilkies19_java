@@ -37,8 +37,7 @@ public class CaptainLog {
 
 	public static void main(String[] args) {
 
-		openFileReader(
-				"/home/joelkingsley/zilkies2019_java/joel_kingsley/CaptainOfShip/src/io/ztech/captainofship/assets/log.txt");
+		openFileReader("/home/joelkingsley/zilkies2019_java/joel_kingsley/CaptainOfShip/src/io/ztech/captainofship/assets/log.txt");
 
 		groupAList = new HashMap<>();
 		groupBList = new HashMap<>();

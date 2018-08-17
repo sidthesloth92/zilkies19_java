@@ -1,5 +1,6 @@
 package io.ztech.cricketapp.ui;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import io.ztech.cricketapp.beans.User;
@@ -10,6 +11,7 @@ import io.ztech.cricketapp.constants.MatchMenuOptions;
 import io.ztech.cricketapp.constants.PlayerMenuOptions;
 import io.ztech.cricketapp.constants.TeamMenuOptions;
 import io.ztech.cricketapp.constants.UserMessages;
+import io.ztech.cricketapp.controller.MatchController;
 import io.ztech.cricketapp.controller.PlayerController;
 import io.ztech.cricketapp.controller.TeamController;
 
@@ -20,6 +22,8 @@ public class Menu {
 	TeamController teamController;
 	PlayerHandler playerHandler;
 	PlayerController playerController;
+	MatchHandler matchHandler;
+	MatchController matchController;
 	User user;
 	
 	public Menu(User user) {
@@ -28,32 +32,43 @@ public class Menu {
 		playerController = new PlayerController();
 		teamHandler = new TeamHandler();
 		teamController = new TeamController();
+		matchHandler = new MatchHandler();
+		matchController = new MatchController();
 		this.user = user;
 	}
 	
 	public void showMainMenu() {
+		char retry;
 		do {
-			System.out.println();
-			System.out.print(UserMessages.MAIN_MENU);
-			MainMenuOptions option = MainMenuOptions.values()[scanner.nextInt() - 1];
-			scanner.nextLine();
-			switch (option) {
-			case MATCHES:
-				showMatchMenu();
-				break;
-			case TEAMS:
-				showTeamMenu();
-				break;
-			case PLAYERS:
-				showPlayerMenu();
-				break;
-			case EXIT:
-				return;
-			default:
-				System.out.println(UserMessages.INVALID_CHOICE);
+			try {
+				retry = 'n';
+				System.out.println();
+				System.out.print(UserMessages.MAIN_MENU);
+				MainMenuOptions option = MainMenuOptions.values()[scanner.nextInt() - 1];
+				scanner.nextLine();
+				switch (option) {
+				case MATCHES:
+					showMatchMenu();
+					break;
+				case TEAMS:
+					showTeamMenu();
+					break;
+				case PLAYERS:
+					showPlayerMenu();
+					break;
+				case EXIT:
+					return;
+				default:
+					System.out.println(UserMessages.INVALID_CHOICE);
+				}
+				System.out.print(UserMessages.CONTINUE);
+				retry = scanner.nextLine().charAt(0);
+			} catch (InputMismatchException e) {
+				System.out.println(UserMessages.INCORRECT_INPUT + e);
+				retry = 'y';
+				scanner.nextLine();
 			}
-			System.out.print(UserMessages.CONTINUE);
-		} while (Character.toLowerCase(scanner.nextLine().charAt(0)) == 'y');
+		} while (Character.toLowerCase(retry) == 'y');
 	}
 	
 	public void showMatchMenu() {
@@ -63,16 +78,16 @@ public class Menu {
 			scanner.nextLine();
 			switch (option) {
 			case PLAY_MATCH:
-				//MatchService.playMatch();
+				matchHandler.playMatch(user);
 				break;
 			case VIEW_MATCHES:
-				//MatchService.displayMatches();
+				matchController.displayMatches(user);
 				break;
 			case EDIT_MATCH:
 				//MatchService.editMatch();
 				break;
 			case CREATE_MATCH:
-				//MatchControlloer.createMatch();
+				matchHandler.createMatch(user);
 				break;
 			default:
 				System.out.println(UserMessages.INVALID_CHOICE);

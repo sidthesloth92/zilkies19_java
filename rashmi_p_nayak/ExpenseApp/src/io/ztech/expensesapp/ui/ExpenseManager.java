@@ -1,10 +1,9 @@
 package io.ztech.expensesapp.ui;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collector;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import io.ztech.expensesapp.beans.Expense;
@@ -21,9 +20,9 @@ import io.ztech.expensesapp.constants.GroupOptions;
 import io.ztech.expensesapp.constants.MainMenuOptions;
 import io.ztech.expensesapp.constants.RegexConstants;
 import io.ztech.expensesapp.constants.StartUpMenuOptions;
+import io.ztech.expensesapp.exceptions.CouldNotAddMembersException;
 import io.ztech.expensesapp.exceptions.LoginFailedException;
 import io.ztech.expensesapp.exceptions.UsernameAlreadyExistsException;
-import io.ztech.expensesapp.dao.ExpenseDAO;
 import io.ztech.expensesapp.services.ExpenseService;
 
 public class ExpenseManager {
@@ -32,18 +31,20 @@ public class ExpenseManager {
 	User activeUser;
 	ExpenseService expenseService;
 	Group activeGroup;
+	Logger logger;
 
 	public ExpenseManager() {
 		in = new Scanner(System.in);
 		validator = new Validator();
 		expenseService = new ExpenseService();
+		logger = Logger.getLogger(ExpenseManager.class.getName());
 
 	}
 
 	public void startUpMenu() {
 		while (true) {
 			try {
-				System.out.println(DisplayConstants.STARTUP_MENU);
+				logger.info(DisplayConstants.STARTUP_MENU);
 				int choice = in.nextInt();
 				StartUpMenuOptions option = StartUpMenuOptions.values()[choice - 1];
 				switch (option) {
@@ -54,13 +55,13 @@ public class ExpenseManager {
 					logIn();
 					break;
 				default: {
-					System.out.println(DisplayConstants.ENTER_VALID_CHOICE);
+					logger.info(DisplayConstants.ENTER_VALID_CHOICE);
 
 				}
 				}
 			} catch (Exception e) {
 				// e.printStackTrace();
-				System.out.println(DisplayConstants.INVALID_INPUT);
+				logger.info(DisplayConstants.INVALID_INPUT);
 				in.nextLine();
 
 			}
@@ -71,24 +72,24 @@ public class ExpenseManager {
 	public void signUp() {
 		while (true) {
 			try {
-				System.out.println();
-				System.out.println(DisplayConstants.ENTER_USERNAME);
+				logger.info("\n");
+				logger.info(DisplayConstants.ENTER_USERNAME);
 				String userName = in.next();
-				System.out.println(DisplayConstants.ENTER_EMAILID);
+				logger.info(DisplayConstants.ENTER_EMAILID);
 				String emailId = in.next();
 				if (!validator.isValidated(emailId, RegexConstants.EMAIL_REGEX)) {
-					System.out.println(DisplayConstants.INVALID_EMAILID);
+					logger.info(DisplayConstants.INVALID_EMAILID);
 					continue;
 				}
-				System.out.println(DisplayConstants.ENTER_NEW_PASSWORD);
+				logger.info(DisplayConstants.ENTER_NEW_PASSWORD);
 				String password = in.next();
-				System.out.println(DisplayConstants.CONFIRM_PASSWORD);
+				logger.info(DisplayConstants.CONFIRM_PASSWORD);
 				String confirmPassword = in.next();
 				if (!password.equals(confirmPassword) || password.length() < 6) {
-					System.out.println(DisplayConstants.PASSWORD_ERROR);
+					logger.info(DisplayConstants.PASSWORD_ERROR);
 					continue;
 				}
-				System.out.println(DisplayConstants.ADD_EXPENSE_LIMIT);
+				logger.info(DisplayConstants.ADD_EXPENSE_LIMIT);
 				float expenseLimit = in.nextFloat();
 				User user = new User();
 				user.setEmailId(emailId);
@@ -97,14 +98,15 @@ public class ExpenseManager {
 				user.setExpenseLimit(expenseLimit);
 
 				expenseService.signUp(user);
+				logger.info(DisplayConstants.SUCCESSFUL_SIGNUP);
 				break;
 
 			} catch (InputMismatchException e) {
 				// e.printStackTrace();
-				System.out.println(DisplayConstants.INVALID_INPUT);
+				logger.info(DisplayConstants.INVALID_INPUT);
 				in.nextLine();
 			} catch (UsernameAlreadyExistsException e) {
-				System.out.println(e.getMessage());
+				logger.info(e.getMessage());
 
 			}
 		}
@@ -114,23 +116,24 @@ public class ExpenseManager {
 		while (true) {
 			User user = new User();
 			try {
-				System.out.println(DisplayConstants.ENTER_USERNAME_EMAIL);
+				logger.info(DisplayConstants.ENTER_USERNAME_EMAIL);
 				String input = in.next();
-				System.out.println(DisplayConstants.ENTER_PASSWORD);
+				logger.info(DisplayConstants.ENTER_PASSWORD);
 				String password = in.next();
 				user.setUserName(input);
 				user.setPassword(password);
 				activeUser = expenseService.logIn(user);
+				logger.info(DisplayConstants.SUCCESSFUL_LOGIN);
 				mainMenu();
 				return;
 			} catch (InputMismatchException e) {
 				// e.printStackTrace();
-				System.out.println(DisplayConstants.INVALID_INPUT);
+				logger.info(DisplayConstants.INVALID_INPUT);
 				in.nextLine();
 
 			} catch (LoginFailedException e) {
-				System.out.println(e.getMessage());
-
+				logger.info(e.getMessage());
+				return;
 			}
 		}
 	}
@@ -138,8 +141,8 @@ public class ExpenseManager {
 	public void mainMenu() {
 		while (true) {
 			try {
-				System.out.println();
-				System.out.println(DisplayConstants.MAIN_MENU);
+				logger.info("\n");
+				logger.info(DisplayConstants.MAIN_MENU);
 				int choice = in.nextInt();
 				MainMenuOptions option = MainMenuOptions.values()[choice - 1];
 				switch (option) {
@@ -156,13 +159,13 @@ public class ExpenseManager {
 					activeUser = null;
 					return;
 				default: {
-					System.out.println(DisplayConstants.ENTER_VALID_CHOICE);
+					logger.info(DisplayConstants.ENTER_VALID_CHOICE);
 
 				}
 				}
 			} catch (Exception e) {
 				// e.printStackTrace();
-				System.out.println(DisplayConstants.INVALID_INPUT);
+				logger.info(DisplayConstants.INVALID_INPUT);
 				in.nextLine();
 
 			}
@@ -172,7 +175,7 @@ public class ExpenseManager {
 	public void myExpenses() {
 		while (true) {
 			try {
-				System.out.println(DisplayConstants.MY_EXPENSE_OPTIONS);
+				logger.info(DisplayConstants.MY_EXPENSE_OPTIONS);
 				int choice = in.nextInt();
 				ExpenseMenuOptions option = ExpenseMenuOptions.values()[choice - 1];
 				switch (option) {
@@ -180,6 +183,7 @@ public class ExpenseManager {
 					Expense expense = new Expense();
 					addNewExpense(expense, activeUser.getuId());
 					expenseService.addNewExpense(expense);
+					logger.info(DisplayConstants.EXPENSE_ADDED);
 					break;
 				case SHOW_EXPENSES:
 					showAllExpenses();
@@ -187,12 +191,12 @@ public class ExpenseManager {
 				case BACK:
 					return;
 				default: {
-					System.out.println(DisplayConstants.ENTER_VALID_CHOICE);
+					logger.info(DisplayConstants.ENTER_VALID_CHOICE);
 				}
 				}
 			} catch (InputMismatchException e) {
 				e.printStackTrace();
-				System.out.println(DisplayConstants.INVALID_INPUT);
+				logger.info(DisplayConstants.INVALID_INPUT);
 				in.nextLine();
 
 			}
@@ -202,7 +206,7 @@ public class ExpenseManager {
 	public void myGroups() {
 		while (true) {
 			try {
-				System.out.println(DisplayConstants.GROUP_MENU);
+				logger.info(DisplayConstants.GROUP_MENU);
 				int choice = in.nextInt();
 				GroupMenuOptions option = GroupMenuOptions.values()[choice - 1];
 				switch (option) {
@@ -215,12 +219,12 @@ public class ExpenseManager {
 				case BACK:
 					return;
 				default: {
-					System.out.println(DisplayConstants.ENTER_VALID_CHOICE);
+					logger.info(DisplayConstants.ENTER_VALID_CHOICE);
 				}
 				}
 			} catch (InputMismatchException e) {
 				e.printStackTrace();
-				System.out.println(DisplayConstants.INVALID_INPUT);
+				logger.info(DisplayConstants.INVALID_INPUT);
 				in.nextLine();
 			}
 		}
@@ -228,22 +232,25 @@ public class ExpenseManager {
 
 	public void viewGroups() {
 		activeUser.setGroups(expenseService.viewGroups(activeUser).getGroups());
-		System.out.println("G_ID  GROUP NAME");
-		System.out.println("----------------");
+		if (activeUser.getGroups().size() == 0) {
+			logger.info(DisplayConstants.GROUPS_EMPTY);
+			return;
+		}
+		logger.info(DisplayConstants.GROUP_HEADING);
 		for (Group group : activeUser.getGroups()) {
-			System.out.printf("%-4d  %s\n",group.getgId(),group.getGroupName());
+			logger.info(group.getgId() + " " + group.getGroupName());
 
 		}
 		List<Group> currentGroup;
 		while (true) {
-			System.out.println("Enter group ID to enter group, enter 0 to go back: ");
+			logger.info(DisplayConstants.ENTER_GID);
 			int choice = in.nextInt();
 			if (choice == 0)
 				return;
 			currentGroup = activeUser.getGroups().stream().filter(group -> group.getgId() == choice)
 					.collect(Collectors.toList());
 			if (currentGroup.isEmpty()) {
-				System.out.println(DisplayConstants.ENTER_VALID_CHOICE);
+				logger.info(DisplayConstants.ENTER_VALID_CHOICE);
 				continue;
 			}
 			break;
@@ -255,15 +262,7 @@ public class ExpenseManager {
 	public void enterGroup() {
 		while (true) {
 			try {
-				System.out.println("====================			   \n"
-						         + "     "+activeGroup.getGroupName()+"\n"
-						         + "====================			   \n"
-						         + "1.Add Expense 					   \n"
-						         + "2.View Expenses 				   \n"
-						         + "3.View Balances                    \n"
-						         + "4.View Members                     \n"
-						         + "5.Go Back                          \n"
-						         + "Enter choice:");
+				logger.info(DisplayConstants.GROUP_OPTIONS);
 				int choice = in.nextInt();
 				GroupOptions option = GroupOptions.values()[choice - 1];
 				switch (option) {
@@ -273,16 +272,17 @@ public class ExpenseManager {
 				case VIEW_EXPENSES:
 					viewGroupExpenses();
 					break;
-				case VIEW_BALANCES: // viewBalances
+				case VIEW_BALANCES:
+					viewBalances();
 					break;
 				case VIEW_MEMBERS:
-					viewMembers();// view members
+					viewMembers();
 					break;
 				case BACK:
 					activeGroup = null;
 					return;
 				default: {
-					System.out.println(DisplayConstants.ENTER_VALID_CHOICE);
+					logger.info(DisplayConstants.ENTER_VALID_CHOICE);
 
 				}
 				}
@@ -295,42 +295,44 @@ public class ExpenseManager {
 	}
 
 	public void viewMembers() {
-		System.out.println("U_ID  USERNAME");
+		logger.info(DisplayConstants.GROUP_MEMBER_HEADING);
 		for (User user : activeGroup.getUsers()) {
-			System.out.printf("%-4d  %s\n",user.getuId() , user.getUserName());
+			logger.info(user.getuId() + " " + user.getUserName());
 		}
 	}
 
 	public void viewGroupExpenses() {
 		Group group = expenseService.viewGroupExpenses(activeGroup);
-		System.out.println("=============================");
-		System.out.println("   GROUP EXPENSE ACTIVITY    ");
-		System.out.println("=============================");
-		System.out.println();
+		if (group.getGroupPayments().isEmpty()) {
+			logger.info(DisplayConstants.EXPENSES_EMPTY);
+			return;
+		}
+		logger.info(DisplayConstants.GROUP_EXPENSE_HEADING);
 		for (GroupPayment groupPayment : group.getGroupPayments()) {
-			System.out
-					.println  ("Expense paid by : " + groupPayment.getExpenseMembers().stream().filter(member -> member.getuId() == groupPayment.getuId()).findAny().get().getUserName());
-			System.out.println("Amount          : " + groupPayment.getAmount());
-			System.out.println("Description     : " + groupPayment.getDescription());
+			logger.info(DisplayConstants.EXPENSE_PAID_BY + groupPayment.getExpenseMembers().stream()
+					.filter(member -> member.getuId() == groupPayment.getuId()).findAny().get().getUserName());
+			logger.info(DisplayConstants.AMOUNT + groupPayment.getAmount());
+			logger.info(DisplayConstants.DESCRIPTION + groupPayment.getDescription());
+			logger.info(DisplayConstants.LAST_UPDATED_AT + groupPayment.getUpdatedAt());
 			boolean involved = false;
 			for (ExpenseMember member : groupPayment.getExpenseMembers()) {
 				if (activeUser.getuId() == member.getuId()) {
 					involved = true;
-					System.out.print("You ");
 					if (activeUser.getuId() == groupPayment.getuId())
-						System.out.println("lent        : " + (groupPayment.getAmount() - member.getAmountPaid()));
+						logger.info(DisplayConstants.YOU_LENT + (groupPayment.getAmount() - member.getAmountPaid()));
 
 					else
-						System.out.println("borrowed    : " + member.getAmountPaid());
-					System.out.println("Status          : " + (member.isPending() ? "Not Settled" : "Settled"));
-					System.out.println();
+						logger.info(DisplayConstants.YOU_BORROWED + member.getAmountPaid());
+					logger.info(DisplayConstants.STATUS
+							+ (member.isPending() ? DisplayConstants.NOT_SETTLED : DisplayConstants.SETTLED));
+					logger.info("\n");
 				}
-				
+
 			}
-			if(!involved)
-				System.out.println("You were not involved in this expense.");
+			if (!involved)
+				logger.info(DisplayConstants.NOT_INVOLVED);
 		}
-		System.out.println();
+		logger.info("\n");
 	}
 
 	public void addGroupExpense() {
@@ -338,10 +340,10 @@ public class ExpenseManager {
 			GroupPayment groupPayment = new GroupPayment();
 			try {
 				ExpenseMember member = new ExpenseMember();
-				System.out.println("Payment made by (Enter username) :");
+				logger.info(DisplayConstants.PAYMENT_MADE_BY);
 				String payer = in.next();
 				if (!activeGroup.getUsers().stream().anyMatch(user -> user.getUserName().compareTo(payer) == 0)) {
-					System.out.println("Enter username of existing member!");
+					logger.info(DisplayConstants.ENTER_EXISTING_USERNAME);
 					continue;
 				}
 				member.setUserName(payer);
@@ -351,32 +353,35 @@ public class ExpenseManager {
 				groupPayment.setuId(user.getuId());
 				groupPayment.setgId(activeGroup.getgId());
 				addNewExpense(groupPayment, user.getuId());
-				System.out.println("Enter no.of people to split between (excluding payer):");
+				logger.info(DisplayConstants.NO_OF_PEOPLE_TO_SPLIT);
 				int noOfMembers = in.nextInt();
 				while (noOfMembers > 0) {
 					member = new ExpenseMember();
-					System.out.println("Enter username : ");
+					logger.info(DisplayConstants.ENTER_USERNAME_EMAIL);
 					String memberUserName = in.next();
 					if (!activeGroup.getUsers().stream()
 							.anyMatch(users -> users.getUserName().compareTo(memberUserName) == 0)) {
-						System.out.println("Enter username of existing member!");
+						logger.info(DisplayConstants.ENTER_EXISTING_USERNAME);
 						continue;
 					}
 					if (memberUserName.compareTo(payer) == 0) {
-						System.out.println("Enter member apart from payer!");
+						logger.info(DisplayConstants.ENTER_APART_FROM_PAYER);
 						continue;
 					}
 					member.setUserName(memberUserName);
 					groupPayment.getExpenseMembers().add(member);
 					noOfMembers--;
 				}
-				System.out.println("Enter 1 to split unequally, anything else to split equally:");
+				logger.info(DisplayConstants.SPLIT_EQUAL_UNEQUAL);
 				int choice = in.nextInt();
 				if (choice != 1) {
 					for (ExpenseMember expenseMember : groupPayment.getExpenseMembers()) {
 						if (expenseMember.getUserName().compareTo(user.getUserName()) == 0) {
 							expenseMember.setPending(false);
-							expenseMember.setAmountPaid(groupPayment.getAmount() - expenseMember.getTotalAmount());
+							expenseMember
+									.setAmountPaid(groupPayment.getAmount() / groupPayment.getExpenseMembers().size());
+							expenseMember
+									.setTotalAmount(groupPayment.getAmount() / groupPayment.getExpenseMembers().size());
 
 						} else {
 							expenseMember.setPending(true);
@@ -390,7 +395,7 @@ public class ExpenseManager {
 					while (true) {
 						int totalAmount = 0;
 						for (ExpenseMember expenseMember : groupPayment.getExpenseMembers()) {
-							System.out.println("Enter amount for uId : " + expenseMember.getuId());
+							logger.info(DisplayConstants.ENTER_AMOUNT_FOR + expenseMember.getUserName());
 							int amount = in.nextInt();
 							if (expenseMember.getuId() == user.getuId()) {
 								expenseMember.setPending(false);
@@ -406,7 +411,7 @@ public class ExpenseManager {
 							totalAmount += amount;
 						}
 						if (totalAmount != groupPayment.getAmount()) {
-							System.out.println("Amount does not tally, please check your math!");
+							logger.info(DisplayConstants.AMOUNT_DOESNT_TALLY);
 							continue;
 						}
 						break;
@@ -417,13 +422,13 @@ public class ExpenseManager {
 			} catch (InputMismatchException e) {
 				e.printStackTrace();
 				in.nextLine();
-				System.out.println(DisplayConstants.INVALID_INPUT);
-			} finally {
-
-				expenseService.addNewExpense(groupPayment);
-				expenseService.addExpenseMembers(groupPayment);
-				break;
+				logger.info(DisplayConstants.INVALID_INPUT);
 			}
+			expenseService.addNewExpense(groupPayment);
+			expenseService.addExpenseMembers(groupPayment);
+			logger.info(DisplayConstants.EXPENSE_ADDED);
+			break;
+
 		}
 	}
 
@@ -431,29 +436,40 @@ public class ExpenseManager {
 		while (true) {
 			try {
 				Group group = new Group();
-				System.out.println(DisplayConstants.ENTER_GROUP_NAME);
+				logger.info(DisplayConstants.ENTER_GROUP_NAME);
 				in.nextLine();
 				String groupName = in.nextLine();
-				System.out.println(DisplayConstants.ENTER_NO_OF_MEMBERS);
+				logger.info(DisplayConstants.ENTER_NO_OF_MEMBERS);
 				int noOfMembers = in.nextInt();
+				if (noOfMembers > 10) {
+					logger.info(DisplayConstants.TOO_MANY_MEMBERS);
+					continue;
+				}
 				in.nextLine();
-				System.out.println("Enter usernames of " + noOfMembers + " members (excluding you):");
+				logger.info(DisplayConstants.ENTER_GROUP_MEMBERS);
 				group.setGroupName(groupName);
 				group.getUsers().add(activeUser);
+				User user;
 				while (noOfMembers-- > 0) {
 					String userName = in.next();
-					User user = new User();
-					user.setUserName(userName); // CHANGE TO USERNAME
+					user = new User();
+					user.setUserName(userName);
 					group.getUsers().add(user);
 				}
+
 				activeUser.getGroups().add(group);
 				expenseService.createGroups(activeUser);
+
 				break;
 			} catch (InputMismatchException e) {
 				// e.printStackTrace();
 				in.nextLine();
-				System.out.println(DisplayConstants.INVALID_INPUT);
+				logger.info(DisplayConstants.INVALID_INPUT);
 
+			} catch (CouldNotAddMembersException e) {
+				logger.info(DisplayConstants.GROUP_CREATED);
+				logger.info(e.getMessage());
+				break;
 			}
 		}
 	}
@@ -461,13 +477,14 @@ public class ExpenseManager {
 	public void editExpenseLimit() {
 		while (true) {
 			try {
-				System.out.println("Enter new expense limit: ");
+				logger.info(DisplayConstants.NEW_EXPENSE_LIMIT);
 				float expenseLimit = in.nextInt();
 				activeUser.setExpenseLimit(expenseLimit);
 				expenseService.editExpenseLimit(activeUser);
+				logger.info(DisplayConstants.EXPENSE_LIMIT_UPDATED);
 				break;
 			} catch (InputMismatchException e) {
-				System.out.println(DisplayConstants.INVALID_INPUT);
+				logger.info(DisplayConstants.INVALID_INPUT);
 				in.nextLine();
 			}
 		}
@@ -476,27 +493,31 @@ public class ExpenseManager {
 	public void addNewExpense(Expense expense, int uId) {
 		while (true) {
 			try {
-				System.out.println(DisplayConstants.ENTER_AMOUNT);
+				logger.info(DisplayConstants.ENTER_AMOUNT);
 				int amount = in.nextInt();
-				System.out.println(DisplayConstants.CATEGORY_TYPES);
+				if (amount < 1) {
+					logger.info(DisplayConstants.INVALID_INPUT);
+					continue;
+				}
+				logger.info(DisplayConstants.CATEGORY_TYPES);
 				int categoryChoice = in.nextInt();
 				int categoryOptionSize = CategoryOptions.values().length;
 				if (categoryChoice < 0 || categoryChoice > categoryOptionSize) {
-					System.out.println(DisplayConstants.ENTER_VALID_CHOICE);
+					logger.info(DisplayConstants.ENTER_VALID_CHOICE);
 					continue;
 				}
-				System.out.println(DisplayConstants.EXPENSE_TYPES);
+				logger.info(DisplayConstants.EXPENSE_TYPES);
 				int typeChoice = in.nextInt();
 				int expenseOptionSize = ExpenseOptions.values().length;
 				if (typeChoice < 0 || typeChoice > expenseOptionSize) {
-					System.out.println(DisplayConstants.ENTER_VALID_CHOICE);
+					logger.info(DisplayConstants.ENTER_VALID_CHOICE);
 					continue;
 				}
 				in.nextLine();
-				System.out.println(DisplayConstants.ENTER_DESCRIPTION);
+				logger.info(DisplayConstants.ENTER_DESCRIPTION);
 				String description = in.nextLine();
 				if (description.length() > 100) {
-					System.out.println("Enter upto 100 characters!");
+					logger.info(DisplayConstants.ENTER_100_CHARACTERS);
 					continue;
 				}
 				expense.setuId(uId);
@@ -508,7 +529,7 @@ public class ExpenseManager {
 
 			} catch (InputMismatchException e) {
 				// e.printStackTrace();
-				System.out.println(DisplayConstants.INVALID_INPUT);
+				logger.info(DisplayConstants.INVALID_INPUT);
 				in.nextLine();
 
 			}
@@ -521,36 +542,53 @@ public class ExpenseManager {
 		int i = 0;
 		float groupTotalAmount = 0, personalTotalAmount = 0;
 		Expense expense;
-		System.out.println("Group Expenditures\n"
-				         + "================== ");
-		System.out.println("AMOUNT      DESCRIPTION           CATEGORY    TYPE      ");
-		System.out.println("--------------------------------------------------------");
-		while(i < activeUser.getExpenses().size() && (expense = activeUser.getExpenses().get(i)) instanceof GroupPayment) {
-			System.out.printf("%-10.2f  %-20s  %-10s  %-10s\n",expense.getAmount(),expense.getDescription(),expense.getCategory(),expense.getType());
+		if (activeUser.getExpenses().isEmpty()) {
+			logger.info(DisplayConstants.EXPENSES_EMPTY);
+			return;
+		}
+		logger.info(DisplayConstants.GROUP_EXPENSE_HEADING);
+		logger.info(DisplayConstants.EXPENSE_HEADING);
+		logger.info(DisplayConstants.LINE);
+		while (i < activeUser.getExpenses().size()
+				&& (expense = activeUser.getExpenses().get(i)) instanceof GroupPayment) {
+			logger.info(expense.getAmount() + " " + expense.getDescription() + " " + expense.getCategory() + " "
+					+ expense.getType() + " " + expense.getCreatedAt() + " " + expense.getUpdatedAt() + "\n");
 			i++;
 			groupTotalAmount += expense.getAmount();
 		}
-		System.out.println("Total Group Expenditure: "+groupTotalAmount);
-		System.out.println();
-		System.out.println("Personal Expenditures\n"
-						 + "=====================");
-		System.out.println("AMOUNT      DESCRIPTION           CATEGORY    TYPE      ");
-		System.out.println("--------------------------------------------------------");
-		while(i < activeUser.getExpenses().size() && (expense = activeUser.getExpenses().get(i)) instanceof Expense) {
-			System.out.printf("%-10.2f  %-20s  %-10s  %-10s\n",expense.getAmount(),expense.getDescription(),expense.getCategory(),expense.getType());
+		logger.info(DisplayConstants.TOTAL_GROUP_EXPENSE + groupTotalAmount);
+		logger.info("\n");
+		logger.info(DisplayConstants.PERSONAL_EXPENSE_HEADING);
+		logger.info(DisplayConstants.EXPENSE_HEADING);
+		logger.info(DisplayConstants.LINE);
+		while (i < activeUser.getExpenses().size() && (expense = activeUser.getExpenses().get(i)) instanceof Expense) {
+			logger.info(expense.getAmount() + " " + expense.getDescription() + " " + expense.getCategory() + " "
+					+ expense.getType() + " " + expense.getCreatedAt() + " " + expense.getUpdatedAt() + "\n");
 			i++;
 			personalTotalAmount += expense.getAmount();
 		}
-		System.out.println("Total Personal Expenditure: "+personalTotalAmount);
-		System.out.println();
-		System.out.println("Total Expenditure: "+(groupTotalAmount+personalTotalAmount));
-		System.out.println();
-		float percent = ((groupTotalAmount+personalTotalAmount)/activeUser.getExpenseLimit())*100;
-		System.out.println("You have reached "+percent+"% of your total expense limit!");
+		logger.info(DisplayConstants.TOTAL_PERSONAL_EXPENSE + personalTotalAmount);
+		logger.info("\n");
+		logger.info(DisplayConstants.TOTAL_EXPENSE + (groupTotalAmount + personalTotalAmount));
+		logger.info("\n");
+		float percent = ((groupTotalAmount + personalTotalAmount) / activeUser.getExpenseLimit()) * 100;
+		logger.info(DisplayConstants.YOU_HAVE_REACHED + percent + DisplayConstants.PERCENT_OF_LIMIT);
+		logger.info(DisplayConstants.EXPENSE_LIMIT + activeUser.getExpenseLimit());
 	}
 
-	public static void main(String[] args) {
-		new ExpenseManager().startUpMenu();
-
+	public void viewBalances() {
+		try {
+			GroupPayment groupPayment = expenseService.viewBalances(activeGroup);
+			for (ExpenseMember member : groupPayment.getExpenseMembers()) {
+				logger.info(member.getUserName());
+				float amount;
+				logger.info(
+						((amount = member.getTotalAmount()) < 0 ? DisplayConstants.GETS_BACK : DisplayConstants.OWES)
+								+ Math.abs(amount));
+				logger.info("\n");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

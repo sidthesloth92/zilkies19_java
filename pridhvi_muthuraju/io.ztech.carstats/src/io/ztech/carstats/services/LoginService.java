@@ -7,15 +7,15 @@ public class LoginService {
 
 	LoginDelegate loginDelegate = new LoginDelegate();
 
-	public boolean login() {
-		return loginDelegate.logoutLogin(true);
+	public boolean login(User user) {
+		return loginDelegate.logoutLogin(true,user);
 	}
 
-	public boolean logout() {
-		return loginDelegate.logoutLogin(false);
+	public boolean logout(User user) {
+		return loginDelegate.logoutLogin(false,user);
 	}
 
 	public boolean signup(User user) {
-		return loginDelegate.signup(user) && this.logout();
+		return loginDelegate.signup(user) && this.logout(user);
 	}
 }

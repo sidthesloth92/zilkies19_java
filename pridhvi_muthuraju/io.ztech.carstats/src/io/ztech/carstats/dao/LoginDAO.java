@@ -16,8 +16,10 @@ public class LoginDAO {
 	private Connection con = null;
 	private PreparedStatement pst = null;
 
-	public boolean logoutLogin(Boolean flag) {
+	public boolean logoutLogin(Boolean flag, User user) {
 		User.setLoginStatus(flag);
+		if (!flag)
+			user.setAdminStatus("");
 		return true;
 	}
 
