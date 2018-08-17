@@ -22,12 +22,12 @@ public class DbConfig {
 		return connection;
 	}
 
-	public void closeConnection(Connection connection,PreparedStatement preparedStatement,ResultSet resultSet) {
+	public void closeConnection(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet) {
 		try {
-			if(preparedStatement!=null) {
-				preparedStatement =null;
+			if (preparedStatement != null) {
+				preparedStatement = null;
 			}
-			if(resultSet != null) {
+			if (resultSet != null) {
 				resultSet.close();
 			}
 			if (connection != null) {

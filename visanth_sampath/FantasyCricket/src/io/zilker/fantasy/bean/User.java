@@ -3,7 +3,7 @@ package io.zilker.fantasy.bean;
 public class User {
 	private String userName, email, password;
 	private int userId, totalPointsObtained, type;
-	
+
 	// setters
 	public void setUser(String userName, String email, String password, int type, int totalPointsObtained) {
 		this.userName = userName;
@@ -12,9 +12,11 @@ public class User {
 		this.type = type;
 		this.totalPointsObtained = totalPointsObtained;
 	}
+
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
 	// getter returns user Name
 	public String getUserName() {
 		return userName;

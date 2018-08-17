@@ -11,6 +11,7 @@ import io.zilker.fantasy.bean.Player;
 import io.zilker.fantasy.bean.ResultBoard;
 import io.zilker.fantasy.bean.UserPickedTeam;
 import io.zilker.fantasy.constants.SqlConstants;
+import io.zilker.fantasy.service.AdminService;
 import io.zilker.fantasy.service.UserService;
 
 public class UserDAO {
@@ -66,9 +67,11 @@ public class UserDAO {
 	// display active matches
 	public void displayActiveMatches() {
 		// TODO Auto-generated method stub
+		ArrayList<Match> matches = new ArrayList<Match>();
 		try {
 			AdminDAO adminDAO = new AdminDAO();
-			adminDAO.listActiveMatches();
+			matches = adminDAO.listActiveMatches();
+			new AdminService().displayMatchList(matches);
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -109,12 +112,16 @@ public class UserDAO {
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Player player = new Player();
-				player.setPlayer(resultSet.getString("player_name"), "team",resultSet.getString("type") , resultSet.getInt("rating"));
+				player.setPlayer(resultSet.getString("player_name"), "team", resultSet.getString("type"),
+						resultSet.getInt("rating"));
 				player.setPlayerId(resultSet.getInt("player_id"));
 				playersList.add(player);
-				/*userService.printPlayers(resultSet.getInt("player_id"), resultSet.getString("player_name"),
-						resultSet.getString("type"), resultSet.getInt("rating"));*/
-				
+				/*
+				 * userService.printPlayers(resultSet.getInt("player_id"),
+				 * resultSet.getString("player_name"), resultSet.getString("type"),
+				 * resultSet.getInt("rating"));
+				 */
+
 			}
 		} catch (Exception e) {
 			e.getStackTrace();
@@ -168,9 +175,12 @@ public class UserDAO {
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Message message = new Message();
-				message.setMessage(resultSet.getString("users.user_name"), resultSet.getString("message"), resultSet.getString("inserted_time"));
-				/*userService.printMessages(resultSet.getString("users.user_name"), resultSet.getString("message"),
-						resultSet.getString("inserted_time"));*/
+				message.setMessage(resultSet.getString("users.user_name"), resultSet.getString("message"),
+						resultSet.getString("inserted_time"));
+				/*
+				 * userService.printMessages(resultSet.getString("users.user_name"),
+				 * resultSet.getString("message"), resultSet.getString("inserted_time"));
+				 */
 				messages.add(message);
 			}
 		} catch (Exception e) {
@@ -181,9 +191,9 @@ public class UserDAO {
 		return messages;
 	}
 
-	public ArrayList <Player> displaySelectedTeam(int matchId, int userId) {
+	public ArrayList<Player> displaySelectedTeam(int matchId, int userId) {
 		// TODO Auto-generated method stub
-		ArrayList <Player> playersList = new ArrayList<Player> ();
+		ArrayList<Player> playersList = new ArrayList<Player>();
 		try {
 			connection = dbConfig.getConnection();
 			preparedStatement = connection.prepareStatement(SqlConstants.PLAYER_SELECTED_TEAM);
@@ -192,7 +202,8 @@ public class UserDAO {
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Player player = new Player();
-				player.setPlayer(resultSet.getString("player_name"), "team", resultSet.getString("type") , resultSet.getInt("rating"));
+				player.setPlayer(resultSet.getString("player_name"), "team", resultSet.getString("type"),
+						resultSet.getInt("rating"));
 				player.setPlayerId(resultSet.getInt("player_id"));
 				playersList.add(player);
 			}
@@ -355,6 +366,32 @@ public class UserDAO {
 			dbConfig.closeConnection(connection, preparedStatement, resultSet);
 		}
 		return names;
+	}
+
+	public ResultBoard getPreviousResult(int userId) {
+		// TODO Auto-generated method stub
+		ArrayList<Integer> users = new ArrayList<Integer>();
+		ArrayList<Integer> matchPoints = new ArrayList<Integer>();
+		ArrayList<String> names = new ArrayList<String>();
+		ResultBoard resultBoard = new ResultBoard();
+		try {
+			connection = dbConfig.getConnection();
+			preparedStatement = connection.prepareStatement(SqlConstants.SELECT_PARTICULAR_RESULT_TABLE);
+			preparedStatement.setInt(1, userId);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				users.add(resultSet.getInt("user_id"));
+				names.add(resultSet.getString("user_name"));
+				matchPoints.add(resultSet.getInt("match_points"));
+			}
+			resultBoard.setResultBoard(users, names, matchPoints);
+		} catch (Exception e) {
+			e.getStackTrace();
+		} finally {
+			dbConfig.closeConnection(connection, preparedStatement, resultSet);
+		}
+
+		return resultBoard;
 	}
 
 }

@@ -11,25 +11,26 @@ public class AdminUI {
 	private int index;
 	private Scanner scanner = new Scanner(System.in);
 	private Logger logger = Logger.getLogger(AdminUI.class.getName());
-	public void printMatches(int matchId,String teamOne,String teamTwo) {
-		logger.info(matchId +" " +teamOne +" " +teamTwo+"\n");
+
+	public void printMatches(int matchId, String teamOne, String teamTwo) {
+		logger.info(matchId + " " + teamOne + " " + teamTwo + "\n");
 	}
-	
+
 	public int getIntInputs() {
 		return scanner.nextInt();
-		//return input;
+		// return input;
 	}
-	
+
 	public String getStringInputs() {
 		return scanner.next();
 	}
-	
-	//prints the available players
-	public void printPlayers(int PlayerId,String playerName,String role,int playerRating) {
-		logger.info(PlayerId +" " +playerName +" " +role+" "+playerRating+"\n");
+
+	// prints the available players
+	public void printPlayers(int PlayerId, String playerName, String role, int playerRating) {
+		logger.info(PlayerId + "	" + playerName + "	" + role + "	" + playerRating + "\n");
 	}
-	
-	//prints the alert messages
+
+	// prints the alert messages
 	public void displayAlert(String message) {
 		logger.info(message);
 	}
@@ -38,10 +39,11 @@ public class AdminUI {
 		// TODO Auto-generated method stub
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(DisplayConstants.MATCHES_TABLE_FORMAT);
-		for(index = 0;index < matchList.size();index++) {
-			stringBuilder.append(matchList.get(index).getMatchId()+" "+matchList.get(index).getTeamOne()+" "+matchList.get(index).getTeamTwo()+"\n");
+		for (index = 0; index < matchList.size(); index++) {
+			stringBuilder.append(matchList.get(index).getMatchId() + "	" + matchList.get(index).getTeamOne() + "	"
+					+ matchList.get(index).getTeamTwo() + "\n");
 		}
 		logger.info(stringBuilder.toString());
-		
+
 	}
 }
