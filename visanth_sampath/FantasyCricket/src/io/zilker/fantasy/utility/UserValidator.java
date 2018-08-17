@@ -1,4 +1,4 @@
-package io.zilker.fantasy.delegate;
+package io.zilker.fantasy.utility;
 
 import io.zilker.fantasy.bean.User;
 import io.zilker.fantasy.constants.DisplayConstants;
@@ -44,7 +44,7 @@ public class UserValidator {
 			adminUI.displayAlert(DisplayConstants.ENTER_PASSWORD);
 			String password = adminUI.getStringInputs();
 			User newUser = new User();
-			newUser.setUser(userName, email, password, 1, 0);
+			newUser.setUser(userName, email, password, 1);
 			isValid = newCRUDOperations.signupInsertion(newUser);
 		} catch (Exception e) {
 			e.getStackTrace();

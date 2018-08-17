@@ -1,10 +1,22 @@
-package io.zilker.fantasy.delegate;
+package io.zilker.fantasy.utility;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import io.zilker.fantasy.constants.RegexConstants;
 
 public class GeneralValidators {
+	
+	public boolean checkIntegerInputs(String string) {
+		 Pattern pattern = Pattern.compile(RegexConstants.INTEGER_VALIDATOR);
+	     Matcher matcher = pattern.matcher(string);
+	     if (!matcher.matches()) {
+	          return false;
+	     } else {
+	          return true;
+	     }
+	}
+	
 	public boolean checkVaildEmail(String email) {
 		String emailRegex = RegexConstants.EMAIL_VALIDATOR;
 		Pattern pat = Pattern.compile(emailRegex);
