@@ -58,7 +58,7 @@ public class UIClass {
 	public boolean putLoginUserUI() throws SQLException {
 
 		user.setAdminStatus(AppConstants.USER);
-		loginService.login();
+		loginService.login(user);
 		this.userMenu();
 		return true;
 	}
@@ -66,7 +66,7 @@ public class UIClass {
 	public boolean putLoginAdminUI() throws SQLException {
 
 		user.setAdminStatus(AppConstants.ADMIN);
-		loginService.login();
+		loginService.login(user);
 		this.adminMenu();
 		return true;
 	}
@@ -176,6 +176,10 @@ public class UIClass {
 
 	public boolean displayRatingUI() {
 		HashMap<String, Rating> ratings = fetchdetailsService.displayRating(specification);
+		if (ratings == null) {
+			logger.info("No Ratings!");
+			return false;
+		}
 		for (Map.Entry<String, Rating> entry : ratings.entrySet()) {
 			logger.info("Username:" + entry.getKey() + "\nRating:" + entry.getValue().getRating() + "\nReview:"
 					+ entry.getValue().getReview());
@@ -290,8 +294,10 @@ public class UIClass {
 
 	public boolean getRequests() {
 		ArrayList<Request> requests = requestCarService.getRequests(user);
-		if (requests == null)
+		if (requests == null) {
+			logger.info("No Pending Requests!");
 			return false;
+		}
 		for (Request request : requests) {
 			logger.info(request.getRequestId() + " " + request.getCarId() + " " + request.getUserName());
 		}
@@ -325,8 +331,14 @@ public class UIClass {
 
 	public boolean carMenu() throws SQLException {
 		while (true) {
-			logger.info("1.Ratings&Reviews\n2.Statistics\n3.Add Rating\n4.Main Menu");
-			int choice = sc.nextInt();
+			int choice = 0;
+			try {
+				logger.info("1.Ratings&Reviews\n2.Statistics\n3.Add Rating\n4.Main Menu");
+				choice = sc.nextInt();
+			} catch (Exception e) {
+				logger.info("Invalid Input! Try Again");
+				sc.nextLine();
+			}
 			switch (choice) {
 			case 1: {
 				this.displayRatingUI();
@@ -353,8 +365,14 @@ public class UIClass {
 
 	public boolean userMenu() throws SQLException {
 		while (true) {
-			logger.info("1.Car by Make\n2.Car by Type\n3.Request Add Car\n4.Show Pending Requests\n5.Logout");
-			int choice = sc.nextInt();
+			int choice = 0;
+			try {
+				logger.info("1.Car by Make\n2.Car by Type\n3.Request Add Car\n4.Show Pending Requests\n5.Logout");
+				choice = sc.nextInt();
+			} catch (Exception e) {
+				logger.info("Invalid Input! Try Again");
+				sc.nextLine();
+			}
 			switch (choice) {
 			case 1: {
 				this.clearAll(make, carType);
@@ -377,7 +395,7 @@ public class UIClass {
 			}
 			case 5: {
 				this.clearAll(make, carType);
-				loginService.logout();
+				loginService.logout(user);
 				return true;
 			}
 			}
@@ -386,8 +404,14 @@ public class UIClass {
 
 	public boolean adminMenu() throws SQLException {
 		while (true) {
-			logger.info("1.Add Car\n2.Delete Car\n3.Add Statistics\n4.Review Add Car Requests\n5.Logout");
-			int choice = sc.nextInt();
+			int choice = 0;
+			try {
+				logger.info("1.Add Car\n2.Delete Car\n3.Add Statistics\n4.Review Add Car Requests\n5.Logout");
+				choice = sc.nextInt();
+			} catch (Exception e) {
+				logger.info("Invalid Input! Try Again");
+				sc.nextLine();
+			}
 			switch (choice) {
 			case 1: {
 				this.clearAll(make, carType);
@@ -412,7 +436,7 @@ public class UIClass {
 			}
 			case 5: {
 				this.clearAll(make, carType);
-				loginService.logout();
+				loginService.logout(user);
 				return true;
 			}
 			}
@@ -421,9 +445,14 @@ public class UIClass {
 
 	public boolean mainMenu() throws SQLException {
 		while (true) {
-
-			logger.info("1.Car by Make\n2.Car by Type\n3.Login\n4.Signup\n5.Exit");
-			int choice = sc.nextInt();
+			int choice = 0;
+			try {
+				logger.info("1.Car by Make\n2.Car by Type\n3.Login\n4.Signup\n5.Exit");
+				choice = sc.nextInt();
+			} catch (Exception e) {
+				logger.info("Invalid Input! Try Again");
+				sc.nextLine();
+			}
 			switch (choice) {
 			case 1: {
 				this.clearAll(make, carType);

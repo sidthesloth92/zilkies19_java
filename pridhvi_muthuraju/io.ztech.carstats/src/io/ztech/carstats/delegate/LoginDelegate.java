@@ -6,8 +6,8 @@ import io.ztech.carstats.dao.LoginDAO;
 public class LoginDelegate {
 	LoginDAO loginDAO = new LoginDAO();
 
-	public boolean logoutLogin(Boolean flag) {
-		return loginDAO.logoutLogin(flag);
+	public boolean logoutLogin(Boolean flag,User user) {
+		return loginDAO.logoutLogin(flag,user);
 	}
 
 	public boolean signup(User user) {

@@ -77,7 +77,10 @@ public class FetchDetailsDAO {
 		} finally {
 			DBUtils.closeConnection(con, pst, res);
 		}
-		return ratings;
+		if (ratings.isEmpty())
+			return null;
+		else
+			return ratings;
 	}
 
 	public ArrayList<Statistics> displayStatistics(Specification specification) {
