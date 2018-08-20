@@ -1,8 +1,8 @@
 package io.zilker.application.logsession;
 
-public class UserLog {
-	public int USER_ID = 0;
-	public String userName = null;
+public class UserSession {
+	private int USER_ID = 0;
+	private String userName = null, userRoll = null;
 
 	public String getUserName() {
 		return userName;
@@ -18,5 +18,13 @@ public class UserLog {
 
 	public void setUSER_ID(int uSER_ID) {
 		USER_ID = uSER_ID;
+	}
+
+	public String getUserRoll() {
+		return userRoll;
+	}
+
+	public void setUserRoll(String userRoll) {
+		this.userRoll = userRoll;
 	}
 }

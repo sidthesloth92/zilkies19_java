@@ -9,44 +9,34 @@ import io.zilker.application.beans.Response;
 import io.zilker.application.delegate.ContractorDelegate;
 import io.zilker.application.delegate.UserDelegate;
 
-
-
 public class DisplayProjects {
 	Scanner in = new Scanner(System.in);
-	UserDelegate userDelegate =  new UserDelegate();
+	UserDelegate userDelegate = new UserDelegate();
 	ContractorDelegate contractorDelegate = new ContractorDelegate();
+
 	// Displaying All Projects
-	public  ArrayList<ApprovedProject> displayProjects() {
+	public ArrayList<ApprovedProject> displayProjects() {
 		return userDelegate.displayProjects();
 	}
-	//Get Comments of a Particular Project
-	public ArrayList<Comments> getComments(int projectID){
+
+	// Get Comments of a Particular Project
+	public ArrayList<Comments> getComments(int projectID) {
 		return userDelegate.getComments(projectID);
 	}
+
 	// Get Responses of a Project
-	public ArrayList<Response> getResponses(int projectID){
+	public ArrayList<Response> getResponses(int projectID) {
 		return contractorDelegate.getResponses(projectID);
 	}
-	//Display a Particular Project
+
+	// Display a Particular Project
 	public ArrayList<ApprovedProject> detailDisplay(int projectID) {
 		return userDelegate.detailDisplay(projectID);
 	}
-	
-	// Displaying Projects in the Users Location 
+
+	// Displaying Projects in the Users Location
 	public ArrayList<ApprovedProject> projectsInLocationSer(int userID) {
 		return userDelegate.projectsInLocationSer(userID);
 	}
-	
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
