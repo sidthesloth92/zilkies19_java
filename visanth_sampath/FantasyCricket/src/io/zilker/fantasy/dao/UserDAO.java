@@ -3,6 +3,7 @@ package io.zilker.fantasy.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import io.zilker.fantasy.bean.Match;
@@ -11,12 +12,13 @@ import io.zilker.fantasy.bean.Player;
 import io.zilker.fantasy.bean.ResultBoard;
 import io.zilker.fantasy.bean.UserPickedTeam;
 import io.zilker.fantasy.constants.SqlConstants;
+import io.zilker.fantasy.service.AdminService;
 import io.zilker.fantasy.service.UserService;
 
 public class UserDAO {
 	public Connection connection;
-	private PreparedStatement preparedStatement = null;
-	private ResultSet resultSet = null;
+	private PreparedStatement preparedStatement;
+	private ResultSet resultSet;
 	DbConfig dbConfig = new DbConfig();
 	UserService userService = new UserService();
 	UserPickedTeam userPickedTeam = new UserPickedTeam();
@@ -24,8 +26,13 @@ public class UserDAO {
 	private ArrayList<Integer> credits = new ArrayList<Integer>();
 	ResultBoard resultBoard = new ResultBoard();
 
+	public UserDAO() {
+		connection = null;
+		preparedStatement = null;
+		resultSet = null;
+	}
+
 	public String getRole(int playerId) {
-		// TODO Auto-generated method stub
 		String role = null;
 		try {
 			connection = dbConfig.getConnection();
@@ -35,6 +42,8 @@ public class UserDAO {
 			if (resultSet.next()) {
 				role = resultSet.getString("type");
 			}
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -44,7 +53,6 @@ public class UserDAO {
 	}
 
 	public int getPlayerCredits(int playerId) {
-		// TODO Auto-generated method stub
 		int rating = 0;
 		try {
 			connection = dbConfig.getConnection();
@@ -54,6 +62,8 @@ public class UserDAO {
 			if (resultSet.next()) {
 				rating = resultSet.getInt("rating");
 			}
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -65,10 +75,11 @@ public class UserDAO {
 
 	// display active matches
 	public void displayActiveMatches() {
-		// TODO Auto-generated method stub
+		ArrayList<Match> matches = new ArrayList<Match>();
 		try {
 			AdminDAO adminDAO = new AdminDAO();
-			adminDAO.listActiveMatches();
+			matches = adminDAO.listActiveMatches();
+			new AdminService().displayMatchList(matches);
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -77,7 +88,7 @@ public class UserDAO {
 	}
 
 	// selects from match table and set the match bean
-	public Match setMatchBean(int matchId) {
+	public Match setMatch(int matchId) {
 		// TODO Auto-generated method stub
 		Match match = new Match();
 		try {
@@ -91,6 +102,8 @@ public class UserDAO {
 						resultSet.getString("end_time"), resultSet.getInt("match_credits"));
 			}
 
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -100,7 +113,6 @@ public class UserDAO {
 	}
 
 	public ArrayList<Player> displayTeam(String teamName) {
-		// TODO Auto-generated method stub
 		ArrayList<Player> playersList = new ArrayList<Player>();
 		try {
 			connection = dbConfig.getConnection();
@@ -109,13 +121,19 @@ public class UserDAO {
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Player player = new Player();
-				player.setPlayer(resultSet.getString("player_name"), "team",resultSet.getString("type") , resultSet.getInt("rating"));
+				player.setPlayer(resultSet.getString("player_name"), "team", resultSet.getString("type"),
+						resultSet.getInt("rating"));
 				player.setPlayerId(resultSet.getInt("player_id"));
 				playersList.add(player);
-				/*userService.printPlayers(resultSet.getInt("player_id"), resultSet.getString("player_name"),
-						resultSet.getString("type"), resultSet.getInt("rating"));*/
-				
+				/*
+				 * userService.printPlayers(resultSet.getInt("player_id"),
+				 * resultSet.getString("player_name"), resultSet.getString("type"),
+				 * resultSet.getInt("rating"));
+				 */
+
 			}
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -135,6 +153,8 @@ public class UserDAO {
 			preparedStatement.setInt(3, playerId);
 			preparedStatement.setInt(4, credits);
 			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -143,7 +163,7 @@ public class UserDAO {
 	}
 
 	//
-	public void insertIntoChat(int userId, String message) {
+	public void addChat(int userId, String message) {
 		// TODO Auto-generated method stub
 		try {
 			connection = dbConfig.getConnection();
@@ -151,6 +171,8 @@ public class UserDAO {
 			preparedStatement.setInt(1, userId);
 			preparedStatement.setString(2, message);
 			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -168,11 +190,16 @@ public class UserDAO {
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Message message = new Message();
-				message.setMessage(resultSet.getString("users.user_name"), resultSet.getString("message"), resultSet.getString("inserted_time"));
-				/*userService.printMessages(resultSet.getString("users.user_name"), resultSet.getString("message"),
-						resultSet.getString("inserted_time"));*/
+				message.setMessage(resultSet.getString("users.user_name"), resultSet.getString("message"),
+						resultSet.getString("inserted_time"));
+				/*
+				 * userService.printMessages(resultSet.getString("users.user_name"),
+				 * resultSet.getString("message"), resultSet.getString("inserted_time"));
+				 */
 				messages.add(message);
 			}
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -181,9 +208,9 @@ public class UserDAO {
 		return messages;
 	}
 
-	public ArrayList <Player> displaySelectedTeam(int matchId, int userId) {
+	public ArrayList<Player> displaySelectedTeam(int matchId, int userId) {
 		// TODO Auto-generated method stub
-		ArrayList <Player> playersList = new ArrayList<Player> ();
+		ArrayList<Player> playersList = new ArrayList<Player>();
 		try {
 			connection = dbConfig.getConnection();
 			preparedStatement = connection.prepareStatement(SqlConstants.PLAYER_SELECTED_TEAM);
@@ -192,10 +219,13 @@ public class UserDAO {
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Player player = new Player();
-				player.setPlayer(resultSet.getString("player_name"), "team", resultSet.getString("type") , resultSet.getInt("rating"));
+				player.setPlayer(resultSet.getString("player_name"), "team", resultSet.getString("type"),
+						resultSet.getInt("rating"));
 				player.setPlayerId(resultSet.getInt("player_id"));
 				playersList.add(player);
 			}
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -220,6 +250,8 @@ public class UserDAO {
 				teamTwo.add(resultSet.getString("team2"));
 			}
 			userService.displayMatches(matchId, teamOne, teamTwo);
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -227,7 +259,7 @@ public class UserDAO {
 		}
 	}
 
-	public UserPickedTeam setUserTeamBean(int userId, int matchId) {
+	public UserPickedTeam setUserTeam(int userId, int matchId) {
 		// TODO Auto-generated method stub
 		try {
 			connection = dbConfig.getConnection();
@@ -243,6 +275,8 @@ public class UserDAO {
 			userPickedTeam.setPlayerCredits(credits);
 			userPickedTeam.setPlayerId(players);
 
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -260,6 +294,8 @@ public class UserDAO {
 			preparedStatement.setInt(1, userId);
 			preparedStatement.setInt(2, matchId);
 			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -281,6 +317,8 @@ public class UserDAO {
 				total += resultSet.getInt("points");
 			}
 
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -304,6 +342,8 @@ public class UserDAO {
 				total = resultSet.getInt("match_points");
 			}
 
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -329,6 +369,8 @@ public class UserDAO {
 			}
 			resultBoard.setResultBoard(users, names, matchPoints);
 
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -349,12 +391,66 @@ public class UserDAO {
 				names.add(resultSet.getString("player_name"));
 			}
 
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
 			dbConfig.closeConnection(connection, preparedStatement, resultSet);
 		}
 		return names;
+	}
+
+	public ResultBoard getPreviousResult(int userId) {
+		// TODO Auto-generated method stub
+		ArrayList<Integer> users = new ArrayList<Integer>();
+		ArrayList<Integer> matchPoints = new ArrayList<Integer>();
+		ArrayList<String> names = new ArrayList<String>();
+		ResultBoard resultBoard = new ResultBoard();
+		try {
+			connection = dbConfig.getConnection();
+			preparedStatement = connection.prepareStatement(SqlConstants.SELECT_PARTICULAR_RESULT_TABLE);
+			preparedStatement.setInt(1, userId);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				users.add(resultSet.getInt("user_id"));
+				names.add(resultSet.getString("user_name"));
+				matchPoints.add(resultSet.getInt("match_points"));
+			}
+			resultBoard.setResultBoard(users, names, matchPoints);
+		} catch (SQLException e) {
+			e.getStackTrace();
+		} catch (Exception e) {
+			e.getStackTrace();
+		} finally {
+			dbConfig.closeConnection(connection, preparedStatement, resultSet);
+		}
+
+		return resultBoard;
+	}
+
+	public ArrayList<Match> getUpcomingMatches() {
+		// TODO Auto-generated method stub
+		ArrayList<Match> matchList = new ArrayList<Match>();
+		try {
+			connection = dbConfig.getConnection();
+			preparedStatement = connection.prepareStatement(SqlConstants.SELECT_UPCOMING_MATCHES);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Match match = new Match();
+				match.setMatchTable(resultSet.getString("team1"), resultSet.getString("team2"), "scheduledDate",
+						"startTime", "endTime", 0);
+				match.setStatusTable(resultSet.getInt("match_id"), 1, 1);
+				matchList.add(match);
+			}
+		} catch (SQLException e) {
+			e.getStackTrace();
+		} catch (Exception e) {
+			e.getStackTrace();
+		} finally {
+			dbConfig.closeConnection(connection, preparedStatement, resultSet);
+		}
+		return matchList;
 	}
 
 }

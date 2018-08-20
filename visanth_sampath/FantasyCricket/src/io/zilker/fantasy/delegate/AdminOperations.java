@@ -8,10 +8,11 @@ import io.zilker.fantasy.dao.AdminDAO;
 import io.zilker.fantasy.dao.UserDAO;
 import io.zilker.fantasy.service.AdminService;
 import io.zilker.fantasy.service.UserService;
+import io.zilker.fantasy.utility.GeneralValidators;
 
 public class AdminOperations {
 	private boolean isValid = false;
-	private int choice, matchCredits, type, rating,teamId,playerId,matchId,index,points;
+	private int choice, matchCredits, type, rating, teamId, playerId, matchId, index, points;
 	private String teamOne, teamTwo, scheduledDate, startTime, endTime, playerName, team;
 	GeneralValidators newGeneralValidators = new GeneralValidators();
 	AdminDAO adminDAO = new AdminDAO();
@@ -20,8 +21,9 @@ public class AdminOperations {
 	Match match = new Match();
 	UserDAO userDAO = new UserDAO();
 	UserService userService = new UserService();
+
 	// Schedule a new match
-	public void scheduleNewMatch() {
+	public boolean scheduleNewMatch() {
 		boolean isValid = false;
 		try {
 			adminService.displayAlert(DisplayConstants.ENTER_TEAM_ONE);
@@ -59,56 +61,55 @@ public class AdminOperations {
 			matchCredits = adminService.getIntInputs();
 			Match newMatch = new Match();
 			newMatch.setMatchTable(teamOne, teamTwo, scheduledDate, startTime, endTime, matchCredits);
-			adminDAO.newMatchInsertion(newMatch);
+			adminDAO.setNewMatch(newMatch);
 			int matchId = adminDAO.getLastInsertedMatchId();
 			newMatch.setStatusTable(matchId, 1, 1);
-			adminDAO.newMatchStatusInsertion(newMatch);
-			adminService.displayAlert(DisplayConstants.MATCH_ADD_SUCCESS);
+			adminDAO.setNewMatchStatus(newMatch);
+
 		} catch (Exception e) {
 			e.getStackTrace();
+			return false;
 		} finally {
-			
-		}
 
+		}
+		return true;
 	}
 
 	// disable a active match
-	public void disableActiveMatch() {
+	public boolean startMatch() {
 		int matchId;
 		ArrayList<Integer> players = new ArrayList<Integer>();
 		ArrayList<Match> matchList = new ArrayList<Match>();
 		try {
 			adminService.displayAlert(DisplayConstants.MATCH_TO_BE_DISABLED);
 			matchList = adminDAO.listActiveMatches();
-			if (matchList.size()>0) {
+			if (matchList.size() > 0) {
 				adminService.displayMatchList(matchList);
 				matchId = adminService.getIntInputs();
 				adminDAO.disableParticularMatch(matchId);
 				players = adminDAO.getTopPicks(matchId);
-				topPicks(players,matchId);
-				adminService.displayAlert(DisplayConstants.MATCH_DISABLED);
-				
+				getTopPicks(players, matchId);
+			}
+		} catch (Exception e) {
+			e.getStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	private void getTopPicks(ArrayList<Integer> players, int matchId) {
+		// TODO Auto-generated method stub
+		try {
+			for (index = 0; index < players.size(); index++) {
+				adminDAO.setMostPickedPlayers(players.get(index), matchId);
 			}
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
 	}
 
-
-	private void topPicks(ArrayList<Integer> players,int matchId) {
-		// TODO Auto-generated method stub
-		try {
-			for(index = 0;index <players.size();index++) {
-				adminDAO.insertIntoMostPickedPlayers(players.get(index), matchId);
-			}
-		}
-		catch(Exception e) {
-			e.getStackTrace();
-		}
-	}
-
 	// add a player
-	public void addPlayer() {
+	public boolean addPlayer() {
 
 		try {
 			adminService.displayAlert(DisplayConstants.ENTER_PLAYER_NAME);
@@ -123,84 +124,97 @@ public class AdminOperations {
 					adminService.displayAlert(DisplayConstants.INVALID_ROLE);
 				}
 			} while (!isValid);
-			adminService.displayAlert(DisplayConstants.ENTER_PLAYER_RATING);
-			rating = adminService.getIntInputs();
+			do {
+				adminService.displayAlert(DisplayConstants.ENTER_PLAYER_RATING);
+				rating = adminService.getIntInputs();
+				isValid = checkRating(rating);
+			} while (!isValid);
 			String role = getPlayerRole(type);
 			newPlayer.setPlayer(playerName, team, role, rating);
-			adminDAO.insertIntoPlayer(newPlayer);
+			adminDAO.setPlayer(newPlayer);
 			playerId = adminDAO.getLastPlayerId();
 			teamId = adminDAO.getTeamId(team);
-			if(teamId == 0) {
+			if (teamId == 0) {
 				adminDAO.insertIntoTeam(team);
 				teamId = adminDAO.getTeamId(team);
 			}
-			adminDAO.insertIntoTeamAndPlayers(teamId,playerId);
+			adminDAO.setTeamAndPlayers(teamId, playerId);
 		} catch (Exception e) {
 			e.getStackTrace();
+			return false;
 		}
+		return true;
 	}
-	//enter playing 11
-	public void updatePlayingTeam() {
+
+	private boolean checkRating(int rating) {
+		// TODO Auto-generated method stub
+		if (rating > 10) {
+			adminService.displayAlert(DisplayConstants.CREDITS_INVALID);
+			return false;
+		}
+		return true;
+	}
+
+	// enter playing 11
+	public boolean endMatch() {
 		ArrayList<Match> matchList = new ArrayList<Match>();
 		try {
 			matchList = adminDAO.displayOngoingMatches();
 			adminService.displayMatchList(matchList);
 			adminService.displayAlert(DisplayConstants.ENTER_MATCH_ID);
 			matchId = adminService.getIntInputs();
-			match = userDAO.setMatchBean(matchId);
+			match = userDAO.setMatch(matchId);
 			userDAO.displayTeam(match.getTeamOne());
 			userDAO.displayTeam(match.getTeamTwo());
-			ArrayList<Integer> playersInTeam = new ArrayList<Integer> ();
-			int count =0;
-			while(count < 22) {
+			ArrayList<Integer> playersInTeam = new ArrayList<Integer>();
+			int count = 0;
+			while (count < 22) {
 				adminService.displayAlert(DisplayConstants.ENTER_PLAYERS_ID);
 				playerId = adminService.getIntInputs();
 				playersInTeam.add(playerId);
 				count++;
 			}
-			getPlayingTeamData(matchId , playersInTeam);
-			//done
+			getPlayingTeamData(matchId, playersInTeam);
+			// done
 			updateTotalScore(matchId);
-			adminService.displayAlert(DisplayConstants.DISPLAY_MATCH_COMPLETED);
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			e.getStackTrace();
+			return false;
 		}
+		return true;
 	}
 
 	private void updateTotalScore(int matchId) {
 		// TODO Auto-generated method stub
 		try {
-			ArrayList <Integer> userId = new ArrayList<Integer> ();
+			ArrayList<Integer> userId = new ArrayList<Integer>();
 			userId = adminDAO.getUsersOfParticularMatch(matchId);
-			for(index=0;index<userId.size();index++) {
-				points = adminDAO.getTotalPointsOfUser(userId.get(index),matchId);
-				adminDAO.insertIntoResultBoard(userId.get(index),matchId,points);
+			for (index = 0; index < userId.size(); index++) {
+				points = adminDAO.getTotalPointsOfUser(userId.get(index), matchId);
+				adminDAO.setResultBoard(userId.get(index), matchId, points);
 			}
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			e.getStackTrace();
 		}
-		
+
 	}
 
 	private void getPlayingTeamData(int matchId, ArrayList<Integer> playersInTeam) {
 		// TODO Auto-generated method stub
 		try {
-			for(index= 0; index<playersInTeam.size();index++) {
-				type = (int)(Math.random()*100);
-				adminDAO.insertIntoPlayingTeam(matchId , playersInTeam.get(index),type);
+			for (index = 0; index < playersInTeam.size(); index++) {
+				type = (int) (Math.random() * 100);
+				adminDAO.setPlayingTeam(matchId, playersInTeam.get(index), type);
 			}
-			adminDAO.disableUpcommingMatch(matchId);
-		}
-		catch(Exception e) {
+			adminDAO.disableUpcomingMatch(matchId);
+		} catch (Exception e) {
 			e.getStackTrace();
 		}
-		
+
 	}
 
 	// edit Player Rating
-	public void editPlayerRating() {
+	public boolean editPlayerRating() {
 		int modifiedRating;
 		ArrayList<Player> players = new ArrayList<Player>();
 		try {
@@ -213,18 +227,20 @@ public class AdminOperations {
 				adminService.displayAlert(DisplayConstants.MODIFIED_RATING);
 				modifiedRating = adminService.getIntInputs();
 				isValid = newGeneralValidators.checkRating(modifiedRating);
-				if(isValid == false) {
+				if (isValid == false) {
 					adminService.displayAlert(DisplayConstants.INVALID_RATING);
 				}
-			} while(!isValid);
+			} while (!isValid);
 			isValid = false;
-			isValid = adminDAO.modifyPlayerRating(choice ,modifiedRating );
-			if(isValid ==true ) {
+			isValid = adminDAO.modifyPlayerRating(choice, modifiedRating);
+			if (isValid == true) {
 				adminService.displayAlert(DisplayConstants.MODIFY_SUCCESS);
 			}
 		} catch (Exception e) {
-
+			e.getStackTrace();
+			return false;
 		}
+		return true;
 	}
 
 	// get player status
@@ -239,42 +255,10 @@ public class AdminOperations {
 			} else if (type == 4) {
 				return "Wicket Keeper";
 			}
-		}
-		catch(Exception e) {
-			e.getStackTrace();
-		}
-		return null;
-	}
-
-	// main menu for admin
-	public void displayAdminOperations() {
-		try {
-			do {
-				adminService.displayAlert(DisplayConstants.DISPLAY_ADMIN_OPTIONS);
-				choice = adminService.getIntInputs();
-				switch (choice) {
-				case 1:
-					scheduleNewMatch();
-					break;
-				case 2:
-					disableActiveMatch();
-					break;
-				case 3:
-					addPlayer();
-					break;
-				case 4:
-					 editPlayerRating();
-					break;
-				case 5:
-					updatePlayingTeam();
-					break;
-				default:
-					break;
-				}
-			} while (choice < 6);
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
+		return null;
 	}
 
 }

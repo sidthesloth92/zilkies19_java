@@ -6,11 +6,12 @@ public class GroupPayment extends Expense {
 	int paymentId;
 	int gId;
 	ArrayList<ExpenseMember> expenseMembers;
+
 	public GroupPayment() {
 		super();
 		expenseMembers = new ArrayList<ExpenseMember>();
 	}
-	
+
 	public int getPaymentId() {
 		return paymentId;
 	}

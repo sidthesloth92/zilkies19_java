@@ -5,9 +5,7 @@ public class ExpenseMember extends User {
 	float totalAmount;
 	float amountPaid;
 
-	
-
-		public void setPending(boolean pending) {
+	public void setPending(boolean pending) {
 		this.pending = pending;
 	}
 
@@ -30,5 +28,5 @@ public class ExpenseMember extends User {
 	public void setAmountPaid(float amountPaid) {
 		this.amountPaid = amountPaid;
 	}
-	
+
 }

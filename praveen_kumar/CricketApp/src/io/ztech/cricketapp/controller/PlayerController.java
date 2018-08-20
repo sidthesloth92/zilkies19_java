@@ -1,34 +1,35 @@
 package io.ztech.cricketapp.controller;
 
+import io.ztech.cricketapp.beans.Player;
+import io.ztech.cricketapp.beans.Team;
 import io.ztech.cricketapp.beans.User;
-import io.ztech.cricketapp.constants.Queries;
-import io.ztech.cricketapp.delegate.PlayerManager;
+import io.ztech.cricketapp.delegate.PlayerDelegate;
 
 public class PlayerController {
 
-	PlayerManager playerManager;
+	PlayerDelegate playerDelegate;
 	
 	public PlayerController() {
-		playerManager = new PlayerManager();
+		playerDelegate = new PlayerDelegate();
 	}
 	
-	public boolean searchPlayer(int playerId, User user) {
-		return playerManager.searchPlayer(playerId, user);
-	}
+	/*public boolean searchPlayer(int playerId, User user) {
+		return playerDelegate.searchPlayer(playerId, user);
+	}*/
 	
-	public void removePlayer(int teamId, int playerId) {
-		playerManager.removePlayer(teamId, playerId);
+	public void removePlayer(Team team) {
+		playerDelegate.removePlayer(team);
 	}
 	
 	public void displayPlayer(User user) {
-		playerManager.displayPlayer(user);
+		playerDelegate.displayPlayer(user);
 	}
 	
-	public void updateTeamId(int teamId, int playerId) {
-		playerManager.updateTeamId(teamId, playerId);
+	public void updateTeamId(Team team) {
+		playerDelegate.updateTeamId(team);
 	}
 	
-	public void updatePlayerName(int playerId, String newName, String query) {
-		playerManager.updatePlayerName(playerId, newName, query);
+	public void updatePlayerName(Player player, String query) {
+		playerDelegate.updatePlayerName(player, query);
 	}
 }

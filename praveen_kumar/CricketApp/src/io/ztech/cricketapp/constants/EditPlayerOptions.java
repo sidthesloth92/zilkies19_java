@@ -1,5 +1,5 @@
 package io.ztech.cricketapp.constants;
 
 public enum EditPlayerOptions {
-	TEAM, FIRST_NAME, LAST_NAME;
+	TEAM, FIRST_NAME, LAST_NAME, GO_BACK;
 }

@@ -8,33 +8,29 @@ import io.ztech.carstats.beans.Make;
 import io.ztech.carstats.beans.Rating;
 import io.ztech.carstats.beans.Request;
 import io.ztech.carstats.beans.Specification;
-import io.ztech.carstats.beans.Statistics;
-import io.ztech.carstats.delegate.FetchDetailsDelegate;
+import io.ztech.carstats.beans.User;
+import io.ztech.carstats.delegate.FetchCarsDelegate;
 
 public class FetchDetailsService {
-	FetchDetailsDelegate fetchDetailsDelegate = new FetchDetailsDelegate();
+	FetchCarsDelegate fetchCarsDelegate = new FetchCarsDelegate();
 
-	public HashMap<Integer, String> displayMakes() throws SQLException {
-		return fetchDetailsDelegate.displayMakes();
+	public ArrayList<Make> displayMakes(CarType carType) throws SQLException {
+		return fetchCarsDelegate.displayMakes(carType);
 	}
 
-	public HashMap<Integer, ArrayList<String>> getCars(Make make, CarType carType) throws SQLException {
-		return fetchDetailsDelegate.getCars(make, carType);
+	public ArrayList<Specification> getCars(Make make, CarType carType) throws SQLException {
+		return fetchCarsDelegate.getCars(make, carType);
 	}
 
-	public HashMap<Integer, String> displayCarTypes() throws SQLException {
-		return fetchDetailsDelegate.displayCarTypes();
+	public ArrayList<CarType> displayCarTypes(Make make) throws SQLException {
+		return fetchCarsDelegate.displayCarTypes(make);
 	}
 
-	public HashMap<String, Rating> displayRating(Specification specification) {
-		return fetchDetailsDelegate.displayRating(specification);
+	public HashMap<User, Rating> displayRating(Specification specification) throws SQLException {
+		return fetchCarsDelegate.displayRating(specification);
 	}
 
-	public ArrayList<Statistics> displayStatistics(Specification specification) {
-		return fetchDetailsDelegate.displayStatistics(specification);
-	}
-
-	public Specification getCar(Request request) {
-		return fetchDetailsDelegate.getCar(request);
+	public Specification getCar(Request request) throws SQLException {
+		return fetchCarsDelegate.getCar(request);
 	}
 }
