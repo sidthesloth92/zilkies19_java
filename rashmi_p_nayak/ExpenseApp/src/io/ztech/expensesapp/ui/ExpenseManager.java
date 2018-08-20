@@ -1,5 +1,7 @@
 package io.ztech.expensesapp.ui;
 
+import java.sql.SQLException;
+import java.sql.SQLNonTransientConnectionException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -70,8 +72,7 @@ public class ExpenseManager {
 	}
 
 	public void signUp() {
-		
-		
+
 		while (true) {
 			try {
 				logger.info("\n");
@@ -110,6 +111,8 @@ public class ExpenseManager {
 			} catch (UsernameAlreadyExistsException e) {
 				logger.info(e.getMessage());
 
+			} catch (SQLException e) {
+				logger.info(e.getMessage());
 			}
 		}
 	}
@@ -136,6 +139,8 @@ public class ExpenseManager {
 			} catch (LoginFailedException e) {
 				logger.info(e.getMessage());
 				return;
+			} catch (SQLException e) {
+				logger.info(e.getMessage());
 			}
 		}
 	}
@@ -201,6 +206,8 @@ public class ExpenseManager {
 				logger.info(DisplayConstants.INVALID_INPUT);
 				in.nextLine();
 
+			} catch (SQLException e) {
+				logger.info(e.getMessage());
 			}
 		}
 	}
@@ -233,32 +240,36 @@ public class ExpenseManager {
 	}
 
 	public void viewGroups() {
-		activeUser.setGroups(expenseService.viewGroups(activeUser).getGroups());
-		if (activeUser.getGroups().size() == 0) {
-			logger.info(DisplayConstants.GROUPS_EMPTY);
-			return;
-		}
-		logger.info(DisplayConstants.GROUP_HEADING);
-		for (Group group : activeUser.getGroups()) {
-			logger.info(group.getgId() + " " + group.getGroupName());
-
-		}
-		List<Group> currentGroup;
-		while (true) {
-			logger.info(DisplayConstants.ENTER_GID);
-			int choice = in.nextInt();
-			if (choice == 0)
+		try {
+			activeUser.setGroups(expenseService.viewGroups(activeUser).getGroups());
+			if (activeUser.getGroups().size() == 0) {
+				logger.info(DisplayConstants.GROUPS_EMPTY);
 				return;
-			currentGroup = activeUser.getGroups().stream().filter(group -> group.getgId() == choice)
-					.collect(Collectors.toList());
-			if (currentGroup.isEmpty()) {
-				logger.info(DisplayConstants.ENTER_VALID_CHOICE);
-				continue;
 			}
-			break;
+			logger.info(DisplayConstants.GROUP_HEADING);
+			for (Group group : activeUser.getGroups()) {
+				logger.info(group.getgId() + " " + group.getGroupName());
+
+			}
+			List<Group> currentGroup;
+			while (true) {
+				logger.info(DisplayConstants.ENTER_GID);
+				int choice = in.nextInt();
+				if (choice == 0)
+					return;
+				currentGroup = activeUser.getGroups().stream().filter(group -> group.getgId() == choice)
+						.collect(Collectors.toList());
+				if (currentGroup.isEmpty()) {
+					logger.info(DisplayConstants.ENTER_VALID_CHOICE);
+					continue;
+				}
+				break;
+			}
+			activeGroup = currentGroup.get(0);
+			enterGroup();
+		} catch (SQLException e) {
+			logger.info(e.getMessage());
 		}
-		activeGroup = currentGroup.get(0);
-		enterGroup();
 	}
 
 	public void enterGroup() {
@@ -304,37 +315,42 @@ public class ExpenseManager {
 	}
 
 	public void viewGroupExpenses() {
-		Group group = expenseService.viewGroupExpenses(activeGroup);
-		if (group.getGroupPayments().isEmpty()) {
-			logger.info(DisplayConstants.EXPENSES_EMPTY);
-			return;
-		}
-		logger.info(DisplayConstants.GROUP_EXPENSE_HEADING);
-		for (GroupPayment groupPayment : group.getGroupPayments()) {
-			logger.info(DisplayConstants.EXPENSE_PAID_BY + groupPayment.getExpenseMembers().stream()
-					.filter(member -> member.getuId() == groupPayment.getuId()).findAny().get().getUserName());
-			logger.info(DisplayConstants.AMOUNT + groupPayment.getAmount());
-			logger.info(DisplayConstants.DESCRIPTION + groupPayment.getDescription());
-			logger.info(DisplayConstants.LAST_UPDATED_AT + groupPayment.getUpdatedAt());
-			boolean involved = false;
-			for (ExpenseMember member : groupPayment.getExpenseMembers()) {
-				if (activeUser.getuId() == member.getuId()) {
-					involved = true;
-					if (activeUser.getuId() == groupPayment.getuId())
-						logger.info(DisplayConstants.YOU_LENT + (groupPayment.getAmount() - member.getAmountPaid()));
-
-					else
-						logger.info(DisplayConstants.YOU_BORROWED + member.getAmountPaid());
-					logger.info(DisplayConstants.STATUS
-							+ (member.isPending() ? DisplayConstants.NOT_SETTLED : DisplayConstants.SETTLED));
-					logger.info("\n");
-				}
-
+		try {
+			Group group = expenseService.viewGroupExpenses(activeGroup);
+			if (group.getGroupPayments().isEmpty()) {
+				logger.info(DisplayConstants.EXPENSES_EMPTY);
+				return;
 			}
-			if (!involved)
-				logger.info(DisplayConstants.NOT_INVOLVED);
+			logger.info(DisplayConstants.GROUP_EXPENSE_HEADING);
+			for (GroupPayment groupPayment : group.getGroupPayments()) {
+				logger.info(DisplayConstants.EXPENSE_PAID_BY + groupPayment.getExpenseMembers().stream()
+						.filter(member -> member.getuId() == groupPayment.getuId()).findAny().get().getUserName());
+				logger.info(DisplayConstants.AMOUNT + groupPayment.getAmount());
+				logger.info(DisplayConstants.DESCRIPTION + groupPayment.getDescription());
+				logger.info(DisplayConstants.LAST_UPDATED_AT + groupPayment.getUpdatedAt());
+				boolean involved = false;
+				for (ExpenseMember member : groupPayment.getExpenseMembers()) {
+					if (activeUser.getuId() == member.getuId()) {
+						involved = true;
+						if (activeUser.getuId() == groupPayment.getuId())
+							logger.info(
+									DisplayConstants.YOU_LENT + (groupPayment.getAmount() - member.getAmountPaid()));
+
+						else
+							logger.info(DisplayConstants.YOU_BORROWED + member.getAmountPaid());
+						logger.info(DisplayConstants.STATUS
+								+ (member.isPending() ? DisplayConstants.NOT_SETTLED : DisplayConstants.SETTLED));
+						logger.info("\n");
+					}
+
+				}
+				if (!involved)
+					logger.info(DisplayConstants.NOT_INVOLVED);
+			}
+			logger.info("\n");
+		} catch (SQLException e) {
+			logger.info(e.getMessage());
 		}
-		logger.info("\n");
 	}
 
 	public void addGroupExpense() {
@@ -426,10 +442,14 @@ public class ExpenseManager {
 				in.nextLine();
 				logger.info(DisplayConstants.INVALID_INPUT);
 			}
-			expenseService.addNewExpense(groupPayment);
-			expenseService.addExpenseMembers(groupPayment);
-			logger.info(DisplayConstants.EXPENSE_ADDED);
-			break;
+			try {
+				expenseService.addNewExpense(groupPayment);
+				expenseService.addExpenseMembers(groupPayment);
+				logger.info(DisplayConstants.EXPENSE_ADDED);
+				break;
+			} catch (SQLException e) {
+				logger.info(e.getMessage());
+			}
 
 		}
 	}
@@ -488,6 +508,8 @@ public class ExpenseManager {
 			} catch (InputMismatchException e) {
 				logger.info(DisplayConstants.INVALID_INPUT);
 				in.nextLine();
+			} catch (SQLException e) {
+				logger.info(e.getMessage());
 			}
 		}
 	}
@@ -540,42 +562,47 @@ public class ExpenseManager {
 	}
 
 	public void showAllExpenses() {
-		activeUser.setExpenses(expenseService.showAllExpense(activeUser).getExpenses());
-		int i = 0;
-		float groupTotalAmount = 0, personalTotalAmount = 0;
-		Expense expense;
-		if (activeUser.getExpenses().isEmpty()) {
-			logger.info(DisplayConstants.EXPENSES_EMPTY);
-			return;
+		try {
+			activeUser.setExpenses(expenseService.showAllExpense(activeUser).getExpenses());
+			int i = 0;
+			float groupTotalAmount = 0, personalTotalAmount = 0;
+			Expense expense;
+			if (activeUser.getExpenses().isEmpty()) {
+				logger.info(DisplayConstants.EXPENSES_EMPTY);
+				return;
+			}
+			logger.info(DisplayConstants.GROUP_EXPENSE_HEADING);
+			logger.info(DisplayConstants.EXPENSE_HEADING);
+			logger.info(DisplayConstants.LINE);
+			while (i < activeUser.getExpenses().size()
+					&& (expense = activeUser.getExpenses().get(i)) instanceof GroupPayment) {
+				logger.info(expense.getAmount() + " " + expense.getDescription() + " " + expense.getCategory() + " "
+						+ expense.getType() + " " + expense.getCreatedAt() + " " + expense.getUpdatedAt() + "\n");
+				i++;
+				groupTotalAmount += expense.getAmount();
+			}
+			logger.info(DisplayConstants.TOTAL_GROUP_EXPENSE + groupTotalAmount);
+			logger.info("\n");
+			logger.info(DisplayConstants.PERSONAL_EXPENSE_HEADING);
+			logger.info(DisplayConstants.EXPENSE_HEADING);
+			logger.info(DisplayConstants.LINE);
+			while (i < activeUser.getExpenses().size()
+					&& (expense = activeUser.getExpenses().get(i)) instanceof Expense) {
+				logger.info(expense.getAmount() + " " + expense.getDescription() + " " + expense.getCategory() + " "
+						+ expense.getType() + " " + expense.getCreatedAt() + " " + expense.getUpdatedAt() + "\n");
+				i++;
+				personalTotalAmount += expense.getAmount();
+			}
+			logger.info(DisplayConstants.TOTAL_PERSONAL_EXPENSE + personalTotalAmount);
+			logger.info("\n");
+			logger.info(DisplayConstants.TOTAL_EXPENSE + (groupTotalAmount + personalTotalAmount));
+			logger.info("\n");
+			float percent = ((groupTotalAmount + personalTotalAmount) / activeUser.getExpenseLimit()) * 100;
+			logger.info(DisplayConstants.YOU_HAVE_REACHED + percent + DisplayConstants.PERCENT_OF_LIMIT);
+			logger.info(DisplayConstants.EXPENSE_LIMIT + activeUser.getExpenseLimit());
+		} catch (SQLException e) {
+			logger.info(e.getMessage());
 		}
-		logger.info(DisplayConstants.GROUP_EXPENSE_HEADING);
-		logger.info(DisplayConstants.EXPENSE_HEADING);
-		logger.info(DisplayConstants.LINE);
-		while (i < activeUser.getExpenses().size()
-				&& (expense = activeUser.getExpenses().get(i)) instanceof GroupPayment) {
-			logger.info(expense.getAmount() + " " + expense.getDescription() + " " + expense.getCategory() + " "
-					+ expense.getType() + " " + expense.getCreatedAt() + " " + expense.getUpdatedAt() + "\n");
-			i++;
-			groupTotalAmount += expense.getAmount();
-		}
-		logger.info(DisplayConstants.TOTAL_GROUP_EXPENSE + groupTotalAmount);
-		logger.info("\n");
-		logger.info(DisplayConstants.PERSONAL_EXPENSE_HEADING);
-		logger.info(DisplayConstants.EXPENSE_HEADING);
-		logger.info(DisplayConstants.LINE);
-		while (i < activeUser.getExpenses().size() && (expense = activeUser.getExpenses().get(i)) instanceof Expense) {
-			logger.info(expense.getAmount() + " " + expense.getDescription() + " " + expense.getCategory() + " "
-					+ expense.getType() + " " + expense.getCreatedAt() + " " + expense.getUpdatedAt() + "\n");
-			i++;
-			personalTotalAmount += expense.getAmount();
-		}
-		logger.info(DisplayConstants.TOTAL_PERSONAL_EXPENSE + personalTotalAmount);
-		logger.info("\n");
-		logger.info(DisplayConstants.TOTAL_EXPENSE + (groupTotalAmount + personalTotalAmount));
-		logger.info("\n");
-		float percent = ((groupTotalAmount + personalTotalAmount) / activeUser.getExpenseLimit()) * 100;
-		logger.info(DisplayConstants.YOU_HAVE_REACHED + percent + DisplayConstants.PERCENT_OF_LIMIT);
-		logger.info(DisplayConstants.EXPENSE_LIMIT + activeUser.getExpenseLimit());
 	}
 
 	public void viewBalances() {

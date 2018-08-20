@@ -1,5 +1,8 @@
 package io.ztech.expensesapp.services;
 
+import java.sql.SQLException;
+import java.sql.SQLNonTransientConnectionException;
+
 import io.ztech.expensesapp.beans.Expense;
 import io.ztech.expensesapp.beans.Group;
 import io.ztech.expensesapp.beans.GroupPayment;
@@ -16,15 +19,19 @@ public class ExpenseService {
 		expenseDelegate = new ExpenseDelegate();
 	}
 
-	public void signUp(User user) throws UsernameAlreadyExistsException {
+	public void signUp(User user) throws UsernameAlreadyExistsException, SQLException {
 		try {
 			expenseDelegate.signUp(user);
-		} catch (UsernameAlreadyExistsException e) {
+		}
+		catch (UsernameAlreadyExistsException e) {
 			throw new UsernameAlreadyExistsException(e.getMessage());
+		}
+		catch(SQLException e) {
+			throw new SQLException(e.getMessage());
 		}
 	}
 
-	public User logIn(User user) throws LoginFailedException {
+	public User logIn(User user) throws LoginFailedException,SQLException {
 		User activeUser;
 		try {
 			activeUser = expenseDelegate.logIn(user);
@@ -32,19 +39,22 @@ public class ExpenseService {
 			throw new LoginFailedException(e.getMessage());
 
 		}
+		catch(SQLException e) {
+			throw new SQLException(e.getMessage());
+		}
 		return activeUser;
 	}
 
-	public void addNewExpense(Expense expense) {
+	public void addNewExpense(Expense expense) throws SQLException{
 		expenseDelegate.addNewExpense(expense);
 	}
 
-	public User showAllExpense(User activeUser) {
+	public User showAllExpense(User activeUser) throws SQLException{
 		User user = expenseDelegate.showAllExpense(activeUser);
 		return user;
 	}
 
-	public User viewGroups(User activeUser) {
+	public User viewGroups(User activeUser) throws SQLException{
 		User user = expenseDelegate.viewGroups(activeUser);
 		return user;
 	}
@@ -57,21 +67,21 @@ public class ExpenseService {
 		}
 	}
 
-	public void addExpenseMembers(GroupPayment groupPayment) {
+	public void addExpenseMembers(GroupPayment groupPayment) throws SQLException{
 		expenseDelegate.addExpenseMembers(groupPayment);
 	}
 
-	public Group viewGroupExpenses(Group activeGroup) {
+	public Group viewGroupExpenses(Group activeGroup) throws SQLException{
 		Group group = expenseDelegate.viewGroupExpenses(activeGroup);
 		return group;
 	}
 
-	public GroupPayment viewBalances(Group activeGroup) {
+	public GroupPayment viewBalances(Group activeGroup) throws SQLException{
 		GroupPayment groupPayment = expenseDelegate.viewBalances(activeGroup);
 		return groupPayment;
 	}
 
-	public void editExpenseLimit(User activeUser) {
+	public void editExpenseLimit(User activeUser) throws SQLException{
 		expenseDelegate.editExpenseLimit(activeUser);
 	}
 }

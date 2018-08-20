@@ -4,19 +4,19 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Expense {
-	int eId;
-	int uId;
-	int categoryId;
-	int typeId;
-	String description;
-	float amount;
-	String category;
-	String type;
-	Timestamp createdAt;
-	Timestamp updatedAt;
-	Date date;
+	private int eId;
+	private int uId;
+	private int categoryId;
+	private int typeId;
+	private String description;
+	private float amount;
+	private String category;
+	private String type;
+	private Timestamp createdAt;
+	private Timestamp updatedAt;
+	private Date date;
 	
-
+	
 	public Date getDate() {
 		return date;
 	}

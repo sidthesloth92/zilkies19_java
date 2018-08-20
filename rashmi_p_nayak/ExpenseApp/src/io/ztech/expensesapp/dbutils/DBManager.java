@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLNonTransientConnectionException;
 
 //=========================================================================================================================================
 //DB MANAGER CLASS - DATABASE UTILITIES
@@ -16,12 +17,12 @@ public class DBManager {
 	Connection connection;
 
 	// creates and returns a connection
-	public Connection getConnection() {
+	public Connection getConnection() throws SQLException {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection(url, username, password);
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new SQLException();
 		}
 		return connection;
 

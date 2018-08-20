@@ -3,14 +3,18 @@ package io.ztech.expensesapp.beans;
 import java.util.ArrayList;
 
 public class User {
-	int uId;
-	String userName;
-	String emailId;
-	String password;
-	float expenseLimit;
-	ArrayList<Expense> expenses = new ArrayList<Expense>();
-	ArrayList<Group> groups = new ArrayList<Group>();
-
+	private int uId;
+	private String userName;
+	private String emailId;
+	private String password;
+	private float expenseLimit;
+	private ArrayList<Expense> expenses;
+	private ArrayList<Group> groups;
+	
+	public User() {
+		expenses = new ArrayList<Expense>();
+		groups = new ArrayList<Group>();
+	}
 	public int getuId() {
 		return uId;
 	}
