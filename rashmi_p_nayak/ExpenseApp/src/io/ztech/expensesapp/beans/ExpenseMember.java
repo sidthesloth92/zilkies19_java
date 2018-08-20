@@ -1,9 +1,9 @@
 package io.ztech.expensesapp.beans;
 
 public class ExpenseMember extends User {
-	boolean pending;
-	float totalAmount;
-	float amountPaid;
+	private boolean pending;
+	private float totalAmount;
+	private float amountPaid;
 
 	public void setPending(boolean pending) {
 		this.pending = pending;

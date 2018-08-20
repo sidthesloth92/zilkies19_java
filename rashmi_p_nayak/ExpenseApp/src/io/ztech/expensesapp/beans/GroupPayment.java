@@ -3,9 +3,9 @@ package io.ztech.expensesapp.beans;
 import java.util.ArrayList;
 
 public class GroupPayment extends Expense {
-	int paymentId;
-	int gId;
-	ArrayList<ExpenseMember> expenseMembers;
+	private int paymentId;
+	private int gId;
+	private ArrayList<ExpenseMember> expenseMembers;
 
 	public GroupPayment() {
 		super();
