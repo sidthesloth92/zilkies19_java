@@ -16,7 +16,7 @@ public class FacultyDetailsDao{
 	private static ResultSet rs;
 	private static Connection con;
 	
-	public boolean insertFacultyDetails(FacultyData obj) {
+	public boolean insertFacultyDetails(FacultyData obj)throws SQLException {
 		try {
 			con = Config.getConnection();
 			stmt = Config.conn.prepareStatement(SqlConstants.INSERT_FACULTY);
@@ -28,15 +28,13 @@ public class FacultyDetailsDao{
 			if(count>0) {
 				return true;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
+		}finally {
 			Config.closeConnection(con, stmt, rs);
 		}
 		return false;
 	}
 	
-	public boolean deleteFacultyDetails(long facultyRegistrationNumber) {
+	public boolean deleteFacultyDetails(long facultyRegistrationNumber)throws SQLException {
 		try {
 			con = Config.getConnection();
 			stmt = Config.conn.prepareStatement(SqlConstants.DELETE_FACULTY);
@@ -45,15 +43,13 @@ public class FacultyDetailsDao{
 			if(count>0) {
 				return true;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 			Config.closeConnection(con, stmt, rs);
 		}
 		return false;
 	}
 	
-	public boolean updateFacultyDetails(long facultyRegistrationNumber, String dataToValidate, int column, int flag) {
+	public boolean updateFacultyDetails(long facultyRegistrationNumber, String dataToValidate, int column, int flag)throws SQLException {
 		try {
 			con = Config.getConnection();
 			if (column == 1) {
@@ -76,8 +72,6 @@ public class FacultyDetailsDao{
 			if (count > 0) {
 				return true;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 			Config.closeConnection(con, stmt, rs);
 		}
@@ -85,7 +79,7 @@ public class FacultyDetailsDao{
 	}
 
 	
-	public ArrayList<LinkedHashMap<String, String>> getAllFacultyDetails() {
+	public ArrayList<LinkedHashMap<String, String>> getAllFacultyDetails()throws SQLException {
 		ArrayList<LinkedHashMap<String, String>> list = new ArrayList<LinkedHashMap<String, String>>();
 		try {
 			con = Config.getConnection();
@@ -99,8 +93,6 @@ public class FacultyDetailsDao{
 				map.put("Department: ", rs.getString("department"));
 				list.add(map);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 			Config.closeConnection(con, stmt, rs);
 		}

@@ -15,7 +15,7 @@ public class CollegeDetailsDao {
 	private static ResultSet rs;
 	private static Connection con;
 
-	public boolean insertCollegeDetails(CollegeData obj) {
+	public boolean insertCollegeDetails(CollegeData obj)throws SQLException {
 		try {
 			con = Config.getConnection();
 			stmt = Config.conn.prepareStatement(SqlConstants.INSERT_COLLEGE);
@@ -25,15 +25,13 @@ public class CollegeDetailsDao {
 			if(count>0) {
 				return true;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
+		}finally {
 			Config.closeConnection(con, stmt, rs);
 		}
 		return false;
 	}
 	
-	public boolean deleteCollegeDetails(int collegeCode) {
+	public boolean deleteCollegeDetails(int collegeCode)throws SQLException {
 		try {
 			con = Config.getConnection();
 			stmt = Config.conn.prepareStatement(SqlConstants.DELETE_COLLEGE);
@@ -42,15 +40,13 @@ public class CollegeDetailsDao {
 			if(count>0) {
 				return true;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
+		}finally {
 			Config.closeConnection(con, stmt, rs);
 		}
 		return false;
 	}
 	
-	public ArrayList<LinkedHashMap<String, String>> getAllCollegeDetails() {
+	public ArrayList<LinkedHashMap<String, String>> getAllCollegeDetails()throws SQLException {
 		ArrayList<LinkedHashMap<String, String>> list = new ArrayList<LinkedHashMap<String, String>>();
 		try {
 			con = Config.getConnection();
@@ -62,9 +58,7 @@ public class CollegeDetailsDao {
 				map.put("College Name: ", rs.getString("college_name"));
 				list.add(map);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
+		}finally {
 			Config.closeConnection(con, stmt, rs);
 		}
 		return list;

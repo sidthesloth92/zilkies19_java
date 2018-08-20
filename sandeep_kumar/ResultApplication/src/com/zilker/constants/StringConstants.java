@@ -1,6 +1,6 @@
 package com.zilker.constants;
 
-public class DisplayConstants {
+public class StringConstants {
 	public static final String STUDENT_MENU = "Choose an option \n1.View Result \n2.Apply For Revaluation \n3.Check Revaluation Status \n4.Exit";
 	public static final String FACULTY_MENU = "Choose an option \n1.View Result \n2.View Revaluation Request \n3.Check Revaluation Status \n4.Add Subject \n5.Delete Subject \n6.Exit";
 	public static final String EDITSTUDENT_MENU = "1.Add Student \n2.Delete Student \n3.Update Student \n4.Exit";
@@ -19,6 +19,7 @@ public class DisplayConstants {
 	public static final String ENTER_SEMESTER_WRITTEN="Enter Semester in which Written";
 	public static final String ENTER_DEPARTMENT = "Enter Department Id \n1.CSE \n2.ECE \n3.EEE \n4.IT \n5.MECH";
 	public static final String RESULT_ID = "Enter Result Id to Apply";
+	public static final String FACULTY_VIEW_RESULT_MENU="Choose an option \n1.View Results By Student \n2.View Results By Semester \n3.View Results by Subject \n4.Exit";
 	public static final String ADMIN_MENU = "Choose an option \n1.Edit Student \n2.Edit Faculty \n3.Edit Subject \n4.Edit College \n5.Add Result \n6.Update Grade \n7.Exit";
 	public static final String GRADE_LIST = "Enter Grade \n1. S \n2. A \n3. B \n4. C \n5. D \n6. E \n7. U";
 	public static final String UPDATE_STUDENT_COLUMN="1.Name 2.College Code 3.Department 4.Semester";

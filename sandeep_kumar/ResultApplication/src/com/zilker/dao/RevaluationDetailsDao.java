@@ -17,25 +17,23 @@ public class RevaluationDetailsDao {
 	private static ResultSet rs;
 	private static Connection con;
 
-	public boolean applyRevaluation(int resultId) {
+	public boolean applyRevaluation(int resultId) throws SQLException {
 		try {
 			con = Config.getConnection();
 			stmt = Config.conn.prepareStatement(SqlConstants.APPLY_REVAL);
 			stmt.setInt(1, resultId);
 			stmt.setString(2, "applied");
-			int count=stmt.executeUpdate();
+			int count = stmt.executeUpdate();
 			if (count > 0) {
 				return true;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 			Config.closeConnection(con, stmt, rs);
 		}
 		return false;
 	}
 
-	public int findRevaluationCount(LoggedInUserData currentUser) {
+	public int findRevaluationCount(LoggedInUserData currentUser) throws SQLException {
 		try {
 			con = Config.getConnection();
 			stmt = Config.conn.prepareStatement(SqlConstants.REVAL_COUNT);
@@ -45,15 +43,14 @@ public class RevaluationDetailsDao {
 			if (rs.next()) {
 				return rs.getInt(1);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 			Config.closeConnection(con, stmt, rs);
 		}
 		return 0;
 	}
 
-	public ArrayList<LinkedHashMap<String, String>> checkRevaluationStatusById(long registrationNumber, int semester) {
+	public ArrayList<LinkedHashMap<String, String>> checkRevaluationStatusById(long registrationNumber, int semester)
+			throws SQLException {
 		ArrayList<LinkedHashMap<String, String>> list = new ArrayList<LinkedHashMap<String, String>>();
 		try {
 			con = Config.getConnection();
@@ -69,15 +66,14 @@ public class RevaluationDetailsDao {
 				map.put("Updated Grade: ", rs.getString("updated_grade"));
 				list.add(map);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 			Config.closeConnection(con, stmt, rs);
 		}
 		return list;
 	}
-	
-	public ArrayList<LinkedHashMap<String, String>> checkRevaluationStatusBySubject(long registrationNumber,int collegeCode) {
+
+	public ArrayList<LinkedHashMap<String, String>> checkRevaluationStatusBySubject(long registrationNumber,
+			int collegeCode) throws SQLException {
 		ArrayList<LinkedHashMap<String, String>> list = new ArrayList<LinkedHashMap<String, String>>();
 		try {
 			con = Config.getConnection();
@@ -93,15 +89,13 @@ public class RevaluationDetailsDao {
 				map.put("Updated Grade: ", rs.getString("updated_grade"));
 				list.add(map);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 			Config.closeConnection(con, stmt, rs);
 		}
 		return list;
 	}
 
-	public boolean changeStatusbyFaculty(int revalId, String status) {
+	public boolean changeStatusbyFaculty(int revalId, String status) throws SQLException {
 		try {
 			con = Config.getConnection();
 			stmt = Config.conn.prepareStatement(SqlConstants.UPDATE_STATUS_BY_FACULTY);
@@ -111,15 +105,13 @@ public class RevaluationDetailsDao {
 			if (count > 0) {
 				return true;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 			Config.closeConnection(con, stmt, rs);
 		}
 		return false;
 	}
-	
-	public char getCurrentGrade(int revalId) {
+
+	public char getCurrentGrade(int revalId) throws SQLException {
 		try {
 			con = Config.getConnection();
 			stmt = Config.conn.prepareStatement(SqlConstants.CURRENT_GRADE);
@@ -128,15 +120,13 @@ public class RevaluationDetailsDao {
 			if (rs.next()) {
 				return rs.getString("grade").charAt(0);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 			Config.closeConnection(con, stmt, rs);
 		}
 		return 'o';
 	}
 
-	public boolean updateGrade(int revalId, String grade, String status) {
+	public boolean updateGrade(int revalId, String grade, String status) throws SQLException {
 		try {
 			con = Config.getConnection();
 			stmt = Config.conn.prepareStatement(SqlConstants.UPDATE_GRADE);
@@ -147,15 +137,13 @@ public class RevaluationDetailsDao {
 			if (count > 0) {
 				return true;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 			Config.closeConnection(con, stmt, rs);
 		}
 		return false;
 	}
-	
-	public ArrayList<LinkedHashMap<String, String>> getApprovedRevaluationList() {
+
+	public ArrayList<LinkedHashMap<String, String>> getApprovedRevaluationList() throws SQLException {
 		ArrayList<LinkedHashMap<String, String>> list = new ArrayList<LinkedHashMap<String, String>>();
 		try {
 			con = Config.getConnection();
@@ -169,8 +157,6 @@ public class RevaluationDetailsDao {
 				map.put("Updated Grade: ", rs.getString("updated_grade"));
 				list.add(map);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 			Config.closeConnection(con, stmt, rs);
 		}

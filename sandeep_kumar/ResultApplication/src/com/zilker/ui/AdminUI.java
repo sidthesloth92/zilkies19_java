@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 import com.zilker.delegates.Validator;
 import com.zilker.services.AdminServices;
 import com.zilker.beans.*;
-import com.zilker.constants.DisplayConstants;
+import com.zilker.constants.StringConstants;
 import com.zilker.constants.RegexConstants;
 
 public class AdminUI {
@@ -33,7 +33,7 @@ public class AdminUI {
 			if (Validator.validate(getInput, regex)) {
 				proceed = false;
 			} else {
-				System.err.println(errorDisplay);
+				LOGGER.info(errorDisplay);
 			}
 		} while (proceed);
 		return getInput;
@@ -42,14 +42,14 @@ public class AdminUI {
 	public void addStudent() {
 		int departmentId = 0;
 		StudentData addStudent = new StudentData();
-		addStudent.setStudentRegistrationNumber(Long.parseLong(this.scanInput(DisplayConstants.ENTER_REGNO,
-				RegexConstants.INT_REGEX, DisplayConstants.INVALID_INPUT)));
-		addStudent.setName(this.scanInput(DisplayConstants.ENTER_NAME, RegexConstants.ALPHA_REGEX,
-				DisplayConstants.INVALID_INPUT));
-		addStudent.setCollegeCode(this.scanInput(DisplayConstants.ENTER_COLLEGE_CODE, RegexConstants.COLLEGE_CODE_REGEX,
-				DisplayConstants.INVALID_INPUT));
+		addStudent.setStudentRegistrationNumber(Long.parseLong(this.scanInput(StringConstants.ENTER_REGNO,
+				RegexConstants.NUMERIC_REGEX, StringConstants.INVALID_INPUT)));
+		addStudent.setName(this.scanInput(StringConstants.ENTER_NAME, RegexConstants.ALPHA_REGEX,
+				StringConstants.INVALID_INPUT));
+		addStudent.setCollegeCode(this.scanInput(StringConstants.ENTER_COLLEGE_CODE, RegexConstants.COLLEGE_CODE_REGEX,
+				StringConstants.INVALID_INPUT));
 		departmentId = Integer
-				.parseInt(this.scanInput(DisplayConstants.ENTER_DEPARTMENT, "[1-5]+", DisplayConstants.INVALID_INPUT));
+				.parseInt(this.scanInput(StringConstants.ENTER_DEPARTMENT, "[1-5]+", StringConstants.INVALID_INPUT));
 		if (departmentId == 1) {
 			addStudent.setDepartment("CSE");
 		}
@@ -65,26 +65,26 @@ public class AdminUI {
 		if (departmentId == 5) {
 			addStudent.setDepartment("MECH");
 		}
-		addStudent.setSemester(Integer.parseInt(this.scanInput(DisplayConstants.ENTER_SEMESTER,
-				RegexConstants.SEMESTER_REGEX, DisplayConstants.INVALID_INPUT)));
+		addStudent.setSemester(Integer.parseInt(this.scanInput(StringConstants.ENTER_SEMESTER,
+				RegexConstants.SEMESTER_REGEX, StringConstants.INVALID_INPUT)));
 		if (adminService.addStudentDetails(addStudent)) {
-			LOGGER.info(DisplayConstants.ADD_SUCCESS);
+			LOGGER.info(StringConstants.ADD_SUCCESS);
 		} else {
-			System.err.println(DisplayConstants.ADD_ERROR);
+			LOGGER.info(StringConstants.ADD_ERROR);
 		}
 	}
 
 	public void addFaculty() {
 		int departmentId = 0;
 		FacultyData addFaculty = new FacultyData();
-		addFaculty.setFacultyRegistrationNumber(Long.parseLong(this.scanInput(DisplayConstants.ENTER_REGNO,
-				RegexConstants.INT_REGEX, DisplayConstants.INVALID_INPUT)));
-		addFaculty.setName(this.scanInput(DisplayConstants.ENTER_NAME, RegexConstants.ALPHA_REGEX,
-				DisplayConstants.INVALID_INPUT));
-		addFaculty.setCollegeCode(this.scanInput(DisplayConstants.ENTER_COLLEGE_CODE, RegexConstants.COLLEGE_CODE_REGEX,
-				DisplayConstants.INVALID_INPUT));
-		departmentId = Integer.parseInt(this.scanInput(DisplayConstants.ENTER_DEPARTMENT, RegexConstants.DEPT_REGEX,
-				DisplayConstants.INVALID_INPUT));
+		addFaculty.setFacultyRegistrationNumber(Long.parseLong(this.scanInput(StringConstants.ENTER_REGNO,
+				RegexConstants.NUMERIC_REGEX, StringConstants.INVALID_INPUT)));
+		addFaculty.setName(this.scanInput(StringConstants.ENTER_NAME, RegexConstants.ALPHA_REGEX,
+				StringConstants.INVALID_INPUT));
+		addFaculty.setCollegeCode(this.scanInput(StringConstants.ENTER_COLLEGE_CODE, RegexConstants.COLLEGE_CODE_REGEX,
+				StringConstants.INVALID_INPUT));
+		departmentId = Integer.parseInt(this.scanInput(StringConstants.ENTER_DEPARTMENT, RegexConstants.DEPT_REGEX,
+				StringConstants.INVALID_INPUT));
 		if (departmentId == 1) {
 			addFaculty.setDepartment("CSE");
 		}
@@ -101,36 +101,36 @@ public class AdminUI {
 			addFaculty.setDepartment("MECH");
 		}
 		if (adminService.addFacultyDetails(addFaculty)) {
-			LOGGER.info(DisplayConstants.ADD_SUCCESS);
+			LOGGER.info(StringConstants.ADD_SUCCESS);
 		} else {
-			System.err.println(DisplayConstants.ADD_ERROR);
+			LOGGER.info(StringConstants.ADD_ERROR);
 		}
 
 	}
 
 	public void addSubject() {
 		SubjectData addSubject = new SubjectData();
-		addSubject.setSubjectCode(this.scanInput(DisplayConstants.ENTER_SUBJECT_CODE,
-				RegexConstants.ALPHA_NUMERIC_REGEX, DisplayConstants.INVALID_INPUT));
-		addSubject.setSubjectName(this.scanInput(DisplayConstants.ENTER_SUBJECT_NAME, RegexConstants.ALPHA_REGEX,
-				DisplayConstants.INVALID_INPUT));
+		addSubject.setSubjectCode(this.scanInput(StringConstants.ENTER_SUBJECT_CODE,
+				RegexConstants.ALPHA_NUMERIC_REGEX, StringConstants.INVALID_INPUT));
+		addSubject.setSubjectName(this.scanInput(StringConstants.ENTER_SUBJECT_NAME, RegexConstants.ALPHA_REGEX,
+				StringConstants.INVALID_INPUT));
 		if (adminService.addSubjectDetails(addSubject)) {
-			LOGGER.info(DisplayConstants.ADD_SUCCESS);
+			LOGGER.info(StringConstants.ADD_SUCCESS);
 		} else {
-			System.err.println(DisplayConstants.ADD_ERROR);
+			LOGGER.info(StringConstants.ADD_ERROR);
 		}
 	}
 
 	public void addCollege() {
 		CollegeData addCollege = new CollegeData();
-		addCollege.setCollegeCode(Integer.parseInt(this.scanInput(DisplayConstants.ENTER_COLLEGE_CODE,
-				RegexConstants.INT_REGEX, DisplayConstants.INVALID_INPUT)));
-		addCollege.setCollegeName(this.scanInput(DisplayConstants.ENTER_COLLEGE_NAME, RegexConstants.COLLEGE_CODE_REGEX,
-				DisplayConstants.INVALID_INPUT));
+		addCollege.setCollegeCode(Integer.parseInt(this.scanInput(StringConstants.ENTER_COLLEGE_CODE,
+				RegexConstants.NUMERIC_REGEX, StringConstants.INVALID_INPUT)));
+		addCollege.setCollegeName(this.scanInput(StringConstants.ENTER_COLLEGE_NAME, RegexConstants.COLLEGE_CODE_REGEX,
+				StringConstants.INVALID_INPUT));
 		if (adminService.addCollegeDetails(addCollege)) {
-			LOGGER.info(DisplayConstants.ADD_SUCCESS);
+			LOGGER.info(StringConstants.ADD_SUCCESS);
 		} else {
-			System.err.println(DisplayConstants.ADD_ERROR);
+			LOGGER.info(StringConstants.ADD_ERROR);
 		}
 	}
 
@@ -138,12 +138,12 @@ public class AdminUI {
 		int gradeId = 0;
 		String grade = "";
 		ResultData addResult = new ResultData();
-		addResult.setStudentRegistrationNumber(Long.parseLong(this.scanInput(DisplayConstants.ENTER_REGNO,
-				RegexConstants.INT_REGEX, DisplayConstants.INVALID_INPUT)));
-		addResult.setSubjectCode(this.scanInput(DisplayConstants.ENTER_SUBJECT_CODE, RegexConstants.ALPHA_NUMERIC_REGEX,
-				DisplayConstants.INVALID_INPUT));
-		gradeId = Integer.parseInt(this.scanInput(DisplayConstants.GRADE_LIST, RegexConstants.GRADE_REGEX,
-				DisplayConstants.INVALID_INPUT));
+		addResult.setStudentRegistrationNumber(Long.parseLong(this.scanInput(StringConstants.ENTER_REGNO,
+				RegexConstants.NUMERIC_REGEX, StringConstants.INVALID_INPUT)));
+		addResult.setSubjectCode(this.scanInput(StringConstants.ENTER_SUBJECT_CODE, RegexConstants.ALPHA_NUMERIC_REGEX,
+				StringConstants.INVALID_INPUT));
+		gradeId = Integer.parseInt(this.scanInput(StringConstants.GRADE_LIST, RegexConstants.GRADE_REGEX,
+				StringConstants.INVALID_INPUT));
 		if (gradeId == 1) {
 			grade = "S";
 		} else if (gradeId == 2) {
@@ -162,11 +162,11 @@ public class AdminUI {
 		addResult.setGrade(grade);
 		
 		addResult.setWrittenIn(Integer.parseInt(
-				this.scanInput(DisplayConstants.ENTER_SEMESTER_WRITTEN,RegexConstants.SEMESTER_REGEX, DisplayConstants.INVALID_INPUT)));
+				this.scanInput(StringConstants.ENTER_SEMESTER_WRITTEN,RegexConstants.SEMESTER_REGEX, StringConstants.INVALID_INPUT)));
 		if (adminService.addResults(addResult)) {
-			LOGGER.info(DisplayConstants.ADD_SUCCESS);
+			LOGGER.info(StringConstants.ADD_SUCCESS);
 		} else {
-			System.err.println(DisplayConstants.ADD_ERROR);
+			LOGGER.info(StringConstants.ADD_ERROR);
 		}
 	}
 
@@ -174,10 +174,10 @@ public class AdminUI {
 		int revaluationId = 0, gradeId;
 		char grade = '\0';
 		print(adminService.getApprovedRevaluationList());
-		revaluationId = Integer.parseInt(this.scanInput(DisplayConstants.REVALUATION_ID, RegexConstants.INT_REGEX,
-				DisplayConstants.INVALID_INPUT));
-		gradeId = Integer.parseInt(this.scanInput(DisplayConstants.GRADE_LIST, RegexConstants.GRADE_REGEX,
-				DisplayConstants.INVALID_INPUT));
+		revaluationId = Integer.parseInt(this.scanInput(StringConstants.REVALUATION_ID, RegexConstants.NUMERIC_REGEX,
+				StringConstants.INVALID_INPUT));
+		gradeId = Integer.parseInt(this.scanInput(StringConstants.GRADE_LIST, RegexConstants.GRADE_REGEX,
+				StringConstants.INVALID_INPUT));
 		if (gradeId == 1) {
 			grade = 'S';
 		} else if (gradeId == 2) {
@@ -195,71 +195,71 @@ public class AdminUI {
 		}
 
 		if (adminService.updateGrade(revaluationId, grade)) {
-			LOGGER.info(DisplayConstants.UPDATE_SUCCESS);
+			LOGGER.info(StringConstants.UPDATE_SUCCESS);
 		} else {
-			System.err.println(DisplayConstants.UPDATE_ERROR);
+			LOGGER.info(StringConstants.UPDATE_ERROR);
 		}
 	}
 
 	public static boolean print(ArrayList<LinkedHashMap<String, String>> result) {
 		if (result.isEmpty()) {
-			System.err.println(DisplayConstants.NO_RECORDS);
+			LOGGER.info(StringConstants.NO_RECORDS);
 			return false;
 		}
 		for (LinkedHashMap<String, String> map : result) {
-			LOGGER.info(DisplayConstants.STAR);
+			LOGGER.info(StringConstants.STAR);
 			for (Entry<String, String> pair : map.entrySet()) {
 				LOGGER.info(pair.getKey() + pair.getValue());
 			}
 		}
-		LOGGER.info(DisplayConstants.STAR);
+		LOGGER.info(StringConstants.STAR);
 		return true;
 	}
 
 	public void deleteStudent() {
 		if (print(adminService.getAllStudentDetails())) {
-			long registrationNumber = Long.parseLong(this.scanInput(DisplayConstants.ENTER_REGNO,
-					RegexConstants.INT_REGEX, DisplayConstants.INVALID_INPUT));
+			long registrationNumber = Long.parseLong(this.scanInput(StringConstants.ENTER_REGNO,
+					RegexConstants.NUMERIC_REGEX, StringConstants.INVALID_INPUT));
 			if (adminService.deleteStudentDetails(registrationNumber)) {
-				LOGGER.info(DisplayConstants.DELETE_SUCCESS);
+				LOGGER.info(StringConstants.DELETE_SUCCESS);
 			} else {
-				System.err.println(DisplayConstants.DELETE_ERROR);
+				LOGGER.info(StringConstants.DELETE_ERROR);
 			}
 		}
 	}
 
 	public void deleteFaculty() {
 		if (print(adminService.getAllFacultyDetails())) {
-			long registrationNumber = Long.parseLong(this.scanInput(DisplayConstants.ENTER_REGNO,
-					RegexConstants.INT_REGEX, DisplayConstants.INVALID_INPUT));
+			long registrationNumber = Long.parseLong(this.scanInput(StringConstants.ENTER_REGNO,
+					RegexConstants.NUMERIC_REGEX, StringConstants.INVALID_INPUT));
 			if (adminService.deleteFacultyDetails(registrationNumber)) {
-				LOGGER.info(DisplayConstants.DELETE_SUCCESS);
+				LOGGER.info(StringConstants.DELETE_SUCCESS);
 			} else {
-				System.err.println(DisplayConstants.DELETE_ERROR);
+				LOGGER.info(StringConstants.DELETE_ERROR);
 			}
 		}
 	}
 
 	public void deleteSubject() {
 		if (print(adminService.getSubjectDetailsById(0, 0))) {
-			String subjectCode = this.scanInput(DisplayConstants.ENTER_REGNO, RegexConstants.ALPHA_NUMERIC_REGEX,
-					DisplayConstants.INVALID_INPUT);
+			String subjectCode = this.scanInput(StringConstants.ENTER_REGNO, RegexConstants.ALPHA_NUMERIC_REGEX,
+					StringConstants.INVALID_INPUT);
 			if (adminService.deleteSubjectDetails(subjectCode)) {
-				LOGGER.info(DisplayConstants.DELETE_SUCCESS);
+				LOGGER.info(StringConstants.DELETE_SUCCESS);
 			} else {
-				System.err.println(DisplayConstants.DELETE_ERROR);
+				LOGGER.info(StringConstants.DELETE_ERROR);
 			}
 		}
 	}
 
 	public void deleteCollege() {
 		if (print(adminService.getAllCollegeDetails())) {
-			int collegeCode = Integer.parseInt(this.scanInput(DisplayConstants.ENTER_COLLEGE_CODE,
-					RegexConstants.COLLEGE_CODE_REGEX, DisplayConstants.INVALID_INPUT));
+			int collegeCode = Integer.parseInt(this.scanInput(StringConstants.ENTER_COLLEGE_CODE,
+					RegexConstants.COLLEGE_CODE_REGEX, StringConstants.INVALID_INPUT));
 			if (adminService.deleteCollegeDetails(collegeCode)) {
-				LOGGER.info(DisplayConstants.DELETE_SUCCESS);
+				LOGGER.info(StringConstants.DELETE_SUCCESS);
 			} else {
-				System.err.println(DisplayConstants.DELETE_ERROR);
+				LOGGER.info(StringConstants.DELETE_ERROR);
 			}
 		}
 	}
@@ -268,20 +268,20 @@ public class AdminUI {
 		String dataToupdate = "";
 		int columnId = 0, flag = 0,departmentId=0;
 		if (print(adminService.getAllStudentDetails())) {
-			long registrationNumber = Long.parseLong(this.scanInput(DisplayConstants.ENTER_REGNO,
-					RegexConstants.INT_REGEX, DisplayConstants.INVALID_INPUT));
-			columnId = Integer.parseInt(this.scanInput(DisplayConstants.UPDATE_STUDENT_COLUMN,
-					RegexConstants.EDIT_MENU_REGEX, DisplayConstants.INVALID_INPUT));
+			long registrationNumber = Long.parseLong(this.scanInput(StringConstants.ENTER_REGNO,
+					RegexConstants.NUMERIC_REGEX, StringConstants.INVALID_INPUT));
+			columnId = Integer.parseInt(this.scanInput(StringConstants.UPDATE_STUDENT_COLUMN,
+					RegexConstants.EDIT_MENU_REGEX, StringConstants.INVALID_INPUT));
 			if (columnId == 1) {
-				dataToupdate= this.scanInput(DisplayConstants.ENTER_DATA_TO_UPDATE, RegexConstants.ALPHA_REGEX,
-						DisplayConstants.INVALID_INPUT);
+				dataToupdate= this.scanInput(StringConstants.ENTER_DATA_TO_UPDATE, RegexConstants.ALPHA_REGEX,
+						StringConstants.INVALID_INPUT);
 
 			} else if (columnId == 2) {
 				flag = 1;
-				dataToupdate = this.scanInput(DisplayConstants.ENTER_DATA_TO_UPDATE,
-						RegexConstants.COLLEGE_CODE_REGEX, DisplayConstants.INVALID_INPUT);
+				dataToupdate = this.scanInput(StringConstants.ENTER_DATA_TO_UPDATE,
+						RegexConstants.COLLEGE_CODE_REGEX, StringConstants.INVALID_INPUT);
 			} else if (columnId == 3) {
-				departmentId=Integer.parseInt(this.scanInput(DisplayConstants.ENTER_DEPARTMENT,RegexConstants.DEPT_REGEX , DisplayConstants.INVALID_INPUT));
+				departmentId=Integer.parseInt(this.scanInput(StringConstants.ENTER_DEPARTMENT,RegexConstants.DEPT_REGEX , StringConstants.INVALID_INPUT));
 				if (departmentId == 1) {
 					dataToupdate ="CSE";
 				}
@@ -299,13 +299,13 @@ public class AdminUI {
 				}
 			} else if (columnId == 4) {
 				flag = 1;
-				dataToupdate = this.scanInput(DisplayConstants.ENTER_DATA_TO_UPDATE, RegexConstants.SEMESTER_REGEX,
-						DisplayConstants.INVALID_INPUT);
+				dataToupdate = this.scanInput(StringConstants.ENTER_DATA_TO_UPDATE, RegexConstants.SEMESTER_REGEX,
+						StringConstants.INVALID_INPUT);
 			}
 			if (adminService.updateStudentDetails(registrationNumber, dataToupdate, columnId, flag)) {
-				LOGGER.info(DisplayConstants.UPDATE_SUCCESS);
+				LOGGER.info(StringConstants.UPDATE_SUCCESS);
 			} else {
-				System.err.println(DisplayConstants.UPDATE_ERROR);
+				LOGGER.info(StringConstants.UPDATE_ERROR);
 			}
 		}
 	}
@@ -314,19 +314,19 @@ public class AdminUI {
 		String dataToUpdate = "";int departmentId=0;
 		int columnId = 0, flag = 0;
 		if (print(adminService.getAllFacultyDetails())) {
-			long registrationNumber = Long.parseLong(this.scanInput(DisplayConstants.ENTER_REGNO,
-					RegexConstants.INT_REGEX, DisplayConstants.INVALID_INPUT));
+			long registrationNumber = Long.parseLong(this.scanInput(StringConstants.ENTER_REGNO,
+					RegexConstants.NUMERIC_REGEX, StringConstants.INVALID_INPUT));
 			columnId = Integer.parseInt(
-					this.scanInput(DisplayConstants.UPDATE_FACULTY_COLUMN, "[1-3]", DisplayConstants.INVALID_INPUT));
+					this.scanInput(StringConstants.UPDATE_FACULTY_COLUMN, "[1-3]", StringConstants.INVALID_INPUT));
 			if (columnId == 1) {
-				dataToUpdate = this.scanInput(DisplayConstants.ENTER_DATA_TO_UPDATE, RegexConstants.ALPHA_REGEX,
-						DisplayConstants.INVALID_INPUT);
+				dataToUpdate = this.scanInput(StringConstants.ENTER_DATA_TO_UPDATE, RegexConstants.ALPHA_REGEX,
+						StringConstants.INVALID_INPUT);
 			} else if (columnId == 2) {
 				flag = 1;
-				dataToUpdate = this.scanInput(DisplayConstants.ENTER_DATA_TO_UPDATE,
-						RegexConstants.COLLEGE_CODE_REGEX, DisplayConstants.INVALID_INPUT);
+				dataToUpdate = this.scanInput(StringConstants.ENTER_DATA_TO_UPDATE,
+						RegexConstants.COLLEGE_CODE_REGEX, StringConstants.INVALID_INPUT);
 			} else if (columnId == 3) {
-				departmentId=Integer.parseInt(this.scanInput(DisplayConstants.ENTER_DEPARTMENT,RegexConstants.DEPT_REGEX , DisplayConstants.INVALID_INPUT));
+				departmentId=Integer.parseInt(this.scanInput(StringConstants.ENTER_DEPARTMENT,RegexConstants.DEPT_REGEX , StringConstants.INVALID_INPUT));
 				if (departmentId == 1) {
 					dataToUpdate ="CSE";
 				}
@@ -344,17 +344,17 @@ public class AdminUI {
 				}
 			}
 			if (adminService.updateFacultyDetails(registrationNumber, dataToUpdate, columnId, flag)) {
-				LOGGER.info(DisplayConstants.UPDATE_SUCCESS);
+				LOGGER.info(StringConstants.UPDATE_SUCCESS);
 			} else {
-				System.err.println(DisplayConstants.UPDATE_ERROR);
+				LOGGER.info(StringConstants.UPDATE_ERROR);
 			}
 		}
 	}
 
 	public void editStudentMenu() {
 		do {
-			option = Integer.parseInt(this.scanInput(DisplayConstants.EDITSTUDENT_MENU, RegexConstants.EDIT_MENU_REGEX,
-					DisplayConstants.INVALID_INPUT));
+			option = Integer.parseInt(this.scanInput(StringConstants.EDITSTUDENT_MENU, RegexConstants.EDIT_MENU_REGEX,
+					StringConstants.INVALID_INPUT));
 			switch (option) {
 			case 1:
 				this.addStudent();
@@ -373,8 +373,8 @@ public class AdminUI {
 
 	public void editFacultyMenu() {
 		do {
-			option = Integer.parseInt(this.scanInput(DisplayConstants.EDITFACULTY_MENU, RegexConstants.EDIT_MENU_REGEX,
-					DisplayConstants.INVALID_INPUT));
+			option = Integer.parseInt(this.scanInput(StringConstants.EDITFACULTY_MENU, RegexConstants.EDIT_MENU_REGEX,
+					StringConstants.INVALID_INPUT));
 			switch (option) {
 			case 1:
 				this.addFaculty();
@@ -394,7 +394,7 @@ public class AdminUI {
 	public void editSubjectMenu() {
 		do {
 			option = Integer.parseInt(
-					this.scanInput(DisplayConstants.EDITSUBJECT_MENU, "[1-3]", DisplayConstants.INVALID_INPUT));
+					this.scanInput(StringConstants.EDITSUBJECT_MENU, "[1-3]", StringConstants.INVALID_INPUT));
 			switch (option) {
 			case 1:
 				this.addSubject();
@@ -411,7 +411,7 @@ public class AdminUI {
 	public void editCollegeMenu() {
 		do {
 			option = Integer.parseInt(
-					this.scanInput(DisplayConstants.EDITCOLLEGE_MENU, "[1-3]", DisplayConstants.INVALID_INPUT));
+					this.scanInput(StringConstants.EDITCOLLEGE_MENU, "[1-3]", StringConstants.INVALID_INPUT));
 			switch (option) {
 			case 1:
 				this.addCollege();
@@ -429,7 +429,7 @@ public class AdminUI {
 		LOGGER.info("ADMIN PORTAL: WELCOME ADMIN");
 		do {
 			option = Integer
-					.parseInt(this.scanInput(DisplayConstants.ADMIN_MENU, "[1-7]", DisplayConstants.INVALID_INPUT));
+					.parseInt(this.scanInput(StringConstants.ADMIN_MENU, "[1-7]", StringConstants.INVALID_INPUT));
 			switch (option) {
 			case 1:
 				this.editStudentMenu();
