@@ -50,7 +50,7 @@ public class RequestsAndHallFacilities {
 
 	Logger logger = Logger.getLogger(RequestsAndHallFacilities.class.getName());
 
-	public ArrayList<ConferenceData> fetchRequests(UserData userData) {
+	public ArrayList<ConferenceData> fetchRequests(UserData userData) throws SQLException {
 
 		ConferenceData conferenceData = new ConferenceData();
 
@@ -199,7 +199,7 @@ public class RequestsAndHallFacilities {
 
 	}
 
-	public ArrayList<HallData> getHallsWithFacility() {
+	public ArrayList<HallData> getHallsWithFacility() throws SQLException {
 
 		connection = databaseConfig.getConnection();
 

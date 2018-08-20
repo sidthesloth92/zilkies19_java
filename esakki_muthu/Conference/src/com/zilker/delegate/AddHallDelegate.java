@@ -1,5 +1,6 @@
 package com.zilker.delegate;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.zilker.bean.HallData;
@@ -11,13 +12,13 @@ public class AddHallDelegate {
 	
 	AddNewHall addNewHall = new AddNewHall();
 	
-	public void addHallProcess(HallData hallData) {
+	public void addHallProcess(HallData hallData) throws SQLException {
 		
 		addNewHall.insertHall(hallData);
 		
 	}
 	
-	public ArrayList<HallData> listHallProcess() {
+	public ArrayList<HallData> listHallProcess() throws SQLException {
 		
 		RequestsAndHallFacilities requestsAndHallFacilities = new RequestsAndHallFacilities();
 		

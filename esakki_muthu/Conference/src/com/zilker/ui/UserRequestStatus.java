@@ -1,5 +1,6 @@
 package com.zilker.ui;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -16,7 +17,12 @@ public class UserRequestStatus {
 
 		ArrayList<ConferenceData> conferenceListRequest = new ArrayList<ConferenceData>();
 
-		conferenceListRequest = new GetUserRequestService().getUserRequests(userData);
+		try {
+			conferenceListRequest = new GetUserRequestService().getUserRequests(userData);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		for (ConferenceData conferenceData : conferenceListRequest) {
 

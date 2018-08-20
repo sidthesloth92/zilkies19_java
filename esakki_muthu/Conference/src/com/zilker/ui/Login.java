@@ -1,5 +1,6 @@
 package com.zilker.ui;
 
+import java.sql.SQLException;
 import java.util.logging.Logger;
 
 import com.zilker.bean.LoginData;
@@ -29,7 +30,12 @@ public class Login {
 		
 		LoginService loginService = new LoginService();
 		
-		loginService.loginValues(loginData);
+		try {
+			loginService.loginValues(loginData);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 						
 	}
 	

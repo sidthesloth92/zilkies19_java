@@ -3,6 +3,7 @@ package com.zilker.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.zilker.bean.HallData;
@@ -20,7 +21,7 @@ public class HallWiseFacility {
 
 	ResultSet resultSet = null;
 
-	public ArrayList<HallData> getFacility(ArrayList<Integer> facilityId) {
+	public ArrayList<HallData> getFacility(ArrayList<Integer> facilityId) throws SQLException {
 
 		ArrayList<HallData> hallList = new ArrayList<HallData>();
 
