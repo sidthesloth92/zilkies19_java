@@ -5,22 +5,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import io.ztech.carstats.beans.User;
-import io.ztech.carstats.constants.SQLConstants;
 import io.ztech.carstats.dbutils.DBUtils;
 
-public class CheckLoginDAO {
+public class CheckMakeCarTypeIDDAO {
+
 	private static Connection con = null;
 	private static PreparedStatement pst = null;
 	private static ResultSet res = null;
 
-	public boolean isUser(User user) throws SQLException {
+	public boolean isMakeId(String query) throws SQLException {
 		boolean flag = true;
 		try {
 			con = DBUtils.getConnection();
-			pst = con.prepareStatement(SQLConstants.IS_USER);
-			pst.setString(1, user.getUserName());
-			pst.setString(2, user.getPassword());
+			pst = con.prepareStatement(query);
 			res = pst.executeQuery();
 			res.next();
 			if (res.getInt(1) == 0)
@@ -29,17 +26,16 @@ public class CheckLoginDAO {
 			throw new SQLException();
 		} finally {
 			DBUtils.closeConnection(con, pst, null);
+
 		}
 		return flag;
 	}
 
-	public boolean isAdmin(User user) throws SQLException {
+	public boolean isCarTypeId(String query) throws SQLException {
 		boolean flag = true;
 		try {
 			con = DBUtils.getConnection();
-			pst = con.prepareStatement(SQLConstants.IS_ADMIN);
-			pst.setString(1, user.getUserName());
-			pst.setString(2, user.getPassword());
+			pst = con.prepareStatement(query);
 			res = pst.executeQuery();
 			res.next();
 			if (res.getInt(1) == 0)
@@ -48,7 +44,6 @@ public class CheckLoginDAO {
 			throw new SQLException();
 		} finally {
 			DBUtils.closeConnection(con, pst, null);
-
 		}
 		return flag;
 	}

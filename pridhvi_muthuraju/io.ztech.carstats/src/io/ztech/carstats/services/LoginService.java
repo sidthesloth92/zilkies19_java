@@ -1,5 +1,7 @@
 package io.ztech.carstats.services;
 
+import java.sql.SQLException;
+
 import io.ztech.carstats.beans.User;
 import io.ztech.carstats.delegate.LoginDelegate;
 
@@ -15,7 +17,7 @@ public class LoginService {
 		return loginDelegate.logoutLogin(false,user);
 	}
 
-	public boolean signup(User user) {
+	public boolean signup(User user) throws SQLException {
 		return loginDelegate.signup(user) && this.logout(user);
 	}
 }

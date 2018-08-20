@@ -2,7 +2,9 @@ package io.ztech.carstats.constants;
 
 public class SQLConstants {
 	public static String SELECT_ALL_MAKE = "select * from make";
+	public static String SELECT_ALL_MAKE_CAR_TYPE = "select * from make where make_id in(select make_id from car where car_type_id=";
 	public static String SELECT_ALL_CAR_TYPE = "select * from car_type";
+	public static String SELECT_ALL_CAR_TYPE_MAKE = "select * from car_type where car_type_id in(select car_type_id from car where make_id=";
 	public static String SELECT_ALL_CAR = "select * from specification where car_id in(select car_id from car where make_id=? and car_type_id=?)";
 	public static String DELETE_CAR = "delete from specification where car_id=?";
 	public static String INSERT_CAR = "insert into specification (car_name,engine_type,cylinder,displacement,transmission,"
@@ -28,6 +30,16 @@ public class SQLConstants {
 	public static String IS_USER = "select count(*) from users where user_name=? and user_password=?";
 	public static String IS_ADMIN = "select count(*) from users where user_name=? and"
 			+ " user_password=? and admin_status='ADMIN'";
+
+	public static String IS_MAKE_ID = "select count(*) from car where make_id=";
+	public static String IS_MAKE_ID_CAR_TYPE = " and car_type_id=";
+	public static String IS_CAR_TYPE_ID_MAKE = " and make_id=";
+	public static String IS_CAR_TYPE_ID = "select count(*) from car where car_type_id=";
+
 	public static String SELECT_RATING = "select user_name,rating,review from rating where car_id=?";
+	public static String EDIT_RATING = "update rating set rating=?,review=? where car_id=? and user_name=?";
 	public static String SELECT_STATISTICS = "select statistics_year,sale_count from statistics where car_id=?";
+	public static String SELECT_TOTAL_STATISTICS_YEAR = "select SUM(sale_count) from statistics where statistics_year=?";
+	public static String SELECT_TOTAL_STATISTICS_CAR = "select SUM(sale_count) from statistics where car_id=?";
+	public static String SELECT_STATISTICS_CAR_YEAR = "select SUM(sale_count) from statistics where statistics_year=";
 }

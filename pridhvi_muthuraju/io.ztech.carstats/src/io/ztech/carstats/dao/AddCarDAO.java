@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Logger;
 
 import io.ztech.carstats.beans.CarType;
 import io.ztech.carstats.beans.Make;
@@ -14,13 +13,11 @@ import io.ztech.carstats.constants.SQLConstants;
 import io.ztech.carstats.dbutils.DBUtils;
 
 public class AddCarDAO {
-	private final Logger logger = Logger.getLogger(FetchDetailsDAO.class.getName());
 	private Connection con = null;
 	private PreparedStatement pst = null;
 	private ResultSet res = null;
 
-	public boolean addCar(CarType carType, Make make, Specification specification)
-			throws SQLException {
+	public boolean addCar(CarType carType, Make make, Specification specification) throws SQLException {
 		try {
 			con = DBUtils.getConnection();
 			pst = con.prepareStatement(SQLConstants.INSERT_CAR);
@@ -43,15 +40,14 @@ public class AddCarDAO {
 			pst.executeUpdate();
 
 		} catch (SQLException e) {
-			logger.info(AppConstants.SQL_ERROR);
-			return false;
+			throw new SQLException();
 		} finally {
 			DBUtils.closeConnection(con, pst, null);
 		}
-		return false;
+		return true;
 	}
 
-	public boolean addCarId(CarType carType, Make make, Specification specification) {
+	public boolean addCarId(CarType carType, Make make, Specification specification) throws SQLException {
 		try {
 			con = DBUtils.getConnection();
 			pst = con.prepareStatement(SQLConstants.INSERT_CAR_ID);
@@ -60,8 +56,7 @@ public class AddCarDAO {
 			pst.setInt(3, carType.getCarTypeId());
 			pst.executeUpdate();
 		} catch (SQLException e) {
-			logger.info(AppConstants.SQL_ERROR);
-			return false;
+			throw new SQLException();
 		} finally {
 			DBUtils.closeConnection(con, pst, null);
 		}
@@ -76,8 +71,7 @@ public class AddCarDAO {
 				pst.setString(1, make.getMakeName());
 				pst.executeUpdate();
 			} catch (SQLException e) {
-				logger.info(AppConstants.SQL_ERROR);
-				e.printStackTrace();
+				throw new SQLException();
 			} finally {
 				DBUtils.closeConnection(con, pst, null);
 			}
@@ -89,8 +83,7 @@ public class AddCarDAO {
 				res.next();
 				make.setMakeId(res.getInt(AppConstants.MAKE_ID));
 			} catch (SQLException e) {
-				logger.info(AppConstants.SQL_ERROR);
-				e.printStackTrace();
+				throw new SQLException();
 			} finally {
 				DBUtils.closeConnection(con, pst, null);
 			}
@@ -106,8 +99,7 @@ public class AddCarDAO {
 				pst.setString(1, carType.getCarTypeName());
 				pst.executeUpdate();
 			} catch (SQLException e) {
-				logger.info(AppConstants.SQL_ERROR);
-				e.printStackTrace();
+				throw new SQLException();
 			} finally {
 				DBUtils.closeConnection(con, pst, null);
 			}
@@ -119,8 +111,7 @@ public class AddCarDAO {
 				res.next();
 				carType.setCarTypeId(res.getInt(AppConstants.CAR_TYPE_ID));
 			} catch (SQLException e) {
-				logger.info(AppConstants.SQL_ERROR);
-				e.printStackTrace();
+				throw new SQLException();
 			} finally {
 				DBUtils.closeConnection(con, pst, null);
 			}
@@ -137,8 +128,7 @@ public class AddCarDAO {
 			res.next();
 			carId = res.getInt(1);
 		} catch (SQLException e) {
-			logger.info(AppConstants.SQL_ERROR);
-			e.printStackTrace();
+			throw new SQLException();
 		} finally {
 			DBUtils.closeConnection(con, pst, null);
 		}

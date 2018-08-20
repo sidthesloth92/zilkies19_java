@@ -15,11 +15,11 @@ public class RequestCarService {
 		return requestCarDelegate.addCarUserRequest(request, user, specification);
 	}
 
-	public ArrayList<Request> getRequests(User user) {
+	public ArrayList<Request> getRequests(User user) throws SQLException {
 		return requestCarDelegate.getRequests(user);
 	}
 
-	public boolean approveCar(Specification specification, Request request) {
+	public boolean approveCar(Specification specification, Request request) throws SQLException {
 		return requestCarDelegate.approveCar(specification, request);
 	}
 }
