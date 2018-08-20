@@ -1,7 +1,7 @@
 package com.zilker.beans;
 
 public class Login {
-	String email = "", password = "";
+	String email, password;
 
 	public void setEmail(String email) {
 		this.email = email;

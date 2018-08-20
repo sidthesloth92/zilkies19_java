@@ -1,31 +1,31 @@
 package com.zilker.beans;
 
 public class Schedule {
-	int team1_id = 0, team2_id = 0, tournament_id;
-	String matches = "";
+	int team1Id, team2Id, tournamentId;
+	String matches;
 
-	public void setTeam1Id(int team1_id) {
-		this.team1_id = team1_id;
+	public void setTeamOneId(int team1Id) {
+		this.team1Id = team1Id;
 	}
 
-	public int getTeam1Id() {
-		return this.team1_id;
+	public int getTeamOneId() {
+		return this.team1Id;
 	}
 
-	public void setTeam2Id(int team2_id) {
-		this.team2_id = team2_id;
+	public void setTeamtwoId(int team2Id) {
+		this.team2Id = team2Id;
 	}
 
-	public int getTeam2Id() {
-		return this.team2_id;
+	public int getTeamTwoId() {
+		return this.team2Id;
 	}
 
-	public void setTournamentId(int tournament_id) {
-		this.tournament_id = tournament_id;
+	public void setTournamentId(int tournamentId) {
+		this.tournamentId = tournamentId;
 	}
 
 	public int getTournamentId() {
-		return this.tournament_id;
+		return this.tournamentId;
 	}
 
 	public void setMatches(String matches) {

@@ -10,30 +10,47 @@ import com.zilker.beans.Login;
 import com.zilker.beans.Player;
 import com.zilker.beans.Team;
 import com.zilker.beans.Tournament;
+import com.zilker.beans.Score;
 import com.zilker.beans.UserDetails;
 import com.zilker.constant.ConsoleStrings;
 import com.zilker.constant.RegexStrings;
 import com.zilker.beans.Schedule;
+import com.zilker.beans.Scorecard;
 
 public class FetchAndDisplay {
 	Scanner input = new Scanner(System.in);
 	Logger logger = Logger.getLogger(FetchAndDisplay.class.getName());
-	String player_name = "", player_role = "", password = "", age = "", playingFormat = "";;
+	String playerName, playerRole, password, age, playingFormat;
 	ArrayList<Player> al = new ArrayList<Player>();
 	String team[] = new String[2];
 	ArrayList<String> arrayList = new ArrayList<String>();
-	int option = 0, loginOption = 0;
-	boolean flag = false, flagvar = false, check = false;
-	char ch = ' ';
+	int option, loginOption;
+	Validation valid = new Validation();
+	boolean flag, flagvar, check;
+	char ch;
+
+	public FetchAndDisplay() {
+		ch = ' ';
+		flag = false;
+		flagvar = false;
+		check = false;
+		option = 0;
+		loginOption = 0;
+		playerName = "";
+		playerRole = "";
+		password = "";
+		age = "";
+		playingFormat = "";
+	}
 
 	public int loginOption() {
 		do {
-			System.out.println(ConsoleStrings.LOGIN_OPTION);
+			logger.info(ConsoleStrings.LOGIN_OPTION);
 			try {
 				option = Integer.parseInt(input.nextLine());
 				check = false;
 			} catch (NumberFormatException e) {
-				System.out.println(ConsoleStrings.EXCEPTION_MSG);
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
 				check = true;
 			}
 		} while (check);
@@ -42,12 +59,12 @@ public class FetchAndDisplay {
 
 	public int loginRegisterChoice() {
 		do {
-			System.out.println(ConsoleStrings.LOGIN_REGISTER_CHOICE);
+			logger.info(ConsoleStrings.LOGIN_REGISTER_CHOICE);
 			try {
 				loginOption = Integer.parseInt(input.nextLine());
 				check = false;
 			} catch (NumberFormatException e) {
-				System.out.println(ConsoleStrings.EXCEPTION_MSG);
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
 				check = true;
 			}
 		} while (check);
@@ -55,27 +72,27 @@ public class FetchAndDisplay {
 	}
 
 	public void displayInvalid() {
-		System.out.println(ConsoleStrings.INVALID);
+		logger.info(ConsoleStrings.INVALID);
 	}
 
 	public Login login() {
 		Login loginObj = new Login();
-		System.out.println(ConsoleStrings.WELCOME_LOGIN);
-		System.out.println(ConsoleStrings.EMAIL);
+		logger.info(ConsoleStrings.WELCOME_LOGIN);
+		logger.info(ConsoleStrings.EMAIL);
 		loginObj.setEmail(input.nextLine());
-		System.out.println(ConsoleStrings.PASSWORD);
+		logger.info(ConsoleStrings.PASSWORD);
 		loginObj.setPassword(input.nextLine());
 		return loginObj;
 	}
 
 	public int formatOption() {
 		do {
-			System.out.println(ConsoleStrings.FORMAT_OPTION);
+			logger.info(ConsoleStrings.FORMAT_OPTION);
 			try {
-				int option = Integer.parseInt(input.nextLine());
+				option = Integer.parseInt(input.nextLine());
 				check = false;
 			} catch (NumberFormatException e) {
-				System.out.println(ConsoleStrings.EXCEPTION_MSG);
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
 				check = true;
 			}
 		} while (check);
@@ -84,27 +101,27 @@ public class FetchAndDisplay {
 
 	public int adminOption() {
 		do {
-			System.out.println(ConsoleStrings.ADMIN_OPTION);
+			logger.info(ConsoleStrings.ADMIN_OPTION);
 			try {
-				int option = Integer.parseInt(input.nextLine());
+				option = Integer.parseInt(input.nextLine());
 				check = false;
 			} catch (NumberFormatException e) {
-				System.out.println(ConsoleStrings.EXCEPTION_MSG);
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
 				check = true;
 			}
 		} while (check);
 		return option;
 	}
 
-	public int tournament_id() {
+	public int tournamentId() {
 		int tour_id = 0;
 		do {
-			System.out.println(ConsoleStrings.TOURNAMENT_ID);
+			logger.info(ConsoleStrings.TOURNAMENTID);
 			try {
 				tour_id = Integer.parseInt(input.nextLine());
 				check = false;
 			} catch (NumberFormatException e) {
-				System.out.println(ConsoleStrings.EXCEPTION_MSG);
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
 				check = true;
 			}
 		} while (check);
@@ -114,11 +131,11 @@ public class FetchAndDisplay {
 	public char view_tournament() {
 		do {
 			try {
-				System.out.println(ConsoleStrings.VIEW_TOURNAMENT);
+				logger.info(ConsoleStrings.VIEW_TOURNAMENT);
 				ch = input.next().charAt(0);
 				check = false;
 			} catch (Exception e) {
-				System.out.println(ConsoleStrings.EXCEPTION_MSG);
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
 				check = true;
 			}
 		} while (check);
@@ -127,25 +144,25 @@ public class FetchAndDisplay {
 
 	public char register_tournament() {
 		try {
-			System.out.println(ConsoleStrings.REGISTER_TOURNAMENT);
+			logger.info(ConsoleStrings.REGISTER_TOURNAMENT);
 			ch = input.next().charAt(0);
 			check = false;
 		} catch (Exception e) {
-			System.out.println(ConsoleStrings.EXCEPTION_MSG);
+			logger.info(ConsoleStrings.EXCEPTION_MSG);
 			check = true;
 		}
 		return ch;
 	}
 
 	public void logout() {
-		System.out.println(ConsoleStrings.LOGOUT);
+		logger.info(ConsoleStrings.LOGOUT);
 	}
 
-	public Team teamDetails(int tournament_id, String email) {
+	public Team teamDetails(int tournamentId, String email) {
 		Team teamobj = new Team();
-		teamobj.setTournamentId(tournament_id);
-		System.out.println(ConsoleStrings.TEAM_DETAILS);
-		System.out.println(ConsoleStrings.TEAM_NAME);
+		teamobj.setTournamentId(tournamentId);
+		logger.info(ConsoleStrings.TEAM_DETAILS);
+		logger.info(ConsoleStrings.TEAMNAME);
 		teamobj.setTeamName(input.nextLine());
 		teamobj.setEmail(email);
 		return teamobj;
@@ -154,40 +171,40 @@ public class FetchAndDisplay {
 	public AdminDetails getAdminDetails() {
 		AdminDetails adminobj = new AdminDetails();
 		while (flag == false) {
-			System.out.println(ConsoleStrings.FIRST_NAME);
+			logger.info(ConsoleStrings.FIRSTNAME);
 			adminobj.setFirstName(input.nextLine());
-			flag = Validation.isValidated(adminobj.getFirst_name(), RegexStrings.NAME_REGEX);
+			flag = valid.isValidated(adminobj.getfirstName(), RegexStrings.NAME_REGEX);
 		}
 		flag = false;
 		while (flag == false) {
-			System.out.println(ConsoleStrings.LAST_NAME);
+			logger.info(ConsoleStrings.LASTNAME);
 			adminobj.setLastName(input.nextLine());
-			flag = Validation.isValidated(adminobj.getLast_name(), RegexStrings.NAME_REGEX);
+			flag = valid.isValidated(adminobj.getlastName(), RegexStrings.NAME_REGEX);
 		}
 		flag = false;
 		while (flag == false) {
-			System.out.println(ConsoleStrings.PASSWORD);
+			logger.info(ConsoleStrings.PASSWORD);
 			adminobj.setPassword(input.nextLine());
-			flag = Validation.isValidated(adminobj.getPassword(), RegexStrings.PASSWORD_REGEX);
+			flag = valid.isValidated(adminobj.getPassword(), RegexStrings.PASSWORD_REGEX);
 		}
 		flag = false;
 		while (flag == false) {
-			System.out.println(ConsoleStrings.AGE);
+			logger.info(ConsoleStrings.AGE);
 			age = input.nextLine();
-			flag = Validation.isValidated(age, RegexStrings.AGE_REGEX);
+			flag = valid.isValidated(age, RegexStrings.AGE_REGEX);
 		}
 		adminobj.setAge(Integer.parseInt(age));
 		flag = false;
 		while (flag == false) {
-			System.out.println(ConsoleStrings.MOBILE);
+			logger.info(ConsoleStrings.MOBILE);
 			adminobj.setMobile(input.nextLine());
-			flag = Validation.isValidated(adminobj.getMobile(), RegexStrings.MOBILE_REGEX);
+			flag = valid.isValidated(adminobj.getMobile(), RegexStrings.MOBILE_REGEX);
 		}
 		flag = false;
 		while (flag == false) {
-			System.out.println(ConsoleStrings.EMAIL);
+			logger.info(ConsoleStrings.EMAIL);
 			adminobj.setEmail(input.nextLine());
-			flag = Validation.isValidated(adminobj.getEmail(), RegexStrings.EMAIL_REGEX);
+			flag = valid.isValidated(adminobj.getEmail(), RegexStrings.EMAIL_REGEX);
 		}
 		flag = false;
 		return adminobj;
@@ -198,40 +215,40 @@ public class FetchAndDisplay {
 			Player obj = new Player();
 			obj.setTeamId(teamid);
 			flagvar = false;
-			System.out.println((i + 1) + ConsoleStrings.PLAYER_NAME);
-			player_name = input.nextLine();
-			obj.setPlayerName(player_name);
+			logger.info((i + 1) + ConsoleStrings.PLAYERNAME);
+			playerName = input.nextLine();
+			obj.setPlayerName(playerName);
 			while (flagvar == false) {
-				System.out.println(ConsoleStrings.PLAYER_ROLE);
+				logger.info(ConsoleStrings.PLAYERROLE);
 				do {
 					try {
-						System.out.println(ConsoleStrings.GET_ROLE);
+						logger.info(ConsoleStrings.GET_ROLE);
 						int player_option = Integer.parseInt(input.nextLine());
 						if (player_option == 1) {
-							player_role = ConsoleStrings.BATSMAN;
+							playerRole = ConsoleStrings.BATSMAN;
 							flagvar = true;
 						} else if (player_option == 2) {
-							player_role = ConsoleStrings.BOWLER;
+							playerRole = ConsoleStrings.BOWLER;
 							flagvar = true;
 						} else if (player_option == 3) {
-							player_role = ConsoleStrings.ALL_ROUNDER;
+							playerRole = ConsoleStrings.ALL_ROUNDER;
 							flagvar = true;
 						} else if (player_option == 4) {
-							player_role = ConsoleStrings.WK_BATSMAN;
+							playerRole = ConsoleStrings.WK_BATSMAN;
 							flagvar = true;
 						} else {
-							System.out.println(ConsoleStrings.INVALID);
+							logger.info(ConsoleStrings.INVALID);
 							flagvar = false;
 						}
 						check = false;
 					} catch (NumberFormatException e) {
-						System.out.println(ConsoleStrings.EXCEPTION_MSG);
+						logger.info(ConsoleStrings.EXCEPTION_MSG);
 						check = true;
 					}
 
 				} while (check);
 			}
-			obj.setPlayerRole(player_role);
+			obj.setPlayerRole(playerRole);
 			al.add(obj);
 		}
 		return al;
@@ -240,40 +257,40 @@ public class FetchAndDisplay {
 	public UserDetails getUserDetails() {
 		UserDetails userobj = new UserDetails();
 		while (flag == false) {
-			System.out.println(ConsoleStrings.FIRST_NAME);
+			logger.info(ConsoleStrings.FIRSTNAME);
 			userobj.setFirstName(input.nextLine());
-			flag = Validation.isValidated(userobj.getFirst_name(), RegexStrings.NAME_REGEX);
+			flag = valid.isValidated(userobj.getfirstName(), RegexStrings.NAME_REGEX);
 		}
 		flag = false;
 		while (flag == false) {
-			System.out.println(ConsoleStrings.LAST_NAME);
+			logger.info(ConsoleStrings.LASTNAME);
 			userobj.setLastName(input.nextLine());
-			flag = Validation.isValidated(userobj.getLast_name(), RegexStrings.NAME_REGEX);
+			flag = valid.isValidated(userobj.getlastName(), RegexStrings.NAME_REGEX);
 		}
 		flag = false;
 		while (flag == false) {
-			System.out.println(ConsoleStrings.PASSWORD);
+			logger.info(ConsoleStrings.PASSWORD);
 			userobj.setPassword(input.nextLine());
-			flag = Validation.isValidated(userobj.getPassword(), RegexStrings.PASSWORD_REGEX);
+			flag = valid.isValidated(userobj.getPassword(), RegexStrings.PASSWORD_REGEX);
 		}
 		flag = false;
 		while (flag == false) {
-			System.out.println(ConsoleStrings.AGE);
+			logger.info(ConsoleStrings.AGE);
 			age = input.nextLine();
-			flag = Validation.isValidated(age, RegexStrings.AGE_REGEX);
+			flag = valid.isValidated(age, RegexStrings.AGE_REGEX);
 		}
 		userobj.setAge(Integer.parseInt(age));
 		flag = false;
 		while (flag == false) {
-			System.out.println(ConsoleStrings.MOBILE);
+			logger.info(ConsoleStrings.MOBILE);
 			userobj.setMobile(input.nextLine());
-			flag = Validation.isValidated(userobj.getMobile(), RegexStrings.MOBILE_REGEX);
+			flag = valid.isValidated(userobj.getMobile(), RegexStrings.MOBILE_REGEX);
 		}
 		flag = false;
 		while (flag == false) {
-			System.out.println(ConsoleStrings.EMAIL);
+			logger.info(ConsoleStrings.EMAIL);
 			userobj.setEmail(input.nextLine());
-			flag = Validation.isValidated(userobj.getEmail(), RegexStrings.EMAIL_REGEX);
+			flag = valid.isValidated(userobj.getEmail(), RegexStrings.EMAIL_REGEX);
 		}
 		flag = false;
 		return userobj;
@@ -281,13 +298,13 @@ public class FetchAndDisplay {
 
 	public Tournament getTournamentDetails() {
 		Tournament tourobj = new Tournament();
-		System.out.println(ConsoleStrings.TOURNAMENT_NAME);
+		logger.info(ConsoleStrings.TOURNAMENTNAME);
 		tourobj.setTournamentName(input.nextLine());
 		while (flagvar == false) {
-			System.out.println(ConsoleStrings.FORMAT);
+			logger.info(ConsoleStrings.FORMAT);
 			do {
 				try {
-					System.out.println(ConsoleStrings.SHOW_OPTION);
+					logger.info(ConsoleStrings.SHOW_OPTION);
 					int format = Integer.parseInt(input.nextLine());
 					if (format == 1) {
 						playingFormat = ConsoleStrings.ODI;
@@ -303,7 +320,7 @@ public class FetchAndDisplay {
 					}
 					check = false;
 				} catch (NumberFormatException e) {
-					System.out.println(ConsoleStrings.EXCEPTION_MSG);
+					logger.info(ConsoleStrings.EXCEPTION_MSG);
 					check = true;
 				}
 			} while (check);
@@ -322,53 +339,61 @@ public class FetchAndDisplay {
 	}
 
 	public void registerStatus() {
-		System.out.println(ConsoleStrings.REGISTRATION_SUCCESS);
+		logger.info(ConsoleStrings.REGISTRATION_SUCCESS);
 	}
 
 	public void teamRegister() {
-		System.out.println(ConsoleStrings.TEAM_REGISTRATION_SUCCESS);
-		System.out.println(ConsoleStrings.TOURNAMENT_TEAMS);
+		logger.info(ConsoleStrings.TEAM_REGISTRATION_SUCCESS);
+		logger.info(ConsoleStrings.TOURNAMENT_TEAMS);
 	}
 
 	public int displayTournament(ArrayList hm) {
 		if (hm.size() == 0) {
-			System.out.println(ConsoleStrings.EMPTY_TOURNAMENT);
+			logger.info(ConsoleStrings.EMPTY_TOURNAMENT);
 			return 0;
 		}
-		System.out.println(ConsoleStrings.DASHED_LINES);
+		logger.info(ConsoleStrings.DASHED_LINES);
 		for (int i = 0; i < hm.size(); i += 3) {
-			System.out.printf("%20d%20s%20s\n", hm.get(i), hm.get(i + 1), hm.get(i + 2));
+			logger.info(String.format("%20d%20s%20s\n", hm.get(i), hm.get(i + 1), hm.get(i + 2)));
 		}
-		System.out.println(ConsoleStrings.DASHED_LINES);
-		System.out.println(ConsoleStrings.TOURNAMENT_ID);
-		int tour_id = input.nextInt();
-		input.nextLine();
+		logger.info(ConsoleStrings.DASHED_LINES);
+		logger.info(ConsoleStrings.TOURNAMENTID);
+		int tour_id = 0;
+		do {
+			try {
+				tour_id = Integer.parseInt(input.nextLine());
+				check = false;
+			} catch (NumberFormatException e) {
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
+				check = true;
+			}
+		} while (check);
 		return tour_id;
 	}
 
 	public void displayTeam(ArrayList<String> teamList) {
-		System.out.println(ConsoleStrings.DASHED_LINES);
-		System.out.println(ConsoleStrings.AVAILABLE_TEAMS);
+		logger.info(ConsoleStrings.DASHED_LINES);
+		logger.info(ConsoleStrings.AVAILABLE_TEAMS);
 		for (int i = 0; i < teamList.size(); i++) {
-			System.out.println(teamList.get(i));
+			logger.info(teamList.get(i));
 		}
-		System.out.println(ConsoleStrings.DASHED_LINES);
+		logger.info(ConsoleStrings.DASHED_LINES);
 	}
 
-	public Schedule fixSchedule(int[] teamId, String match, int tournament_id) {
+	public Schedule fixSchedule(int[] teamId, String match, int tournamentId) {
 		Schedule scheduleobj = new Schedule();
-		scheduleobj.setTeam1Id(teamId[0]);
-		scheduleobj.setTeam2Id(teamId[1]);
+		scheduleobj.setTeamOneId(teamId[0]);
+		scheduleobj.setTeamtwoId(teamId[1]);
 		scheduleobj.setMatches(match);
-		scheduleobj.setTournamentId(tournament_id);
+		scheduleobj.setTournamentId(tournamentId);
 		return scheduleobj;
 	}
 
 	public void showMessage(int flag) {
 		if (flag == 0) {
-			System.out.println(ConsoleStrings.DASHED_LINES);
-			System.out.println(ConsoleStrings.TEAM_NAME_EXISTS);
-			System.out.println(ConsoleStrings.DASHED_LINES);
+			logger.info(ConsoleStrings.DASHED_LINES);
+			logger.info(ConsoleStrings.TEAMNAME_EXISTS);
+			logger.info(ConsoleStrings.DASHED_LINES);
 		}
 	}
 
@@ -376,11 +401,11 @@ public class FetchAndDisplay {
 		int option = 0;
 		do {
 			try {
-				System.out.printf(ConsoleStrings.USER_OPTION);
+				logger.info(ConsoleStrings.USER_OPTION);
 				option = Integer.parseInt(input.nextLine());
 				check = false;
 			} catch (NumberFormatException e) {
-				System.out.println(ConsoleStrings.EXCEPTION_MSG);
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
 				check = true;
 			}
 		} while (check);
@@ -391,11 +416,11 @@ public class FetchAndDisplay {
 		int option = 0;
 		do {
 			try {
-				System.out.println(ConsoleStrings.EDIT_OPTION);
+				logger.info(ConsoleStrings.EDIT_OPTION);
 				option = Integer.parseInt(input.nextLine());
 				check = false;
 			} catch (NumberFormatException e) {
-				System.out.println(ConsoleStrings.EXCEPTION_MSG);
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
 				check = true;
 			}
 		} while (check);
@@ -403,9 +428,9 @@ public class FetchAndDisplay {
 	}
 
 	public String[] getTeamName() {
-		System.out.println(ConsoleStrings.OLD_TEAM_NAME);
+		logger.info(ConsoleStrings.OLD_TEAMNAME);
 		team[0] = input.nextLine();
-		System.out.println(ConsoleStrings.NEW_TEAM_NAME);
+		logger.info(ConsoleStrings.NEW_TEAMNAME);
 		team[1] = input.nextLine();
 		return team;
 	}
@@ -413,53 +438,57 @@ public class FetchAndDisplay {
 	public ArrayList<String> updatePlayerDetails(String team) {
 		arrayList.clear();
 		arrayList.add(team);
-		System.out.println(ConsoleStrings.NEW_PLAYER_NAME);
+		logger.info(ConsoleStrings.NEW_PLAYERNAME);
 		arrayList.add(input.nextLine());
-		System.out.println(ConsoleStrings.NEW_PLAYER_ROLE);
+		logger.info(ConsoleStrings.NEW_PLAYERROLE);
 		do {
 			try {
-				System.out.println(ConsoleStrings.GET_ROLE);
+				logger.info(ConsoleStrings.GET_ROLE);
 				int player_option = Integer.parseInt(input.nextLine());
 				if (player_option == 1) {
-					player_role = ConsoleStrings.BATSMAN;
+					playerRole = ConsoleStrings.BATSMAN;
 					flagvar = true;
 				} else if (player_option == 2) {
-					player_role = ConsoleStrings.BOWLER;
+					playerRole = ConsoleStrings.BOWLER;
 					flagvar = true;
 				} else if (player_option == 3) {
-					player_role = ConsoleStrings.ALL_ROUNDER;
+					playerRole = ConsoleStrings.ALL_ROUNDER;
 					flagvar = true;
 				} else if (player_option == 4) {
-					player_role = ConsoleStrings.WK_BATSMAN;
+					playerRole = ConsoleStrings.WK_BATSMAN;
 					flagvar = true;
 				}
 				check = false;
 			} catch (Exception e) {
-				System.out.println(ConsoleStrings.EXCEPTION_MSG);
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
 				check = true;
 			}
 		} while (check);
-		arrayList.add(player_role);
+		arrayList.add(playerRole);
 		return arrayList;
 	}
 
 	public void displaySchedule(ArrayList schedule) {
-		System.out.println(ConsoleStrings.DASHED_LINES);
-		for (int i = 0; i < schedule.size(); i += 5) {
-			System.out.printf("%20d%20d%20d%20s%20d\n", schedule.get(i), schedule.get(i + 1), schedule.get(i + 2),
-					schedule.get(i + 3), schedule.get(i + 4));
+		if (schedule.size() == 0) {
+			logger.info(ConsoleStrings.NO_SCHEDULE);
+			return;
 		}
-		System.out.println(ConsoleStrings.DASHED_LINES);
+		logger.info(ConsoleStrings.DASHED_LINES);
+		for (int i = 0; i < schedule.size(); i += 5) {
+			logger.info(String.format("%20d%20d%20d%20s%20d\n", schedule.get(i), schedule.get(i + 1),
+					schedule.get(i + 2), schedule.get(i + 3), schedule.get(i + 4)));
+		}
+		logger.info(ConsoleStrings.DASHED_LINES);
 	}
 
 	public char tournamentMenu() {
 		do {
 			try {
-				System.out.println(ConsoleStrings.MAIN_MENU);
+				logger.info(ConsoleStrings.MAIN_MENU);
 				ch = input.nextLine().charAt(0);
 				check = false;
 			} catch (Exception e) {
-				System.out.println(ConsoleStrings.EXCEPTION_MSG);
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
 				check = true;
 			}
 		} while (check);
@@ -468,19 +497,19 @@ public class FetchAndDisplay {
 
 	public void displayInvalidTeamName(int status) {
 		if (status == 0)
-			System.out.println(ConsoleStrings.INVALID_TEAM_NAME);
+			logger.info(ConsoleStrings.INVALID_TEAMNAME);
 		else
-			System.out.println(ConsoleStrings.TEAM_NAME_UPDATED);
+			logger.info(ConsoleStrings.TEAMNAME_UPDATED);
 	}
 
 	public char getAdminMenu() {
 		do {
 			try {
-				System.out.println(ConsoleStrings.ADMIN_MENU);
+				logger.info(ConsoleStrings.ADMIN_MENU);
 				ch = input.nextLine().charAt(0);
 				check = false;
 			} catch (Exception e) {
-				System.out.println(ConsoleStrings.EXCEPTION_MSG);
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
 				check = true;
 			}
 		} while (check);
@@ -488,33 +517,34 @@ public class FetchAndDisplay {
 	}
 
 	public void displayNoTeamsAvailable() {
-		System.out.println(ConsoleStrings.TEAM_AVAILABILITY);
+		logger.info(ConsoleStrings.TEAM_AVAILABILITY);
 	}
 
 	public int getPlayerId(ArrayList al) {
-		System.out.println(ConsoleStrings.DASHED_LINES);
+		logger.info(ConsoleStrings.DASHED_LINES);
 		for (int i = 0; i < al.size(); i += 2) {
-			System.out.printf("%20d%20s\n", al.get(i), al.get(i + 1));
+			logger.info(String.format("%20d%20s\n", al.get(i), al.get(i + 1)));
+			// System.out.printf("%20d%20s\n", al.get(i), al.get(i + 1));
 		}
-		System.out.println(ConsoleStrings.DASHED_LINES);
-		System.out.println(ConsoleStrings.PLAYER_ID);
-		int player_id = Integer.parseInt(input.nextLine());
-		return player_id;
+		logger.info(ConsoleStrings.DASHED_LINES);
+		logger.info(ConsoleStrings.PLAYERID);
+		int playerId = Integer.parseInt(input.nextLine());
+		return playerId;
 	}
 
 	public String getTeam() {
-		System.out.println(ConsoleStrings.TEAM_NAME);
+		logger.info(ConsoleStrings.TEAMNAME);
 		return input.nextLine();
 	}
 
 	public char option() {
 		do {
 			try {
-				System.out.println(ConsoleStrings.CONTINUE_MENU);
+				logger.info(ConsoleStrings.CONTINUE_MENU);
 				ch = input.nextLine().charAt(0);
 				check = false;
 			} catch (Exception e) {
-				System.out.println(ConsoleStrings.EXCEPTION_MSG);
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
 				check = true;
 			}
 		} while (check);
@@ -522,24 +552,218 @@ public class FetchAndDisplay {
 	}
 
 	public void noPlayers() {
-		System.out.println(ConsoleStrings.NO_PLAYERS);
+		logger.info(ConsoleStrings.NO_PLAYERS);
 	}
 
 	public void showScheduled() {
-		System.out.println(ConsoleStrings.SCHEDULE_SUCCESS);
+		logger.info(ConsoleStrings.SCHEDULE_SUCCESS);
 	}
 
 	public char getMainmenu() {
 		do {
 			try {
-				System.out.println(ConsoleStrings.ROOT_MENU);
+				logger.info(ConsoleStrings.ROOT_MENU);
 				ch = input.nextLine().charAt(0);
 				check = false;
 			} catch (Exception e) {
-				System.out.println(ConsoleStrings.EXCEPTION_MSG);
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
 				check = true;
 			}
 		} while (check);
 		return ch;
+	}
+
+	public ArrayList<Scorecard> getScorecardDetails(int tournamentId) {
+		Scorecard team1 = new Scorecard();
+		Scorecard team2 = new Scorecard();
+		int matchNo = 0, team1Id = 0, team2Id = 0;
+		ArrayList<Scorecard> al = new ArrayList<Scorecard>();
+		do {
+			try {
+				logger.info(ConsoleStrings.matchNo);
+				matchNo = Integer.parseInt(input.nextLine());
+				check = false;
+			} catch (NumberFormatException e) {
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
+				check = true;
+			}
+		} while (check);
+		do {
+			try {
+				logger.info(ConsoleStrings.TEAM1ID);
+				team1Id = Integer.parseInt(input.nextLine());
+				check = false;
+			} catch (NumberFormatException e) {
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
+				check = true;
+			}
+		} while (check);
+		do {
+			try {
+				logger.info(ConsoleStrings.TEAM2ID);
+				team2Id = Integer.parseInt(input.nextLine());
+				check = false;
+			} catch (NumberFormatException e) {
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
+				check = true;
+			}
+		} while (check);
+		team1.setmatchNo(matchNo);
+		team1.setTeamId(team1Id);
+		team1.setTournamentId(tournamentId);
+		team2.setmatchNo(matchNo);
+		team2.setTeamId(team2Id);
+		team2.setTournamentId(tournamentId);
+		al.add(team1);
+		al.add(team2);
+		return al;
+	}
+
+	public Score getScore() {
+		Score obj = new Score();
+		int runs = 0, wickets = 0;
+		float overs = 0f;
+		do {
+			logger.info(ConsoleStrings.RUNS);
+			try {
+				runs = Integer.parseInt(input.nextLine());
+				check = false;
+			} catch (NumberFormatException e) {
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
+				check = true;
+			}
+		} while (check);
+		do {
+			logger.info(ConsoleStrings.OVERS);
+			try {
+				overs = Float.parseFloat(input.nextLine());
+				check = false;
+			} catch (NumberFormatException e) {
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
+				check = true;
+			}
+		} while (check);
+		do {
+			logger.info(ConsoleStrings.WICKETS);
+			try {
+				wickets = Integer.parseInt(input.nextLine());
+				check = false;
+			} catch (NumberFormatException e) {
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
+				check = true;
+			}
+		} while (check);
+		obj.setRuns(runs);
+		obj.setOvers(overs);
+		obj.setWickets(wickets);
+		return obj;
+	}
+
+	public int[] matchInfo() {
+		int info[] = new int[2];
+		do {
+			logger.info(ConsoleStrings.matchNo);
+			try {
+				info[0] = Integer.parseInt(input.nextLine());
+				check = false;
+			} catch (NumberFormatException e) {
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
+				check = true;
+			}
+		} while (check);
+		do {
+			logger.info(ConsoleStrings.TEAMID);
+			try {
+				info[1] = Integer.parseInt(input.nextLine());
+				check = false;
+			} catch (NumberFormatException e) {
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
+				check = true;
+			}
+		} while (check);
+		return info;
+	}
+
+	public void displayUpdate() {
+		logger.info(ConsoleStrings.UPDATE_MODULE);
+	}
+
+	public int getUpdateOption() {
+		do {
+			logger.info(ConsoleStrings.INSERT_UPDATE_OPTION);
+			try {
+				option = Integer.parseInt(input.nextLine());
+				check = false;
+			} catch (NumberFormatException e) {
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
+				check = true;
+			}
+		} while (check);
+		return option;
+	}
+
+	public int getMatchNo() {
+		do {
+			logger.info(ConsoleStrings.matchNo);
+			try {
+				option = Integer.parseInt(input.nextLine());
+				check = false;
+			} catch (NumberFormatException e) {
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
+				check = true;
+			}
+		} while (check);
+		return option;
+	}
+
+	public void displayScorecard(ArrayList hm) {
+		if (hm.size() == 0) {
+			logger.info(ConsoleStrings.NOT_UPDATED_IN_SCORECARD);
+		} else {
+			logger.info(ConsoleStrings.DASHED_LINES);
+			for (int i = 0; i < hm.size(); i += 6) {
+				String str = String.format("%.1f", hm.get(i + 3));
+				logger.info(String.format("%20d%20d%20d%20s%20d%20d\n", hm.get(i), hm.get(i + 1), hm.get(i + 2), str,
+						hm.get(i + 4), hm.get(i + 5)));
+			}
+			logger.info(ConsoleStrings.DASHED_LINES);
+		}
+	}
+
+	public void deleteInfo(int status) {
+		if (status == 1) {
+			logger.info(ConsoleStrings.SUCCESSFUL_DELETION);
+		} else {
+			logger.info(ConsoleStrings.DELETION_ERROR);
+		}
+	}
+
+	public int showViewMenu() {
+		do {
+			try {
+				logger.info(ConsoleStrings.VIEW_ADMIN);
+				option = Integer.parseInt(input.nextLine());
+				check = false;
+			} catch (NumberFormatException e) {
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
+				check = true;
+			}
+		} while (check);
+		return option;
+	}
+
+	public int getTournamentId() {
+		int tournamentId = 0;
+		do {
+			try {
+				logger.info(ConsoleStrings.TOURNAMENTID);
+				tournamentId = Integer.parseInt(input.nextLine());
+				check = false;
+			} catch (Exception e) {
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
+				check = true;
+			}
+		} while (check);
+		return tournamentId;
 	}
 }

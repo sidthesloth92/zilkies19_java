@@ -1,4 +1,4 @@
-package com.zilker.service;
+package com.zilker.delegates;
 
 import java.util.*;
 
@@ -6,8 +6,12 @@ public class Schedule {
 	public ArrayList<String> convert(ArrayList<String> al, int teamSize, ArrayList<String> teamlist) {
 		for (int i = 0; i < al.size(); i++) {
 			String s = al.get(i);
-			for (int j = 1; j <= teamSize; j++) {
-				s = s.replace(String.valueOf(j), teamlist.get(j - 1));
+			String arr[] = s.split("v");
+			arr[0] = arr[0].trim();
+			arr[1] = arr[1].trim();
+			for (int j = teamSize; j >= 1; j--) {
+				if ((arr[0]).equals(String.valueOf(j)) || (arr[1]).equals(String.valueOf(j)))
+					s = s.replace(String.valueOf(j), teamlist.get(j - 1));
 			}
 			al.set(i, s);
 		}
@@ -59,10 +63,12 @@ public class Schedule {
 				al.add(s);
 			System.out.println();
 		}
+		System.out.println(al);
 		al = convert(al, teamList.size(), teamList);
 		if (ghost) {
 			System.out.println("Matches against team " + teams + " are byes.");
 		}
+		System.out.println(al);
 		return al;
 	}
 

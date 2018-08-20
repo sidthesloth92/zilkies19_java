@@ -1,14 +1,14 @@
 package com.zilker.beans;
 
 public class Tournament {
-	String tournament_name = "", format = "";
+	String tournamentName, format;
 
-	public void setTournamentName(String tournament_name) {
-		this.tournament_name = tournament_name;
+	public void setTournamentName(String tournamentName) {
+		this.tournamentName = tournamentName;
 	}
 
 	public String getTournamentName() {
-		return this.tournament_name;
+		return this.tournamentName;
 	}
 
 	public void setFormat(String format) {
