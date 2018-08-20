@@ -1,5 +1,7 @@
 package io.ztech.placementportal.services;
 
+import java.sql.SQLException;
+
 import io.ztech.placementportal.bean.Marks;
 import io.ztech.placementportal.bean.PersonalInfo;
 import io.ztech.placementportal.bean.PlacedDetail;
@@ -9,21 +11,21 @@ import io.ztech.placementportal.delegate.UpdateStudentDetailDelegate;
 public class UpdateStudentDetailService {
 	UpdateStudentDetailDelegate updateDelegate = new UpdateStudentDetailDelegate();
 
-	public boolean updatePlacementDetail(PlacedDetail student) {
-		return updateDelegate.updatePlacementDetail(student);
+	public void updatePlacementDetail(PlacedDetail student) throws SQLException {
+		updateDelegate.updatePlacementDetail(student);
 
 	}
 
-	public boolean updateMarkDetail(Marks mark) {
-		return updateDelegate.updatePlacementDetail(mark);
+	public void updateMarkDetail(Marks mark) throws SQLException {
+		updateDelegate.updatePlacementDetail(mark);
 	}
 
-	public boolean updateDetail(Student studentDetail) {
-		return updateDelegate.updateDetail(studentDetail);
+	public void updateDetail(Student studentDetail) throws SQLException {
+		updateDelegate.updateDetail(studentDetail);
 	}
 
-	public boolean updatePersonalDetail(PersonalInfo info) {
-		return updateDelegate.updatePersonalDetail(info);
+	public void updatePersonalDetail(PersonalInfo info) throws SQLException {
+		updateDelegate.updatePersonalDetail(info);
 	}
 
 }

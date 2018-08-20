@@ -9,103 +9,87 @@ import io.ztech.placementportal.bean.Marks;
 import io.ztech.placementportal.bean.PersonalInfo;
 import io.ztech.placementportal.bean.PlacedDetail;
 import io.ztech.placementportal.bean.Student;
+import io.ztech.placementportal.constants.ApplicationConstants;
 import io.ztech.placementportal.constants.SqlConstants;
 import io.ztech.placementportal.dbutil.DbConnection;
 
 public class UpdateStudentDetailDao {
-	PreparedStatement ps = null;
-	ResultSet rs = null;
+	PreparedStatement preparedStatement = null;
+	ResultSet resultSet = null;
 
-	public boolean updatePlacementDetail(PlacedDetail student) {
+	public void updatePlacementDetail(PlacedDetail student) throws SQLException {
 		Connection connection = DbConnection.getConnection();
 		try {
-			ps = connection.prepareStatement(SqlConstants.PLACED_DETAIL);
-			ps.setString(1, student.getStudent_id());
-			ps.setInt(2, student.getCompany_id());
-			ps.setString(3, student.getJobStatus());
-			if (ps.executeUpdate() >= 0) {
-				ps = connection.prepareStatement(SqlConstants.UPDATE_PLACED);
-				ps.setString(1, student.getStudent_id());
-				if (ps.executeUpdate() >= 0)
-					return true;
-				else
-					return false;
+			preparedStatement = connection.prepareStatement(SqlConstants.PLACED_DETAIL);
+			preparedStatement.setString(1, student.getStudentId());
+			preparedStatement.setInt(2, student.getCompanyId());
+			preparedStatement.setString(3, student.getJobStatus());
+			if (preparedStatement.executeUpdate() >= 0) {
+				preparedStatement = connection.prepareStatement(SqlConstants.UPDATE_PLACED);
+				preparedStatement.setString(1, student.getStudentId());
+				preparedStatement.executeUpdate();
 			}
+
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException(ApplicationConstants.ERROR);
 		} finally {
-			DbConnection.closeConnection(rs, ps, connection);
+			DbConnection.closeConnection(resultSet, preparedStatement, connection);
 		}
-		return false;
 
 	}
 
-	public boolean updateMarkDetail(Marks mark) {
+	public void updateMarkDetail(Marks mark) throws SQLException {
 		Connection connection = DbConnection.getConnection();
 		try {
-			ps = connection.prepareStatement(SqlConstants.EDITED_MARK_DETAIL);
-			ps.setFloat(1, mark.getMark_X());
-			ps.setFloat(2, mark.getMark_XII());
-			ps.setFloat(3, mark.getCgpa());
-			ps.setInt(4, mark.getArrear_count());
-			ps.setString(5, mark.getStudent_id());
-			if (ps.executeUpdate() >= 0)
-				return true;
-			else
-				return false;
-
+			preparedStatement = connection.prepareStatement(SqlConstants.EDITED_MARK_DETAIL);
+			preparedStatement.setFloat(1, mark.getMarkX());
+			preparedStatement.setFloat(2, mark.getMarkXII());
+			preparedStatement.setFloat(3, mark.getCgpa());
+			preparedStatement.setInt(4, mark.getArrearCount());
+			preparedStatement.setString(5, mark.getStudentId());
+			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException(ApplicationConstants.ERROR);
 		} finally {
-			DbConnection.closeConnection(rs, ps, connection);
+			DbConnection.closeConnection(resultSet, preparedStatement, connection);
 		}
-		return false;
 
 	}
 
-	public boolean updateMarkDetail(Student studentDetail) {
+	public void updateMarkDetail(Student studentDetail) throws SQLException {
 		Connection connection = DbConnection.getConnection();
 		try {
-			ps = connection.prepareStatement(SqlConstants.EDITED_DETAIL);
-			ps.setString(1, studentDetail.getName());
-			ps.setString(2, studentDetail.getDepartment());
-			ps.setString(3, studentDetail.getStudent_id());
-			if (ps.executeUpdate() >= 0)
-				return true;
-			else
-				return false;
-
+			preparedStatement = connection.prepareStatement(SqlConstants.EDITED_DETAIL);
+			preparedStatement.setString(1, studentDetail.getName());
+			preparedStatement.setString(2, studentDetail.getDepartment());
+			preparedStatement.setString(3, studentDetail.getStudentId());
+			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException(ApplicationConstants.ERROR);
 		} finally {
-			DbConnection.closeConnection(rs, ps, connection);
+			DbConnection.closeConnection(resultSet, preparedStatement, connection);
 		}
-		return false;
 	}
 
-	public boolean updatePersonalDetail(PersonalInfo personalInfo) {
+	public void updatePersonalDetail(PersonalInfo personalInfo) throws SQLException {
 		Connection connection = DbConnection.getConnection();
 		try {
-			ps = connection.prepareStatement(SqlConstants.UPDATE_PERSONAL_INFO);
-			ps.setString(1, personalInfo.getD_O_B());
-			ps.setString(2, personalInfo.getBlood_group());
-			ps.setString(3, personalInfo.getPhone_number());
-			ps.setString(4, personalInfo.getAlternate_phone());
-			ps.setString(5, personalInfo.getEmail());
-			ps.setString(6, personalInfo.getAlternate_email());
-			ps.setString(7, personalInfo.getLocation());
-			ps.setString(8, personalInfo.getGender());
-			ps.setString(9, personalInfo.getStudent_id());
-			ps.executeUpdate();
-			if (ps.executeUpdate() >= 0) {
-				return true;
-			}
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		} finally {
-			DbConnection.closeConnection(rs, ps, connection);
-		}
+			preparedStatement = connection.prepareStatement(SqlConstants.UPDATE_PERSONAL_INFO);
+			preparedStatement.setString(1, personalInfo.getStudentId());
+			preparedStatement.setString(2, personalInfo.getDateOfBirth());
+			preparedStatement.setString(3, personalInfo.getBloodGroup());
+			preparedStatement.setString(4, personalInfo.getPhoneNumber());
+			preparedStatement.setString(5, personalInfo.getAlternatePhone());
+			preparedStatement.setString(6, personalInfo.getEmail());
+			preparedStatement.setString(7, personalInfo.getAlternateEmail());
+			preparedStatement.setString(8, personalInfo.getLocation());
+			preparedStatement.setString(9, personalInfo.getGender());
+			preparedStatement.executeUpdate();
 
-		return false;
+		} catch (SQLException e1) {
+			throw new SQLException(ApplicationConstants.ERROR);
+		} finally {
+			DbConnection.closeConnection(resultSet, preparedStatement, connection);
+		}
 	}
 }

@@ -1,5 +1,7 @@
 package io.ztech.placementportal.services;
 
+import java.sql.SQLException;
+
 import io.ztech.placementportal.bean.Company;
 import io.ztech.placementportal.bean.Eligiblity;
 import io.ztech.placementportal.bean.Marks;
@@ -11,20 +13,20 @@ import io.ztech.placementportal.delegate.StudentDetailDelegate;
 public class AddDetailsService {
 	StudentDetailDelegate studentDelegate = new StudentDetailDelegate();
 
-	public boolean addStudentDetail(Student student, Marks mark) {
-		return studentDelegate.addStudentDetail(student, mark);
+	public void addStudentDetail(Student student, Marks mark) throws SQLException {
+		studentDelegate.addStudentDetail(student, mark);
 
 	}
 
-	public boolean addCompanyDetail(Company company, Eligiblity eligible) {
+	public void addCompanyDetail(Company company, Eligiblity eligible) throws SQLException {
 		CompanyDetailDelegate company_delegate = new CompanyDetailDelegate();
-		return company_delegate.addCompanyDetail(company, eligible);
+		company_delegate.addCompanyDetail(company, eligible);
 
 	}
 
-	public boolean addPersonalInfo(PersonalInfo personalInfo) {
+	public void addPersonalInfo(PersonalInfo personalInfo) throws SQLException {
 
-		return studentDelegate.addPersonalDetail(personalInfo);
+		studentDelegate.addPersonalDetail(personalInfo);
 	}
 
 }

@@ -3,41 +3,35 @@ package io.ztech.placementportal.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.logging.Logger;
+import java.sql.SQLException;
 
 import io.ztech.placementportal.bean.Register;
+import io.ztech.placementportal.constants.ApplicationConstants;
 import io.ztech.placementportal.constants.SqlConstants;
 import io.ztech.placementportal.dbutil.DbConnection;
 
 public class CreateLoginDao {
-	Connection connection = DbConnection.getConnection();
-	Logger log = Logger.getLogger("CreateLoginDao.class");
 
-	public boolean createStudentLogin(Register register) {
-		PreparedStatement ps=null;
-		ResultSet rs=null;
-		int success;
+	public void createStudentLogin(Register register) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 		try {
-			ps = connection.prepareStatement(SqlConstants.CREATE_LOGIN);
-			ps.setString(1, register.getUserName());
-			ps.setString(2, register.getPassword());
-			ps.setString(3, register.getEmail());
-			ps.setString(4, register.getRole());
-			ps.setInt(5, 1);
-			ps.setString(6, register.getReg_no());
-			success = ps.executeUpdate();
-			if (success >= 0)
-				return true;
-			else
-				return false;
+			connection = DbConnection.getConnection();
+			preparedStatement = connection.prepareStatement(SqlConstants.CREATE_LOGIN);
+			preparedStatement.setString(1, register.getPassword());
+			preparedStatement.setString(2, register.getEmail());
+			preparedStatement.setString(3, register.getRole());
+			preparedStatement.setInt(4, 1);
+			preparedStatement.setString(5, register.getReg_no());
+			preparedStatement.executeUpdate();
 
-		} catch (Exception e) {
-			log.info(e.toString());
+		} catch (SQLException e) {
+			throw new SQLException(ApplicationConstants.ERROR);
+
+		} finally {
+			DbConnection.closeConnection(resultSet, preparedStatement, connection);
 		}
-		finally {
-			DbConnection.closeConnection(rs, ps, connection);
-		}
-		return false;
 	}
 
 }

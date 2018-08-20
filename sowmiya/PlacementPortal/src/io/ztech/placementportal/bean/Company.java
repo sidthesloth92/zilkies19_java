@@ -1,48 +1,50 @@
 package io.ztech.placementportal.bean;
 
+import io.ztech.placementportal.constants.ApplicationConstants;
+
 public class Company {
-	int company_id;
-	String company_name, company_description, company_type;
-	String job_location, designation, payment, day_of_recruitment;
+	private int companyId;
+	private String companyName, companyDescription, companyType;
+	private String jobLocation, designation, payment, dayOfRecruitment, lastDateForRegistration;
 
-	public int getCompany_id() {
-		return company_id;
+	public int getCompanyId() {
+		return companyId;
 	}
 
-	public void setCompany_id(int company_id) {
-		this.company_id = company_id;
+	public void setCompanyId(int companyId) {
+		this.companyId = companyId;
 	}
 
-	public String getCompany_name() {
-		return company_name;
+	public String getCompanyName() {
+		return companyName;
 	}
 
-	public void setCompany_name(String company_name) {
-		this.company_name = company_name;
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
-	public String getCompany_description() {
-		return company_description;
+	public String getCompanyDescription() {
+		return companyDescription;
 	}
 
-	public void setCompany_description(String company_description) {
-		this.company_description = company_description;
+	public void setCompanyDescription(String companyDescription) {
+		this.companyDescription = companyDescription;
 	}
 
-	public String getCompany_type() {
-		return company_type;
+	public String getCompanyType() {
+		return companyType;
 	}
 
-	public void setCompany_type(String company_type) {
-		this.company_type = company_type;
+	public void setCompanyType(String companyType) {
+		this.companyType = companyType;
 	}
 
-	public String getJob_location() {
-		return job_location;
+	public String getJobLocation() {
+		return jobLocation;
 	}
 
-	public void setJob_location(String job_location) {
-		this.job_location = job_location;
+	public void setJobLocation(String jobLocation) {
+		this.jobLocation = jobLocation;
 	}
 
 	public String getDesignation() {
@@ -61,12 +63,30 @@ public class Company {
 		this.payment = payment;
 	}
 
-	public String getDay_of_recruitment() {
-		return day_of_recruitment;
+	public String getDayOfRecruitment() {
+		return dayOfRecruitment;
 	}
 
-	public void setDay_of_recruitment(String day_of_recruitment) {
-		this.day_of_recruitment = day_of_recruitment;
+	public void setDayOfRecruitment(String dayOfRecruitment) {
+		this.dayOfRecruitment = dayOfRecruitment;
+	}
+
+	public String getLastDateForRegistration() {
+		return lastDateForRegistration;
+	}
+
+	public void setLastDateForRegistration(String lastDate) {
+		this.lastDateForRegistration = lastDate;
+	}
+
+	@Override
+	public String toString() {
+		return ApplicationConstants.COMPANY_ID + companyId + "\n" + ApplicationConstants.COMPANY_NAME + companyName
+				+ "\n" + ApplicationConstants.COMPANY_DESCRIPTION + companyDescription + "\n"
+				+ ApplicationConstants.COMPANY_TYPE + companyType + "\n" + ApplicationConstants.JOB_LOCATION
+				+ jobLocation + "\n" + ApplicationConstants.DESIGNATION + designation + "\n"
+				+ ApplicationConstants.PAYMENT + payment + "\n" + ApplicationConstants.RECRUITMENT_DATE
+				+ dayOfRecruitment + "\n" + ApplicationConstants.LAST_DATE_FOR_REGISTRATION + lastDateForRegistration;
 	}
 
 }

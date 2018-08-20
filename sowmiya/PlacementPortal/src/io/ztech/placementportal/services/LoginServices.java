@@ -7,9 +7,8 @@ import io.ztech.placementportal.delegate.LoginDelegate;
 
 public class LoginServices {
 	Logger log = Logger.getLogger("LoginServices.class");
-	public static String active_user = "";
 
-	public String login(Register login) {
+	public String login(Register login) throws Exception {
 		LoginDelegate loginDelegate = new LoginDelegate();
 		return loginDelegate.checkLoginCredential(login);
 

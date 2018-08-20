@@ -1,10 +1,11 @@
 package io.ztech.placementportal.services;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.HashMap;
 
 import io.ztech.placementportal.bean.Company;
-import io.ztech.placementportal.constants.ApplicationConstants;
+import io.ztech.placementportal.bean.Eligiblity;
+import io.ztech.placementportal.bean.Marks;
 import io.ztech.placementportal.delegate.ApplicationValidateDelegate;
 import io.ztech.placementportal.delegate.RetrieveDetailDelegate;
 
@@ -20,16 +21,16 @@ public class ApplicationValidateService {
 			return true;
 	}
 
-	public boolean checkeligible(Company company, String reg_no) {
-		HashMap<String, Float> student_mark, eligible_mark;
+	public boolean checkeligible(Company company, String reg_no) throws SQLException {
+		Marks student_mark;
+		Eligiblity eligible_mark;
 		student_mark = retrieveDelegate.getMarkDetail(reg_no);
 		eligible_mark = retrieveDelegate.getEligiblityDetail(company);
-		if (student_mark.get(ApplicationConstants.PERCENTAGE_X) >= eligible_mark.get(ApplicationConstants.PERCENTAGE_X)
-				&& student_mark.get(ApplicationConstants.PERCENTAGE_XII) >= eligible_mark
-						.get(ApplicationConstants.PERCENTAGE_XII)
-				&& student_mark.get(ApplicationConstants.CGPA) >= eligible_mark.get(ApplicationConstants.CGPA)
-				&& student_mark.get(ApplicationConstants.ARREAR_COUNT) <= eligible_mark
-						.get(ApplicationConstants.ARREAR_COUNT)) {
+		if (student_mark.getMarkX() >= eligible_mark.getMarkX()
+				&& student_mark.getMarkXII()>= eligible_mark
+						.getMarkXII()
+				&& student_mark.getCgpa() >= eligible_mark.getCgpa()
+				&& student_mark.getArrearCount() <= eligible_mark.getArrearCount()) {
 			return true;
 
 		}
@@ -37,9 +38,7 @@ public class ApplicationValidateService {
 	}
 
 	public boolean alreadyApplied(Company company, String reg_no) {
-		return validateDelegate.checkIsApplied(company,reg_no);
+		return validateDelegate.checkIsApplied(company, reg_no);
 	}
-
-	
 
 }

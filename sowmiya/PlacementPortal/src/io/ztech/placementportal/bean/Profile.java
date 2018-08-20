@@ -1,8 +1,10 @@
 package io.ztech.placementportal.bean;
 
+import io.ztech.placementportal.constants.ApplicationConstants;
+
 public class Profile {
-	String student_id, title, description;
-	int profileDetailId;
+	private String student_id, title, description;
+	private int profileDetailId;
 
 	public String getStudent_id() {
 		return student_id;
@@ -34,6 +36,12 @@ public class Profile {
 
 	public void setProfileDetailId(int profileDetailId) {
 		this.profileDetailId = profileDetailId;
+	}
+
+	@Override
+	public String toString() {
+		return ApplicationConstants.ID + profileDetailId + ApplicationConstants.TITLE + title
+				+ ApplicationConstants.DESCRPTION + description;
 	}
 
 }

@@ -9,13 +9,14 @@ import io.ztech.placementportal.bean.Profile;
 import io.ztech.placementportal.dbutil.DbConnection;
 
 public class UpdateProfileDao {
-	PreparedStatement ps = null;
-	ResultSet rs = null;
 
 	public boolean addToProfile(Profile profile, String sql) {
-		Connection connection = DbConnection.getConnection();
+		Connection connection = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 		try {
-			ps = connection.prepareStatement(sql); 
+			connection = DbConnection.getConnection();
+			ps = connection.prepareStatement(sql);
 			ps.setString(1, profile.getTitle());
 			ps.setString(2, profile.getDescription());
 			ps.setInt(3, profile.getProfileDetailId());
@@ -28,8 +29,7 @@ public class UpdateProfileDao {
 		} finally {
 			DbConnection.closeConnection(rs, ps, connection);
 		}
-		
-		
+
 		return false;
 	}
 

@@ -5,279 +5,256 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 import io.ztech.placementportal.bean.Company;
-import io.ztech.placementportal.bean.Register;
+import io.ztech.placementportal.bean.Eligiblity;
+import io.ztech.placementportal.bean.Marks;
+import io.ztech.placementportal.bean.PersonalInfo;
+import io.ztech.placementportal.bean.Profile;
+import io.ztech.placementportal.bean.Student;
 import io.ztech.placementportal.constants.ApplicationConstants;
 import io.ztech.placementportal.constants.SqlConstants;
 import io.ztech.placementportal.dbutil.DbConnection;
 
 public class RetrieveDetailsDao {
-	PreparedStatement ps = null;
-	ResultSet rs = null;
+	PreparedStatement preparedStatement = null;
+	ResultSet resultSet = null;
 
-	public HashMap<String, String> getStudentDetail(String reg_no) {
+	public Student getStudentDetail(String reg_no) throws SQLException {
 		Connection connection = DbConnection.getConnection();
-		HashMap<String, String> map = new LinkedHashMap<>();
+		Student student = new Student();
 		try {
-			ps = connection.prepareStatement(SqlConstants.GETSTUDENTDETAIL);
-			ps.setString(1, reg_no);
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				map.put(ApplicationConstants.STUDENT_NAME, rs.getString("student_name"));
-				map.put(ApplicationConstants.DEPARTMENT, rs.getString("department"));
-				map.put(ApplicationConstants.PLACEMENT_STATUS, rs.getString("isPlaced"));
+			preparedStatement = connection.prepareStatement(SqlConstants.GETSTUDENTDETAIL);
+			preparedStatement.setString(1, reg_no);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				student.setStudentId(resultSet.getString("student_id"));
+				student.setName(resultSet.getString("student_name"));
+				student.setDepartment(resultSet.getString("department"));
 			}
-			return map;
+			return student;
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException(ApplicationConstants.ERROR);
 		} finally {
-			DbConnection.closeConnection(rs, ps, connection);
+			DbConnection.closeConnection(resultSet, preparedStatement, connection);
 		}
-		return null;
 	}
 
-	public HashMap<String, Float> getMarkDetail(String reg_no) {
+	public Marks getMarkDetail(String reg_no) throws SQLException {
 		Connection connection = DbConnection.getConnection();
-		HashMap<String, Float> map = new LinkedHashMap<>();
+		Marks mark = new Marks();
 		try {
-			ps = connection.prepareStatement(SqlConstants.GETMARKDETAIL);
-			ps.setString(1, reg_no);
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				map.put(ApplicationConstants.PERCENTAGE_X, rs.getFloat("mark_x"));
-				map.put(ApplicationConstants.PERCENTAGE_XII, rs.getFloat("mark_xii"));
-				map.put(ApplicationConstants.CGPA, rs.getFloat("cgpa"));
-				map.put(ApplicationConstants.ARREAR_COUNT, (float) rs.getInt("arrear_count"));
+			preparedStatement = connection.prepareStatement(SqlConstants.GETMARKDETAIL);
+			preparedStatement.setString(1, reg_no);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				mark.setMarkX(resultSet.getFloat("mark_x"));
+				mark.setMarkXII(resultSet.getFloat("mark_xii"));
+				mark.setCgpa(resultSet.getFloat("cgpa"));
+				mark.setArrearCount(resultSet.getInt("arrear_count"));
 			}
-			return map;
+			return mark;
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException(ApplicationConstants.ERROR);
 		} finally {
-			DbConnection.closeConnection(rs, ps, connection);
+			DbConnection.closeConnection(resultSet, preparedStatement, connection);
 		}
-		return null;
 	}
 
-	public HashMap<String, String> getPersonalDetail(String reg_no) {
+	public PersonalInfo getPersonalDetail(String reg_no) throws SQLException {
 		Connection connection = DbConnection.getConnection();
-		HashMap<String, String> map = new LinkedHashMap<>();
+		PersonalInfo personalInfo = new PersonalInfo();
 		try {
-			ps = connection.prepareStatement(SqlConstants.GETPERSONALDETAIL);
-			ps.setString(1, reg_no);
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				map.put(ApplicationConstants.D_O_B, rs.getString("date_of_birth"));
-				map.put(ApplicationConstants.GENDER, rs.getString("gender"));
-				map.put(ApplicationConstants.BLOOD_GROUP, rs.getString("blood_group"));
-				map.put(ApplicationConstants.PHONE_NUMBER, rs.getString("phone_number"));
-				map.put(ApplicationConstants.ALTERNATE_PHONE, rs.getString("alternate_phone"));
-				map.put(ApplicationConstants.EMAIL_ID, rs.getString("email"));
-				map.put(ApplicationConstants.ALTERNATE_EMAIL_ID, rs.getString("alternate_email"));
-				map.put(ApplicationConstants.LOCATION, rs.getString("location"));
+			preparedStatement = connection.prepareStatement(SqlConstants.GETPERSONALDETAIL);
+			preparedStatement.setString(1, reg_no);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				personalInfo.setDateOfBirth(resultSet.getString("date_of_birth"));
+				personalInfo.setGender(resultSet.getString("gender"));
+				personalInfo.setBloodGroup(resultSet.getString("blood_group"));
+				personalInfo.setPhoneNumber(resultSet.getString("phone_number"));
+				personalInfo.setAlternatePhone(resultSet.getString("alternate_phone"));
+				personalInfo.setEmail(resultSet.getString("email"));
+				personalInfo.setAlternateEmail(resultSet.getString("alternate_email"));
+				personalInfo.setLocation(resultSet.getString("location"));
 			}
-			return map;
+			return personalInfo;
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException(ApplicationConstants.ERROR);
+
 		} finally {
-			DbConnection.closeConnection(rs, ps, connection);
+			DbConnection.closeConnection(resultSet, preparedStatement, connection);
 		}
-		return null;
 	}
 
-	public ArrayList<HashMap<String, String>> getAcheivementDetail(String reg_no) {
+	public ArrayList<Profile> getProfileDetail(String reg_no, String sql) throws SQLException {
 		Connection connection = DbConnection.getConnection();
-		ArrayList<HashMap<String, String>> list = new ArrayList<>();
+		Profile profile;
+		ArrayList<Profile> list = new ArrayList<>();
 		try {
-			ps = connection.prepareStatement(SqlConstants.GETACHIEVEMENT);
-			ps.setString(1, reg_no);
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				HashMap<String, String> map = new LinkedHashMap<>();
-				map.put(ApplicationConstants.ACHIEVEMENT_ID, rs.getString("achievement_id"));
-				map.put(ApplicationConstants.TITLE, rs.getString("title"));
-				map.put(ApplicationConstants.DESCRPTION, rs.getString("description"));
-			}
-			return list;
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbConnection.closeConnection(rs, ps, connection);
-		}
-		return null;
-	}
-
-	public ArrayList<HashMap<String, String>> getProjectDetail(String reg_no) {
-		Connection connection = DbConnection.getConnection();
-		ArrayList<HashMap<String, String>> list = new ArrayList<>();
-		try {
-			ps = connection.prepareStatement(SqlConstants.GETPROJECT);
-			ps.setString(1, reg_no);
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				HashMap<String, String> map = new LinkedHashMap<>();
-				map.put(ApplicationConstants.PROJECT_ID, rs.getString("project_id"));
-				map.put(ApplicationConstants.PROJECT_TITLE, rs.getString("project_title"));
-				map.put(ApplicationConstants.DESCRPTION, rs.getString("descrption"));
-				list.add(map);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, reg_no);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				profile = new Profile();
+				profile.setProfileDetailId(resultSet.getInt(1));
+				profile.setTitle(resultSet.getString(2));
+				profile.setDescription(resultSet.getString(3));
+				list.add(profile);
 			}
 			return list;
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException(ApplicationConstants.ERROR);
 		} finally {
-			DbConnection.closeConnection(rs, ps, connection);
+			DbConnection.closeConnection(resultSet, preparedStatement, connection);
 		}
-		return null;
 	}
 
-	public ArrayList<HashMap<String, String>> getCourseDetail(String reg_no) {
+	public ArrayList<Company> getCompanyDetail() throws SQLException {
 		Connection connection = DbConnection.getConnection();
-		ArrayList<HashMap<String, String>> list = new ArrayList<>();
+		ArrayList<Company> list = new ArrayList<>();
 		try {
-			ps = connection.prepareStatement(SqlConstants.GETCOURSES);
-			ps.setString(1, reg_no);
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				HashMap<String, String> map = new LinkedHashMap<>();
-				map.put(ApplicationConstants.COURSE_ID, rs.getString("project_id"));
-				map.put(ApplicationConstants.COURSE_TITLE, rs.getString("course_title"));
-				map.put(ApplicationConstants.CERTIFIED_BY, rs.getString("certified_institution"));
-				list.add(map);
+			preparedStatement = connection.prepareStatement(SqlConstants.GETCOMPANYDETAIL);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Company companyDetail = new Company();
+				companyDetail.setCompanyId(resultSet.getInt("company_id"));
+				companyDetail.setCompanyName(resultSet.getString("company_name"));
+				companyDetail.setCompanyType(resultSet.getString("company_type"));
+				companyDetail.setCompanyDescription(resultSet.getString("company_description"));
+				companyDetail.setJobLocation(resultSet.getString("job_location"));
+				companyDetail.setPayment(resultSet.getString("payment"));
+				companyDetail.setDayOfRecruitment(resultSet.getString("day_of_recruitment"));
+				companyDetail.setDesignation(resultSet.getString("designation"));
+				companyDetail.setLastDateForRegistration(resultSet.getString("last_date"));
+				list.add(companyDetail);
 			}
 			return list;
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException(ApplicationConstants.ERROR);
+
 		} finally {
-			DbConnection.closeConnection(rs, ps, connection);
+			DbConnection.closeConnection(resultSet, preparedStatement, connection);
 		}
-		return null;
 	}
 
-	public ArrayList<HashMap<String, String>> getCompanyDetail() {
+	public Eligiblity getEligiblityDetail(Company company) {
 		Connection connection = DbConnection.getConnection();
-		ArrayList<HashMap<String, String>> list = new ArrayList<>();
+		Eligiblity eligiblityDetail = new Eligiblity();
 		try {
-			ps = connection.prepareStatement(SqlConstants.GETCOMPANYDETAIL);
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				HashMap<String, String> map = new LinkedHashMap<>();
-				map.put(ApplicationConstants.COMPANY_ID, rs.getString("company_id"));
-				map.put(ApplicationConstants.COMPANY_NAME, rs.getString("company_name"));
-				map.put(ApplicationConstants.COMPANY_TYPE, rs.getString("company_description"));
-				map.put(ApplicationConstants.COMPANY_DESCRIPTION, rs.getString("company_description"));
-				map.put(ApplicationConstants.JOB_LOCATION, rs.getString("job_location"));
-				map.put(ApplicationConstants.PAYMENT, rs.getString("payment"));
-				map.put(ApplicationConstants.RECRUITMENT__DATE, rs.getString("day_of_recruitment"));
-				map.put(ApplicationConstants.DESIGNATION, rs.getString("designation"));
-				list.add(map);
-
+			preparedStatement = connection.prepareStatement(SqlConstants.GETELIGIBLITYDETAIL);
+			preparedStatement.setInt(1, company.getCompanyId());
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				eligiblityDetail.setMarkX(resultSet.getFloat("percent10"));
+				eligiblityDetail.setMarkXII(resultSet.getFloat("percent12"));
+				eligiblityDetail.setCgpa(resultSet.getFloat("cgpa"));
+				eligiblityDetail.setArrearCount(resultSet.getInt("arrear_count"));
 			}
-			return list;
+			return eligiblityDetail;
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+
 		} finally {
-			DbConnection.closeConnection(rs, ps, connection);
+			DbConnection.closeConnection(resultSet, preparedStatement, connection);
 		}
 		return null;
 	}
 
-	public HashMap<String, Float> getEligiblityDetail(Company company) {
+	public ArrayList<Student> getEligiblityList(Company company) throws SQLException {
 		Connection connection = DbConnection.getConnection();
-		HashMap<String, Float> map = new LinkedHashMap<>();
+		ArrayList<Student> list = new ArrayList<>();
+		Student student;
 		try {
-			ps = connection.prepareStatement(SqlConstants.GETELIGIBLITYDETAIL);
-			ps.setInt(1, company.getCompany_id());
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				map.put(ApplicationConstants.PERCENTAGE_X, rs.getFloat("percent10"));
-				map.put(ApplicationConstants.PERCENTAGE_XII, rs.getFloat("percent12"));
-				map.put(ApplicationConstants.CGPA, rs.getFloat("cgpa"));
-				map.put(ApplicationConstants.ARREAR_COUNT, (float) rs.getInt("arrear_count"));
-			}
-			return map;
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbConnection.closeConnection(rs, ps, connection);
-		}
-		return null;
-	}
-
-	public ArrayList<HashMap<String, String>> getEligiblityList(Company company) {
-		Connection connection = DbConnection.getConnection();
-		ArrayList<HashMap<String, String>> list = new ArrayList<>();
-		try {
-			ps = connection.prepareStatement(SqlConstants.GETELIGIBLITYLISt);
-			ps.setInt(1, company.getCompany_id());
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				HashMap<String, String> map = new LinkedHashMap<>();
-				map.put(ApplicationConstants.REGISTER_NO, rs.getString("student_id"));
-				map.put(ApplicationConstants.NAME, rs.getString("student_name"));
-				map.put(ApplicationConstants.DEPARTMENT, rs.getString("department"));
-				list.add(map);
+			preparedStatement = connection.prepareStatement(SqlConstants.GETELIGIBLITYLISt);
+			preparedStatement.setInt(1, company.getCompanyId());
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				student = new Student();
+				student.setStudentId(resultSet.getString("student_id"));
+				student.setName(resultSet.getString("student_name"));
+				student.setDepartment(resultSet.getString("department"));
+				list.add(student);
 			}
 			return list;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException(ApplicationConstants.ERROR);
+
 		} finally {
-			DbConnection.closeConnection(rs, ps, connection);
+			DbConnection.closeConnection(resultSet, preparedStatement, connection);
 		}
-		return null;
+
 	}
 
-	public ArrayList<HashMap<String, String>> viewProfile(String reg_no, String sql) {
-		Connection connection = DbConnection.getConnection();
-		ArrayList<HashMap<String, String>> list = new ArrayList<>();
-		try {
-			ps = connection.prepareStatement(sql);
-			ps.setString(1, reg_no);
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				HashMap<String, String> map = new LinkedHashMap<>();
-				map.put(ApplicationConstants.ID, rs.getString(1));
-				map.put(ApplicationConstants.TITLE, rs.getString(3));
-				map.put(ApplicationConstants.DESCRPTION, rs.getString(4));
-				list.add(map);
-			}
-			return list;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbConnection.closeConnection(rs, ps, connection);
-		}
-		return null;
-	}
-
-	public HashMap<String, String> viewSpecificProfileDetail(int profileDetailId, String sql) {
-		HashMap<String, String> profile = new HashMap<>();
+	public Profile viewSpecificProfileDetail(int profileDetailId, String sql) throws SQLException {
+		Profile profile = new Profile();
 		Connection connection = DbConnection.getConnection();
 		try {
-			ps = connection.prepareStatement(sql);
-			ps.setInt(1, profileDetailId);
-			rs = ps.executeQuery();
-			while (rs.next()) {
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, profileDetailId);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
 				System.out.println("yes");
-				profile.put(ApplicationConstants.TITLE, rs.getString(3));
-				profile.put(ApplicationConstants.DESCRPTION, rs.getString(4));
+				profile.setTitle(resultSet.getString(3));
+				profile.setDescription(resultSet.getString(4));
 			}
 			return profile;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException(ApplicationConstants.ERROR);
+
 		} finally {
-			DbConnection.closeConnection(rs, ps, connection);
+			DbConnection.closeConnection(resultSet, preparedStatement, connection);
+		}
+	}
+
+	public boolean checkIsAvailable(String input, String sql) throws SQLException {
+		Connection connection = DbConnection.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, input);
+			resultSet = preparedStatement.executeQuery();
+			if (resultSet.isBeforeFirst())
+				return true;
+			else
+				return false;
+		} catch (SQLException e) {
+			throw new SQLException(ApplicationConstants.ERROR);
+		} finally {
+			DbConnection.closeConnection(resultSet, preparedStatement, connection);
+		}
+	}
+
+	public Company getSpecificCompany(Company companyDetail) throws SQLException {
+		Connection connection = DbConnection.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(SqlConstants.GETSPECIFICCOMPANY);
+			preparedStatement.setInt(1, companyDetail.getCompanyId());
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				companyDetail.setCompanyId(resultSet.getInt("company_id"));
+				companyDetail.setCompanyName(resultSet.getString("company_name"));
+				companyDetail.setCompanyType(resultSet.getString("company_type"));
+				companyDetail.setCompanyDescription(resultSet.getString("company_description"));
+				companyDetail.setJobLocation(resultSet.getString("job_location"));
+				companyDetail.setPayment(resultSet.getString("payment"));
+				companyDetail.setDayOfRecruitment(resultSet.getString("day_of_recruitment"));
+				companyDetail.setDesignation(resultSet.getString("designation"));
+				companyDetail.setLastDateForRegistration(resultSet.getString("last_date"));
+
+			}
+			return companyDetail;
+
+		} catch (SQLException e) {
+			throw new SQLException(ApplicationConstants.ERROR);
+
+		} finally {
+			DbConnection.closeConnection(resultSet, preparedStatement, connection);
 		}
 
-		return null;
 	}
 }

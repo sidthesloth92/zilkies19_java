@@ -7,35 +7,35 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 import io.ztech.placementportal.bean.Company;
+import io.ztech.placementportal.constants.ApplicationConstants;
 import io.ztech.placementportal.constants.SqlConstants;
 import io.ztech.placementportal.dbutil.DbConnection;
 
 public class SubmitApplicationDao {
 
-	public boolean submitApplication(Company company, String reg_no, LocalDate date) {
-		Connection connection = DbConnection.getConnection();
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+	public boolean submitApplication(Company company, String reg_no, LocalDate date) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 		int success;
 		try {
-			ps = connection.prepareStatement(SqlConstants.APPLICATION);
-			ps.setString(1, reg_no);
-			ps.setInt(2, company.getCompany_id());
-			ps.setString(3, date.toString());
-			success = ps.executeUpdate();
+			connection = DbConnection.getConnection();
+			preparedStatement = connection.prepareStatement(SqlConstants.APPLICATION);
+			preparedStatement.setString(1, reg_no);
+			preparedStatement.setInt(2, company.getCompanyId());
+			preparedStatement.setString(3, date.toString());
+			success = preparedStatement.executeUpdate();
 			if (success >= 0)
 				return true;
 			else
 				return false;
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SQLException(ApplicationConstants.ERROR);
 		} finally {
-			DbConnection.closeConnection(rs, ps, connection);
+			DbConnection.closeConnection(resultSet, preparedStatement, connection);
 		}
 
-		return false;
 	}
 
 }

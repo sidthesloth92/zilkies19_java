@@ -13,7 +13,7 @@ public class ApplicationValidateDelegate {
 	}
 
 	public boolean checkIsApplied(Company company, String reg_no) {
-		return validateDao.checkIsApplied(company,reg_no);
+		return validateDao.checkIsApplied(company, reg_no);
 	}
 
 }

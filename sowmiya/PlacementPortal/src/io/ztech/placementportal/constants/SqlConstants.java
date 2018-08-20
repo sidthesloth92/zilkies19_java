@@ -2,11 +2,12 @@ package io.ztech.placementportal.constants;
 
 public class SqlConstants {
 
-	public final static String LOGIN_SQL = "select * from register where user_name=? and password=? and role=? and isactive=?";
-	public final static String CREATE_LOGIN = "insert into register (user_name,password,email,role,isactive,reg_no) values(?,?,?,?,?,?)";
-	public static final String STUDENT = "insert into student (student_id,student_name,isplaced) values(?,?,?)";
+	public final static String LOGIN_SQL = "select * from register where reg_no=? and password=? and isactive=?";
+	public final static String SET_RECENT_LOGIN = "update register set updated_at=? where reg_no=?";
+	public final static String CREATE_LOGIN = "insert into register (password,email,role,isactive,reg_no) values(?,?,?,?,?)";
+	public static final String STUDENT = "insert into student (student_id,student_name,isplaced,department) values(?,?,?,?)";
 	public static final String ACADEMIC_DETAILS = "insert into Marks(student_id,mark_x,mark_xii,cgpa,arrear_count) values(?,?,?,?,?)";
-	public static final String COMPANY = "insert into company_details (company_name,company_description,company_type,job_location,designation,payment,day_of_recruitment)values(?,?,?,?,?,?,?)";
+	public static final String COMPANY = "insert into company_details (company_name,company_description,company_type,job_location,designation,payment,day_of_recruitment,last_date)values(?,?,?,?,?,?,?,?)";
 	public static final String GETSTUDENTDETAIL = "select * from student where student_id=?";
 	public static final String GET_RECENT_COMPANY = "select max(company_id) from company_details";
 	public static final String ELIGIBLITY = "insert into eligiblity(company_id,percent10,percent12,cgpa,arrear_count)values(?,?,?,?,?)";
@@ -40,5 +41,9 @@ public class SqlConstants {
 	public static final String GETSPECIFICPROJECT = "select * from project where project_id=?";
 	public static final String GETSPECIFICCOURSES = "select * from certifications where course_id=?";
 	public static final String RECENT_LOGIN = "update register set recent_login=? where reg_no=?";
+	public static final String CHECK_USER = "select * from register where user_name=?";
+	public static final String CHECK_EMAIL = "select * from register where email=?";
+	public static final String CHECK_REGISTER_NO = "select * from register where reg_no=?";
+	public static final String GETSPECIFICCOMPANY = "select * from company_details where company_id=?";
 
 }

@@ -1,24 +1,44 @@
 package io.ztech.placementportal.bean;
 
+import io.ztech.placementportal.constants.ApplicationConstants;
+
 public class PlacedDetail {
-	String student_id;
-	int company_id;
-	String jobStatus;
-	public String getStudent_id() {
-		return student_id;
+	private String studentId;
+	private int companyId;
+	private String jobStatus;
+
+	
+	@Override
+	public String toString() {
+		return ApplicationConstants.JOB + jobStatus;
 	}
-	public void setStudent_id(String student_id) {
-		this.student_id = student_id;
+
+
+	public String getStudentId() {
+		return studentId;
 	}
-	public int getCompany_id() {
-		return company_id;
+
+
+	public void setStudentId(String studentId) {
+		this.studentId = studentId;
 	}
-	public void setCompany_id(int company_id) {
-		this.company_id = company_id;
+
+
+	public int getCompanyId() {
+		return companyId;
 	}
+
+
+	public void setCompanyId(int companyId) {
+		this.companyId = companyId;
+	}
+
+
 	public String getJobStatus() {
 		return jobStatus;
 	}
+
+
 	public void setJobStatus(String jobStatus) {
 		this.jobStatus = jobStatus;
 	}
