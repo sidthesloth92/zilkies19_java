@@ -1,8 +1,43 @@
 package io.ztech.cricketapp.beans;
 
+import java.util.ArrayList;
+
 public class User {
 	int userId;
 	String userName, firstName, lastName, password;
+	ArrayList<Player> players;
+	ArrayList<Team> teams;
+	ArrayList<Match> matches;
+	
+	public User() {
+		players = new ArrayList<>();
+		teams = new ArrayList<>();
+		matches = new ArrayList<>();
+	}
+	
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(ArrayList<Player> players) {
+		this.players = players;
+	}
+
+	public ArrayList<Team> getTeams() {
+		return teams;
+	}
+
+	public void setTeams(ArrayList<Team> teams) {
+		this.teams = teams;
+	}
+
+	public ArrayList<Match> getMatches() {
+		return matches;
+	}
+
+	public void setMatches(ArrayList<Match> matches) {
+		this.matches = matches;
+	}
 	
 	public String getUserName() {
 		return userName;
@@ -33,5 +68,18 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public void addPlayer(Player player) {
+		this.players.add(player);
+	}
+	public void addPlayer(ArrayList<Player> players) {
+		this.players.addAll(players);
+	}
+	public void addTeam(Team team) {
+		this.teams.add(team);
+	}
+	public void addMatch(Match match) {
+		this.matches.add(match);
 	}
 }

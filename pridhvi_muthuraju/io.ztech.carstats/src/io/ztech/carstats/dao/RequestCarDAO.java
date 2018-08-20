@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 import io.ztech.carstats.beans.Request;
 import io.ztech.carstats.beans.Specification;
@@ -16,12 +15,11 @@ import io.ztech.carstats.dbutils.DBUtils;
 
 public class RequestCarDAO {
 
-	private final Logger logger = Logger.getLogger(FetchDetailsDAO.class.getName());
 	private Connection con = null;
 	private PreparedStatement pst = null;
-	private ResultSet res = null;;
+	private ResultSet res = null;
 
-	public boolean addCarUserRequest(Request request, User user, Specification specification) {
+	public boolean addCarUserRequest(Request request, User user, Specification specification) throws SQLException {
 
 		try {
 
@@ -31,8 +29,7 @@ public class RequestCarDAO {
 			pst.setString(2, user.getUserName());
 			pst.executeUpdate();
 		} catch (SQLException e) {
-			logger.info(AppConstants.SQL_ERROR);
-			return false;
+			throw new SQLException();
 		} finally {
 			DBUtils.closeConnection(con, pst, null);
 		}
@@ -47,7 +44,6 @@ public class RequestCarDAO {
 			res.next();
 			request.setRequestId(res.getInt(1));
 		} catch (SQLException e) {
-			logger.info(AppConstants.SQL_ERROR);
 			return false;
 		} finally {
 			DBUtils.closeConnection(con, pst, null);
@@ -62,7 +58,6 @@ public class RequestCarDAO {
 			pst.setInt(1, specification.getCarId());
 			pst.executeUpdate();
 		} catch (SQLException e) {
-			logger.info(AppConstants.SQL_ERROR);
 			return false;
 		} finally {
 			DBUtils.closeConnection(con, pst, null);
@@ -70,7 +65,7 @@ public class RequestCarDAO {
 		return true;
 	}
 
-	public ArrayList<Request> getRequests(User user) {
+	public ArrayList<Request> getRequests(User user) throws SQLException {
 		ArrayList<Request> requests = new ArrayList<>();
 		try {
 			con = DBUtils.getConnection();
@@ -88,8 +83,7 @@ public class RequestCarDAO {
 				requests.add(request);
 			}
 		} catch (SQLException e) {
-			logger.info(AppConstants.SQL_ERROR);
-			return null;
+			throw new SQLException();
 		} finally {
 			DBUtils.closeConnection(con, pst, null);
 		}
@@ -99,15 +93,14 @@ public class RequestCarDAO {
 			return requests;
 	}
 
-	public boolean deleteRequest(Request request) {
+	public boolean deleteRequest(Request request) throws SQLException {
 		try {
 			con = DBUtils.getConnection();
 			pst = con.prepareStatement(SQLConstants.DELETE_REQUEST);
 			pst.setInt(1, request.getRequestId());
 			pst.executeUpdate();
 		} catch (SQLException e) {
-			logger.info(AppConstants.SQL_ERROR);
-			return false;
+			throw new SQLException();
 		} finally {
 			DBUtils.closeConnection(con, pst, null);
 		}

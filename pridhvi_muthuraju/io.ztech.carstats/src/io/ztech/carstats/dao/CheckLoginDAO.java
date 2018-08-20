@@ -4,15 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Logger;
 
 import io.ztech.carstats.beans.User;
-import io.ztech.carstats.constants.AppConstants;
 import io.ztech.carstats.constants.SQLConstants;
 import io.ztech.carstats.dbutils.DBUtils;
 
 public class CheckLoginDAO {
-	public static final Logger logger = Logger.getLogger(CheckLoginDAO.class.getName());
 	private static Connection con = null;
 	private static PreparedStatement pst = null;
 	private static ResultSet res = null;
@@ -29,10 +26,9 @@ public class CheckLoginDAO {
 			if (res.getInt(1) == 0)
 				flag = false;
 		} catch (SQLException e) {
-			logger.info(AppConstants.SQL_ERROR);
+			throw new SQLException();
 		} finally {
 			DBUtils.closeConnection(con, pst, null);
-
 		}
 		return flag;
 	}
@@ -49,7 +45,7 @@ public class CheckLoginDAO {
 			if (res.getInt(1) == 0)
 				flag = false;
 		} catch (SQLException e) {
-			logger.info(AppConstants.SQL_ERROR);
+			throw new SQLException();
 		} finally {
 			DBUtils.closeConnection(con, pst, null);
 

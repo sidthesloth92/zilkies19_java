@@ -32,7 +32,7 @@ public class AddCarDelegate {
 		return addCarDAO.getCarId();
 	}
 
-	public boolean addCarId(CarType carType, Make make, Specification specification) {
+	public boolean addCarId(CarType carType, Make make, Specification specification) throws SQLException {
 		return addCarDAO.addCarId(carType, make, specification);
 	}
 }

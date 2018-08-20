@@ -3,33 +3,33 @@ package io.ztech.cricketapp.controller;
 import io.ztech.cricketapp.beans.User;
 import io.ztech.cricketapp.constants.Regex;
 import io.ztech.cricketapp.constants.UserMessages;
-import io.ztech.cricketapp.delegate.UserManager;
+import io.ztech.cricketapp.delegate.UserDelegate;
 
 public class UserController {
-	UserManager userManager;
+	UserDelegate userDelegate;
 	Validator validator;
 
 	public UserController() {
-		userManager = new UserManager();
+		userDelegate = new UserDelegate();
 		validator = new Validator();
 	}
 
 	public boolean checkUser(User user) {
-		return userManager.checkUser(user);
+		return userDelegate.checkUser(user);
 	}
 
 	public User verifyUser(User user) {
-		return userManager.verifyUser(user);
+		return userDelegate.verifyUser(user);
 	}
 
 	public boolean createUser(User newUser) {
 		if (validator.validateInput(Regex.nameRegex, newUser.getFirstName(), UserMessages.INVALID_FIRST_NAME)
 				&& validator.validateInput(Regex.nameRegex, newUser.getFirstName(), UserMessages.INVALID_FIRST_NAME)) {
-			if (userManager.checkUser(newUser)) {
+			if (userDelegate.checkUser(newUser)) {
 				System.out.println(UserMessages.USER_ALREADY_EXISTS);
 				return false;
 			}
-			userManager.createUser(newUser);
+			userDelegate.createUser(newUser);
 			return true;
 		} else {
 			return false;

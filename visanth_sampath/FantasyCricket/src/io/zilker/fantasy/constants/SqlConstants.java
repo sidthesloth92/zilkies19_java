@@ -1,19 +1,19 @@
 package io.zilker.fantasy.constants;
 
 public class SqlConstants {
-	public static final String LOGIN_SELECT ="SELECT * FROM users WHERE user_name= ? AND password = ?";
-	public static final String  SIGNUP_INSERT = "INSERT INTO users (user_name,email,password) VALUES (?,?,?)";
-	public static final String  MATCH_INSERT = "INSERT INTO matches_scheduled (team1,team2,scheduled_date,start_time,end_time,match_credits) VALUES (?,?,?,?,?,?)";
-	public static final String  MATCH_STATUS_INSERT = "INSERT INTO match_status (match_id,is_active,is_upcomming) values(?,1,1)";
-	public static final String  SELECT_LAST_INSERTED_ID = "SELECT * FROM matches_scheduled ORDER BY match_id DESC;";
-	public static final String  SELECT_ACTIVE_MATCHES = "SELECT * FROM matches_scheduled INNER JOIN match_status WHERE match_status.is_active = 1 AND matches_scheduled.match_id = match_status.match_id";
-	public static final String  UPDATE_ACTIVE_MATCH = "UPDATE match_status SET is_active= 0 WHERE match_id = ?";
-	public static final String  INSERT_INTO_PLAYER = "INSERT INTO player (player_name,type,rating) VALUES (?,?,?)";
-	public static final String  INSERT_INTO_TEAM = "INSERT INTO team (team_name) VALUES (?)";
-	public static final String  SELECT_TEAM_TABLE = "SELECT * FROM team WHERE team_name = ? ";
-	public static final String  INSERT_INTO_TEAM_AND_PLAYER = "INSERT INTO players_in_team (team_id,player_id) VALUES (?,?)";
-	public static final String  SELECT_LAST_PLAYER = "SELECT * FROM player order by player_id  desc";
-	public static final String  SELECT_PLAYERS = "SELECT * FROM player"; 
+	public static final String LOGIN_SELECT = "SELECT * FROM users WHERE user_name= ? AND password = ?";
+	public static final String SIGNUP_INSERT = "INSERT INTO users (user_name,email,password) VALUES (?,?,?)";
+	public static final String MATCH_INSERT = "INSERT INTO matches_scheduled (team1,team2,scheduled_date,start_time,end_time,match_credits) VALUES (?,?,?,?,?,?)";
+	public static final String MATCH_STATUS_INSERT = "INSERT INTO match_status (match_id,is_active,is_upcomming) values(?,1,1)";
+	public static final String SELECT_LAST_INSERTED_ID = "SELECT * FROM matches_scheduled ORDER BY match_id DESC;";
+	public static final String SELECT_ACTIVE_MATCHES = "SELECT * FROM matches_scheduled INNER JOIN match_status WHERE match_status.is_active = 1 AND matches_scheduled.match_id = match_status.match_id";
+	public static final String UPDATE_ACTIVE_MATCH = "UPDATE match_status SET is_active= 0 WHERE match_id = ?";
+	public static final String INSERT_INTO_PLAYER = "INSERT INTO player (player_name,type,rating) VALUES (?,?,?)";
+	public static final String INSERT_INTO_TEAM = "INSERT INTO team (team_name) VALUES (?)";
+	public static final String SELECT_TEAM_TABLE = "SELECT * FROM team WHERE team_name = ? ";
+	public static final String INSERT_INTO_TEAM_AND_PLAYER = "INSERT INTO players_in_team (team_id,player_id) VALUES (?,?)";
+	public static final String SELECT_LAST_PLAYER = "SELECT * FROM player order by player_id  desc";
+	public static final String SELECT_PLAYERS = "SELECT * FROM player";
 	public static final String UPDATE_PLAYER_RATING = "UPDATE player SET rating = ? WHERE player_id = ?";
 	public static final String SELECT_ROLE = "SELECT * FROM player WHERE player_id = ? ";
 	public static final String SELECT_MATCH = "SELECT * FROM matches_scheduled WHERE match_id = ?";
@@ -37,4 +37,6 @@ public class SqlConstants {
 	public static final String GET_TOP_PICKS = "SELECT player_id,count(player_id) AS k FROM players_picked a WHERE EXISTS (SELECT * FROM players_picked WHERE player_id = a.player_id AND match_id = ? )GROUP BY player_id ORDER BY k DESC";
 	public static final String INSERT_INTO_MOSTLY_PICKED_PLAYERS = "INSERT INTO most_picked_players (player_id,match_id) VALUES (?,?)";
 	public static final String SELECT_MOST_PICKED = "SELECT * FROM most_picked_players INNER JOIN player WHERE most_picked_players.player_id = player.player_id AND match_id =? ";
+	public static final String SELECT_PARTICULAR_RESULT_TABLE = "SELECT * FROM result_board INNER JOIN users WHERE users.user_id = result_board.user_id AND result_board.user_id = ?";
+	public static final String SELECT_UPCOMING_MATCHES = "SELECT * FROM matches_scheduled INNER JOIN match_status WHERE matches_scheduled.match_id = match_status.match_id AND is_active = 1;";
 }

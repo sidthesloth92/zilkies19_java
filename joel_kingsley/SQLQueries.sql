@@ -12,6 +12,8 @@ DROP table CUSTOMER;
 SELECT database();
 use zilker;
 
+select * from user;
+
 create table TRUCK(
 	TRUCK_NUM bigint primary key,
     DRIVER_NAME varchar(40) not null

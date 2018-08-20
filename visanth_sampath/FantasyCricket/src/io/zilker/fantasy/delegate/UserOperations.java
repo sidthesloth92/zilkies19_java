@@ -25,7 +25,7 @@ public class UserOperations {
 	UserPickedTeam userPickedTeam = new UserPickedTeam();
 
 	// deduce the roles of each players
-	public void deduceRole(String role) {
+	public void deduceRoleCount(String role) {
 		try {
 			if (role.equals("Batsman")) {
 				numberOfBatsmen++;
@@ -36,14 +36,13 @@ public class UserOperations {
 			} else if (role.equals("All Rounder")) {
 				numberOfAllrounder++;
 			}
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			e.getStackTrace();
 		}
 	}
 
 	// deduce the roles of each players
-	public void addRole(String role) {
+	public void addRoleCount(String role) {
 		try {
 			if (role.equals("Batsman")) {
 				numberOfBatsmen--;
@@ -54,14 +53,13 @@ public class UserOperations {
 			} else if (role.equals("All Rounder")) {
 				numberOfAllrounder--;
 			}
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			e.getStackTrace();
 		}
 	}
 
 	// check for adding to valid list
-	public boolean checkForValidation(int playerId) {
+	public boolean validatePlayer(int playerId) {
 		try {
 			for (int i = 0; i < players.size(); i++) {
 				if (players.get(i) == playerId) {
@@ -99,7 +97,7 @@ public class UserOperations {
 			credits.add(playerCredits);
 			creditsCompleted += playerCredits;
 			totalCredits -= playerCredits;
-			deduceRole(role);
+			deduceRoleCount(role);
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
@@ -108,22 +106,26 @@ public class UserOperations {
 	}
 
 	// pick a team of 11 players
-	public void pickTeam(User user) {
-		ArrayList <Player> playersList = new ArrayList <Player>();
+	public ArrayList<Player> pickTeam(User user) {
+		ArrayList<Player> playersList = new ArrayList<Player>();
 		try {
 			userDAO.displayActiveMatches();
 			matchId = userService.callIntegerInputs();
-			match = userDAO.setMatchBean(matchId);
+			match = userDAO.setMatch(matchId);
 			totalCredits = match.getMatchCredits();
 			matchCredits = totalCredits;
 			displayTeams(match);
 			int count = 0;
 			while (count < 11) {
 				userService.callDisplayAlert(Integer.toString(totalCredits) + DisplayConstants.REMAINING_CREDITS);
-				userService.callDisplayAlert(DisplayConstants.DISPLAY_REMAINING +Integer.toString(4-numberOfBatsmen) +DisplayConstants.DISPLAY_BATSMEN+Integer.toString(3-numberOfBowler)+DisplayConstants.DISPLAY_BOWLER+Integer.toString(3-numberOfAllrounder)+DisplayConstants.DISPLAY_ALLROUNDER+Integer.toString(1-numberOfKeeper)+DisplayConstants.DISPLAY_KEEPER);
+				userService.callDisplayAlert(DisplayConstants.DISPLAY_REMAINING + Integer.toString(4 - numberOfBatsmen)
+						+ DisplayConstants.DISPLAY_BATSMEN + Integer.toString(3 - numberOfBowler)
+						+ DisplayConstants.DISPLAY_BOWLER + Integer.toString(3 - numberOfAllrounder)
+						+ DisplayConstants.DISPLAY_ALLROUNDER + Integer.toString(1 - numberOfKeeper)
+						+ DisplayConstants.DISPLAY_KEEPER);
 				isValid = false;
 				playerId = userService.callIntegerInputs();
-				isValid = checkForValidation(playerId);
+				isValid = validatePlayer(playerId);
 				if (isValid == true) {
 					count++;
 				}
@@ -131,10 +133,10 @@ public class UserOperations {
 			userId = user.getUserId();
 			addTeam(userId, matchId, players);
 			playersList = userDAO.displaySelectedTeam(matchId, user.getUserId());
-			userService.displayPlayerNamesList(playersList);
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
+		return playersList;
 	}
 
 	public void displayTeams(Match match) {
@@ -145,8 +147,7 @@ public class UserOperations {
 			userService.displayPlayerNamesList(playersList);
 			playersList = userDAO.displayTeam(match.getTeamTwo());
 			userService.displayPlayerNamesList(playersList);
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			e.getStackTrace();
 		}
 	}
@@ -161,36 +162,41 @@ public class UserOperations {
 			e.getStackTrace();
 		}
 	}
-	public void viewTeam(User user,int matchId) {
+
+	public void viewTeam(User user, int matchId) {
 		// TODO Auto-generated method stub
+		ArrayList<Player> playersList = new ArrayList<Player>();
 		try {
 			userId = user.getUserId();
-			userDAO.displaySelectedTeam(matchId, userId);
+			playersList = userDAO.displaySelectedTeam(matchId, userId);
+			userService.displayPlayerNamesList(playersList);
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
 	}
 
-	public void viewTeam(User user) {
-		// TODO Auto-generated method stub
+	public ArrayList<Player> viewTeam(User user) {
+		ArrayList<Player> playersList = new ArrayList<Player>();
 		try {
 			userDAO.displayActiveMatches();
 			matchId = userService.callIntegerInputs();
 			userId = user.getUserId();
-			userDAO.displaySelectedTeam(matchId, userId);
+			playersList = userDAO.displaySelectedTeam(matchId, userId);
+			//userService.displayPlayerNamesList(playersList);
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
+		return playersList;
 	}
 
 	// chat options
-	private void chat(User user) {
+	public boolean chat(User user) {
 		// TODO Auto-generated method stub
 		try {
 			do {
 				ArrayList<Message> messages = new ArrayList<Message>();
 				messages = userDAO.displayMessages();
-				userService .callDisplayMessages(messages);
+				userService.callDisplayMessages(messages);
 				userService.callDisplayAlert(DisplayConstants.CHAT_OPTIONS);
 				choice = userService.callIntegerInputs();
 				if (choice == 2) {
@@ -199,12 +205,13 @@ public class UserOperations {
 				userService.callDisplayAlert(DisplayConstants.ENTER_MESSAGE);
 				message = userService.callStringInputs();
 				userId = user.getUserId();
-				userDAO.insertIntoChat(userId, message);
+				userDAO.addChat(userId, message);
 			} while (choice != 2);
 		} catch (Exception e) {
 			e.getStackTrace();
+			return false;
 		}
-
+		return true;
 	}
 
 	// calculates the credits completed for a particular match
@@ -215,21 +222,20 @@ public class UserOperations {
 
 			for (index = 0; index < credits.size(); index++) {
 				role = userDAO.getRole(players.get(index));
-				deduceRole(role);
+				deduceRoleCount(role);
 				creditCount += credits.get(index);
 			}
 			creditsCompleted = creditCount;
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			e.getStackTrace();
 		}
 	}
 
 	// make the deletion and addition
-	public void makeUpdation(User user, UserPickedTeam userPickedTeam, int matchCredits,int matchId) {
+	public void makeUpdation(User user, UserPickedTeam userPickedTeam, int matchCredits, int matchId) {
 		try {
 			int count = 0;
-			viewTeam(user,matchId);
+			viewTeam(user, matchId);
 			players = userPickedTeam.getPlayerId();
 			credits = userPickedTeam.getCredits();
 			calculateCreditsCompleted(credits, players);
@@ -241,7 +247,7 @@ public class UserOperations {
 					userService.callDisplayAlert(DisplayConstants.DELETE_PLAYER_ID);
 					playerId = userService.callIntegerInputs();
 					role = userDAO.getRole(playerId);
-					addRole(role);
+					addRoleCount(role);
 					index = players.indexOf(playerId);
 					creditsCompleted -= credits.get(index);
 					players.remove(index);
@@ -253,106 +259,83 @@ public class UserOperations {
 				count -= 1;
 				userService.callDisplayAlert(DisplayConstants.ENTER_PLAYER_ID);
 				playerId = userService.callIntegerInputs();
-				checkForValidation(playerId);
+				validatePlayer(playerId);
 			}
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			e.getStackTrace();
 		}
 		// userService.displayAlert("exiting");
 	}
 
 	// view result
-	public void setResult(User user) {
+	public ResultBoard viewLeaderBoard(User user) {
 		try {
-			totalCredits = 0;
 			userService.callDisplayAlert(DisplayConstants.ENTER_MATCH_ID);
 			userDAO.displayCompletedMatches();
 			matchId = userService.callIntegerInputs();
-			/*totalCredits = userDAO.checkResultTable(user.getUserId(),matchId);
-			if(totalCredits==0) {
-				totalCredits = userDAO. calculateMatchScore(matchId,user.getUserId());
-			}
-			userService.displayAlert(Integer.toString(totalCredits));*/
+			/*
+			 * totalCredits = userDAO.checkResultTable(user.getUserId(),matchId);
+			 * if(totalCredits==0) { totalCredits = userDAO.
+			 * calculateMatchScore(matchId,user.getUserId()); }
+			 * userService.displayAlert(Integer.toString(totalCredits));
+			 */
 			resultBoard = userDAO.setResultBoard(matchId);
-			userService.displayResult(resultBoard);
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			e.getStackTrace();
 		}
-		
+		return resultBoard;
 	}
-	
-	//view Top picked players of a match
 
+	// view Top picked players of a match
 
 	// modify the selected team
-	public void modifyTeam(User user) {
+	public boolean modifyTeam(User user) {
 		// TODO Auto-generated method stub
 		try {
 			userDAO.displayActiveMatches();
 			matchId = userService.callIntegerInputs();
-			match = userDAO.setMatchBean(matchId);
+			match = userDAO.setMatch(matchId);
 			matchCredits = match.getMatchCredits();
 			// userService.displayAlert(Integer.toString(matchCredits));
-			userPickedTeam = userDAO.setUserTeamBean(user.getUserId(), matchId);
-			makeUpdation(user, userPickedTeam, matchCredits,matchId);
+			userPickedTeam = userDAO.setUserTeam(user.getUserId(), matchId);
+			makeUpdation(user, userPickedTeam, matchCredits, matchId);
 			userDAO.deleteOldTeam(matchId, user.getUserId());
 			addTeam(user.getUserId(), matchId, players);
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			e.getStackTrace();
+			return false;
 		}
+		return true;
 	}
-	
-	//see most picked
-	public void seeMostPicked() {
+
+	// see most picked
+	public ArrayList<String> viewMostPicked() {
+		ArrayList<String> playerNames = new ArrayList<String>();
 		try {
-			ArrayList <String> playerNames = new ArrayList <String>();
 			userService.callDisplayAlert(DisplayConstants.ENTER_MATCH_ID);
 			userDAO.displayCompletedMatches();
 			matchId = userService.callIntegerInputs();
-			playerNames = userDAO.getPlayersName (matchId);
-			userService.displayPlayerNames(playerNames);
-		}catch(Exception e) {
-			
-		}
-		
-	}
-
-	// main options
-	public void userMainMenu(User user) {
-		try {
-			do {
-				userService.callDisplayAlert(DisplayConstants.DISPLAY_USER_OPTIONS);
-				choice = userService.callIntegerInputs();
-				switch (choice) {
-				case 1:
-					pickTeam(user);
-					break;
-				case 2:
-					viewTeam(user);
-					break;
-				case 3:
-					modifyTeam(user);
-					break;
-				case 4:
-					chat(user);
-					break;
-				case 5:
-					setResult(user);
-					break;
-				case 6:
-					seeMostPicked();
-					break;
-				default:
-					break;
-				}
-			} while (choice < 7);
-		}
-		catch(Exception e) {
+			playerNames = userDAO.getPlayersName(matchId);
+		} catch (Exception e) {
 			e.getStackTrace();
 		}
+		return playerNames;
+
 	}
+	//get upcoming matches
+	public ArrayList<Match> getUpcomingMatches(){
+		ArrayList<Match> matchList = new ArrayList<Match>();
+		matchList = userDAO.getUpcomingMatches();
+		return matchList;
+	}
+
+	// view previous results
+	public ResultBoard ViewPreviousResults(User user) {
+		// TODO Auto-generated method stub
+		resultBoard = userDAO.getPreviousResult(user.getUserId());
+		return resultBoard;
+	}
+
+	
 
 }

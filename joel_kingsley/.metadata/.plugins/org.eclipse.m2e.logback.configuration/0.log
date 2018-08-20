@@ -619,3 +619,841 @@
 2018-08-12 22:52:47,095 [Worker-37: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
 2018-08-12 22:52:47,096 [Worker-37: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2018-08-12 22:52:47,097 [Worker-37: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 12:43:59,656 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 12:43:59,657 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 12:43:59,658 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 12:43:59,658 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 12:44:04,552 [Worker-45: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 12:44:04,552 [Worker-45: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 12:44:04,554 [Worker-45: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 12:44:04,554 [Worker-45: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 12:45:05,675 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 12:45:05,675 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 12:45:05,683 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 12:45:05,683 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 12:45:46,760 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 12:45:46,760 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 12:45:46,761 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 12:45:46,761 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 13:56:41,389 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 13:56:41,390 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 13:56:41,391 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 13:56:41,391 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 13:56:43,196 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 13:56:43,196 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 13:56:43,197 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 13:56:43,197 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 13:56:49,485 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 13:56:49,485 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 13:56:49,497 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 13:56:49,497 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 13:58:23,183 [Worker-52: Building workspace] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: io.ztech.jkingsley:streetrun:0.0.1-SNAPSHOT @ /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/pom.xml.
+2018-08-13 13:58:23,533 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 13:58:23,533 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 13:58:23,536 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 13:58:23,536 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 13:58:25,183 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 13:58:25,183 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 13:58:25,184 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 13:58:25,184 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 14:05:41,569 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:05:41,569 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 14:05:41,570 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:05:41,570 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 14:07:38,740 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:07:38,740 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 14:07:38,741 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:07:38,741 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 14:08:11,933 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:08:11,933 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 14:08:11,935 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:08:11,935 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 14:08:36,731 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:08:36,732 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 14:08:36,733 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:08:36,733 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 14:34:42,299 [Worker-51: Building workspace] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: io.ztech.jkingsley:streetrun:0.0.1-SNAPSHOT @ /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/pom.xml.
+2018-08-13 14:34:44,092 [Worker-51: Building workspace] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/com/maxmind/geoip/geoip-api/1.2.11/geoip-api-1.2.11.pom
+2018-08-13 14:34:44,360 [Worker-51: Building workspace] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/com/maxmind/geoip/geoip-api/1.2.11/geoip-api-1.2.11.pom
+2018-08-13 14:34:44,685 [Worker-51: Building workspace] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/com/maxmind/geoip/geoip-api/1.2.11/geoip-api-1.2.11.jar
+2018-08-13 14:34:45,812 [Worker-51: Building workspace] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/com/maxmind/geoip/geoip-api/1.2.11/geoip-api-1.2.11.jar
+2018-08-13 14:34:46,278 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:34:46,278 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 14:34:46,280 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:34:46,280 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 14:34:48,400 [Worker-51: Building workspace] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: io.ztech.jkingsley:streetrun:0.0.1-SNAPSHOT @ /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/pom.xml.
+2018-08-13 14:34:48,512 [Worker-49: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/com/maxmind/geoip/geoip-api/1.2.11/geoip-api-1.2.11-sources.jar
+2018-08-13 14:34:48,936 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:34:48,936 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 14:34:48,938 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:34:48,939 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 14:34:49,521 [Worker-49: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/com/maxmind/geoip/geoip-api/1.2.11/geoip-api-1.2.11-sources.jar
+2018-08-13 14:34:49,629 [Worker-49: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for com.maxmind.geoip:geoip-api:1.2.11
+2018-08-13 14:34:50,000 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:34:50,000 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 14:34:50,009 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:34:50,010 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 14:34:50,757 [Worker-53: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for com.maxmind.geoip:geoip-api:1.2.11
+2018-08-13 14:34:51,065 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:34:51,065 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 14:34:51,066 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:34:51,066 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 14:35:37,358 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:35:37,359 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 14:35:37,360 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:35:37,360 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 14:35:43,647 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:35:43,647 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 14:35:43,649 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:35:43,649 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 14:37:01,835 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:37:01,835 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 14:37:01,837 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:37:01,837 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 14:37:03,134 [Worker-53: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:37:03,134 [Worker-53: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 14:37:03,137 [Worker-53: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:37:03,137 [Worker-53: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 14:37:09,870 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:37:09,870 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 14:37:09,874 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 14:37:09,874 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 15:12:01,270 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:12:01,270 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 15:12:01,272 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:12:01,272 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 15:12:04,929 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:12:04,929 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 15:12:04,930 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:12:04,931 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 15:12:28,579 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:12:28,579 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 15:12:28,580 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:12:28,580 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 15:13:05,701 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:13:05,701 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 15:13:05,702 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:13:05,702 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 15:13:59,902 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:13:59,902 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 15:13:59,903 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:13:59,903 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 15:14:24,765 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:14:24,765 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 15:14:24,767 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:14:24,767 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 15:14:30,163 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:14:30,163 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 15:14:30,164 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:14:30,164 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 15:14:35,748 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:14:35,748 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 15:14:35,752 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:14:35,752 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 15:14:41,954 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:14:41,954 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 15:14:41,955 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:14:41,955 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 15:15:18,061 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:15:18,061 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 15:15:18,062 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:15:18,062 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 15:21:12,697 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:21:12,697 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 15:21:12,698 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:21:12,698 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 15:21:13,913 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:21:13,914 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 15:21:13,915 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:21:13,915 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 15:21:39,492 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:21:39,492 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 15:21:39,494 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:21:39,494 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 15:22:09,291 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:22:09,291 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 15:22:09,292 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 15:22:09,293 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:10:49,814 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:10:49,823 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:10:49,824 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:10:49,824 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:12:31,653 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:12:31,653 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:12:31,655 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:12:31,655 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:12:34,098 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:12:34,098 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:12:34,098 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:12:34,099 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:12:40,386 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:12:40,386 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:12:40,387 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:12:40,388 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:13:17,369 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:13:17,369 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:13:17,371 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:13:17,376 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:13:57,874 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:13:57,874 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:13:57,876 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:13:57,876 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:14:20,261 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:14:20,261 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:14:20,263 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:14:20,263 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:14:23,056 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:14:23,056 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:14:23,058 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:14:23,058 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:14:33,155 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:14:33,155 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:14:33,156 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:14:33,157 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:14:49,058 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:14:49,058 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:14:49,059 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:14:49,059 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:15:19,194 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:15:19,194 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:15:19,195 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:15:19,196 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:15:28,198 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:15:28,198 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:15:28,200 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:15:28,200 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:15:30,969 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:15:30,969 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:15:30,972 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:15:30,972 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:17:31,679 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:17:31,679 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:17:31,681 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:17:31,681 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:18:22,950 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:18:22,950 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:18:22,951 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:18:22,952 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:18:27,246 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:18:27,246 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:18:27,248 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:18:27,248 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:22:16,798 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:22:16,798 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:22:16,799 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:22:16,799 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:22:20,941 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:22:20,941 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:22:20,942 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:22:20,942 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:22:26,350 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:22:26,350 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:22:26,351 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:22:26,351 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:22:36,702 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:22:36,702 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:22:36,704 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:22:36,705 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:30:16,976 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:30:16,976 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:30:16,977 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:30:16,977 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:48:47,041 [Worker-57: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:48:47,041 [Worker-57: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:48:47,042 [Worker-57: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:48:47,043 [Worker-57: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:51:16,991 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:51:16,992 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:51:16,993 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:51:16,993 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:55:14,568 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:55:14,569 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:55:14,570 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:55:14,570 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:55:28,696 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:55:28,697 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:55:28,698 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:55:28,698 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:56:01,542 [Worker-58: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:56:01,542 [Worker-58: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:56:01,543 [Worker-58: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:56:01,543 [Worker-58: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:56:20,649 [Worker-57: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:56:20,649 [Worker-57: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:56:20,655 [Worker-57: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:56:20,655 [Worker-57: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:56:38,046 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:56:38,047 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:56:38,048 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:56:38,048 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:56:41,442 [Worker-57: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:56:41,442 [Worker-57: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:56:41,444 [Worker-57: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:56:41,444 [Worker-57: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:57:40,387 [Worker-58: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:57:40,388 [Worker-58: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:57:40,389 [Worker-58: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:57:40,389 [Worker-58: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:57:49,729 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:57:49,729 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:57:49,730 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:57:49,731 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:57:51,758 [Worker-58: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:57:51,759 [Worker-58: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:57:51,760 [Worker-58: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:57:51,760 [Worker-58: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:57:58,124 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:57:58,124 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:57:58,126 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:57:58,126 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 16:58:09,847 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:58:09,847 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 16:58:09,848 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 16:58:09,848 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 18:13:48,282 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 18:13:48,302 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 18:13:48,303 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 18:13:48,315 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 18:16:36,951 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 18:16:36,952 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 18:16:36,952 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 18:16:36,952 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 18:16:43,696 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 18:16:43,696 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 18:16:43,698 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 18:16:43,698 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 18:16:45,886 [Worker-60: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 18:16:45,886 [Worker-60: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 18:16:45,887 [Worker-60: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 18:16:45,887 [Worker-60: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 18:17:05,778 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 18:17:05,778 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 18:17:05,779 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 18:17:05,779 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 18:17:12,166 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 18:17:12,166 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 18:17:12,167 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 18:17:12,167 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 18:18:27,974 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 18:18:27,974 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 18:18:27,975 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 18:18:27,975 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 18:19:47,811 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 18:19:47,811 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 18:19:47,812 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 18:19:47,812 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 18:20:13,986 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 18:20:13,987 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 18:20:13,988 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 18:20:13,989 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 18:21:08,144 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 18:21:08,145 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 18:21:08,146 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 18:21:08,146 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 18:21:53,377 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 18:21:53,378 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 18:21:53,379 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 18:21:53,379 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 19:03:06,349 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 19:03:06,349 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 19:03:06,350 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 19:03:06,350 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 19:04:19,425 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 19:04:19,425 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 19:04:19,426 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 19:04:19,426 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 19:06:02,197 [Worker-61: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 19:06:02,197 [Worker-61: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 19:06:02,198 [Worker-61: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 19:06:02,198 [Worker-61: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-13 19:10:47,556 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 19:10:47,556 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-13 19:10:47,557 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-13 19:10:47,557 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:08:13,261 [Worker-5: Loading available Gradle versions] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2018-08-14 10:08:21,541 [Worker-10: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:08:21,542 [Worker-10: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:08:21,545 [Worker-10: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:08:21,545 [Worker-10: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:14:27,347 [Worker-8: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:14:27,350 [Worker-8: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:14:27,359 [Worker-8: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:14:27,359 [Worker-8: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:14:34,387 [Worker-19: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:14:34,387 [Worker-19: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:14:34,389 [Worker-19: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:14:34,389 [Worker-19: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:24:59,839 [Worker-22: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:24:59,840 [Worker-22: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:24:59,842 [Worker-22: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:24:59,842 [Worker-22: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:27:02,652 [Worker-22: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:27:02,652 [Worker-22: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:27:02,654 [Worker-22: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:27:02,654 [Worker-22: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:27:08,572 [Worker-22: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:27:08,572 [Worker-22: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:27:08,574 [Worker-22: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:27:08,574 [Worker-22: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:27:20,879 [Worker-21: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:27:20,879 [Worker-21: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:27:20,882 [Worker-21: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:27:20,882 [Worker-21: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:27:36,740 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:27:36,740 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:27:36,743 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:27:36,743 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:28:14,538 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:28:14,538 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:28:14,540 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:28:14,540 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:28:32,255 [Worker-23: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:28:32,256 [Worker-23: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:28:32,257 [Worker-23: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:28:32,258 [Worker-23: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:29:00,277 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:29:00,277 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:29:00,281 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:29:00,281 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:31:51,653 [Worker-25: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:31:51,653 [Worker-25: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:31:51,655 [Worker-25: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:31:51,655 [Worker-25: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:31:58,036 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:31:58,036 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:31:58,038 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:31:58,039 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:33:35,100 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:33:35,100 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:33:35,102 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:33:35,103 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:33:52,218 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:33:52,218 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:33:52,220 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:33:52,220 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:35:01,574 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:35:01,574 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:35:01,578 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:35:01,578 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:35:25,753 [Worker-25: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:35:25,753 [Worker-25: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:35:25,755 [Worker-25: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:35:25,755 [Worker-25: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:35:34,496 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:35:34,496 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:35:34,498 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:35:34,498 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:35:40,961 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:35:40,962 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:35:40,963 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:35:40,964 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:35:50,364 [Worker-28: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:35:50,365 [Worker-28: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:35:50,366 [Worker-28: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:35:50,366 [Worker-28: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:38:01,570 [Worker-28: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:38:01,571 [Worker-28: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:38:01,573 [Worker-28: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:38:01,573 [Worker-28: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:38:41,690 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:38:41,690 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:38:41,694 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:38:41,694 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:41:15,510 [Worker-26: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:41:15,510 [Worker-26: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:41:15,512 [Worker-26: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:41:15,512 [Worker-26: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:42:08,054 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:42:08,054 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:42:08,056 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:42:08,056 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:43:49,696 [Worker-26: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:43:49,696 [Worker-26: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:43:49,697 [Worker-26: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:43:49,697 [Worker-26: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:51:15,794 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:51:15,794 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:51:15,799 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:51:15,799 [Worker-24: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:53:07,027 [Worker-31: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:53:07,027 [Worker-31: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:53:07,028 [Worker-31: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:53:07,028 [Worker-31: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:58:42,106 [Worker-35: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:58:42,107 [Worker-35: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:58:42,108 [Worker-35: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:58:42,108 [Worker-35: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 10:59:19,562 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:59:19,562 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 10:59:19,571 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 10:59:19,572 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:04:03,029 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:04:03,030 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:04:03,031 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:04:03,031 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:04:14,343 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:04:14,343 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:04:14,344 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:04:14,344 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:04:24,907 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:04:24,907 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:04:24,909 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:04:24,909 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:04:28,602 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:04:28,602 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:04:28,603 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:04:28,603 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:04:30,438 [Worker-41: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:04:30,438 [Worker-41: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:04:30,439 [Worker-41: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:04:30,439 [Worker-41: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:04:37,495 [Worker-41: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:04:37,495 [Worker-41: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:04:37,496 [Worker-41: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:04:37,496 [Worker-41: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:05:24,666 [Worker-38: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:05:24,666 [Worker-38: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:05:24,667 [Worker-38: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:05:24,667 [Worker-38: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:06:38,226 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:06:38,226 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:06:38,227 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:06:38,227 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:08:09,053 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:08:09,053 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:08:09,054 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:08:09,054 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:08:13,634 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:08:13,634 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:08:13,635 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:08:13,635 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:09:02,826 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:09:02,826 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:09:02,827 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:09:02,828 [Worker-27: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:11:54,680 [Worker-46: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:11:54,681 [Worker-46: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:11:54,682 [Worker-46: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:11:54,682 [Worker-46: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:18:53,739 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:18:53,739 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:18:53,740 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:18:53,740 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:19:27,303 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:19:27,303 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:19:27,305 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:19:27,305 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:19:42,437 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:19:42,437 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:19:42,438 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:19:42,439 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:19:53,453 [Worker-41: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:19:53,453 [Worker-41: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:19:53,454 [Worker-41: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:19:53,456 [Worker-41: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:20:32,615 [ModalContext] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:20:32,616 [ModalContext] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:20:32,622 [ModalContext] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:20:32,622 [ModalContext] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:20:39,787 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:20:39,787 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:20:39,788 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:20:39,789 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:21:08,316 [ModalContext] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:21:08,316 [ModalContext] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:21:08,317 [ModalContext] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:21:08,317 [ModalContext] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:21:13,585 [Worker-48: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:21:13,585 [Worker-48: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:21:13,588 [Worker-48: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:21:13,588 [Worker-48: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:21:18,092 [Worker-41: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:21:18,092 [Worker-41: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:21:18,093 [Worker-41: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:21:18,094 [Worker-41: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:21:30,328 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:21:30,328 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:21:30,329 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:21:30,330 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:21:40,195 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:21:40,195 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:21:40,196 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:21:40,196 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:21:48,805 [ModalContext] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:21:48,805 [ModalContext] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:21:48,806 [ModalContext] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:21:48,807 [ModalContext] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:21:52,533 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:21:52,533 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:21:52,534 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:21:52,534 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:22:02,462 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:22:02,462 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:22:02,463 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:22:02,463 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:22:05,412 [Worker-48: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:22:05,412 [Worker-48: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:22:05,413 [Worker-48: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:22:05,413 [Worker-48: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:22:14,541 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:22:14,541 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:22:14,542 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:22:14,542 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:22:19,462 [Worker-41: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:22:19,462 [Worker-41: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:22:19,463 [Worker-41: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:22:19,463 [Worker-41: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:22:54,386 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:22:54,386 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:22:54,387 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:22:54,388 [Worker-49: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:22:58,804 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:22:58,804 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:22:58,805 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:22:58,805 [Worker-51: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:23:04,004 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:23:04,004 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:23:04,006 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:23:04,006 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:27:41,365 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:27:41,365 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:27:41,366 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:27:41,366 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:27:45,722 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:27:45,722 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:27:45,723 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:27:45,723 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:27:50,351 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:27:50,351 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:27:50,353 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:27:50,353 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:28:08,630 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:28:08,630 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:28:08,631 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:28:08,631 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:29:20,736 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:29:20,736 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:29:20,738 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:29:20,738 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:29:37,519 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:29:37,519 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:29:37,521 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:29:37,521 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:30:41,960 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:30:41,960 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:30:41,961 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:30:41,962 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:45:53,535 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:45:53,535 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:45:53,536 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:45:53,536 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:49:51,639 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:49:51,639 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:49:51,640 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:49:51,640 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:49:55,437 [Worker-58: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:49:55,437 [Worker-58: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:49:55,438 [Worker-58: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:49:55,438 [Worker-58: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:51:25,227 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:51:25,227 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:51:25,228 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:51:25,228 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:51:29,925 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:51:29,926 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:51:29,927 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:51:29,927 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:51:45,054 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:51:45,055 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:51:45,056 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:51:45,056 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:51:48,155 [Worker-58: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:51:48,155 [Worker-58: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:51:48,156 [Worker-58: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:51:48,156 [Worker-58: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 11:51:54,925 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:51:54,925 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 11:51:54,926 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 11:51:54,926 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 12:08:58,185 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:08:58,185 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 12:08:58,186 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:08:58,186 [Worker-42: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 12:23:57,605 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:23:57,605 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 12:23:57,606 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:23:57,607 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 12:26:19,764 [Worker-62: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:26:19,764 [Worker-62: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 12:26:19,765 [Worker-62: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:26:19,765 [Worker-62: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 12:26:44,033 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:26:44,033 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 12:26:44,034 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:26:44,034 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 12:26:47,253 [Worker-62: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:26:47,253 [Worker-62: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 12:26:47,254 [Worker-62: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:26:47,254 [Worker-62: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 12:28:36,335 [Worker-60: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:28:36,336 [Worker-60: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 12:28:36,337 [Worker-60: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:28:36,337 [Worker-60: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 12:28:44,681 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:28:44,681 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 12:28:44,682 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:28:44,682 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 12:31:24,832 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:31:24,832 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 12:31:24,833 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:31:24,833 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 12:31:31,654 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:31:31,654 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 12:31:31,655 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:31:31,655 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 12:31:48,096 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:31:48,096 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 12:31:48,098 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:31:48,107 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 12:31:50,013 [Worker-65: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:31:50,013 [Worker-65: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 12:31:50,013 [Worker-65: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:31:50,014 [Worker-65: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 12:33:26,830 [Worker-60: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:33:26,830 [Worker-60: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 12:33:26,831 [Worker-60: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:33:26,831 [Worker-60: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 12:34:36,811 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:34:36,811 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 12:34:36,813 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:34:36,813 [Worker-56: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 12:34:45,524 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:34:45,524 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 12:34:45,525 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 12:34:45,525 [Worker-59: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:03:50,074 [Worker-63: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:03:50,075 [Worker-63: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:03:50,076 [Worker-63: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:03:50,076 [Worker-63: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:04:04,368 [Worker-66: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:04:04,368 [Worker-66: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:04:04,369 [Worker-66: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:04:04,369 [Worker-66: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:04:28,241 [Worker-68: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:04:28,242 [Worker-68: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:04:28,242 [Worker-68: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:04:28,242 [Worker-68: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:05:48,342 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:05:48,342 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:05:48,343 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:05:48,344 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:05:55,867 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:05:55,867 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:05:55,868 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:05:55,869 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:06:19,522 [Worker-63: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:06:19,523 [Worker-63: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:06:19,524 [Worker-63: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:06:19,524 [Worker-63: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:08:08,044 [Worker-67: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:08:08,045 [Worker-67: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:08:08,046 [Worker-67: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:08:08,046 [Worker-67: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:08:47,709 [Worker-63: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:08:47,709 [Worker-63: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:08:47,710 [Worker-63: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:08:47,711 [Worker-63: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:08:52,933 [Worker-70: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:08:52,933 [Worker-70: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:08:52,934 [Worker-70: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:08:52,934 [Worker-70: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:08:57,766 [Worker-70: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:08:57,766 [Worker-70: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:08:57,767 [Worker-70: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:08:57,767 [Worker-70: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:09:17,410 [Worker-71: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:09:17,410 [Worker-71: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:09:17,411 [Worker-71: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:09:17,411 [Worker-71: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:10:16,056 [Worker-67: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:10:16,057 [Worker-67: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:10:16,058 [Worker-67: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:10:16,058 [Worker-67: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:11:00,778 [Worker-73: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:11:00,778 [Worker-73: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:11:00,779 [Worker-73: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:11:00,779 [Worker-73: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:11:11,116 [Worker-67: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:11:11,116 [Worker-67: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:11:11,117 [Worker-67: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:11:11,117 [Worker-67: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:11:19,903 [Worker-69: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:11:19,903 [Worker-69: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:11:19,904 [Worker-69: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:11:19,904 [Worker-69: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:12:06,356 [Worker-67: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:12:06,356 [Worker-67: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:12:06,357 [Worker-67: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:12:06,357 [Worker-67: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:12:58,472 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:12:58,472 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:12:58,473 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:12:58,473 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:16:05,088 [Worker-63: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:16:05,089 [Worker-63: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:16:05,090 [Worker-63: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:16:05,090 [Worker-63: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:16:14,553 [Worker-71: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:16:14,554 [Worker-71: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:16:14,555 [Worker-71: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:16:14,555 [Worker-71: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:18:56,346 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:18:56,346 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:18:56,348 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:18:56,348 [Worker-64: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:19:22,822 [Worker-76: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:19:22,823 [Worker-76: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:19:22,824 [Worker-76: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:19:22,824 [Worker-76: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:20:38,566 [Worker-74: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:20:38,566 [Worker-74: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:20:38,567 [Worker-74: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:20:38,567 [Worker-74: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:25:11,794 [Worker-78: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:25:11,794 [Worker-78: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:25:11,796 [Worker-78: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:25:11,796 [Worker-78: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:25:31,228 [Worker-63: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:25:31,228 [Worker-63: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:25:31,231 [Worker-63: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:25:31,231 [Worker-63: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:26:43,669 [Worker-79: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:26:43,669 [Worker-79: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:26:43,670 [Worker-79: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:26:43,670 [Worker-79: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 13:29:09,222 [Worker-78: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:29:09,223 [Worker-78: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 13:29:09,225 [Worker-78: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 13:29:09,225 [Worker-78: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 14:09:08,657 [Worker-81: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 14:09:08,657 [Worker-81: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 14:09:08,658 [Worker-81: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 14:09:08,658 [Worker-81: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-14 14:09:20,717 [Worker-82: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 14:09:20,718 [Worker-82: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-14 14:09:20,719 [Worker-82: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-14 14:09:20,719 [Worker-82: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-15 10:51:24,410 [Worker-1: Loading available Gradle versions] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2018-08-15 10:51:45,208 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-15 10:51:45,211 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-15 10:51:45,221 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-15 10:51:45,223 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-16 01:58:38,201 [Worker-7: Loading available Gradle versions] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2018-08-16 01:58:54,447 [Worker-9: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-16 01:58:54,448 [Worker-9: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/main/resources
+2018-08-16 01:58:54,451 [Worker-9: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-08-16 01:58:54,451 [Worker-9: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/joelkingsley/zilkies2019_java/joel_kingsley/streetrun/src/test/resources
+2018-08-16 09:31:13,785 [Worker-7: Loading available Gradle versions] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2018-08-16 21:58:29,492 [Worker-1: Loading available Gradle versions] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2018-08-17 06:28:06,724 [Worker-0: Loading available Gradle versions] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2018-08-20 09:30:18,479 [Worker-2: Loading available Gradle versions] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.

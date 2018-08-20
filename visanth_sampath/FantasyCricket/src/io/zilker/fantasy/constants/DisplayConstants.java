@@ -3,7 +3,7 @@ package io.zilker.fantasy.constants;
 public class DisplayConstants {
 	public static final String CONNECTION_ERROR = "Unable To Connect to DataBase\n";
 	public static final String CONNECTION_CLOSE_ERROR = "Unable to Disconnnect to data base\n";
-	public static final String STARTING_OPTIONS="Enter the required option\n1.Login\n2.signup\n";
+	public static final String STARTING_OPTIONS = "Enter the required option\n1.Login\n2.signup\n";
 	public static final String ENTER_USER_NAME = "Enter user name\n";
 	public static final String ENTER_PASSWORD = "Enter the Password\n";
 	public static final String ENTER_EMAIL = "Enter the Email\n";
@@ -32,11 +32,11 @@ public class DisplayConstants {
 	public static final String MODIFIED_RATING = "Enter the modified rating\n";
 	public static final String INVALID_RATING = "Invalid rating....Enter the proper rating\n";
 	public static final String MODIFY_SUCCESS = "Rating has been modified successfully....!\n";
-	public static final String DISPLAY_USER_OPTIONS = "1.Pick a team\n2.View Team\n3.Modify teams\n4.chat\n5.view Results\n6.View Most picked players 7.exit\n";
+	public static final String DISPLAY_USER_OPTIONS = "1.Pick a team\n2.View Team\n3.Modify teams\n4.chat\n5.view Results\n6.View Most picked players\n 7.View Previous Results\n 8.exit\n";
 	public static final String INVALID_SELECTION = "Invalid selection.....Please enter a valid one!";
 	public static final String REMAINING_CREDITS = "Credits remaining\n";
 	public static final String CHAT_OPTIONS = "Enter 1 to enter message 2 to exit\n";
-	public static final String ENTER_MESSAGE= "Enter the message";
+	public static final String ENTER_MESSAGE = "Enter the message";
 	public static final String DELETE_PLAYER_OPTIONS = "Enetr 1. delete a player 2.exit\n";
 	public static final String DELETE_PLAYER_ID = "Enter the id of the player you want to delete\n";
 	public static final String ENTER_PLAYER_ID = "Enter  Player ID\n";
@@ -46,7 +46,7 @@ public class DisplayConstants {
 	public static final String DISPLAY_BOWLER = " Bowlers ";
 	public static final String DISPLAY_BATSMEN = " Batsmen ";
 	public static final String DISPLAY_ALLROUNDER = " All Rounders ";
-	public static final String DISPLAY_KEEPER = " WicketKeepers \n";	
+	public static final String DISPLAY_KEEPER = " WicketKeepers \n";
 	public static final String CREDITS_COMPLETED = "Please enter a player with less than or equal to credits remaining\n";
 	public static final String BATSMEN_EXCEED = "You have already selected the required number of  batsmen\n";
 	public static final String BOWLER_EXCEED = "You have already selected the required number of  bowlers\n";
@@ -54,9 +54,13 @@ public class DisplayConstants {
 	public static final String ALLROUNDER_EXCEED = "You have already selected the required number of  All Rounders\n";
 	public static final String ALREADY_PRESENT = "Player already Taken\n";
 	public static final String DISPLAY_MATCH_COMPLETED = "Match Status have been updated sucessfully\n";
-	public static final String PLAYERS_TABLE_FORMAT = "\nPlayerId PlayerName playerRole PlayerCredits\n";
-	public static final Object MESSAGES_TABLE_FORMAT = "\nUserName Message InsertedTime\n";
-	public static final Object MATCHES_TABLE_FORMAT = "\nMatchId Team1 Team2\n";
-	
-	
+	public static final String PLAYERS_TABLE_FORMAT = "\nPlayerId 	PlayerName	 playerRole	 PlayerCredits\n";
+	public static final String MESSAGES_TABLE_FORMAT = "\nUserName	 Message	InsertedTime\n";
+	public static final String MATCHES_TABLE_FORMAT = "\nMatchId	Team1 	Team2\n";
+	public static final String PLAYER_ADDED_SUCESS = "Player Added Sucessfully\n";
+	public static final String RATING_MODIFIED_SUCESSFULLY = "Rating Updated Sucessfully\n";
+	public static final String INVALID_INPUT = "You have entered inValid Input...Enter the correct option\n";
+	public static final String UPCOMING_MATCHES = "Upcoming matches Are:\n";
+	public static final String CREDITS_INVALID = "Credits should be greater than 0 and less than or equal to 10";
+
 }

@@ -1,5 +1,8 @@
 package io.ztech.expensesapp.beans;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 public class Expense {
 	int eId;
 	int uId;
@@ -7,6 +10,52 @@ public class Expense {
 	int typeId;
 	String description;
 	float amount;
+	String category;
+	String type;
+	Timestamp createdAt;
+	Timestamp updatedAt;
+	Date date;
+	
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public void setUpdatedAt(Timestamp updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public Timestamp getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public int geteId() {
 		return eId;
@@ -55,7 +104,5 @@ public class Expense {
 	public void setAmount(float amount) {
 		this.amount = amount;
 	}
-
-	// date
 
 }

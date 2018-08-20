@@ -1,12 +1,36 @@
 package io.zilker.application.beans;
 
 public class User {
-	public UserLocation location;
 	public UserName user;
-	public UserPassword password;
+	public String role;
+	private String location;
+	private String password;
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	public User() {
-		location = new UserLocation();
 		user = new UserName();
-		password = new UserPassword();
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

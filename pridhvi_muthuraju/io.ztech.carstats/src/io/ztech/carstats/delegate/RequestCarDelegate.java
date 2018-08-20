@@ -15,11 +15,11 @@ public class RequestCarDelegate {
 		return requestDAO.addCarUserRequest(request, user, specification) && requestDAO.getRequestId(request);
 	}
 
-	public ArrayList<Request> getRequests(User user) {
+	public ArrayList<Request> getRequests(User user) throws SQLException {
 		return requestDAO.getRequests(user);
 	}
 
-	public boolean approveCar(Specification specification, Request request) {
+	public boolean approveCar(Specification specification, Request request) throws SQLException {
 		requestDAO.deleteRequest(request);
 		return requestDAO.approveCar(specification);
 	}

@@ -2,11 +2,11 @@ package io.zilker.fantasy.bean;
 
 public class Match {
 	private String teamOne, teamTwo, scheduledDate, startTime, endTime;
-	private int matchId, matchCredits,isActive,isUpcomming;
+	private int matchId, matchCredits, isActive, isUpcomming;
 
 	// setter for setting values
-	public void setMatchTable(String teamOne, String teamTwo, String scheduledDate, String startTime,
-			String endTime, int matchCredits) {
+	public void setMatchTable(String teamOne, String teamTwo, String scheduledDate, String startTime, String endTime,
+			int matchCredits) {
 		this.teamOne = teamOne;
 		this.teamTwo = teamTwo;
 		this.scheduledDate = scheduledDate;
@@ -14,11 +14,12 @@ public class Match {
 		this.endTime = endTime;
 		this.matchCredits = matchCredits;
 	}
-	public void setStatusTable(int matchId,int isActive,int isUpcomming) {
-		this.matchId =matchId;
-		this.isActive =isActive;
+
+	public void setStatusTable(int matchId, int isActive, int isUpcomming) {
+		this.matchId = matchId;
+		this.isActive = isActive;
 		this.isUpcomming = isUpcomming;
-		
+
 	}
 
 	// getters returns match id
@@ -55,10 +56,12 @@ public class Match {
 	public int getMatchCredits() {
 		return matchCredits;
 	}
+
 	// getters returns the active of match
 	public int getActiveStatus() {
 		return isActive;
 	}
+
 	// getters returns upcomming of match
 	public int getUpcommingStatus() {
 		return isUpcomming;
