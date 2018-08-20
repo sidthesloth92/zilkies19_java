@@ -11,8 +11,10 @@ import io.ztech.expensesapp.beans.ExpenseMember;
 import io.ztech.expensesapp.beans.Group;
 import io.ztech.expensesapp.beans.GroupPayment;
 import io.ztech.expensesapp.beans.User;
+import io.ztech.expensesapp.constants.DisplayConstants;
 import io.ztech.expensesapp.constants.QueryConstants;
 import io.ztech.expensesapp.dbutils.DBManager;
+import io.ztech.expensesapp.exceptions.CouldNotAddMembersException;
 
 public class ExpenseDAO {
 	Connection connection;
@@ -57,8 +59,10 @@ public class ExpenseDAO {
 			e.printStackTrace();
 		} finally {
 			dbManager.closeConnection(resultSet, prepareStatement, connection);
-			return isPresent;
+
 		}
+		return isPresent;
+
 	}
 
 	public User logIn(User user) {
@@ -81,8 +85,9 @@ public class ExpenseDAO {
 			e.printStackTrace();
 		} finally {
 			dbManager.closeConnection(resultSet, prepareStatement, connection);
-			return activeUser;
+
 		}
+		return activeUser;
 	}
 
 	public void addNewExpense(Expense expense) {
@@ -107,17 +112,19 @@ public class ExpenseDAO {
 		ArrayList<Expense> expenses = new ArrayList<Expense>();
 		try {
 			connection = dbManager.getConnection();
-			prepareStatement = connection.prepareStatement(QueryConstants.SELECT_ALL_GROUP_EXPENSES);
+			prepareStatement = connection.prepareStatement(QueryConstants.SELECT_GROUP_EXPENSES);
 			prepareStatement.setInt(1, activeUser.getuId());
+			System.out.println("ID:"+activeUser.getuId());
 			resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
-				System.out.println("1!");
 				GroupPayment expense = new GroupPayment();
-				expense.setCategoryId(resultSet.getInt(1));
-				expense.setTypeId(resultSet.getInt(2));
-				expense.setDescription(resultSet.getString(3));
-				expense.setAmount(resultSet.getFloat(4));
-				expense.setPaymentId(resultSet.getInt(5));
+				System.out.println("Hererre "+resultSet.getFloat(1));
+				expense.setAmount(resultSet.getFloat(1));
+				expense.setCategoryId(resultSet.getInt(2));
+				expense.setTypeId(resultSet.getInt(3));
+				expense.setDescription(resultSet.getString(4));
+				expense.setCreatedAt(resultSet.getTimestamp(5));
+				expense.setUpdatedAt(resultSet.getTimestamp(6));
 				expenses.add(expense);
 			}
 			prepareStatement = connection.prepareStatement(QueryConstants.SELECT_ALL_EXPENSES);
@@ -130,38 +137,37 @@ public class ExpenseDAO {
 				expense.setDescription(resultSet.getString(3));
 				expense.setAmount(resultSet.getFloat(4));
 				expense.seteId(resultSet.getInt(5));
+				expense.setCreatedAt(resultSet.getTimestamp(6));
+				expense.setUpdatedAt(resultSet.getTimestamp(7));
 				expenses.add(expense);
 			}
-			
-			
+
 			user.setExpenses(expenses);
 			for (Expense expense : user.getExpenses()) {
-				prepareStatement = connection.prepareStatement(
-						"select category_type, type from Category_Types,Expense_Types where category_id = ? and type_id = ?");
+				prepareStatement = connection.prepareStatement(QueryConstants.SELECT_CATEGORY_AND_TYPE);
 				prepareStatement.setInt(1, expense.getCategoryId());
 				prepareStatement.setInt(2, expense.getTypeId());
 				resultSet = prepareStatement.executeQuery();
-				while(resultSet.next()) {
+				while (resultSet.next()) {
 					expense.setCategory(resultSet.getString(1));
 					expense.setType(resultSet.getString(2));
 				}
 			}
 
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			dbManager.closeConnection(resultSet, prepareStatement, connection);
-			return user;
 		}
+		return user;
+
 	}
 
 	public User viewGroups(User activeUser) {
 		User user = new User();
 		try {
 			connection = dbManager.getConnection();
-			prepareStatement = connection.prepareStatement(
-					"select Groups.g_id, group_name from Groups join Group_Members on Groups.g_id = Group_Members.g_id where u_id = ?");
+			prepareStatement = connection.prepareStatement(QueryConstants.SELECT_GROUPS);
 			prepareStatement.setInt(1, activeUser.getuId());
 			resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
@@ -171,8 +177,7 @@ public class ExpenseDAO {
 				user.getGroups().add(group);
 			}
 			for (Group group : user.getGroups()) {
-				prepareStatement = connection.prepareStatement(
-						"select Group_Members.u_id,user_name from Group_Members join Users on Group_Members.u_id = Users.u_id where g_id = ?");
+				prepareStatement = connection.prepareStatement(QueryConstants.SELECT_GROUP_MEMBERS);
 				prepareStatement.setInt(1, group.getgId());
 				resultSet = prepareStatement.executeQuery();
 				while (resultSet.next()) {
@@ -187,15 +192,16 @@ public class ExpenseDAO {
 			e.printStackTrace();
 		} finally {
 			dbManager.closeConnection(resultSet, prepareStatement, connection);
-			return user;
 		}
+		return user;
+
 	}
 
-	public void createGroups(User activeUser) {
+	public void createGroups(User activeUser) throws CouldNotAddMembersException {
 		try {
 			connection = dbManager.getConnection();
 			prepareStatement = connection.prepareStatement(QueryConstants.INSERT_INTO_GROUPS);
-			prepareStatement.setString(1, activeUser.getGroups().get(0).getGroupName());
+			prepareStatement.setString(1, activeUser.getGroups().get(activeUser.getGroups().size() - 1).getGroupName());
 			prepareStatement.execute();
 			prepareStatement = connection.prepareStatement(QueryConstants.SELECT_RECENT_GID);
 			resultSet = prepareStatement.executeQuery();
@@ -203,15 +209,18 @@ public class ExpenseDAO {
 			while (resultSet.next()) {
 				recentGid = resultSet.getInt(1);
 			}
-			for (User user : activeUser.getGroups().get(0).getUsers()) {
+			for (User user : activeUser.getGroups().get(activeUser.getGroups().size() - 1).getUsers()) {
+				//System.out.println("here!");
 				prepareStatement = connection.prepareStatement(QueryConstants.INSERT_INTO_GROUP_MEMBERS);
 				prepareStatement.setInt(1, recentGid);
 				prepareStatement.setString(2, user.getUserName());
 				prepareStatement.execute();
+
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
+			throw new CouldNotAddMembersException(DisplayConstants.USERNAME_INVALID_NOT_ADDED);
 		} finally {
 			dbManager.closeConnection(resultSet, prepareStatement, connection);
 		}
@@ -220,8 +229,7 @@ public class ExpenseDAO {
 	public void addGroupExpense(GroupPayment groupExpense) {
 		try {
 			connection = dbManager.getConnection();
-			prepareStatement = connection.prepareStatement(
-					"insert into Group_Expenses(g_id,u_id,amount,category_id,type_id,description) values(?,?,?,?,?,?)");
+			prepareStatement = connection.prepareStatement(QueryConstants.INSERT_INTO_GROUP_EXPENSES);
 			prepareStatement.setInt(1, groupExpense.getgId());
 			prepareStatement.setInt(2, groupExpense.getuId());
 			prepareStatement.setFloat(3, groupExpense.getAmount());
@@ -240,8 +248,7 @@ public class ExpenseDAO {
 	public void addExpenseMembers(GroupPayment groupPayment) {
 		try {
 			connection = dbManager.getConnection();
-			prepareStatement = connection.prepareStatement(
-					"insert into Expense_Members(u_id,totalAmount,amountPaid,pending,payment_id) values((select u_id from Users where user_name = ?),?,?,?,(select payment_id from Group_Expenses order by payment_id desc limit 1))");
+			prepareStatement = connection.prepareStatement(QueryConstants.INSERT_INTO_EXPENSE_MEMBERS);
 			for (ExpenseMember expenseMember : groupPayment.getExpenseMembers()) {
 				prepareStatement.setString(1, expenseMember.getUserName());
 				prepareStatement.setFloat(2, expenseMember.getTotalAmount());
@@ -261,8 +268,7 @@ public class ExpenseDAO {
 		Group group = new Group();
 		try {
 			connection = dbManager.getConnection();
-			prepareStatement = connection
-					.prepareStatement("select payment_id,u_id,amount,description from Group_Expenses where g_id = ?");
+			prepareStatement = connection.prepareStatement(QueryConstants.SELECT_ALL_GROUP_EXPENSES);
 			prepareStatement.setInt(1, activeGroup.getgId());
 			resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
@@ -271,11 +277,11 @@ public class ExpenseDAO {
 				groupPayment.setuId(resultSet.getInt(2));
 				groupPayment.setAmount(resultSet.getFloat(3));
 				groupPayment.setDescription(resultSet.getString(4));
+				groupPayment.setUpdatedAt(resultSet.getTimestamp(5));
 				group.getGroupPayments().add(groupPayment);
 			}
 			for (GroupPayment groupPayment : group.getGroupPayments()) {
-				prepareStatement = connection.prepareStatement(
-						"select Expense_Members.u_id,  user_name, totalAmount,pending from Group_Expenses join Expense_Members on Group_Expenses.payment_id = Expense_Members.payment_id join Users on Users.u_id = Expense_Members.u_id where g_id = ? and Expense_Members.payment_id = ?");
+				prepareStatement = connection.prepareStatement(QueryConstants.SELECT_ALL_EXPENSE_MEMBERS);
 				prepareStatement.setInt(1, activeGroup.getgId());
 				prepareStatement.setInt(2, groupPayment.getPaymentId());
 				resultSet = prepareStatement.executeQuery();
@@ -293,15 +299,15 @@ public class ExpenseDAO {
 			e.printStackTrace();
 		} finally {
 			dbManager.closeConnection(resultSet, prepareStatement, connection);
-			return group;
 		}
+		return group;
 
 	}
 
 	public void editExpenseLimit(User activeUser) {
 		try {
 			connection = dbManager.getConnection();
-			prepareStatement = connection.prepareStatement("update Users set expense_limit = ? where u_id = ?");
+			prepareStatement = connection.prepareStatement(QueryConstants.UPDATE_EXPENSE_LIMIT);
 			prepareStatement.setInt(2, activeUser.getuId());
 			prepareStatement.setFloat(1, activeUser.getExpenseLimit());
 			prepareStatement.execute();
@@ -310,5 +316,35 @@ public class ExpenseDAO {
 		} finally {
 			dbManager.closeConnection(resultSet, prepareStatement, connection);
 		}
+	}
+
+	public GroupPayment viewBalances(Group activeGroup) {
+		GroupPayment groupPayments = new GroupPayment();
+		try {
+			connection = dbManager.getConnection();
+			prepareStatement = connection.prepareStatement(QueryConstants.FIND_GROUP_BALANCES);
+			resultSet = prepareStatement.executeQuery();
+			while (resultSet.next()) {
+				ExpenseMember member = new ExpenseMember();
+				member.setuId(resultSet.getInt(1));
+				member.setTotalAmount(resultSet.getFloat(2)-resultSet.getFloat(3));
+				groupPayments.getExpenseMembers().add(member);
+				
+			}
+			for (ExpenseMember members : groupPayments.getExpenseMembers()) {
+				prepareStatement = connection.prepareStatement(QueryConstants.SELECT_USERNAME);
+				prepareStatement.setInt(1, members.getuId());
+				resultSet = prepareStatement.executeQuery();
+				while (resultSet.next()) {
+					members.setUserName(resultSet.getString(1));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			dbManager.closeConnection(resultSet, prepareStatement, connection);
+		}
+		return groupPayments;
+
 	}
 }
