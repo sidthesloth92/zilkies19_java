@@ -5,6 +5,7 @@ import io.ztech.expensesapp.beans.Group;
 import io.ztech.expensesapp.beans.GroupPayment;
 import io.ztech.expensesapp.beans.User;
 import io.ztech.expensesapp.constants.DisplayConstants;
+import io.ztech.expensesapp.exceptions.CouldNotAddMembersException;
 import io.ztech.expensesapp.exceptions.LoginFailedException;
 import io.ztech.expensesapp.exceptions.UsernameAlreadyExistsException;
 import io.ztech.expensesapp.dao.ExpenseDAO;
@@ -35,7 +36,7 @@ public class ExpenseDelegate {
 	public void addNewExpense(Expense expense) {
 		if (expense instanceof GroupPayment)
 			expenseDao.addGroupExpense((GroupPayment) expense);
-		else
+		if(expense instanceof Expense)
 			expenseDao.addNewExpense(expense);
 
 	}
@@ -51,8 +52,12 @@ public class ExpenseDelegate {
 		return user;
 	}
 
-	public void createGroups(User activeUser) {
-		expenseDao.createGroups(activeUser);
+	public void createGroups(User activeUser) throws CouldNotAddMembersException {
+		try {
+			expenseDao.createGroups(activeUser);
+		} catch (CouldNotAddMembersException e) {
+			throw new CouldNotAddMembersException(e.getMessage());
+		}
 	}
 
 	public void addExpenseMembers(GroupPayment groupPayment) {
@@ -66,5 +71,10 @@ public class ExpenseDelegate {
 
 	public void editExpenseLimit(User activeUser) {
 		expenseDao.editExpenseLimit(activeUser);
+	}
+
+	public GroupPayment viewBalances(Group activeGroup) {
+		GroupPayment groupPayment = expenseDao.viewBalances(activeGroup);
+		return groupPayment;
 	}
 }

@@ -55,7 +55,12 @@ public class DisplayConstants {
 	public static final String ALREADY_PRESENT = "Player already Taken\n";
 	public static final String DISPLAY_MATCH_COMPLETED = "Match Status have been updated sucessfully\n";
 	public static final String PLAYERS_TABLE_FORMAT = "\nPlayerId 	PlayerName	 playerRole	 PlayerCredits\n";
-	public static final Object MESSAGES_TABLE_FORMAT = "\nUserName	 Message	InsertedTime\n";
-	public static final Object MATCHES_TABLE_FORMAT = "\nMatchId	Team1 	Team2\n";
+	public static final String MESSAGES_TABLE_FORMAT = "\nUserName	 Message	InsertedTime\n";
+	public static final String MATCHES_TABLE_FORMAT = "\nMatchId	Team1 	Team2\n";
+	public static final String PLAYER_ADDED_SUCESS = "Player Added Sucessfully\n";
+	public static final String RATING_MODIFIED_SUCESSFULLY = "Rating Updated Sucessfully\n";
+	public static final String INVALID_INPUT = "You have entered inValid Input...Enter the correct option\n";
+	public static final String UPCOMING_MATCHES = "Upcoming matches Are:\n";
+	public static final String CREDITS_INVALID = "Credits should be greater than 0 and less than or equal to 10";
 
 }

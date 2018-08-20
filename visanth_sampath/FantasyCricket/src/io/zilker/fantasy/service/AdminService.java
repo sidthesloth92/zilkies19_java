@@ -42,8 +42,38 @@ public class AdminService {
 		adminUI.displayMatchList(matchList);
 	}
 
-	public void adminServiceRedirect() {
+	public boolean scheduleNewMatchCaller() {
+		// TODO Auto-generated method stub
+		boolean isDone = new AdminOperations().scheduleNewMatch();
+		return isDone;
+	}
+
+	public boolean startMatchCaller() {
+		// TODO Auto-generated method stub
+		boolean isDone = new AdminOperations().startMatch();
+		return isDone;
+	}
+
+	public boolean addPlayerCaller() {
+		// TODO Auto-generated method stub
+		boolean isDone = new AdminOperations().addPlayer();
+		return isDone;
+	}
+
+	public boolean editPlayerRatingCaller() {
+		// TODO Auto-generated method stub
+		boolean isDone = new AdminOperations().editPlayerRating();
+		return isDone;
+	}
+
+	public boolean endMatchCaller() {
+		// TODO Auto-generated method stub
+		boolean isDone = new AdminOperations().endMatch();
+		return isDone;
+	}
+
+	/*public void adminServiceRedirect() {
 		AdminOperations newOperations = new AdminOperations();
 		newOperations.displayAdminOperations();
-	}
+	}*/
 }

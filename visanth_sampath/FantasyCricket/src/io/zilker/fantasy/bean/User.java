@@ -5,12 +5,11 @@ public class User {
 	private int userId, totalPointsObtained, type;
 
 	// setters
-	public void setUser(String userName, String email, String password, int type, int totalPointsObtained) {
+	public void setUser(String userName, String email, String password, int type) {
 		this.userName = userName;
 		this.email = email;
 		this.password = password;
 		this.type = type;
-		this.totalPointsObtained = totalPointsObtained;
 	}
 
 	public void setUserId(int userId) {
