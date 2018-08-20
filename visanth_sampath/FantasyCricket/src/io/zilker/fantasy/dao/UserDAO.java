@@ -394,4 +394,25 @@ public class UserDAO {
 		return resultBoard;
 	}
 
+	public ArrayList<Match> getUpcomingMatches() {
+		// TODO Auto-generated method stub
+		ArrayList<Match> matchList = new ArrayList<Match>();
+		try {
+			connection = dbConfig.getConnection();
+			preparedStatement = connection.prepareStatement(SqlConstants.SELECT_UPCOMING_MATCHES);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Match match = new Match();
+				match.setMatchTable(resultSet.getString("team1"), resultSet.getString("team2"), "scheduledDate", "startTime", "endTime", 0);
+				match.setStatusTable(resultSet.getInt("match_id"), 1, 1);
+				matchList.add(match);
+			}
+		} catch (Exception e) {
+			e.getStackTrace();
+		} finally {
+			dbConfig.closeConnection(connection, preparedStatement, resultSet);
+		}
+		return matchList;
+	}
+
 }

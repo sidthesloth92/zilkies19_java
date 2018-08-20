@@ -29,8 +29,7 @@ public class AdminDAO {
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
 				newUser.setUser(resultSet.getString("user_name"), resultSet.getString("email"),
-						resultSet.getString("password"), resultSet.getInt("type"),
-						resultSet.getInt("total_points_obtained"));
+						resultSet.getString("password"), resultSet.getInt("type"));
 				newUser.setUserId(resultSet.getInt("user_id"));
 			}
 

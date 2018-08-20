@@ -38,4 +38,5 @@ public class SqlConstants {
 	public static final String INSERT_INTO_MOSTLY_PICKED_PLAYERS = "INSERT INTO most_picked_players (player_id,match_id) VALUES (?,?)";
 	public static final String SELECT_MOST_PICKED = "SELECT * FROM most_picked_players INNER JOIN player WHERE most_picked_players.player_id = player.player_id AND match_id =? ";
 	public static final String SELECT_PARTICULAR_RESULT_TABLE = "SELECT * FROM result_board INNER JOIN users WHERE users.user_id = result_board.user_id AND result_board.user_id = ?";
+	public static final String SELECT_UPCOMING_MATCHES = "SELECT * FROM matches_scheduled INNER JOIN match_status WHERE matches_scheduled.match_id = match_status.match_id AND is_active = 1;";
 }

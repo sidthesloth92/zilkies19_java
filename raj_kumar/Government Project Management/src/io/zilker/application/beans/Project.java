@@ -1,7 +1,7 @@
 package io.zilker.application.beans;
 
 public class Project {
-	String projectName, location, description;
+	private String projectName, location, description;
 
 	public String getProjectName() {
 		return projectName;

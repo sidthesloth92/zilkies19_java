@@ -1,7 +1,7 @@
 package io.zilker.application.beans;
 
 public class UserName {
-	String firstName, lastName, username;
+	private String firstName, lastName, username;
 
 	public String getUsername() {
 		return username;
