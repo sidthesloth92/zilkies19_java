@@ -37,30 +37,32 @@ public class FoodLogDao {
 	}
 
 	public int getMealID(FoodLog foodLog) {
-		int logID = 0;
+		int mealID = 0;
 		try {
 			conn = con_obj.getConnection();
 			ps = conn.prepareStatement(SQLQueryStringConstants.GET_MEAL_ID);
 			ps.setInt(1, foodLog.getFoodID());
 			ps.setFloat(2, foodLog.getQuantity());
+			
+			rs=ps.executeQuery();
 
 			if (rs.next()) {
-				logID = rs.getInt(1);
+				mealID = rs.getInt(1);
 			} else {
 				ps = conn.prepareStatement(SQLQueryStringConstants.INSERT_MEAL);
 				ps.setInt(1, foodLog.getFoodID());
 				ps.setFloat(2, foodLog.getQuantity());
-				ps.setFloat(3, foodLog.getQuantity() * foodLog.getCalories());
-				ps.executeQuery();
+				ps.executeUpdate();
 				return getMealID(foodLog);
 			}
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			return 0;
 		} finally {
-			con_obj.closeConnection(conn, rs, ps);
+			//con_obj.closeConnection(conn, rs, ps);
 		}
-		return logID;
+		return mealID;
 	}
 
 	public int getLogID(FoodLog foodLog) {
@@ -69,12 +71,15 @@ public class FoodLogDao {
 			conn = con_obj.getConnection();
 
 			ps = conn.prepareStatement(SQLQueryStringConstants.GET_LOG_ID);
+			ps.setString(1, foodLog.getUserName());
+			ps.setInt(2, foodLog.getMealTime());
 			rs = ps.executeQuery();
+			
 			if (rs.next()) {
 				logID = rs.getInt(1);
 			} else {
 				ps = conn.prepareStatement(SQLQueryStringConstants.ADD_LOG_TO_TRACKER);
-				ps.setInt(1, foodLog.getRegID());
+				ps.setString(1, foodLog.getUserName());
 				ps.setInt(2, foodLog.getMealTime());
 
 				ps.executeUpdate();
@@ -82,9 +87,10 @@ public class FoodLogDao {
 			}
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			return 0;
 		} finally {
-			con_obj.closeConnection(conn, rs, ps);
+			//con_obj.closeConnection(conn, rs, ps);
 		}
 		return logID;
 	}

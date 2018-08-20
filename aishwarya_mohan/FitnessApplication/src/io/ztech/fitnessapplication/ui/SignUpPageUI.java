@@ -1,12 +1,13 @@
 package io.ztech.fitnessapplication.ui;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
 import io.ztech.fitnessapplication.DriverClass;
 import io.ztech.fitnessapplication.beans.UserAccount;
-import io.ztech.fitnessapplication.beans.UserProfile;
-import io.ztech.fitnessapplication.beans.UserStats;
+import io.ztech.fitnessapplication.beans.UserAccountDetails;
+import io.ztech.fitnessapplication.beans.UserPhysicalDetails;
 import io.ztech.fitnessapplication.constants.DisplayStringConstants;
 import io.ztech.fitnessapplication.delegate.SignUpDelegate;
 
@@ -17,88 +18,92 @@ public class SignUpPageUI {
 	ValidationUI checkObj = new ValidationUI();
 
 	public UserAccount signupUI() {
-		UserAccount newAccount = new UserAccount();
-		UserProfile newProfile = createProfile();
+		UserAccountDetails newAccount = createAccount();
 
-		boolean success = new SignUpDelegate().signup(newProfile);
+		boolean success = new SignUpDelegate().signup(newAccount);
 		if (!success) {
 			logger.info(DisplayStringConstants.ERROR);
 			return null;
 		}
 
-		newAccount.setUserName(newProfile.getUserName());
-		newAccount.setFirstName(newProfile.getFirstName());
-		newAccount.setPassword(newProfile.getPassword());
-
-		return newAccount;
+		UserAccount currentAccount = new UserAccount();
+		currentAccount.setUserName(newAccount.getUserName());
+		currentAccount.setPassword(newAccount.getPassword());
+		return currentAccount;
 	}
 
-	public UserProfile createProfile() {
+	public UserAccountDetails createAccount() {
 		String userName, password, firstName, lastName, mailID, phoneNumber;
 		logger.info(DisplayStringConstants.SIGN_UP_PAGE);
 
-		UserProfile newProfile = new UserProfile();
-
+		UserAccountDetails newAccount = new UserAccountDetails();
 		logger.info(DisplayStringConstants.FIRST_NAME);
 		firstName = sc.next();
-		newProfile.setFirstName(firstName);
+		newAccount.setFirstName(firstName);
 
 		logger.info(DisplayStringConstants.LAST_NAME);
 		lastName = sc.next();
-		newProfile.setLastName(lastName);
+		newAccount.setLastName(lastName);
 
 		logger.info(DisplayStringConstants.USER_NAME);
 		userName = sc.next();
 		if (!checkObj.isValid(userName, ValidationUI.USER_NAME_VALIDATION)) {
 			logger.info(DisplayStringConstants.NO_SPACE_WARNING);
-			return createProfile();
+			return new UserAccountDetails();
 		}
-		newProfile.setUserName(userName);
+		newAccount.setUserName(userName);
 
 		logger.info(DisplayStringConstants.PASSWORD);
 		password = sc.next();
-		newProfile.setPassword(password);
+		newAccount.setPassword(password);
 
 		logger.info(DisplayStringConstants.MAIL);
 		mailID = sc.next();
 		if (!checkObj.isValid(mailID, ValidationUI.EMAIL_VALIDATION)) {
-			return createProfile();
+			return createAccount();
 		}
-		newProfile.setEmailID(mailID);
+		newAccount.setEmail(mailID);
 
 		logger.info(DisplayStringConstants.PHONE);
 		phoneNumber = sc.next();
 		if (!checkObj.isValid(phoneNumber, ValidationUI.NUMBER_VALIDATION)) {
-			return createProfile();
+			return createAccount();
 		}
-		newProfile.setPhoneNo(phoneNumber);
+		newAccount.setPhone(phoneNumber);
+		newAccount.setRole(2);
 
-		return newProfile;
+		return newAccount;
 	}
 
-	public UserStats customiseAccount(UserAccount account) {
-		UserStats newAccStats = new UserStats();
+	public UserPhysicalDetails customiseAccount(UserAccount account) {
+		UserPhysicalDetails newAccount = new UserPhysicalDetails();
+
+		newAccount.setUserName(account.getUserName());
 
 		logger.info(DisplayStringConstants.CUST_MSG);
 
-		newAccStats.setRegID(account.getRegID());
+		try {
+			logger.info(DisplayStringConstants.HEIGHT);
+			newAccount.setHeight(sc.nextFloat());
 
-		logger.info(DisplayStringConstants.HEIGHT);
-		newAccStats.setHeight(sc.nextFloat());
+			logger.info(DisplayStringConstants.WEIGHT);
+			newAccount.setWeight(sc.nextFloat());
 
-		logger.info(DisplayStringConstants.WEIGHT);
-		newAccStats.setWeight(sc.nextFloat());
+			logger.info(DisplayStringConstants.AGE);
+			newAccount.setAge(sc.nextInt());
 
-		logger.info(DisplayStringConstants.AGE);
-		newAccStats.setAge(sc.nextInt());
+			logger.info(DisplayStringConstants.GENDER);
+			newAccount.setGender(sc.next());
 
-		logger.info(DisplayStringConstants.GENDER);
-		newAccStats.setGender(sc.next().charAt(0));
+			logger.info(DisplayStringConstants.LIFESTYLE_MENU);
+			newAccount.setActivty(sc.nextInt());
 
-		logger.info(DisplayStringConstants.LIFESTYLE_MENU);
-		newAccStats.setActivityLevel(sc.nextInt());
+		} catch (InputMismatchException e) {
+			logger.info(DisplayStringConstants.INVALID_INPUT_WARNING);
+			return customiseAccount(account);
+		}
 
-		return newAccStats;
+		return newAccount;
 	}
 
 }

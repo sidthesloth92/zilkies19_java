@@ -1,7 +1,8 @@
 package io.ztech.fitnessapplication.beans;
 
 public class FoodLog {
-	int mealID, foodID, mealTime, regID, logID;
+	String userName;
+	int foodID, mealTime, logID, mealID;
 	public int getLogID() {
 		return logID;
 	}
@@ -10,15 +11,23 @@ public class FoodLog {
 		this.logID = logID;
 	}
 
-	float quantity, calories;
-
-	public int getRegID() {
-		return regID;
+	public int getMealID() {
+		return mealID;
 	}
 
-	public void setRegID(int regID) {
-		this.regID = regID;
+	public void setMealID(int mealID) {
+		this.mealID = mealID;
 	}
+
+	public float getCalories() {
+		return calories;
+	}
+
+	public void setCalories(float calories) {
+		this.calories = calories;
+	}
+
+	float quantity,calories;
 
 	public int getMealTime() {
 		return mealTime;
@@ -28,12 +37,12 @@ public class FoodLog {
 		this.mealTime = mealTime;
 	}
 
-	public int getMealID() {
-		return mealID;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setMealID(int mealID) {
-		this.mealID = mealID;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public int getFoodID() {
@@ -50,14 +59,6 @@ public class FoodLog {
 
 	public void setQuantity(float quantity) {
 		this.quantity = quantity;
-	}
-
-	public float getCalories() {
-		return calories;
-	}
-
-	public void setCalories(float calories) {
-		this.calories = calories;
 	}
 
 }

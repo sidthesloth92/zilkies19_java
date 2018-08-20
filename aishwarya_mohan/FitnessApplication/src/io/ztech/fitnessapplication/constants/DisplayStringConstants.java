@@ -8,7 +8,7 @@ public class DisplayStringConstants {
 	public static String SIGN_UP_PAGE = "\nSIGN UP PAGE";
 
 	public static String INPUT_MSG = "\nEnter the following details to continue.";
-	public static String DETAILS_MENU = "\n1. User name\n2. Password\n3. Email-id\n4. Phone number\n5. Delete Account\nEnter an option :";
+	public static String DETAILS_MENU = "\n1. First name\n2. Last name\n3. User name\n4. Password\n5. Email\n6. Phone\nEnter an option :";
 	public static String USER_NAME = "\nUser name: ";
 	public static String PASSWORD = "\nPassword: ";
 	public static String FIRST_NAME = "\nFirst name: ";
@@ -32,7 +32,7 @@ public class DisplayStringConstants {
 	public static String LOGGED_IN_ADMIN_MENU = "\nMenu:\n1. View Account Details\n2.Message User\n3.Add food items\nEnter an option: ";
 
 	public static String ANON_USER_MENU = "\nMenu: 1. Sign in\n2. Sign up"
-			+ "\n3. BMI Calculator\n4. BMR Calculator\n5. Calculate Meal Calories\nEnter an input: ";
+			+ "\n3. BMI Calculator\n4. BMR Calculator\n5. Calculate Meal Calories\n6. Exit application.\nEnter an input: ";
 
 	public static String BMR = "\nYour BMR is";
 	public static String OPT1 = "1. Calories per day to maintain your weight : ";
@@ -55,14 +55,14 @@ public class DisplayStringConstants {
 	public static String ASK_TO_EDIT_ACCOUNT = "\nDo you want to edit your account details? (y/n)";
 
 	public static String ASK_TO_EDIT_STATS = "\nDo you want to edit your stats? (y/n)";
-	public static String STATS_MENU = "\nMenu:\n1. Height\n2. Weight\n3. Age\n4. Gender\n5. Lifestyle";
+	public static String PROFILE_MENU = "\nMenu:\n1. Height\n2. Weight\n3. Age\n4. Gender\n5. Lifestyle";
 	public static String CHOOSE_FROM_MENU = "\nEnter an option: ";
 
 	public static String HEIGHT = "Height in cms: ";
 	public static String WEIGHT = "Weight in kg: ";
 	public static String AGE = "Age : ";
 	public static String GENDER = "Gender (M/F): ";
-	public static String LIFESTYLE_MENU = "1.Sedentary\n2.Light activity\n3.Moderate activity\n4.Hard activity\n5.Very Hard acivity\nYour daily lifestyle/ activity :";
+	public static String LIFESTYLE_MENU = "LifeStyle: 1.Sedentary\n2.Light activity\n3.Moderate activity\n4.Hard activity\n5.Very Hard acivity\nYour daily lifestyle/ activity :";
 
 	public static String DONE_MSG = "\nDone!!";
 	public static String NOT_DONE_MSG = "\nNot Done!!.Try again later";

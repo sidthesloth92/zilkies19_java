@@ -20,14 +20,14 @@ public class LogInPageUI {
 		logger.info(DisplayStringConstants.LOGIN_PAGE);
 
 		logger.info(DisplayStringConstants.USER_NAME);
-		userName = sc.next();
+		userName = sc.nextLine();
 		if (!checkObj.isValid(userName, ValidationUI.USER_NAME_VALIDATION)) {
 			logger.info(DisplayStringConstants.NO_SPACE_WARNING);
 			return loginUI();
 		}
 
 		logger.info(DisplayStringConstants.PASSWORD);
-		password = sc.next();
+		password = sc.nextLine();
 
 		userAccount.setUserName(userName);
 		userAccount.setPassword(password);

@@ -1,10 +1,10 @@
 package io.ztech.fitnessapplication.delegate;
 
-import io.ztech.fitnessapplication.beans.UserProfile;
+import io.ztech.fitnessapplication.beans.UserAccountDetails;
 import io.ztech.fitnessapplication.dao.UserAccountDAO;
 
 public class SignUpDelegate {
-	public boolean signup(UserProfile newProfile) {
+	public boolean signup(UserAccountDetails newProfile) {
 		return new UserAccountDAO().addUserAccount(newProfile);
 	}
 }
