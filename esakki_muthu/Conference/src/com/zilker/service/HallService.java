@@ -1,5 +1,6 @@
 package com.zilker.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.zilker.bean.HallData;
@@ -10,13 +11,13 @@ public class HallService {
 	
 	AddHallDelegate addHallDelegate = new AddHallDelegate();
 
-	public void hallValues(HallData hallData)
+	public void hallValues(HallData hallData) throws SQLException
 	{
 		
 		addHallDelegate.addHallProcess(hallData);
 	}
 	
-	public ArrayList<HallData> hallListService() {
+	public ArrayList<HallData> hallListService() throws SQLException {
 		
 		return addHallDelegate.listHallProcess();
 		

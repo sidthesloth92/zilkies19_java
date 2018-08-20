@@ -15,100 +15,100 @@ public class Inputs {
 
 	ValidationHelper helper = new ValidationHelper();
 
-	String user_name, pass_word, confirm_password, role_name, e_mail, phone_no;
+	String userName, password, confirmPassword, roleName, email, phoneNo;
 
-	String hall_name, description;
+	String hallName, description;
 
-	String facility_name, result;
+	String facilityName, result;
 
-	int facility_id;
+	int facilityId;
 
-	int user_id, role_id, size;
+	int userId, roleId, size;
 
 	public String get_User_name() {
 
-		user_name = in.nextLine();
+		userName = in.nextLine();
 
-		if (!helper.check_User_name(user_name)) {
+		if (!helper.check_User_name(userName)) {
 
 			logger.info(StringConstants.USER_NAME_ERROR);
 
 			return get_User_name();
 		}
 
-		return user_name;
+		return userName;
 	}
 
 	public String getPassword() {
 
-		pass_word = in.nextLine();
+		password = in.nextLine();
 
-		if (!helper.check_Password(pass_word)) {
+		if (!helper.check_Password(password)) {
 
 			logger.info(StringConstants.PASSWORD_ERROR);
 
 			return getPassword();
 		}
 
-		return pass_word;
+		return password;
 	}
 
 	public String getConfirmPassword() {
 
-		confirm_password = in.nextLine();
+		confirmPassword = in.nextLine();
 
-		if (!helper.check_Match_Password(pass_word, confirm_password)) {
+		if (!helper.checkMatchPassword(password, confirmPassword)) {
 
 			logger.info(StringConstants.CONFIRM_PASSWORD_ERROR);
 
 			return getConfirmPassword();
 		}
 
-		return confirm_password;
+		return confirmPassword;
 	}
 
 	public String getEmail() {
 
-		e_mail = in.nextLine();
+		email = in.nextLine();
 
-		if (!helper.checkEmail(e_mail)) {
+		if (!helper.checkEmail(email)) {
 
 			logger.info(StringConstants.EMAIL_ERROR);
 
 			return getEmail();
 		}
 
-		return e_mail;
+		return email;
 
 	}
 
 	public String getPhone() {
 
-		phone_no = in.nextLine();
+		phoneNo = in.nextLine();
 
-		if (!helper.check_Phone_no(phone_no)) {
+		if (!helper.check_Phone_no(phoneNo)) {
 
 			logger.info(StringConstants.PHONE_ERROR);
 
 			return getPhone();
 		}
 
-		return phone_no;
+		return phoneNo;
 
 	}
 
 	public String getRoleName() {
 
-		role_name = in.nextLine();
+		roleName = in.nextLine();
 
-		return role_name;
+		return roleName;
 	}
 
 	public String getHallName() {
 
-		hall_name = in.nextLine();
+		hallName = in.nextLine();
 
-		return hall_name;
+		return hallName;
 	}
 
 	public String getDescription() {
@@ -120,18 +120,18 @@ public class Inputs {
 
 	public String getFacilityName() {
 
-		facility_name = in.nextLine();
+		facilityName = in.nextLine();
 
-		return facility_name;
+		return facilityName;
 	}
 
 	public int getFacilityId() {
 
 		try {
 
-			facility_id = in.nextInt();
+			facilityId = in.nextInt();
 
-			return facility_id;
+			return facilityId;
 
 		} catch (InputMismatchException e) {
 
@@ -187,6 +187,30 @@ public class Inputs {
 
 		return number;
 
+	}
+	
+	public String dateInput() {
+		
+		String date = in.nextLine();
+		
+		if (!helper.checkDate(date)) {
+
+			logger.info(StringConstants.DATE_ERROR);
+
+			return dateInput();
+		}
+		
+		return date;
+
+	}
+
+	public String checkFromDate() {
+		
+		String date = in.nextLine();
+		
+		
+		
+		return date;
 	}
 
 }

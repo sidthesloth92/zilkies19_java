@@ -1,5 +1,6 @@
 package com.zilker.ui;
 
+import java.sql.SQLException;
 import java.util.logging.Logger;
 
 import com.zilker.bean.RegisterData;
@@ -40,7 +41,13 @@ public class Register {
 		
 		registerData.setConfirmPassword(inputs.getConfirmPassword());	
 		
-		int result = registerService.register(registerData);
+		int result = 0;
+		try {
+			result = registerService.register(registerData);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if(result == 1) {
 			

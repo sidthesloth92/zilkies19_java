@@ -128,4 +128,6 @@ public class StringConstants {
 	
 	public final static String NUMBER_ERROR = "Invalid Number.. Enter Again : ";
 	
+	public final static String DATE_ERROR = "Invalid Date.. Enter Again : ";
+	
 }

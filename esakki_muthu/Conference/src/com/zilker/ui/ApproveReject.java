@@ -1,5 +1,6 @@
 package com.zilker.ui;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -19,13 +20,18 @@ public class ApproveReject {
 
 	Logger logger = Logger.getLogger(ApproveReject.class.getName());
 
-	public void getConferenceId(UserData userData) {
+	public void getConferenceId(UserData userData)  {
 
 		logger.info(StringConstants.ENTER_CONFERENCE_Id);
 
 		int conferenceId = in.nextInt();
 
-		conferenceData = getConferenceDatasService.getDatas(conferenceId);
+		try {
+			conferenceData = getConferenceDatasService.getDatas(conferenceId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		if (conferenceData.getFound() == 1) {
 
@@ -72,13 +78,23 @@ public class ApproveReject {
 			
 			case 1:
 				
-				getConferenceDatasService.setAccept(userData,conferenceId,1);
+				try {
+					getConferenceDatasService.setAccept(userData,conferenceId,1);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				break;
 				
 			case 2:
 				
-				getConferenceDatasService.setAccept(userData,conferenceId,2);
+				try {
+					getConferenceDatasService.setAccept(userData,conferenceId,2);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				break;
 				

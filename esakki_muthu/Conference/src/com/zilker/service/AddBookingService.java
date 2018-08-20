@@ -5,7 +5,7 @@ import com.zilker.delegate.AddNewBookingDelegate;
 
 public class AddBookingService {
 	
-	public int book_By_Id(ConferenceData conferenceData) {
+	public int bookById(ConferenceData conferenceData) {
 		
 		return new AddNewBookingDelegate().book_By_Id(conferenceData);
 	}

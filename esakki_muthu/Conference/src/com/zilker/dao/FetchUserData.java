@@ -3,6 +3,7 @@ package com.zilker.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Logger;
 
 import com.zilker.bean.LoginData;
@@ -35,7 +36,7 @@ public class FetchUserData {
 
 	UserData userData = new UserData();
 
-	public UserData getUser(LoginData loginData) {
+	public UserData getUser(LoginData loginData) throws SQLException {
 
 		try {
 

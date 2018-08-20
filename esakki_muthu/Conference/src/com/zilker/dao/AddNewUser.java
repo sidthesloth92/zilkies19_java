@@ -3,6 +3,7 @@ package com.zilker.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Logger;
 
 import com.zilker.bean.RegisterData;
@@ -23,7 +24,7 @@ public class AddNewUser {
 	
 	Logger logger = Logger.getLogger(AddNewUser.class.getName());
 
-	public int insertUser(RegisterData registerData) {
+	public int insertUser(RegisterData registerData) throws SQLException {
 		
 		try {
 		

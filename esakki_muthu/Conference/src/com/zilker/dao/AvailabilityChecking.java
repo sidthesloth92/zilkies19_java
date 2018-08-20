@@ -3,6 +3,7 @@ package com.zilker.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,7 +35,7 @@ public class AvailabilityChecking {
 
 	Calendar calendar = null;
 
-	public ArrayList<Availability> getAvailability() {
+	public ArrayList<Availability> getAvailability() throws SQLException {
 
 		ArrayList<Availability> availabilityList = new ArrayList<Availability>();
 
@@ -118,6 +119,9 @@ public class AvailabilityChecking {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		finally {
+			databaseConfig.closeConnection(connection, resultSet, prepareStmt);
 		}
 
 		return availabilityList;

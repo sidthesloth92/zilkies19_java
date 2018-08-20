@@ -3,6 +3,7 @@ package com.zilker.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -23,7 +24,7 @@ public class AddNewHall {
 	
 	Logger logger = Logger.getLogger(AddNewHall.class.getName());
 
-	public void insertHall(HallData hallData) {
+	public void insertHall(HallData hallData) throws SQLException {
 
 		try {
 

@@ -1,5 +1,6 @@
 package com.zilker.ui;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -71,7 +72,12 @@ public class Hall {
 
 		hallData.setFacilityId(facilityId);
 
-		hallService.hallValues(hallData);
+		try {
+			hallService.hallValues(hallData);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -79,7 +85,13 @@ public class Hall {
 
 		HallService hallService = new HallService();
 
-		ArrayList<HallData> hallList = hallService.hallListService();
+		ArrayList<HallData> hallList = null;
+		try {
+			hallList = hallService.hallListService();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		int sno = 1;
 

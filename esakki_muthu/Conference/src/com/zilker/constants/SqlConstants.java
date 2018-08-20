@@ -50,15 +50,15 @@ public class SqlConstants {
 	
 	public final static String AVAILABILITY = "select hal.hall_id as hall_id, hal.hall_name as hall_name, hal.hall_size as hall_size, conference.status as status,conference.from_date as from_date,conference.to_date as to_date,conference.from_time as from_time,conference.to_time as to_time  from hall hal,conference_history conference where hal.hall_id = conference.hall_id and conference.hall_id = ?";
 	
-	public final static String CHECK_DATES = "SELECT dates.hall_id as hall_id, dates.conference_id as conference_id, history.from_time as from_time, history.to_time as to_time,dates.conference_date as date ,halls.hall_name as hall_name,halls.hall_size FROM conference_dates dates,conference_history history,hall halls where halls.hall_id = history.hall_id and halls.hall_id=dates.hall_id and history.conference_id=dates.conference_id and dates.conference_date between ? and ? and history.status =? and halls.hall_id = ?";
+	public final static String CHECK_DATES = "SELECT dates.hall_id as hall_id, dates.conference_id as conference_id, history.from_time as from_time, history.to_time as to_time,dates.conference_date as date ,halls.hall_name as hall_name,halls.hall_size FROM conf_date dates,conference_history history,hall halls where halls.hall_id = history.hall_id and halls.hall_id=dates.hall_id and history.conference_id=dates.conference_id and dates.conference_date between ? and ? and history.status =? and halls.hall_id = ?";
 	
-	public final static String GET_CONFERENCE_BY_DATE = "select history.hall_id, dates.conference_date as date, history.from_time as from_time, history.to_time as to_time from conference_history history,conference_dates dates where history.conference_id = dates.conference_id and history.hall_id = ? and history.status = ? and dates.conference_date between ? and ?";
+	public final static String GET_CONFERENCE_BY_DATE = "select history.hall_id, dates.conference_date as date, history.from_time as from_time, history.to_time as to_time from conference_history history,conf_date dates where history.conference_id = dates.conference_id and history.hall_id = ? and history.status = ? and dates.conference_date between ? and ?";
 	
 	public final static String GET_MAX_CONFERENCE_ID = "select max(conference_id) as conference_id from conference_history";
 	
 	public final static String ADD_HISTORY = "insert into conference_history(conference_name,hall_id,user_id,from_date,to_date,from_time,to_time,status) values(?,?,?,?,?,?,?,?)";
 
-	public final static String CONFERENCE_DATE = "insert into conference_dates(conference_id,conference_date,hall_id) values(?,?,?)";
+	public final static String CONFERENCE_DATE = "insert into conf_date(conference_id,conference_date,hall_id) values(?,?,?)";
 	
 	public final static String CONFERENCE_REQUEST_BY_USER_ID = "select history.conference_id as conference_id, halls.hall_id as hall_id ,halls.hall_name as hall_name, history.conference_name as conference_name, history.from_time as from_time,history.to_time as to_time,history.from_date as from_date,history.to_date as to_date,history.status as status from hall halls,conference_history history where halls.hall_id = history.hall_id and history.user_id= ? and from_date>=?";
 	
