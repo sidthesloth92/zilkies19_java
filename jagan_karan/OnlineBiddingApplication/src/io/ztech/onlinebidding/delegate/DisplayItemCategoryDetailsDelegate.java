@@ -17,23 +17,39 @@ public class DisplayItemCategoryDetailsDelegate {
 	BidItemDetailRetrieval bidItemRetrieve = new BidItemDetailRetrieval();
 	BidItem bidItemDetail = new BidItem();
 
-	public HashMap<String, String> getCategoryDetails() {
-		categoryList = categoryRetrieve.retreiveCategory();
+	public HashMap<String, String> getCategoryDetails() throws Exception {
+		try {
+			categoryList = categoryRetrieve.retreiveCategory();
+		} catch (Exception e) {
+			throw e;
+		}
 		return categoryList;
 	}
 
-	public HashMap<String, String> getItemDetails(String categoryId) {
-		itemList = itemRetrieve.retreiveItem(categoryId);
+	public HashMap<String, String> getItemDetails(String categoryId) throws Exception {
+		try {
+			itemList = itemRetrieve.retreiveItem(categoryId);
+		} catch (Exception e) {
+			throw e;
+		}
 		return itemList;
 	}
 
-	public HashMap<String, BidItem> getBidItemDetails(String itemId, String categoryId) {
-		bidItemList = bidItemRetrieve.retrieveBidItemDetails(itemId, categoryId);
+	public HashMap<String, BidItem> getBidItemDetails(String itemId, String categoryId) throws Exception {
+		try {
+			bidItemList = bidItemRetrieve.retrieveBidItemDetails(itemId, categoryId);
+		} catch (Exception e) {
+			throw e;
+		}
 		return bidItemList;
 	}
 
-	public BidItem getBidItemDetails(String bidItemId) {
-		bidItemDetail = bidItemRetrieve.retrieveBidItemDetails(bidItemId);
+	public BidItem getBidItemDetails(String bidItemId) throws Exception {
+		try {
+			bidItemDetail = bidItemRetrieve.retrieveBidItemDetails(bidItemId);
+		} catch (Exception e) {
+			throw e;
+		}
 		return bidItemDetail;
 	}
 }

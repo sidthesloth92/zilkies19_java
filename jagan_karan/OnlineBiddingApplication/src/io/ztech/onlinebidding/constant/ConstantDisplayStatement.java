@@ -54,7 +54,7 @@ public interface ConstantDisplayStatement {
 	public static final String SELECT_BID_TO_DISPLAY_CURRENT_STATUS = "\nENTER THE BID_ID TO DISPLAY THE CURRENT STATUS OF THAT ITEM";
 	public static final String NEW_BID = "\nYOU ARE THE NEW BID";
 	public static final String INVALID_BUYER = "\nSELLER CANNOT BID HIS OWN PRODUCT";
-	public static final String LOGOUT = "\nTHE USER IS LOGGED OUT";
+	public static final String LOGOUT = "\nTHE USER IS LOGGED OUT\n";
 	public static final String FLOAT_REGEX = "[+-]?([0-9]*[.])?[0-9]+";
 	public static final String TIME_STAMP_REGEX = "[1-2]\\d{3}-[0-1]\\d-[0-3]\\d[ ][0-2]\\d[:][0-5]\\d[:][0-5]\\d";
 	public static final String ITEM_NAME_REGEX = "^[a-zA-Z\\s]+";
@@ -68,4 +68,6 @@ public interface ConstantDisplayStatement {
 	public static final String WELCOME_USER_PAGE = "\nWELCOME USER ";
 	public static final String WELCOME_ADMIN_PAGE = "\nWELCOME ADMIN ";
 	public static final String ALREADY_PRESENT_BID = "SOME OF THE RELEVENT ITEMS PRESENT IN BID";
+	public static final String NOT_PRESENT_IN_SELECTED_CATEGORY = "THE BID ITEM ID ENTERED IS NOT PRESENT IN THE SELECTED CATEGORY";
+	public static final String DATABASE_ERROR = "SORRY FOR THE INCONVIENCE, SOME ERROR OCCURED IN DATABASE:-(";
 }

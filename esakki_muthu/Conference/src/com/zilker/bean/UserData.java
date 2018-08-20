@@ -20,7 +20,7 @@ public class UserData {
 	
 	String current_Time = null;
 
-	public int getUser_id() {
+	public int getUserId() {
 		return user_id;
 	}
 

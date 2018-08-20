@@ -111,7 +111,7 @@ public class UserOperations {
 		try {
 			userDAO.displayActiveMatches();
 			matchId = userService.callIntegerInputs();
-			match = userDAO.setMatchBean(matchId);
+			match = userDAO.setMatch(matchId);
 			totalCredits = match.getMatchCredits();
 			matchCredits = totalCredits;
 			displayTeams(match);
@@ -205,7 +205,7 @@ public class UserOperations {
 				userService.callDisplayAlert(DisplayConstants.ENTER_MESSAGE);
 				message = userService.callStringInputs();
 				userId = user.getUserId();
-				userDAO.insertIntoChat(userId, message);
+				userDAO.addChat(userId, message);
 			} while (choice != 2);
 		} catch (Exception e) {
 			e.getStackTrace();
@@ -294,10 +294,10 @@ public class UserOperations {
 		try {
 			userDAO.displayActiveMatches();
 			matchId = userService.callIntegerInputs();
-			match = userDAO.setMatchBean(matchId);
+			match = userDAO.setMatch(matchId);
 			matchCredits = match.getMatchCredits();
 			// userService.displayAlert(Integer.toString(matchCredits));
-			userPickedTeam = userDAO.setUserTeamBean(user.getUserId(), matchId);
+			userPickedTeam = userDAO.setUserTeam(user.getUserId(), matchId);
 			makeUpdation(user, userPickedTeam, matchCredits, matchId);
 			userDAO.deleteOldTeam(matchId, user.getUserId());
 			addTeam(user.getUserId(), matchId, players);

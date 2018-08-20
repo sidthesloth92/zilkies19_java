@@ -3,7 +3,6 @@ package io.ztech.onlinebidding.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -16,10 +15,9 @@ public class TimeRetrieval implements SqlQueries, ConstantDisplayStatement, DBFi
 	DatabaseConfig dbConfig = new DatabaseConfig();
 	ArrayList<Date> startEndTimeList = new ArrayList<Date>(2);
 
-	public ArrayList<Date> retreiveTime(String bidItemId) {
+	public ArrayList<Date> retreiveTime(String bidItemId) throws Exception {
 		Connection databaseConnection = dbConfig.getConnection();
 		try {
-			databaseConnection.setAutoCommit(false);
 			PreparedStatement selectTime = databaseConnection.prepareStatement(SELECT_TIME);
 			selectTime.setInt(1, Integer.parseInt(bidItemId));
 			ResultSet time = selectTime.executeQuery();
@@ -27,14 +25,8 @@ public class TimeRetrieval implements SqlQueries, ConstantDisplayStatement, DBFi
 				startEndTimeList.add(time.getTimestamp(DB_STARTTIME));
 				startEndTimeList.add(time.getTimestamp(DB_ENDTIME));
 			}
-			databaseConnection.commit();
 		} catch (Exception e) {
-			try {
-				databaseConnection.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			e.printStackTrace();
+			throw e;
 		} finally {
 			dbConfig.closeConnection(databaseConnection);
 		}

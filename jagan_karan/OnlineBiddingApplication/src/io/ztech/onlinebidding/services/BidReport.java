@@ -5,6 +5,7 @@ import java.util.HashMap;
 import io.ztech.onlinebidding.bean.BidItem;
 import io.ztech.onlinebidding.delegate.BidReportDelegate;
 import io.ztech.onlinebidding.ui.AdminPage;
+import io.ztech.onlinebidding.ui.DisplayException;
 import io.ztech.onlinebidding.ui.DisplayReport;
 
 public class BidReport {
@@ -13,17 +14,24 @@ public class BidReport {
 	DisplayReport displayItem = new DisplayReport();
 
 	public void bidSoldReport() {
-		bidItemDetail = report.bidSoldReport();
-		displayItem.displaySoldReport(bidItemDetail);
-		AdminPage adminPage = new AdminPage();
-		adminPage.AdminOption();
+		try {
+			bidItemDetail = report.bidSoldReport();
+			displayItem.displaySoldReport(bidItemDetail);
+			AdminPage adminPage = new AdminPage();
+			adminPage.AdminOption();
+		} catch (Exception e) {
+			DisplayException.displayException();
+		}
 	}
 
 	public void bidUnsoldReport() {
-		bidItemDetail = report.bidUnsoldReport();
-		displayItem.displayUnsoldReport(bidItemDetail);
-		AdminPage adminPage = new AdminPage();
-		adminPage.AdminOption();
-
+		try {
+			bidItemDetail = report.bidUnsoldReport();
+			displayItem.displayUnsoldReport(bidItemDetail);
+			AdminPage adminPage = new AdminPage();
+			adminPage.AdminOption();
+		} catch (Exception e) {
+			DisplayException.displayException();
+		}
 	}
 }

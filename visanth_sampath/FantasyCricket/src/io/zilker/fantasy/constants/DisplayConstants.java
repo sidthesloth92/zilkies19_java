@@ -61,5 +61,6 @@ public class DisplayConstants {
 	public static final String RATING_MODIFIED_SUCESSFULLY = "Rating Updated Sucessfully\n";
 	public static final String INVALID_INPUT = "You have entered inValid Input...Enter the correct option\n";
 	public static final String UPCOMING_MATCHES = "Upcoming matches Are:\n";
+	public static final String CREDITS_INVALID = "Credits should be greater than 0 and less than or equal to 10";
 
 }

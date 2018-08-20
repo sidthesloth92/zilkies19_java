@@ -3,7 +3,6 @@ package io.ztech.onlinebidding.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 
 import io.ztech.onlinebidding.constant.ConstantDisplayStatement;
@@ -15,24 +14,17 @@ public class ItemRetrieval implements SqlQueries, ConstantDisplayStatement, DBFi
 	DatabaseConfig dbConfig = new DatabaseConfig();
 	HashMap<String, String> itemList = new HashMap<>();
 
-	public HashMap<String, String> retreiveItem(String categoryId) {
+	public HashMap<String, String> retreiveItem(String categoryId) throws Exception {
 		Connection databaseConnection = dbConfig.getConnection();
 		try {
-			databaseConnection.setAutoCommit(false);
 			PreparedStatement selectItem = databaseConnection.prepareStatement(SELECT_ITEM);
 			selectItem.setInt(1, Integer.parseInt(categoryId));
 			ResultSet category = selectItem.executeQuery();
 			while (category.next()) {
 				itemList.put(category.getString(DB_ITEM_ID), category.getString(DB_ITEM_NAME));
 			}
-			databaseConnection.commit();
 		} catch (Exception e) {
-			try {
-				databaseConnection.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			e.printStackTrace();
+			throw e;
 		} finally {
 			dbConfig.closeConnection(databaseConnection);
 		}

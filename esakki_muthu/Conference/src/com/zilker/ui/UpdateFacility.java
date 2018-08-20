@@ -1,5 +1,6 @@
 package com.zilker.ui;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Logger;
@@ -22,7 +23,12 @@ public class UpdateFacility {
 				
 		HallService hallService = new HallService();
 
-		ArrayList<HallData> hallList = hallService.hallListService();
+		try {
+			ArrayList<HallData> hallList = hallService.hallListService();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		logger.info(StringConstants.ENTER_HALL_ID);
 				

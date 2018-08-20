@@ -1,5 +1,6 @@
 package com.zilker.ui;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -83,7 +84,12 @@ public class AdminPage {
 
 			case 3:
 
-				hallRequests.viewRequests(userData);
+				try {
+					hallRequests.viewRequests(userData);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				break;
 

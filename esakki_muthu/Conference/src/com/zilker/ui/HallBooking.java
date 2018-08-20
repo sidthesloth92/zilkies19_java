@@ -1,6 +1,10 @@
 package com.zilker.ui;
 
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -98,9 +102,9 @@ public class HallBooking {
 
 		logger.info(StringConstants.ENTER_HALL_ID);
 
-		int hall_id = in.nextInt();
+		int hallId = in.nextInt();
 
-		conferenceData.setHallId(hall_id);
+		conferenceData.setHallId(hallId);
 
 		in.nextLine();
 
@@ -121,7 +125,7 @@ public class HallBooking {
 			String res = inputs.promptResult();
 
 			if (res.equals("Y") || res.equals("y")) {
-				
+
 				HallService hallService = new HallService();
 
 				ArrayList<String> hallFacilities = hallService.displayHallFacilities();
@@ -143,15 +147,20 @@ public class HallBooking {
 				break;
 
 			}
-						
 
-		}		
+		}
 
-		ArrayList<HallData> hall_List = new DisplayWiseFacilityService().displayFacility(facilityId);
+		ArrayList<HallData> hallList = null;
+		try {
+			hallList = new DisplayWiseFacilityService().displayFacility(facilityId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		int sno = 1;
 
-		for (HallData list : hall_List) {
+		for (HallData list : hallList) {
 
 			logger.info(sno + StringConstants.PARENTHESIS + StringConstants.NEW_LINE +
 
@@ -160,67 +169,137 @@ public class HallBooking {
 					StringConstants.NEW_LINE +
 
 					StringConstants.HALL_NAME + list.getHallName()
-					
-					+StringConstants.NEW_LINE +
-					
+
+					+ StringConstants.NEW_LINE +
+
 					StringConstants.HALL_SIZE + list.getHallSize()
-					
-					);
+
+			);
 
 		}
 
 		// hallDatas.setFacility_id(facility_id);
-		
-		
 
 		return bookById(userData);
 	}
 
 	public int get_Details(UserData userData, ConferenceData conferenceData) {
 
+		Inputs inputs = new Inputs();
+
 		logger.info(StringConstants.ENTER_CONFERENCE_NAME);
 
 		conferenceData.setConferenceName(in.nextLine());
 
-		logger.info(StringConstants.ENTER_FROM_DATE);
+		while (true) {
 
-		String from_date = in.nextLine();
+			logger.info(StringConstants.ENTER_FROM_DATE);
 
-		conferenceData.setFromDate(from_date);
+			String fromDate = inputs.dateInput();
 
-		logger.info(StringConstants.ENTER_TO_DATE);
+			conferenceData.setFromDate(fromDate);
 
-		String to_date = in.nextLine();
+			logger.info(StringConstants.ENTER_TO_DATE);
 
-		conferenceData.setToDate(to_date);
+			String toDate = inputs.dateInput();
 
-		logger.info(StringConstants.ENTER_FROM_HOUR);
+			conferenceData.setToDate(toDate);
 
-		String from_hour = in.nextLine();
+			logger.info(StringConstants.ENTER_FROM_HOUR);
 
-		conferenceData.setFrom_hour(from_hour);
+			String fromHour = in.nextLine();
 
-		logger.info(StringConstants.ENTER_MINUTES);
+			conferenceData.setFrom_hour(fromHour);
 
-		String from_min = in.nextLine();
+			logger.info(StringConstants.ENTER_MINUTES);
 
-		conferenceData.setFrom_min(from_min);
+			String fromMin = in.nextLine();
 
-		logger.info(StringConstants.ENTER_TO_HOUR);
+			conferenceData.setFrom_min(fromMin);
 
-		String to_hour = in.nextLine();
+			logger.info(StringConstants.ENTER_TO_HOUR);
 
-		conferenceData.setTo_hour(to_hour);
+			String toHour = in.nextLine();
 
-		logger.info(StringConstants.ENTER_MINUTES);
+			conferenceData.setTo_hour(toHour);
 
-		String to_min = in.nextLine();
+			logger.info(StringConstants.ENTER_MINUTES);
 
-		conferenceData.setTo_min(to_min);
+			String toMin = in.nextLine();
 
-		conferenceData.setUserId(userData.getUser_id());
+			conferenceData.setTo_min(toMin);
 
-		return new AddBookingService().book_By_Id(conferenceData);
+			if (validateDates(conferenceData)) {
+
+				break;
+			}
+		}
+
+		conferenceData.setUserId(userData.getUserId());
+
+		// return 0;
+		return new AddBookingService().bookById(conferenceData);
+
+	}
+
+	public boolean validateDates(ConferenceData conferenceData) {
+
+		Date currentDate = new Date();
+
+		Date date = new Date();
+
+		String fromDateString = conferenceData.getFromDate();
+
+		System.out.println(fromDateString);
+
+		int fromDateYear = Integer.parseInt(fromDateString.substring(0, 4));
+
+		int fromDateMonth = Integer.parseInt(fromDateString.substring(5, 7));
+
+		int fromDateDay = Integer.parseInt(fromDateString.substring(8));
+
+		Calendar cal = Calendar.getInstance();
+
+		cal.set(fromDateYear, fromDateMonth - 1, fromDateDay, Integer.parseInt(conferenceData.getFrom_hour()),
+				Integer.parseInt(conferenceData.getFrom_min()));
+
+		System.out.println(cal.getTime());
+
+		currentDate = cal.getTime();
+
+		SimpleDateFormat simpleDate = new SimpleDateFormat("yyyyMMdd");
+		System.out.println(simpleDate.format(date) + " " + simpleDate.format(currentDate));
+
+		System.out.println(currentDate.getTime() + "from " + date.getTime() + " current");
+
+		if (currentDate.getTime() > date.getTime()) {
+
+			String toDateString = conferenceData.getToDate();
+
+			System.out.println(fromDateString);
+
+			int toDateYear = Integer.parseInt(toDateString.substring(0, 4));
+
+			int toDateMonth = Integer.parseInt(toDateString.substring(5, 7));
+
+			int toDateDay = Integer.parseInt(toDateString.substring(8));
+
+			Calendar cal2 = Calendar.getInstance();
+
+			cal2.set(toDateYear, toDateMonth - 1, toDateDay, Integer.parseInt(conferenceData.getTohour()),
+					Integer.parseInt(conferenceData.getTomin()));
+
+			Date toDate = cal2.getTime();
+
+			if (toDate.getTime() > currentDate.getTime()) {
+				System.out.println(toDate.getTime() + "to" + currentDate.getTime() + "from");
+				return true;
+			}
+
+			return false;
+		} else {
+			return false;
+		}
 
 	}
 

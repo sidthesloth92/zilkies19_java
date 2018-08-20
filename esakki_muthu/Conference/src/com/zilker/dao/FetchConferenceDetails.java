@@ -3,6 +3,7 @@ package com.zilker.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
@@ -39,7 +40,7 @@ public class FetchConferenceDetails {
 
 	SimpleDateFormat timeFormat = null;
 
-	public ConferenceData getDetails(int conference_id) {
+	public ConferenceData getDetails(int conference_id) throws SQLException {
 
 		try {
 
@@ -167,7 +168,7 @@ public class FetchConferenceDetails {
 	}	
 
 	public void getRequests(PreparedStatement hallStmt, ResultSet hallSet, PreparedStatement userStmt,
-			ResultSet userSet) {
+			ResultSet userSet) throws SQLException {
 
 		try {
 
@@ -237,7 +238,7 @@ public class FetchConferenceDetails {
 		}
 	}
 	
-	public int setAcceptOrDecline(UserData userData,int conferenceId,int option) {
+	public int setAcceptOrDecline(UserData userData,int conferenceId,int option) throws SQLException {
 		
 		connection = databaseConfig.getConnection();
 		
@@ -245,7 +246,7 @@ public class FetchConferenceDetails {
 			
 			prepareStmt = connection.prepareStatement(SqlConstants.UPDATE_REQUEST);
 			
-			prepareStmt.setInt(1,userData.getUser_id());
+			prepareStmt.setInt(1,userData.getUserId());
 			
 			prepareStmt.setInt(2, option);
 			

@@ -3,6 +3,7 @@ package com.zilker.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,7 +45,7 @@ public class GetUpcomingConference {
 
 	Logger logger = Logger.getLogger(GetConferenceHistory.class.getName());
 
-	public ArrayList<ConferenceData> getHistory(UserData userData) {
+	public ArrayList<ConferenceData> getHistory(UserData userData) throws SQLException {
 
 		ConferenceData conferenceData = new ConferenceData();
 
@@ -70,7 +71,7 @@ public class GetUpcomingConference {
 
 				prepareStmt.setInt(1, 0);
 
-				prepareStmt.setInt(2, userData.getUser_id());
+				prepareStmt.setInt(2, userData.getUserId());
 
 			} else {
 
@@ -175,7 +176,7 @@ public class GetUpcomingConference {
 	}
 
 	public void getRequests(ConferenceData conferenceData, int pos, PreparedStatement hallStmt, ResultSet hallSet,
-			PreparedStatement userStmt, ResultSet userSet) {
+			PreparedStatement userStmt, ResultSet userSet) throws SQLException {
 
 		try {
 

@@ -1,5 +1,8 @@
 package com.zilker.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.zilker.constants.RegexConstants;
 
 public class ValidationHelper {
@@ -45,12 +48,31 @@ public class ValidationHelper {
 		return true;
 	}
 	
-	public boolean check_Match_Password(String pass_word,String confirm_password) {
+	public boolean checkMatchPassword(String password,String confirmPassword) {
 		
-		if(!pass_word.equals(confirm_password)) {
+		if(!password.equals(confirmPassword)) {
 			
 			return false;
 		}
+		
+		return true;
+	}
+	
+	public boolean checkDate(String date) {
+		
+		if(!date.matches(RegexConstants.DATE_CHECKING)) {
+			
+			return false;
+			
+		}
+		
+		return true;
+	}
+	
+	public boolean checkFromDate(String date) {
+								
+		//Date newDate = new Date();
+		
 		
 		return true;
 	}

@@ -8,4 +8,6 @@ public class RegexConstants {
 	
 	public final static String PASS_WORD = "[a-z A-Z 0-9]{6}";
 	
+	public final static String DATE_CHECKING = "[0-9]{4}-[0-9]{2}-[0-9]{2}";
+	
 }

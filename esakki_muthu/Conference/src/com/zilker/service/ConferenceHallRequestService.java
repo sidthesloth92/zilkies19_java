@@ -1,5 +1,6 @@
 package com.zilker.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.zilker.bean.ConferenceData;
@@ -13,7 +14,7 @@ public class ConferenceHallRequestService {
 	
 	RequestsAndHallFacilities requestsAndHallFacilities = new RequestsAndHallFacilities();
 	
-	public ArrayList<ConferenceData> viewRequests(UserData userData) {	
+	public ArrayList<ConferenceData> viewRequests(UserData userData) throws SQLException {	
 		
 		RequestsAndHallFacilitiesDelegate requestsAndHallFacilitiesDelegate = new RequestsAndHallFacilitiesDelegate();
 					

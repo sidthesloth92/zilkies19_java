@@ -171,7 +171,7 @@ public class AddNewBooking {
 		return 1;
 	}
 
-	public void bookHall(ConferenceData conferenceData) {
+	public void bookHall(ConferenceData conferenceData) throws SQLException {
 
 		try {
 

@@ -1,5 +1,7 @@
 package com.zilker.service;
 
+import java.sql.SQLException;
+
 import com.zilker.bean.LoginData;
 import com.zilker.bean.UserData;
 import com.zilker.delegate.LoginDelegate;
@@ -9,7 +11,7 @@ import com.zilker.ui.UserPage;
 
 public class LoginService {
 
-	public void loginValues(LoginData loginData) {
+	public void loginValues(LoginData loginData) throws SQLException {
 
 		LoginDelegate loginDelegate = new LoginDelegate();
 
