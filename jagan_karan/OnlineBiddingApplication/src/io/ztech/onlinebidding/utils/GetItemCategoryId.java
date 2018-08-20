@@ -12,7 +12,7 @@ public class GetItemCategoryId {
 		String id;
 		do {
 			logger.info(comment1);
-			id=input.nextLine();
+			id = input.nextLine();
 		} while (id.equals(""));
 		return id;
 	}

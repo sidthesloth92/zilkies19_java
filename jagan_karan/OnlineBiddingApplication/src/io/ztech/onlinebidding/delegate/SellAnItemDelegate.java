@@ -9,14 +9,23 @@ public class SellAnItemDelegate {
 	InsertBidItemBaseLog insertBidLog = new InsertBidItemBaseLog();
 	IdRetrieval idRetreive = new IdRetrieval();
 	int bidderid;
-	
-	public int insertBidder(String username) {
-		int customerId = idRetreive.customerIdRetrieve(username);
-		bidderid=insertBidderId.insertBidder(customerId);
-		return bidderid;
+
+	public int insertBidder(String username) throws Exception {
+		try {
+			int customerId = idRetreive.customerIdRetrieve(username);
+			bidderid = insertBidderId.insertBidder(customerId);
+			return bidderid;
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
-	public void insertBidItemLog(int bidderId,String itemId,String categoryId,String itemName,String price,String starttime,String endtime) {
-		insertBidLog.insertBidItem(bidderId, itemId, categoryId,itemName, price, starttime, endtime);
+	public void insertBidItemLog(int bidderId, String itemId, String categoryId, String itemName, String price,
+			String starttime, String endtime) throws Exception {
+		try {
+			insertBidLog.insertBidItem(bidderId, itemId, categoryId, itemName, price, starttime, endtime);
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 }

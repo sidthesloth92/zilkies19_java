@@ -3,7 +3,6 @@ package io.ztech.onlinebidding.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import io.ztech.onlinebidding.constant.DBFields;
 import io.ztech.onlinebidding.constant.SqlQueries;
@@ -13,24 +12,17 @@ public class TypeOfUserRetrieval implements SqlQueries, DBFields {
 	DatabaseConfig dbConfig = new DatabaseConfig();
 	String typeOfUser;
 
-	public String retrieveUserType(String username) {
+	public String retrieveUserType(String username) throws Exception {
 		Connection databaseConnection = dbConfig.getConnection();
 		try {
-			databaseConnection.setAutoCommit(false);
 			PreparedStatement selectType = databaseConnection.prepareStatement(SELECT_TYPE_OF_USER);
 			selectType.setString(1, username);
 			ResultSet typeSet = selectType.executeQuery();
 			while (typeSet.next()) {
 				typeOfUser = typeSet.getString(DB_TYPEOFUSER);
 			}
-			databaseConnection.commit();
 		} catch (Exception e) {
-			try {
-				databaseConnection.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			e.printStackTrace();
+			throw e;
 		} finally {
 			dbConfig.closeConnection(databaseConnection);
 		}

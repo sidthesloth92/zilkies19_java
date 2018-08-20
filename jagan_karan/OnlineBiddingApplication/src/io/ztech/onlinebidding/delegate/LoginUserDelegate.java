@@ -15,12 +15,12 @@ import io.ztech.onlinebidding.dao.TypeOfUserRetrieval;
 public class LoginUserDelegate {
 	static Cipher cipher;
 	LoginPasswordRetrieval passwordRetrieve = new LoginPasswordRetrieval();
-	TypeOfUserRetrieval typeretrieve=new TypeOfUserRetrieval();
-	String password,type;
+	TypeOfUserRetrieval typeretrieve = new TypeOfUserRetrieval();
+	String password, type;
 	private static final byte[] keyValue = new byte[] { 'T', 'h', 'i', 's', 'I', 's', 'A', 'S', 'e', 'c', 'r', 'e', 't',
 			'K', 'e', 'y' };
 
-	public CustomerDetail userDetail(CustomerDetail customerDetail) {
+	public CustomerDetail userDetail(CustomerDetail customerDetail) throws Exception {
 		try {
 			password = passwordRetrieve.retreivePassword(customerDetail.getUserName());
 			if (password != null) {
@@ -30,13 +30,18 @@ public class LoginUserDelegate {
 				customerDetail.setPassword(" ");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw e;
 		}
 		return customerDetail;
 	}
-	public CustomerDetail userType(CustomerDetail detail) {
-		type=typeretrieve.retrieveUserType(detail.getUserName());
-		detail.setTypeOfUser(type);
+
+	public CustomerDetail userType(CustomerDetail detail) throws Exception {
+		try {
+			type = typeretrieve.retrieveUserType(detail.getUserName());
+			detail.setTypeOfUser(type);
+		} catch (Exception e) {
+			throw e;
+		}
 		return detail;
 	}
 

@@ -3,7 +3,6 @@ package io.ztech.onlinebidding.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 
 import io.ztech.onlinebidding.bean.BidItem;
@@ -16,11 +15,10 @@ public class BidItemDetailRetrieval implements SqlQueries, ConstantDisplayStatem
 	DatabaseConfig config = new DatabaseConfig();
 	HashMap<String, BidItem> bidList = new HashMap<>();
 
-	public HashMap<String, BidItem> retrieveBidItemDetails(String itemId, String categoryId) {
+	public HashMap<String, BidItem> retrieveBidItemDetails(String itemId, String categoryId) throws Exception {
 		Connection databaseConnection = config.getConnection();
 		try {
 
-			databaseConnection.setAutoCommit(false);
 			PreparedStatement bidItem = databaseConnection.prepareStatement(SELECT_BID_ITEM_FROM_BASELOG);
 			bidItem.setInt(1, Integer.parseInt(categoryId));
 			bidItem.setInt(2, Integer.parseInt(itemId));
@@ -36,14 +34,8 @@ public class BidItemDetailRetrieval implements SqlQueries, ConstantDisplayStatem
 				bidItemDetails.setEndtime(bidItemSet.getTimestamp(DB_ENDTIME));
 				bidList.put(Integer.toString((bidItemSet.getInt(DB_BID_ITEM_ID))), bidItemDetails);
 			}
-			databaseConnection.commit();
 		} catch (Exception e) {
-			try {
-				databaseConnection.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			e.printStackTrace();
+			throw e;
 		} finally {
 			config.closeConnection(databaseConnection);
 		}
@@ -51,7 +43,7 @@ public class BidItemDetailRetrieval implements SqlQueries, ConstantDisplayStatem
 		return bidList;
 	}
 
-	public BidItem retrieveBidItemDetails(String bidItemId) {
+	public BidItem retrieveBidItemDetails(String bidItemId) throws Exception {
 		Connection databaseConnection = config.getConnection();
 		BidItem bidItemDetails = new BidItem();
 
@@ -78,17 +70,17 @@ public class BidItemDetailRetrieval implements SqlQueries, ConstantDisplayStatem
 		} catch (Exception e) {
 			try {
 				databaseConnection.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+			} catch (Exception e1) {
+				throw e1;
 			}
-			e.printStackTrace();
+			throw e;
 		} finally {
 			config.closeConnection(databaseConnection);
 		}
 		return bidItemDetails;
 	}
 
-	public BidItem retrieveDetailFromBase(String bidItemId) {
+	public BidItem retrieveDetailFromBase(String bidItemId) throws Exception {
 		Connection databaseConnection = config.getConnection();
 		BidItem bidItemDetails = new BidItem();
 
@@ -106,10 +98,10 @@ public class BidItemDetailRetrieval implements SqlQueries, ConstantDisplayStatem
 		} catch (Exception e) {
 			try {
 				databaseConnection.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+			} catch (Exception e1) {
+				throw e1;
 			}
-			e.printStackTrace();
+			throw e;
 		} finally {
 			config.closeConnection(databaseConnection);
 		}

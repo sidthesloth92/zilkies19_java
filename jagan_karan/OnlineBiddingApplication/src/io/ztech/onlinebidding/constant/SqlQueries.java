@@ -26,4 +26,7 @@ public interface SqlQueries {
 	public static final String SELECT_SOLDBID_FROM_FINAL_LOG = "select * from bid_final_log where status=\"SOLD\"";
 	public static final String SELECT_UNSOLDBID_FROM_FINAL_LOG = "select * from bid_final_log where status=\"UNSOLD\"";
 	public static final String DELETE_BID_FROM_LOG = "delete from bid_log where bid_item_id=?";
+	public static final String SELECT_USERNAME = "select username from customer_details where username=?";
+	public static final String SELECT_BID_ITEM_FROM_FINAL_LOG = "select distinct bid_item_id from bid_final_log";
+	public static final String SELECT_BID_ITEM_ID_FROM_BASE_LOG = "select bid_item_id from bid_base_price where item_id=? and category_id=?";
 }

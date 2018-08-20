@@ -3,7 +3,6 @@ package io.ztech.onlinebidding.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 
 import io.ztech.onlinebidding.bean.BidItem;
@@ -15,11 +14,10 @@ public class BidItemFromFinalLog implements DBFields, SqlQueries {
 	DatabaseConfig config = new DatabaseConfig();
 	HashMap<String, BidItem> bidList = new HashMap<>();
 
-	public HashMap<String, BidItem> retrieveSoldBidItemDetails() {
+	public HashMap<String, BidItem> retrieveSoldBidItemDetails() throws Exception {
 		Connection databaseConnection = config.getConnection();
 		try {
 
-			databaseConnection.setAutoCommit(false);
 			PreparedStatement biditem = databaseConnection.prepareStatement(SELECT_SOLDBID_FROM_FINAL_LOG);
 			ResultSet biditemset = biditem.executeQuery();
 			while (biditemset.next()) {
@@ -28,14 +26,8 @@ public class BidItemFromFinalLog implements DBFields, SqlQueries {
 				bidItemDetails.setPrice(Float.toString(biditemset.getFloat(DB_PRICE)));
 				bidList.put(Integer.toString((biditemset.getInt(DB_BID_ITEM_ID))), bidItemDetails);
 			}
-			databaseConnection.commit();
 		} catch (Exception e) {
-			try {
-				databaseConnection.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			e.printStackTrace();
+			throw e;
 		} finally {
 			config.closeConnection(databaseConnection);
 		}
@@ -43,11 +35,10 @@ public class BidItemFromFinalLog implements DBFields, SqlQueries {
 		return bidList;
 	}
 
-	public HashMap<String, BidItem> retrieveUnsoldBidItemDetails() {
+	public HashMap<String, BidItem> retrieveUnsoldBidItemDetails() throws Exception {
 		Connection databaseConnection = config.getConnection();
 		try {
 
-			databaseConnection.setAutoCommit(false);
 			PreparedStatement biditem = databaseConnection.prepareStatement(SELECT_UNSOLDBID_FROM_FINAL_LOG);
 			ResultSet biditemset = biditem.executeQuery();
 			while (biditemset.next()) {
@@ -56,14 +47,8 @@ public class BidItemFromFinalLog implements DBFields, SqlQueries {
 				bidItemDetails.setPrice(Float.toString(biditemset.getFloat(DB_PRICE)));
 				bidList.put(Integer.toString((biditemset.getInt(DB_BID_ITEM_ID))), bidItemDetails);
 			}
-			databaseConnection.commit();
 		} catch (Exception e) {
-			try {
-				databaseConnection.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			e.printStackTrace();
+			throw e;
 		} finally {
 			config.closeConnection(databaseConnection);
 		}

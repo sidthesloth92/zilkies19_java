@@ -2,7 +2,6 @@ package io.ztech.onlinebidding.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.logging.Logger;
 
 import io.ztech.onlinebidding.bean.CustomerDetail;
@@ -14,10 +13,9 @@ public class InsertNewCustomer implements SqlQueries, ConstantDisplayStatement {
 	DatabaseConfig dbConfig = new DatabaseConfig();
 	public static Logger logger = Logger.getLogger("OnlineBiddingDao");
 
-	public void insertNewUserDetails(CustomerDetail registerDetails) {
+	public void insertNewUserDetails(CustomerDetail registerDetails) throws Exception {
 		Connection databaseConnection = dbConfig.getConnection();
 		try {
-			databaseConnection.setAutoCommit(false);
 			PreparedStatement insertstatement = databaseConnection.prepareStatement(INSERT_NEW_CUSTOMER);
 			insertstatement.setString(1, registerDetails.getFirstName());
 			insertstatement.setString(2, registerDetails.getLastName());
@@ -28,14 +26,8 @@ public class InsertNewCustomer implements SqlQueries, ConstantDisplayStatement {
 			insertstatement.setString(7, registerDetails.getUserName());
 			insertstatement.setString(8, registerDetails.getPassword());
 			insertstatement.executeUpdate();
-			databaseConnection.commit();
 		} catch (Exception e) {
-			try {
-				databaseConnection.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			e.printStackTrace();
+			throw e;
 		} finally {
 			dbConfig.closeConnection(databaseConnection);
 		}

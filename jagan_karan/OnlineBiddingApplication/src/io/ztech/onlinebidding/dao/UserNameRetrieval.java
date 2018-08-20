@@ -3,31 +3,32 @@ package io.ztech.onlinebidding.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.HashMap;
 
 import io.ztech.onlinebidding.constant.ConstantDisplayStatement;
 import io.ztech.onlinebidding.constant.DBFields;
 import io.ztech.onlinebidding.constant.SqlQueries;
 import io.ztech.onlinebidding.utils.DatabaseConfig;
 
-public class ItemRetrieval implements SqlQueries, ConstantDisplayStatement, DBFields {
+public class UserNameRetrieval implements SqlQueries, ConstantDisplayStatement, DBFields {
 	DatabaseConfig dbConfig = new DatabaseConfig();
-	HashMap<String, String> itemList = new HashMap<>();
 
-	public HashMap<String, String> retreiveItem(String categoryId) throws Exception {
+	public boolean userNameRetrieve(String userName) throws Exception {
 		Connection databaseConnection = dbConfig.getConnection();
 		try {
-			PreparedStatement selectItem = databaseConnection.prepareStatement(SELECT_ITEM);
-			selectItem.setInt(1, Integer.parseInt(categoryId));
-			ResultSet category = selectItem.executeQuery();
-			while (category.next()) {
-				itemList.put(category.getString(DB_ITEM_ID), category.getString(DB_ITEM_NAME));
+			PreparedStatement selectUserName = databaseConnection.prepareStatement(SELECT_USERNAME);
+			selectUserName.setString(1, userName);
+			ResultSet userNameSet = selectUserName.executeQuery();
+			while (userNameSet.next()) {
+				String username = userNameSet.getString("username");
+				if (username.equals("0")) {
+					return true;
+				}
 			}
 		} catch (Exception e) {
 			throw e;
 		} finally {
 			dbConfig.closeConnection(databaseConnection);
 		}
-		return itemList;
+		return false;
 	}
 }
