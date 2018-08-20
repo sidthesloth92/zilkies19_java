@@ -2,6 +2,7 @@ package io.ztech.cricketapp.delegate;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 import io.ztech.cricketapp.beans.BallStats;
 import io.ztech.cricketapp.beans.Match;
@@ -11,13 +12,16 @@ import io.ztech.cricketapp.beans.User;
 import io.ztech.cricketapp.constants.MatchResult;
 import io.ztech.cricketapp.constants.UserMessages;
 import io.ztech.cricketapp.dao.CricketDAO;
+import io.ztech.cricketapp.ui.UserEntry;
 
-public class MatchManager {
+public class MatchDelegate {
 
 	Scanner scanner;
+	Logger logger;
 	CricketDAO dao;
 
-	public MatchManager() {
+	public MatchDelegate() {
+		logger = Logger.getLogger(UserEntry.class.getName());
 		scanner = new Scanner(System.in);
 		dao = new CricketDAO();
 	}
@@ -28,7 +32,7 @@ public class MatchManager {
 
 	public void displayMatches(User user) {
 		ArrayList<Match> matchList = dao.fetchMatches(user);
-		System.out.println(UserMessages.MATCH_TABLE);
+		logger.info(UserMessages.MATCH_TABLE);
 		for (Match match : matchList) {
 			Team team = match.getTeamA();
 			team = dao.fetchTeam(team.getTeamId());
@@ -49,7 +53,7 @@ public class MatchManager {
 				match.setMatchResult(MatchResult.NA);
 			}
 
-			System.out.println(match.getMatchId() + "\t" + match.getMatchDate() + "\t" + match.getTeamA().getTeamName()
+			logger.info(match.getMatchId() + "\t" + match.getMatchDate() + "\t" + match.getTeamA().getTeamName()
 					+ "\t" + match.getTeamB().getTeamName() + "\t" + match.getStatus() + "\t" + toss + "\t"
 					+ match.getMatchResult());
 		}
@@ -69,5 +73,17 @@ public class MatchManager {
 
 	public void insertBallStats(BallStats ballStats) {
 		dao.insertBallStats(ballStats);
+	}
+	
+	public boolean isMatchScheduled(User user) {
+		return dao.fetchScheduledMatch(user);
+	}
+	
+	public void updateMatchDate(Match match) {
+		dao.updateMatchDate(match);
+	}
+	
+	public void updateTeam(Match match, String team) {
+		dao.updateTeam(match, team);
 	}
 }

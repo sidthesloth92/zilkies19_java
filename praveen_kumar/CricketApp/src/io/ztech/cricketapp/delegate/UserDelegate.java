@@ -3,10 +3,10 @@ package io.ztech.cricketapp.delegate;
 import io.ztech.cricketapp.beans.User;
 import io.ztech.cricketapp.dao.CricketDAO;
 
-public class UserManager {
+public class UserDelegate {
 	CricketDAO dao;
 	
-	public UserManager() {
+	public UserDelegate() {
 		dao = new CricketDAO();
 	}
 	

@@ -2,30 +2,32 @@ package io.ztech.cricketapp.delegate;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 import io.ztech.cricketapp.beans.Player;
 import io.ztech.cricketapp.beans.Team;
 import io.ztech.cricketapp.beans.User;
-import io.ztech.cricketapp.constants.Queries;
 import io.ztech.cricketapp.constants.UserMessages;
 import io.ztech.cricketapp.dao.CricketDAO;
+import io.ztech.cricketapp.ui.UserEntry;
 
-public class PlayerManager {
-	
+public class PlayerDelegate {
+	Logger logger;
 	Scanner scanner;
 	CricketDAO dao;
 	
-	public PlayerManager() {
+	public PlayerDelegate() {
+		logger = Logger.getLogger(UserEntry.class.getName());
 		scanner = new Scanner(System.in);
 		dao = new CricketDAO();
 	}
 	
-	public boolean searchPlayer(int playerId, User user) {
+	/*public boolean searchPlayer(int playerId, User user) {
 		return dao.searchPlayer(user, playerId);
-	}
+	}*/
 	
-	public void removePlayer(int teamId, int playerId) {
-		dao.deletePlayer(teamId, playerId);
+	public void removePlayer(Team team) {
+		dao.deletePlayer(team);
 	}
 	
 	public void displayPlayer(User user) {
@@ -37,17 +39,17 @@ public class PlayerManager {
 	
 	public void printPlayerDetails(Team team) {
 		ArrayList<Player> playerList = dao.fetchTeamPlayers(team);
-		System.out.println(UserMessages.PLAYER_TABLE);
+		logger.info(UserMessages.PLAYER_TABLE);
 		for (Player player : playerList) {
-			System.out.println(player.getTeamId() + "\t" + player.getPlayerId() + "\t" + player.getFirstName() + "\t\t" + player.getLastName());
+			logger.info(player.getTeamId() + "\t" + player.getPlayerId() + "\t" + player.getFirstName() + "\t\t" + player.getLastName());
 		}
 	}
 	
-	public void updateTeamId(int teamId, int playerId) {
-		dao.updatePlayerTeam(teamId, playerId);
+	public void updateTeamId(Team team) {
+		dao.updatePlayerTeam(team);
 	}
 	
-	public void updatePlayerName(int playerId, String newName, String query) {
-		dao.updatePlayerName(playerId, newName, query);
+	public void updatePlayerName(Player player, String query) {
+		dao.updatePlayerName(player, query);
 	}
 }
