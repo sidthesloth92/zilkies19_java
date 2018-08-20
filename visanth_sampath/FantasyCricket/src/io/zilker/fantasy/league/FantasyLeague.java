@@ -16,7 +16,7 @@ public class FantasyLeague {
 
 	// main starting of the program
 	public static void main(String[] args) {
-		System.setProperty("java.util.logging.SimpleFormatter.format", "%1$tT %4$s %5$s%6$s%n");
+		System.setProperty("java.util.logging.SimpleFormatter.format", "%5$s%6$s%n");
 		UserValidator userValidator = new UserValidator();
 		do {
 			printer.displayAlert(DisplayConstants.STARTING_OPTIONS);

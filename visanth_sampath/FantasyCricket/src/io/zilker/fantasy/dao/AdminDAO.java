@@ -10,16 +10,23 @@ import io.zilker.fantasy.bean.Player;
 import io.zilker.fantasy.bean.User;
 import io.zilker.fantasy.constants.SqlConstants;
 import io.zilker.fantasy.service.AdminService;
+import io.zilker.fantasy.utility.CustomException;
 
 public class AdminDAO {
 	AdminService adminService = new AdminService();
 	private Connection connection;
-	private PreparedStatement preparedStatement = null;
-	private ResultSet resultSet = null;
+	private PreparedStatement preparedStatement;
+	private ResultSet resultSet;
 	DbConfig dbConfig = new DbConfig();
 
+	public AdminDAO() {
+		connection = null;
+		preparedStatement = null;
+		resultSet = null;
+	}
+
 	// checks if the entered values are valid
-	public User loginValidator(String userName, String password) throws SQLException {
+	public User validateLogin(String userName, String password) {
 		User newUser = new User();
 		try {
 			connection = dbConfig.getConnection();
@@ -33,7 +40,10 @@ public class AdminDAO {
 				newUser.setUserId(resultSet.getInt("user_id"));
 			}
 
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
+
 			e.getStackTrace();
 		} finally {
 			dbConfig.closeConnection(connection, preparedStatement, resultSet);
@@ -41,7 +51,7 @@ public class AdminDAO {
 		return newUser;
 	}
 
-	public boolean signupInsertion(User newUser) throws SQLException {
+	public boolean addUser(User newUser) {
 		// TODO Auto-generated method stub
 		boolean isValid = false;
 		try {
@@ -51,6 +61,8 @@ public class AdminDAO {
 			preparedStatement.setString(2, newUser.getEmail());
 			preparedStatement.setString(3, newUser.getPassword());
 			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -59,7 +71,7 @@ public class AdminDAO {
 		return isValid;
 	}
 
-	public void newMatchInsertion(Match newMatch) throws SQLException {
+	public void setNewMatch(Match newMatch) {
 		// TODO Auto-generated method stub
 		try {
 			connection = dbConfig.getConnection();
@@ -71,6 +83,9 @@ public class AdminDAO {
 			preparedStatement.setString(5, newMatch.getEndTime());
 			preparedStatement.setInt(6, newMatch.getMatchCredits());
 			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			new CustomException("Exception Caught");
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -79,13 +94,15 @@ public class AdminDAO {
 	}
 
 	// insert into match status table
-	public void newMatchStatusInsertion(Match newMatch) throws SQLException {
+	public void setNewMatchStatus(Match newMatch) {
 		// TODO Auto-generated method stub
 		try {
 			connection = dbConfig.getConnection();
 			preparedStatement = connection.prepareStatement(SqlConstants.MATCH_STATUS_INSERT);
 			preparedStatement.setInt(1, newMatch.getMatchId());
 			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -95,7 +112,7 @@ public class AdminDAO {
 	}
 
 	// gets the id of last inserted match
-	public int getLastInsertedMatchId() throws SQLException {
+	public int getLastInsertedMatchId() {
 		// TODO Auto-generated method stub
 		int lastInsertedId = 0;
 		try {
@@ -105,6 +122,8 @@ public class AdminDAO {
 			if (resultSet.next()) {
 				lastInsertedId = resultSet.getInt("match_id");
 			}
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -114,19 +133,21 @@ public class AdminDAO {
 	}
 
 	// list active matches
-	public ArrayList<Match> listActiveMatches() throws SQLException {
+	public ArrayList<Match> listActiveMatches() {
 		// TODO Auto-generated method stub
-		ArrayList <Match> matchList = new ArrayList<Match> ();
+		ArrayList<Match> matchList = new ArrayList<Match>();
 		try {
 			connection = dbConfig.getConnection();
 			preparedStatement = connection.prepareStatement(SqlConstants.SELECT_ACTIVE_MATCHES);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Match match = new Match();
-				match.setMatchTable(resultSet.getString("team1"), resultSet.getString("team2"), "scheduledDate", "startTime", "endTime", 0);
+				match.setMatchTable(resultSet.getString("team1"), resultSet.getString("team2"), "scheduledDate",
+						"startTime", "endTime", 0);
 				match.setStatusTable(resultSet.getInt("match_status.match_id"), 1, 1);
-				//adminService.printMatches(resultSet.getInt("match_status.match_id"), resultSet.getString("team1"),
-						//resultSet.getString("team2"));
+				// adminService.printMatches(resultSet.getInt("match_status.match_id"),
+				// resultSet.getString("team1"),
+				// resultSet.getString("team2"));
 				// (resultSet.getInt("match_status.match_id"), resultSet.getString("team1"),
 				// resultSet.getString("team2"), resultSet.getString("scheduled_date"),
 				// resultSet.getString("start_time"), resultSet.getString("end_time"),
@@ -134,6 +155,8 @@ public class AdminDAO {
 				// resultSet.getInt("isupcomming"));
 				matchList.add(match);
 			}
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -143,13 +166,15 @@ public class AdminDAO {
 	}
 
 	// disable an active match
-	public void disableParticularMatch(int matchId) throws SQLException {
+	public void disableParticularMatch(int matchId) {
 		// TODO Auto-generated method stub
 		try {
 			connection = dbConfig.getConnection();
 			preparedStatement = connection.prepareStatement(SqlConstants.UPDATE_ACTIVE_MATCH);
 			preparedStatement.setInt(1, matchId);
 			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -159,7 +184,7 @@ public class AdminDAO {
 	}
 
 	// insert into player
-	public void insertIntoPlayer(Player newPlayer) throws SQLException {
+	public void setPlayer(Player newPlayer) {
 		try {
 			connection = dbConfig.getConnection();
 			preparedStatement = connection.prepareStatement(SqlConstants.INSERT_INTO_PLAYER);
@@ -167,6 +192,8 @@ public class AdminDAO {
 			preparedStatement.setString(2, newPlayer.getplayerType());
 			preparedStatement.setLong(3, newPlayer.getplayerRating());
 			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -176,12 +203,14 @@ public class AdminDAO {
 	}
 
 	// insert into team table
-	public void insertIntoTeam(String teamName) throws SQLException {
+	public void insertIntoTeam(String teamName) {
 		try {
 			connection = dbConfig.getConnection();
 			preparedStatement = connection.prepareStatement(SqlConstants.INSERT_INTO_TEAM);
 			preparedStatement.setString(1, teamName);
 			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -191,7 +220,7 @@ public class AdminDAO {
 	}
 
 	// insert into team table
-	public int getTeamId(String teamName) throws SQLException {
+	public int getTeamId(String teamName) {
 		int teamId = 0;
 		try {
 			connection = dbConfig.getConnection();
@@ -201,6 +230,8 @@ public class AdminDAO {
 			if (resultSet.next()) {
 				teamId = resultSet.getInt("team_id");
 			}
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -219,11 +250,18 @@ public class AdminDAO {
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Player player = new Player();
-				player.setPlayer(resultSet.getString("player_name"), "team", resultSet.getString("type"), resultSet.getInt("rating"));
-				/*adminService.printPlayers(resultSet.getInt("player_id"), resultSet.getString("player_name"),
-						resultSet.getString("type"), resultSet.getInt("rating"));*/
+				player.setPlayer(resultSet.getString("player_name"), "team", resultSet.getString("type"),
+						resultSet.getInt("rating"));
+				player.setPlayerId(resultSet.getInt("player_id"));
+				/*
+				 * adminService.printPlayers(resultSet.getInt("player_id"),
+				 * resultSet.getString("player_name"), resultSet.getString("type"),
+				 * resultSet.getInt("rating"));
+				 */
 				playerList.add(player);
 			}
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -233,7 +271,7 @@ public class AdminDAO {
 	}
 
 	// insert into team and player table
-	public void insertIntoTeamAndPlayers(int teamId, int playerId) throws SQLException {
+	public void setTeamAndPlayers(int teamId, int playerId) {
 		// TODO Auto-generated method stub
 		try {
 			connection = dbConfig.getConnection();
@@ -241,6 +279,8 @@ public class AdminDAO {
 			preparedStatement.setInt(1, teamId);
 			preparedStatement.setInt(2, playerId);
 			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -250,7 +290,7 @@ public class AdminDAO {
 	}
 
 	// get last inserted Player Id
-	public int getLastPlayerId() throws SQLException {
+	public int getLastPlayerId() {
 		// TODO Auto-generated method stub
 		int playerId = 0;
 		try {
@@ -260,6 +300,8 @@ public class AdminDAO {
 			if (resultSet.next()) {
 				playerId = resultSet.getInt("player_id");
 			}
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -276,6 +318,8 @@ public class AdminDAO {
 			preparedStatement.setInt(1, modifiedRating);
 			preparedStatement.setInt(2, playerId);
 			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 			return false;
@@ -294,12 +338,17 @@ public class AdminDAO {
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Match match = new Match();
-				match.setMatchTable(resultSet.getString("team1"), resultSet.getString("team2"), "scheduledDate", "startTime", "endTime", 0);
-				/*adminService.printMatches(resultSet.getInt("match_id"), resultSet.getString("team1"),
-						resultSet.getString("team2"));*/
+				match.setMatchTable(resultSet.getString("team1"), resultSet.getString("team2"), "scheduledDate",
+						"startTime", "endTime", 0);
+				/*
+				 * adminService.printMatches(resultSet.getInt("match_id"),
+				 * resultSet.getString("team1"), resultSet.getString("team2"));
+				 */
 				match.setStatusTable(resultSet.getInt("match_id"), 0, 1);
 				matchList.add(match);
 			}
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -310,12 +359,14 @@ public class AdminDAO {
 	}
 
 	// disable upcomming match
-	public void disableUpcommingMatch(int matchId) {
+	public void disableUpcomingMatch(int matchId) {
 		try {
 			connection = dbConfig.getConnection();
 			preparedStatement = connection.prepareStatement(SqlConstants.DISABLE_UPCOMMING);
 			preparedStatement.setInt(1, matchId);
 			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -323,7 +374,7 @@ public class AdminDAO {
 		}
 	}
 
-	public void insertIntoPlayingTeam(int matchId, int playerId, int points) {
+	public void setPlayingTeam(int matchId, int playerId, int points) {
 		// TODO Auto-generated method stub
 		try {
 			connection = dbConfig.getConnection();
@@ -332,6 +383,8 @@ public class AdminDAO {
 			preparedStatement.setInt(2, playerId);
 			preparedStatement.setInt(3, points);
 			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -351,6 +404,8 @@ public class AdminDAO {
 			while (resultSet.next()) {
 				users.add(resultSet.getInt("user_id"));
 			}
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -371,6 +426,8 @@ public class AdminDAO {
 			if (resultSet.next()) {
 				points = resultSet.getInt("total");
 			}
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -379,7 +436,7 @@ public class AdminDAO {
 		return points;
 	}
 
-	public void insertIntoResultBoard(int userId, int matchId, int points) {
+	public void setResultBoard(int userId, int matchId, int points) {
 		// TODO Auto-generated method stub
 		try {
 			connection = dbConfig.getConnection();
@@ -388,6 +445,8 @@ public class AdminDAO {
 			preparedStatement.setInt(2, matchId);
 			preparedStatement.setInt(3, points);
 			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -409,6 +468,8 @@ public class AdminDAO {
 				players.add(resultSet.getInt("player_id"));
 				count++;
 			}
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -417,7 +478,7 @@ public class AdminDAO {
 		return players;
 	}
 
-	public void insertIntoMostPickedPlayers(int playerId, int matchId) {
+	public void setMostPickedPlayers(int playerId, int matchId) {
 		// TODO Auto-generated method stub
 		try {
 			connection = dbConfig.getConnection();
@@ -425,6 +486,8 @@ public class AdminDAO {
 			preparedStatement.setInt(1, playerId);
 			preparedStatement.setInt(2, matchId);
 			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.getStackTrace();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {

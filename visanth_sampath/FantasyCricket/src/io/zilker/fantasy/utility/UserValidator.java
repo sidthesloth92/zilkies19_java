@@ -19,7 +19,7 @@ public class UserValidator {
 			String userName = adminUI.getStringInputs();
 			adminUI.displayAlert(DisplayConstants.ENTER_PASSWORD);
 			String password = adminUI.getStringInputs();
-			newUser = newCRUDOperations.loginValidator(userName, password);
+			newUser = newCRUDOperations.validateLogin(userName, password);
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
@@ -45,7 +45,7 @@ public class UserValidator {
 			String password = adminUI.getStringInputs();
 			User newUser = new User();
 			newUser.setUser(userName, email, password, 1);
-			isValid = newCRUDOperations.signupInsertion(newUser);
+			isValid = newCRUDOperations.addUser(newUser);
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
