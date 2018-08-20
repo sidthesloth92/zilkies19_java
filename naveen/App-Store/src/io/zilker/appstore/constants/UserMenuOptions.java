@@ -1,0 +1,5 @@
+package io.zilker.appstore.constants;
+
+public enum UserMenuOptions {
+	VIEW_ALL_APPS, VIEW_DOWNLOADED_APPS, DOWNLOAD_APPS, VIEW_WISHLIST, ADD_APPS_TO_WISHLIST, USER_SPECIFIC_OPTIONS, EXIT
+}
