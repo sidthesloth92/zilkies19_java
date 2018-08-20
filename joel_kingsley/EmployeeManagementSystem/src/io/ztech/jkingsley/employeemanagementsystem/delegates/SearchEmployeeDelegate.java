@@ -10,6 +10,7 @@ import io.ztech.jkingsley.employeemanagementsystem.beans.objects.Experience;
 import io.ztech.jkingsley.employeemanagementsystem.beans.objects.Mail;
 import io.ztech.jkingsley.employeemanagementsystem.beans.objects.Phone;
 import io.ztech.jkingsley.employeemanagementsystem.beans.objects.Profile;
+import io.ztech.jkingsley.employeemanagementsystem.beans.objects.Project;
 import io.ztech.jkingsley.employeemanagementsystem.beans.objects.Skill;
 import io.ztech.jkingsley.employeemanagementsystem.dao.AssignDAO;
 import io.ztech.jkingsley.employeemanagementsystem.dao.DesignationDAO;
@@ -18,6 +19,7 @@ import io.ztech.jkingsley.employeemanagementsystem.dao.EmployeeDAO;
 import io.ztech.jkingsley.employeemanagementsystem.dao.ExperienceDAO;
 import io.ztech.jkingsley.employeemanagementsystem.dao.MailDAO;
 import io.ztech.jkingsley.employeemanagementsystem.dao.PhoneDAO;
+import io.ztech.jkingsley.employeemanagementsystem.dao.ProjectDAO;
 import io.ztech.jkingsley.employeemanagementsystem.dao.SkillDAO;
 
 public class SearchEmployeeDelegate {
@@ -89,6 +91,11 @@ public class SearchEmployeeDelegate {
 		}
 		return skills;
 		
+	}
+
+	public ArrayList<Project> findAllProjects() throws PersistenceException {
+		ProjectDAO projectDAO = new ProjectDAO();
+		return projectDAO.findAllProjects();
 	}
 
 }

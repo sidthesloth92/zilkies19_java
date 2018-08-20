@@ -8,7 +8,7 @@ public class Fields {
 	public static final String TABLE_EMERGENCY_CONTACT = "emergency_contact";
 	public static final String TABLE_EXPERIENCE = "experience";
 	public static final String TABLE_DESIGNATION = "designation";
-	
+	public static final String TABLE_PROJECT = "project";
 	public static final String TABLE_SKILL = "skill";
 	
 	public static final String SKILL_KEY_NAME = "skill_name";
@@ -51,5 +51,9 @@ public class Fields {
 	public static final String PHONE_KEY_TYPE = "phone_type";
 	public static final String EXPERIENCE_KEY_EMP_ID = "emp_id";
 	public static final String EXPERIENCE_KEY_SKILL_ID = "skill_id";
-	public static final String TABLE_PROJECT = "project";
+	
+	public static final String PROJECT_KEY_ID = "project_id";
+	public static final String PROJECT_KEY_NAME = "project_name";
+	public static final String PROJECT_KEY_LOCATION = "location";
+	public static final String PROJECT_REPORTING_MANAGER_ID = "reporting_manager_id";
 }

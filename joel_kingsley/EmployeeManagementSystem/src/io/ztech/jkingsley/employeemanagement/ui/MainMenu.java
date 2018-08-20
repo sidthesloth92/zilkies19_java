@@ -4,6 +4,8 @@ import java.math.BigInteger;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+import io.ztech.jkingsley.employeemanagement.constants.Titles;
+
 public class MainMenu {
 	
 	private final Logger LOGGER = Logger.getLogger(Application.class.getName());
@@ -35,6 +37,7 @@ public class MainMenu {
 				eMUI.start();
 				break;
 			case GRIEVANCE_MANAGEMENT:
+				LOGGER.info(Titles.UNDER_CONSTRUCTION);
 				break;
 			case EXIT:
 				notExit = false;

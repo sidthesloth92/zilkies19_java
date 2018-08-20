@@ -30,5 +30,6 @@ public class Query {
 	public static final String ADD_PROJECT = "insert into " + Fields.TABLE_PROJECT + " values(default,?,?,?)";
 	public static final String UPDATE_EMPLOYEE_STATUS = "update " + Fields.TABLE_EMPLOYEE + " set " + Fields.EMPLOYEE_KEY_EMP_STATUS + " = ? "
 			 + " where " + Fields.EMPLOYEE_KEY_ID + " = ?";
+	public static final String LIST_ALL_PROJECTS = "select * from " + Fields.TABLE_PROJECT;
 
 }

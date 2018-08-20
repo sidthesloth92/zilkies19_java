@@ -21,9 +21,7 @@ public class EmployeeLimitedUI {
 
 		GET_EMPLOYEE_DETAILS,
 
-		UPDATE_PHONE_NUMBER, UPDATE_EMERGENCY_CONTACT, UPDATE_MAIL,
-
-		BACK
+		UPDATE_PHONE_NUMBER, UPDATE_EMERGENCY_CONTACT, UPDATE_MAIL, BACK
 	}
 
 	private final Logger LOGGER = Logger.getLogger(Application.class.getName());

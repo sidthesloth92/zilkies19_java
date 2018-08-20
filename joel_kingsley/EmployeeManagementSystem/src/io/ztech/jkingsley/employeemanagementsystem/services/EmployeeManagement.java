@@ -183,4 +183,13 @@ public class EmployeeManagement {
 		}
 	}
 
+	public ArrayList<Project> findAllProjects() {
+		try {
+			return searchEmployeeDelegate.findAllProjects();
+		} catch (PersistenceException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

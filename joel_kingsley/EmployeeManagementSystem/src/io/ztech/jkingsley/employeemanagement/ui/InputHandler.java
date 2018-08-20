@@ -32,12 +32,20 @@ public class InputHandler {
 
 	private final static Logger LOGGER = Logger.getLogger(InputHandler.class.getName());
 
-	public static ArrayList<Experience> removeDuplicatedInList(ArrayList<Experience> experiences) {
-		Set<Experience> set = new HashSet<>();
-		set.addAll(experiences);
+	public static ArrayList<Experience> removeDuplicatedExperiencesInList(ArrayList<Experience> experiences) {
+		Set<BigInteger> set = new HashSet<>();
+		experiences.forEach(experience -> set.add(experience.getSkill_id()));
 		experiences.clear();
-		experiences.addAll(set);
+		set.forEach(id -> experiences.add(new Experience()));
 		return experiences;
+	}
+	
+	public static ArrayList<Skill> removeDuplicatedSkillsInList(ArrayList<Skill> skills) {
+		Set<Skill> set = new HashSet<>();
+		set.addAll(skills);
+		skills.clear();
+		skills.addAll(set);
+		return skills;
 	}
 	
 	public static BigInteger getEmployeeID() {
@@ -285,14 +293,16 @@ public class InputHandler {
 		String phoneNumber = "";
 		String type = "";
 		do {
-			LOGGER.info("Enter number(10 digits):");
-			phoneNumber = scanner.nextLine();
-			if (phoneNumber.equals("-1")) {
-				break;
-			}
+			
 			LOGGER.info("Enter type(work/home):");
 			type = scanner.nextLine().toUpperCase();
-
+			if (type.equals("-1")) {
+				break;
+			}
+			LOGGER.info("Enter number(10 digits):");
+			phoneNumber = scanner.nextLine();
+			
+			
 			if (Validation.isValid(phoneNumber, Regex.PHONE_REGEX) && Validation.isValidPhoneType(type)) {
 				Phone phone = new Phone();
 				phone.setPhone_number(phoneNumber);
@@ -384,15 +394,16 @@ public class InputHandler {
 				Experience experience = new Experience();
 				experience.setSkill_id(allSkills.get(skill - 1).getSkill_id());
 				experiences.add(experience);
-				LOGGER.info("Added skill " + skill);
+				LOGGER.info(Titles.ADDED_SKILL + skill);
 			}
 
 			else {
-				LOGGER.info("You entered an invalid Skill. Make sure it is valid");
+				LOGGER.info(Titles.INVALID_SKILL);
 			}
+			LOGGER.info(Titles.INPUT_SKILLS);
 		} while (skill != -1);
 		
-		experiences = removeDuplicatedInList(experiences);
+		experiences = removeDuplicatedExperiencesInList(experiences);
 		
 		experiences.forEach(experience -> LOGGER.info(experience.getSkill_id().toString()));
 		return experiences;
@@ -405,12 +416,12 @@ public class InputHandler {
 		EmployeeManagement employeeManagement = new EmployeeManagement();
 		ArrayList<Skill> allSkills = employeeManagement.findAllSkills();
 
-		LOGGER.info("List of all valid skills:");
+		LOGGER.info(Titles.LIST_SKILLS);
 		for (int i = 0; i < allSkills.size(); i++) {
 			LOGGER.info(Integer.toString(i + 1) + ". " + allSkills.get(i).getSkill_name());
 		}
 
-		LOGGER.info("Enter Skills one by one(eg. 1)(Enter -1 to skip):");
+		LOGGER.info(Titles.INPUT_SKILLS);
 		int skill = 0;
 		do {
 			String input = scanner.nextLine();
@@ -424,13 +435,13 @@ public class InputHandler {
 				Experience experience = new Experience();
 				experience.setSkill_id(allSkills.get(skill - 1).getSkill_id());
 				experiences.add(experience);
-				LOGGER.info("Added skill " + skill);
+				LOGGER.info(Titles.ADDED_SKILL + skill);
 			} else {
-				LOGGER.info("You entered an invalid Skill. Make sure it is valid");
+				LOGGER.info(Titles.INVALID_SKILL);
 			}
 		} while (skill != -1);
 		
-		experiences = removeDuplicatedInList(experiences);
+		experiences = removeDuplicatedExperiencesInList(experiences);
 		
 		experiences.forEach(experience -> LOGGER.info(experience.getSkill_id().toString()));
 		return experiences;
@@ -439,7 +450,7 @@ public class InputHandler {
 
 	public static Phone getPhoneNumber() {
 		Phone phone = null;
-		LOGGER.info("Enter Phone Number and type):");
+		LOGGER.info(Titles.INPUT_PHONE);
 		String phoneNumber = "";
 		String type = "";
 
@@ -524,7 +535,7 @@ public class InputHandler {
 			LOGGER.info(allSkills.get(i).getSkill_name());
 		}
 
-		LOGGER.info("Enter Skill number(eg. 1)(Enter -1 to skip):");
+		LOGGER.info(Titles.LIST_SKILLS);
 		String input = "";
 		int skill = 0;
 		do {
@@ -540,9 +551,10 @@ public class InputHandler {
 				experience.setSkill_id(allSkills.get(skill - 1).getSkill_id());
 				LOGGER.info("Added skill " + skill);
 			} else {
-				LOGGER.info("You entered an invalid Skill number. Make sure it is within the range");
+				LOGGER.info(Titles.INVALID_SKILL);
 			}
 		} while (skill <= 0 || skill > allSkills.size());
+		
 
 		return experience;
 	}
@@ -581,7 +593,7 @@ public class InputHandler {
 	}
 
 	public static EmployeeStatus getEmployeeStatus() {
-		LOGGER.info("Enter Employee Status:");
+		LOGGER.info(Titles.INPUT_EMP_STATUS);
 		EmployeeStatus[] menuOptions = EmployeeStatus.values();
 		for (int i = 0; i < menuOptions.length; i++) {
 			LOGGER.info(i + 1 + ". " + menuOptions[i].toString());
@@ -594,12 +606,35 @@ public class InputHandler {
 				n = Integer.parseInt(input);
 			}
 			if (n < 1 || n > EmployeeStatus.values().length) {
-				LOGGER.info("Not a valid option. Enter a valid option");
+				LOGGER.info(Titles.INVALID_OPTION);
 			}
 		} while (n < 1 || n > EmployeeStatus.values().length);
 
 		EmployeeStatus empStatus = EmployeeStatus.values()[n - 1];
 		return empStatus;
 	}
+
+	/*public static BigInteger getProjectID() {
+		EmployeeManagement employeeManagement = new EmployeeManagement();
+		ArrayList<Project> projects = employeeManagement.findAllProjects();
+
+		if (projects.isEmpty()) {
+			LOGGER.info("There are no projects entered yet");
+			return BigInteger.ZERO;
+		}
+
+		for (int i = 0; i < projects.size(); i++) {
+			LOGGER.info(String.valueOf(i + 1) + ". " + projects.get(i).getProject_name() + " ("
+					+ projects.get(i).getProject_id() + ")");
+		}
+		
+		String input = "";
+		int n = 0;
+		
+		do {
+			
+		}while();
+		return null;
+	}*/
 
 }

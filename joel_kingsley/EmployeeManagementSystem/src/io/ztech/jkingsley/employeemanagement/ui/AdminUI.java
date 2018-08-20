@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import io.ztech.jkingsley.employeemanagement.constants.Regex;
 import io.ztech.jkingsley.employeemanagement.constants.Titles;
+import io.ztech.jkingsley.employeemanagement.ui.ManagerUI.ManagerMenuOption;
 import io.ztech.jkingsley.employeemanagementsystem.beans.objects.EmergencyContact;
 import io.ztech.jkingsley.employeemanagementsystem.beans.objects.Experience;
 import io.ztech.jkingsley.employeemanagementsystem.beans.objects.Mail;
@@ -18,9 +19,9 @@ import io.ztech.jkingsley.employeemanagementsystem.beans.objects.Skill;
 import io.ztech.jkingsley.employeemanagementsystem.beans.types.EmployeeStatus;
 import io.ztech.jkingsley.employeemanagementsystem.services.EmployeeManagement;
 
-public class ManagerUI {
-	public enum ManagerMenuOption {
-		ADD_PHONE_NUMBER, ADD_EMERGENCY_CONTACT, ADD_MAIL, ADD_EXPERIENCE, ADD_SKILL,ADD_PROJECT,/*ASSIGN_PROJECT,*/
+public class AdminUI {
+	public enum AdminMenuOption {
+		ADD_PHONE_NUMBER, ADD_EMERGENCY_CONTACT, ADD_MAIL, ADD_EXPERIENCE, ADD_SKILL,ADD_PROJECT,
 
 		FIND_EMPLOYEE_BY_ID,GET_EMPLOYEE_DETAILS,
 
@@ -34,39 +35,39 @@ public class ManagerUI {
 	Scanner scanner;
 	BigInteger empID;
 
-	public ManagerUI(BigInteger empID) {
+	public AdminUI(BigInteger empID) {
 		super();
 		scanner = new Scanner(System.in);
 		this.empID = empID;
 	}
 
-	public void displayManagerMenu() {
+	public void displayAdminMenu() {
 		LOGGER.info("\n");
-		LOGGER.info(Titles.EMPLOYEE_MANAGAMENT_MANAGER);
-		ManagerMenuOption[] menuOptions = ManagerMenuOption.values();
+		LOGGER.info(Titles.EMPLOYEE_MANAGAMENT_ADMIN);
+		AdminMenuOption[] menuOptions = AdminMenuOption.values();
 		for (int i = 0; i < menuOptions.length; i++) {
 			LOGGER.info(i + 1 + ". " + menuOptions[i].toString());
 		}
 		LOGGER.info("Enter an option (" + 1 + "-" + menuOptions.length + ") :");
 	}
 
-	public ManagerMenuOption getMenuOption() {
+	public AdminMenuOption getMenuOption() {
 		int n = 0;
 		do {
 			String input = scanner.nextLine();
 			if(Validation.isValid(input, Regex.INTEGER_REGEX)) {
 				n = Integer.parseInt(input);
 			}
-			if (n < 1 || n > ManagerMenuOption.values().length) {
+			if (n < 1 || n > AdminMenuOption.values().length) {
 				LOGGER.info(Titles.INVALID_OPTION);
 			}
 		} while (n < 1 || n > ManagerMenuOption.values().length);
 
-		ManagerMenuOption menuOption = ManagerMenuOption.values()[n - 1];
+		AdminMenuOption menuOption = AdminMenuOption.values()[n - 1];
 		return menuOption;
 	}
-
-	public boolean execute(ManagerMenuOption menuOption) {
+	
+	public boolean execute(AdminMenuOption menuOption) {
 		boolean notExit = true;
 		EmployeeManagement employeeManagement = new EmployeeManagement();
 		switch (menuOption) {
@@ -110,9 +111,6 @@ public class ManagerUI {
 			}
 			break;
 
-		/*
-		 * case ASSIGN_PROJECT: Assign assign = getInputForAssignProject(); break;
-		 */
 		case GET_EMPLOYEE_DETAILS:
 			Profile profile = employeeManagement.findEmployeeById(empID);
 			if(profile == null) {
@@ -176,6 +174,17 @@ public class ManagerUI {
 				LOGGER.info(Titles.UPDATE_EMP_STATUS);
 			}
 			break;
+		/*case DELETE_EMPLOYEE:
+			BigInteger deleteEmpID = getInputForDeleteEmployeeByID();
+			LOGGER.info("Are you sure you want to delete employee " + deleteEmpID + " ? (y/n)");
+			char confirm = 'n';
+			do {
+				confirm = scanner.nextLine().charAt(0);
+			}while(confirm != 'y' && confirm != 'n' && confirm != 'Y' && confirm != 'N');
+			if(confirm == 'y' || confirm == 'Y') {
+				
+			}
+			break;*/
 		case BACK:
 			notExit = false;
 			break;
@@ -185,15 +194,10 @@ public class ManagerUI {
 		}
 		return notExit;
 	}
-
-	/*private Assign getInputForAssignProject() {
-		Assign assign = new Assign();
-		assign.setEmp_id(InputHandler.getEmployeeID());
-		assign.setProject_id(InputHandler.getProjectID());
-		assign.setAssign_date(InputHandler.getAssignDate());
-		assign.setUnit_id(InputHandler.getUnitID());
-		return null;
-	}*/
+	
+	private BigInteger getInputForDeleteEmployeeByID() {
+		return InputHandler.getEmployeeID();
+	}
 
 	private HashMap<BigInteger, EmployeeStatus> getInputForUpdateEMPStatus() {
 		HashMap<BigInteger,EmployeeStatus> map = new HashMap<>();
@@ -331,5 +335,5 @@ public class ManagerUI {
 		newPhone.setPhone_id(phone.getPhone_id());
 		return newPhone;
 	}
-	
+
 }

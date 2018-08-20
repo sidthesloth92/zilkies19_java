@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+import io.ztech.jkingsley.employeemanagement.ui.AdminUI.AdminMenuOption;
 import io.ztech.jkingsley.employeemanagement.ui.EmployeeLimitedUI.EmployeeLimitedMenuOption;
 import io.ztech.jkingsley.employeemanagement.ui.ManagerUI.ManagerMenuOption;
 import io.ztech.jkingsley.employeemanagementsystem.beans.objects.Profile;
@@ -39,6 +40,10 @@ public class EmployeeManagementUI {
 			
 			switch (accountType) {
 			case ADMIN:
+				AdminUI adminUI = new AdminUI(emp_id);
+				adminUI.displayAdminMenu();
+				AdminMenuOption adminMenuOption = adminUI.getMenuOption();
+				notExit = adminUI.execute(adminMenuOption);
 				break;
 			case EMPLOYEE_LIMITED:
 				EmployeeLimitedUI employeeLimitedUI = new EmployeeLimitedUI(emp_id);

@@ -12,6 +12,16 @@ public class Experience {
 		emp_id = BigInteger.ZERO;
 		skill_id = BigInteger.ZERO;
 	}
+	
+	
+
+	public Experience(BigInteger skill_id) {
+		super();
+		this.skill_id = skill_id;
+		this.emp_id = BigInteger.ZERO;
+	}
+
+
 
 	public BigInteger getEmp_id() {
 		return emp_id;

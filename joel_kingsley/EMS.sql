@@ -35,6 +35,10 @@ insert into designation values(default,"Developer Trainee");
 insert into designation values(default,"Trainee Consultant");
 insert into designation values(default,"Junior Developer");
 insert into designation values(default,"Senior Developer");
+
+insert into unit values(default,"QA Testing");
+insert into unit values(default,"Mobile Development");
+insert into unit values(default,"Web Development");
     
 create table skill (
 	skill_id bigint primary key auto_increment,

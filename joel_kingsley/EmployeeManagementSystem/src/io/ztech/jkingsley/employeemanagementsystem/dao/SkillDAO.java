@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import io.ztech.jkingsley.employeemanagement.constants.Fields;
 import io.ztech.jkingsley.employeemanagement.constants.Query;
+import io.ztech.jkingsley.employeemanagement.constants.Titles;
 import io.ztech.jkingsley.employeemanagement.utils.DBUtils;
 import io.ztech.jkingsley.employeemanagement.utils.PersistenceException;
 import io.ztech.jkingsley.employeemanagementsystem.beans.objects.Skill;
@@ -35,7 +36,7 @@ public class SkillDAO {
 
 			return skills;
 		} catch (SQLException e) {
-			throw new PersistenceException("Error in finding all designations",e);
+			throw new PersistenceException(Titles.ERROR_FINDING_SKILLS,e);
 			//e.printStackTrace();
 		} finally {
 			DBUtils.closeConnection(connection);
@@ -54,11 +55,11 @@ public class SkillDAO {
 			int affectedRows = preparedStatement.executeUpdate();
 
 			if (affectedRows == 0) {
-				throw new PersistenceException("No skill added");
+				throw new PersistenceException(Titles.NO_SKILL_ADDED);
 			}
 
 		} catch (SQLException e) {
-			throw new PersistenceException("Error while adding skill", e);
+			throw new PersistenceException(Titles.ERROR_ADDING_SKILL, e);
 		} finally {
 			DBUtils.closeConnection(connection);
 		}

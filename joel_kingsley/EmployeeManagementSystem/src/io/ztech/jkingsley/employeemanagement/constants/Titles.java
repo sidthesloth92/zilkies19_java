@@ -12,11 +12,13 @@ public class Titles {
 	
 	public static final String EMPLOYEE_MANAGAMENT_EMPLOYEE_LIMITED = "Employee Management - Employee(Limited Access)";
 	public static final String EMPLOYEE_MANAGAMENT_MANAGER = "Employee Management - Manager";
+	public static final String EMPLOYEE_MANAGAMENT_ADMIN = "Employee Management - Admin";
 	
 	public static final String INPUT_MAIL_TYPE = "Enter type(personal/company):";
 	public static final String INPUT_MAIL = "Enter mail:";
 	public static final String INPUT_NEW_PHONE = "List of all phone numbers of ID: ";
 	public static final String INPUT_SKILLS = "Enter Skill numbers one by one(eg. 1)(Enter -1 to skip):";
+	public static final String INPUT_PHONE = "Enter new phone number:";
 	
 	public static final String UPDATED_EMERGENCY_CONTACT = "Emergency Contact updated";
 	public static final String UPDATED_MAIL = "Updated mail";
@@ -51,6 +53,14 @@ public class Titles {
 	public static final String EMERGENCY_CONTACT_PRINT_HEADING = "\nEmergency Contacts:\n-----------------";
 	public static final String TOTAL_EXPERIENCE_PRINT_HEADING = "\nTotal Experience:\n----------------";
 	public static final String EMPLOYEE_NOT_FOUND = "Employee not found";
-	public static final String INPUT_PHONE = "Enter new phone number:";
+	
+	public static final String NO_SKILL_ADDED = "No skill added";
+	public static final String ERROR_ADDING_SKILL = "Error while adding skill";
+	public static final String ERROR_FINDING_SKILLS = "Error in finding all skills";
+	public static final String NOT_ADDED_PROJECT = "No project added";
+	public static final String ERROR_ADDING_PROJECT = "Error in adding project";
+	public static final String INVALID_SKILL = "You entered an invalid Skill. Make sure it is valid";
+	public static final String UNDER_CONSTRUCTION = "Under Construction";
+	public static final String INPUT_EMP_STATUS = "Enter employee Status:";
 	
 }
