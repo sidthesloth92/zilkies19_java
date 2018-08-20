@@ -4,7 +4,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import io.ztech.fitnessapplication.DriverClass;
 import io.ztech.fitnessapplication.beans.UserAccount;
 import io.ztech.fitnessapplication.beans.UserPhysicalDetails;
 import io.ztech.fitnessapplication.constants.DisplayStringConstants;
@@ -14,7 +13,7 @@ import io.ztech.fitnessapplication.service.UserPhysicalDetailsService;
 
 public class StartPageUI {
 	private Logger logger;
-	private ScanInputUI sc = new ScanInputUI();
+	private Scanner sc;
 
 	public void startUpPage() {
 		// ask if login/signup/continue
@@ -24,7 +23,14 @@ public class StartPageUI {
 		boolean accountExists = true;
 		int userType = 0;
 
-		userType=ScanInputUI.
+		try {
+			logger.info(DisplayStringConstants.STARTUP_PAGE_MENU);
+			userType = sc.nextInt();
+		} catch (InputMismatchException e) {
+			logger.info(DisplayStringConstants.INVALID_INPUT_WARNING);
+		} catch (NumberFormatException e) {
+			logger.info(DisplayStringConstants.INVALID_INPUT_WARNING);
+		}
 
 		if (userType == 1) {// user login
 			currentAccount = new LogInPageUI().loginUI();
