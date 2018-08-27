@@ -27,4 +27,6 @@ public class SqlQuery {
 	public static final String UPDATE_SCORECARD = "update scorecard set runs=?,overs=?,wickets=? where team_id=? AND match_no=?";
 	public static final String VIEW_SCORECARD = "select * from scorecard where match_no=?";
 	public static final String DELETE_TOURNAMENT = "delete from add_tournament where tournament_id=?";
+	public static final String MATCH_NO = "select match_no from schedule order by match_no desc limit 1";
+	public static final String DELETE_SCORECARD = "delete from scorecard where tournament_id=?";
 }

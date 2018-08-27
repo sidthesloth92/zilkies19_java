@@ -278,10 +278,26 @@ public class CricketTournamentDAO {
 			ps.setString(4, timeStamp);
 			ps.setString(5, timeStamp);
 			ps.executeUpdate();
+			ps = myconn.prepareStatement(SqlQuery.MATCH_NO);
+			rs=ps.executeQuery();
+			int matchNo=0;
+			while(rs.next()) {
+				matchNo=rs.getInt(1);
+			}
+			for(int i=0;i<2;i++) {
+			ps = myconn.prepareStatement(SqlQuery.INSERT_SCORECARD);
+			ps.setInt(1, matchNo);
+			if(i==0)
+			ps.setInt(2,obj.getTeamOneId());
+			else
+			ps.setInt(2,obj.getTeamTwoId());
+			ps.setInt(3,obj.getTournamentId());
+			ps.executeUpdate();
+			}
 		} catch (SQLException e) {
 			throw e;
 		} finally {
-			DbConnection.closeConnection(myconn, ps, null);
+			DbConnection.closeConnection(myconn, ps, rs);
 		}
 	}
 
@@ -289,6 +305,9 @@ public class CricketTournamentDAO {
 		try {
 			myconn = DbConnection.getConnection();
 			ps = myconn.prepareStatement(SqlQuery.DELETE_SCHEDULE);
+			ps.setInt(1, teamobject.getTournamentId());
+			ps.executeUpdate();
+			ps = myconn.prepareStatement(SqlQuery.DELETE_SCORECARD);
 			ps.setInt(1, teamobject.getTournamentId());
 			ps.executeUpdate();
 		} catch (SQLException e) {

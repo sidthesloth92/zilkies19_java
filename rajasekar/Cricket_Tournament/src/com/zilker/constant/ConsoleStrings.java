@@ -6,7 +6,7 @@ public class ConsoleStrings {
 	public static final String INVALID = "Invalid!!TryAgain";
 	public static final String EMAIL = "Enter e-mail";
 	public static final String PASSWORD = "Enter password";
-	public static final String DB_ERROR = "Error while accessing data in DB";
+	public static final String DB_ERROR = "Access Denied";
 	public static final String FORMAT_OPTION = "Enter your Choice\n1.ODI\n2.T20\n3.TEST";
 	public static final String ADMIN_OPTION = "Enter your Choice\n1.Add Tournament\n2.Schedule Matches\n3.ScoreCard\n4.Remove Tournament\n5.View";
 	public static final String TOURNAMENTID = "Enter tournamentId";
@@ -44,7 +44,7 @@ public class ConsoleStrings {
 	public static final String OLD_TEAMNAME = "Enter the Old TeamName";
 	public static final String NEW_TEAMNAME = "Enter the New TeamName";
 	public static final String NO_OF_PLAYERS = "Enter the No.of player details to update:";
-	public static final String EXCEPTION_MSG = "Input Mismatch Exception";
+	public static final String EXCEPTION_MSG = "Invalid Input";
 	public static final String MAIN_MENU = "Do you want to continue with same tournament menu(Y/N)?";
 	public static final String GET_ROLE = "1)Batsman\n2)Bowler\n3)All-Rounder\n4)WK-Batsman";
 	public static final String BATSMAN = "Batsman";
@@ -72,6 +72,7 @@ public class ConsoleStrings {
 	public static final String OVERS = "Enter the Overs";
 	public static final String WICKETS = "Enter the Wickets";
 	public static final String UPDATE_MODULE = "Welcome to Update Module";
+	public static final String INVALID_MATCH_NO = "Invalid Matchno";
 	public static final String INSERT_UPDATE_OPTION = "Enter youe choice 1)Insert 2)Update";
 	public static final String NO_SCHEDULE = "No Matches have been Scheduled";
 	public static final String NOT_UPDATED_IN_SCORECARD = "Scorecard has not been updated";

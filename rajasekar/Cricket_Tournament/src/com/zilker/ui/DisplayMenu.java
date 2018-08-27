@@ -221,17 +221,13 @@ public class DisplayMenu {
 		}
 	}
 
-	public void adminLogin() {
-		loginObj = fetch.login();
-		try {
-			flag = service.getAdminLoginInfo(loginObj);
-		} catch (Exception e) {
-			logger.info(ConsoleStrings.DB_ERROR);
-		}
-		if (flag == false) {
-			fetch.displayInvalid();
-			adminLogin();
-		}
+	public void adminLogin() throws IOException {
+		String password = fetch.adminLogin();
+		adminPassword = fetch.getAdminPassword();
+		  if ((password.equals(adminPassword))) {
+			  fetch.displayInvalid();
+			  adminLogin();
+		  }
 		do {
 			Team teamobject = new Team();
 			adminOption = fetch.adminOption();
@@ -305,25 +301,7 @@ public class DisplayMenu {
 				}
 				fetch.displaySchedule(hm);
 				int choice = 0;
-				if (hm.size() != 0)
-					choice = fetch.getUpdateOption();
-				if (choice == 1) {
-					ArrayList<Scorecard> scorecard = fetch.getScorecardDetails(tournamentId);
-					try {
-						service.insertScorecard(scorecard);
-					} catch (Exception e) {
-						logger.info(ConsoleStrings.DB_ERROR);
-					}
-					fetch.displayUpdate();
-					int info[] = new int[2];
-					info = fetch.matchInfo();
-					Score obj = fetch.getScore();
-					try {
-						service.updateScore(info, obj);
-					} catch (Exception e) {
-						logger.info(ConsoleStrings.DB_ERROR);
-					}
-				} else if (choice == 2) {
+				if (hm.size() != 0) {
 					fetch.displayUpdate();
 					int info[] = new int[2];
 					info = fetch.matchInfo();
@@ -353,7 +331,12 @@ public class DisplayMenu {
 				int choice = fetch.showViewMenu();
 				if (choice == 1) {
 					hm.clear();
-					tournamentId = fetch.getTournamentId();
+					try {
+						hm = service.showTournament();
+					} catch (Exception e) {
+						logger.info(ConsoleStrings.DB_ERROR);
+					}
+					tournamentId = fetch.displayTournament(hm);
 					teamobject.setTournamentId(tournamentId);
 					try {
 						hm = service.viewSchedule(teamobject);
@@ -362,6 +345,20 @@ public class DisplayMenu {
 					}
 					fetch.displaySchedule(hm);
 				} else if (choice == 2) {
+					hm.clear();
+					try {
+						hm = service.showTournament();
+					} catch (Exception e) {
+						logger.info(ConsoleStrings.DB_ERROR);
+					}
+					tournamentId = fetch.displayTournament(hm);
+					teamobject.setTournamentId(tournamentId);
+					try {
+						hm = service.viewSchedule(teamobject);
+					} catch (Exception e) {
+						logger.info(ConsoleStrings.DB_ERROR);
+					}
+					fetch.displaySchedule(hm);
 					hm.clear();
 					int match = fetch.getMatchNo();
 					Scorecard score = new Scorecard();
@@ -399,27 +396,7 @@ public class DisplayMenu {
 	}
 
 	public void AdminMenu() throws IOException {
-		loginOption = fetch.loginRegisterChoice();
-		if (loginOption == 1) {
 			adminLogin();
-		} else if (loginOption == 2) {
-			AdminDetails adminObj = fetch.getAdminDetails();
-			adminPassword = fetch.getAdminPassword();
-			/*
-			 * if (!(adminObj.getPassword().equals(adminPassword))) {
-			 * fetch.displayInvalid(); return; }
-			 */
-			try {
-				service.insertAdminDetails(adminObj);
-			} catch (Exception e) {
-				logger.info(ConsoleStrings.DB_ERROR);
-				AdminMenu();
-			}
-			fetch.registerStatus();
-			adminLogin();
-		} else {
-			fetch.displayInvalid();
-		}
 	}
 
 	public void showOption() throws IOException {

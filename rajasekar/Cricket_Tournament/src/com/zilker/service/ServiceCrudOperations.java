@@ -16,12 +16,17 @@ import com.zilker.beans.Scorecard;
 import com.zilker.delegates.DelegatesCrudOperations;
 
 public class ServiceCrudOperations {
-	boolean flag = false;
+	boolean flag;
 	DelegatesCrudOperations delegates = new DelegatesCrudOperations();
 	ArrayList hm = new ArrayList();
 	ArrayList<String> al = new ArrayList<String>();
-	int teamid = 0;
+	int teamid;
 	int teamId[] = new int[2];
+
+	public ServiceCrudOperations() {
+		teamid=0;
+		flag=false;
+	}
 
 	public boolean getUserLoginInfo(Login loginObj) throws SQLException {
 		try {

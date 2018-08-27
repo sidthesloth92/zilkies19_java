@@ -3,15 +3,26 @@ package com.zilker.delegates;
 import java.util.*;
 
 public class Schedule {
-	public ArrayList<String> convert(ArrayList<String> al, int teamSize, ArrayList<String> teamlist) {
+	public ArrayList<String> convert(ArrayList<String> al, int teamSize, ArrayList<String> teamList) {
 		for (int i = 0; i < al.size(); i++) {
 			String s = al.get(i);
+			s=s.trim();
 			String arr[] = s.split("v");
 			arr[0] = arr[0].trim();
 			arr[1] = arr[1].trim();
-			for (int j = teamSize; j >= 1; j--) {
-				if ((arr[0]).equals(String.valueOf(j)) || (arr[1]).equals(String.valueOf(j)))
-					s = s.replace(String.valueOf(j), teamlist.get(j - 1));
+			int check=0;
+			s="";
+			for (int j = 1; j <=teamSize; j++) {
+				if ((arr[0]).equals(String.valueOf(j)) || (arr[1]).equals(String.valueOf(j))) {
+					if(check==0) {
+						check=1;
+						s+=teamList.get(j-1)+" v ";
+					}
+					else {
+						s+=teamList.get(j-1);
+					}
+				}
+					
 			}
 			al.set(i, s);
 		}

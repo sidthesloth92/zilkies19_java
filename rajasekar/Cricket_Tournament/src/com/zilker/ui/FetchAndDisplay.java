@@ -24,7 +24,7 @@ public class FetchAndDisplay {
 	ArrayList<Player> al = new ArrayList<Player>();
 	String team[] = new String[2];
 	ArrayList<String> arrayList = new ArrayList<String>();
-	int option, loginOption;
+	int option, loginOption,maxMatch,minMatch;
 	Validation valid = new Validation();
 	boolean flag, flagvar, check;
 	char ch;
@@ -36,6 +36,8 @@ public class FetchAndDisplay {
 		check = false;
 		option = 0;
 		loginOption = 0;
+		maxMatch=0;
+		minMatch=0;
 		playerName = "";
 		playerRole = "";
 		password = "";
@@ -475,6 +477,12 @@ public class FetchAndDisplay {
 		}
 		logger.info(ConsoleStrings.DASHED_LINES);
 		for (int i = 0; i < schedule.size(); i += 5) {
+			if(i==0) {
+				minMatch=(int) schedule.get(i);
+			}
+			if(i==schedule.size()-1) {
+				maxMatch=(int) schedule.get(i);
+			}
 			logger.info(String.format("%20d%20d%20d%20s%20d\n", schedule.get(i), schedule.get(i + 1),
 					schedule.get(i + 2), schedule.get(i + 3), schedule.get(i + 4)));
 		}
@@ -527,8 +535,17 @@ public class FetchAndDisplay {
 			// System.out.printf("%20d%20s\n", al.get(i), al.get(i + 1));
 		}
 		logger.info(ConsoleStrings.DASHED_LINES);
-		logger.info(ConsoleStrings.PLAYERID);
-		int playerId = Integer.parseInt(input.nextLine());
+		int playerId=0;
+		do {
+			try {
+				logger.info(ConsoleStrings.PLAYERID);
+				playerId = Integer.parseInt(input.nextLine());
+			}
+			catch(Exception e) {
+				logger.info(ConsoleStrings.EXCEPTION_MSG);
+				check = true;
+			}
+		}while(check);
 		return playerId;
 	}
 
@@ -666,6 +683,10 @@ public class FetchAndDisplay {
 			try {
 				info[0] = Integer.parseInt(input.nextLine());
 				check = false;
+				if(info[0]<minMatch || info[0]>maxMatch) {
+					logger.info(ConsoleStrings.INVALID_MATCH_NO);
+					matchInfo();
+				}
 			} catch (NumberFormatException e) {
 				logger.info(ConsoleStrings.EXCEPTION_MSG);
 				check = true;
@@ -765,5 +786,18 @@ public class FetchAndDisplay {
 			}
 		} while (check);
 		return tournamentId;
+	}
+	public String adminLogin() {
+		String pass="";
+		do {
+		try {
+		logger.info(ConsoleStrings.PASSWORD);
+		pass= input.nextLine();
+		}
+		catch(Exception e) {
+			logger.info(ConsoleStrings.EXCEPTION_MSG);
+		}
+		}while(pass.length()<2);
+		return pass;
 	}
 }
