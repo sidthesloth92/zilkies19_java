@@ -18,7 +18,11 @@ public class UserDelegate {
 		return dao.fetchUser(user);
 	}
 	
-	public void createUser(User newUser) {
+	public boolean createUser(User newUser) {
+		if(checkUser(newUser)) {
+			return false;
+		}
 		dao.insertUser(newUser);
+		return true;
 	}
 }

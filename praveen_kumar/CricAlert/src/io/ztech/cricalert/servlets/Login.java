@@ -10,18 +10,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import io.ztech.cricalert.beans.User;
+import io.ztech.cricalert.controller.UserController;
+
 /**
  * Servlet implementation class Login
  */
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	UserController userController;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public Login() {
         super();
+        userController = new UserController();
         // TODO Auto-generated constructor stub
     }
 
@@ -32,15 +38,20 @@ public class Login extends HttpServlet {
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
-		String username = request.getParameter("username");
+		String userName = request.getParameter("username");
 	    String password = request.getParameter("password");
-		if (username.equals("")) {
-	    	out.println("<h1> Username is required! </h1>");
-	    }
-	    if (password.equals("")) {
-	    	out.println("<h1> Password is required! </h1>");
-	    }
-	    out.println("<h1> Successfully logged in! </h1>");
+		User user = new User();
+		user.setUserName(userName);
+		user.setPassword(password);
+		User verifiedUser = userController.verifyUser(user);
+		if (verifiedUser == null) {
+			out.println("<h1> Failed to log in! </h1>");
+		} else {
+			System.out.println("Verified user details are: ");
+			System.out.println(verifiedUser.getName() + " " + verifiedUser.getEmail());
+//			request.getRequestDispatcher("pages/home.jsp").forward(request, response);
+			response.sendRedirect("pages/home.jsp");
+		}
 	}
 
 }

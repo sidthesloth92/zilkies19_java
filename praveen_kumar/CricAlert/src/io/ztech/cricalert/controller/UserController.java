@@ -14,23 +14,18 @@ public class UserController {
 		validator = new Validator();
 	}
 
-	public boolean checkUser(User user) {
+/*	public boolean checkUser(User user) {
 		return userDelegate.checkUser(user);
 	}
-
+*/
 	public User verifyUser(User user) {
 		return userDelegate.verifyUser(user);
 	}
 
 	public boolean createUser(User newUser) {
-		if (validator.validateInput(Regex.nameRegex, newUser.getFirstName(), UserMessages.INVALID_FIRST_NAME)
-				&& validator.validateInput(Regex.nameRegex, newUser.getFirstName(), UserMessages.INVALID_FIRST_NAME)) {
-			if (userDelegate.checkUser(newUser)) {
-				System.out.println(UserMessages.USER_ALREADY_EXISTS);
-				return false;
-			}
-			userDelegate.createUser(newUser);
-			return true;
+		if (validator.validateInput(Regex.nameRegex, newUser.getName(), UserMessages.INVALID_FIRST_NAME)
+				&& validator.validateInput(Regex.emailRegex, newUser.getEmail(), UserMessages.INVALID_EMAIL)) {
+			return userDelegate.createUser(newUser);
 		} else {
 			return false;
 		}

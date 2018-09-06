@@ -22,6 +22,7 @@ public class UserMessages {
 	public static final String INVALID_DATE = "\nInvalid date entered. Please try again!";
 	public static final String INVALID_FIRST_NAME = "\nInvalid first name entered!";
 	public static final String INVALID_LAST_NAME = "\nInvalid last name entered!";
+	public static final String INVALID_EMAIL = "\nInvalid email entered!";
 	public static final String INVALID_CHOICE = "\nInvalid choice selected!";
 	public static final String INVALID_BALL = "\nInvalid ball entered! Please follow the format";
 	public static final String INVALID_NUMBER_OF_PLAYERS = "\nInvalid number of players entered! Please try again";

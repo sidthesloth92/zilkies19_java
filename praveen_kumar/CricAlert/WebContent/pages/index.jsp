@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="header">
-        <img src="./logo-1_burned.png" alt="CricAlert!"/>
+        <img src="../assets/images/logo-1_burned.png" alt="CricAlert!"/>
     </div>
     <div class="credentials">
         <div class="credentials__title">

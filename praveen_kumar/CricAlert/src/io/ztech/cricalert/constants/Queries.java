@@ -3,7 +3,7 @@ package io.ztech.cricalert.constants;
 public class Queries {
 	private Queries() {}
 	
-	public static final String INSERT_USER = "insert into user (first_name, last_name, user_name, password) values (?, ?, ?, ?)";
+	public static final String INSERT_USER = "insert into user (name, email, user_name, password) values (?, ?, ?, ?)";
 	public static final String INSERT_PLAYER = "insert into player (team_id, first_name, last_name, user_id) values (?, ?, ?, ?)";
 	public static final String INSERT_TEAM = "insert into team (team_name, user_id) values (?, ?)";
 	public static final String INSERT_MATCH = "insert into matches (match_date, team_1_id, team_2_id, status, user_id) values (?, ?, ?, ?, ?)";

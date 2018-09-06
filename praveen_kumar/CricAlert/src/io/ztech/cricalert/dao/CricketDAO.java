@@ -30,8 +30,8 @@ public class CricketDAO {
 		
 		try {
 			ps = con.prepareStatement(Queries.INSERT_USER);
-			ps.setString(1, user.getFirstName());
-			ps.setString(2, user.getLastName());
+			ps.setString(1, user.getName());
+			ps.setString(2, user.getEmail());
 			ps.setString(3, user.getUserName());
 			ps.setString(4, user.getPassword());
 			ps.execute();
@@ -360,11 +360,13 @@ public class CricketDAO {
 			ps = con.prepareStatement(Queries.FETCH_USER);
 			ps.setString(1, user.getUserName());
 			rs = ps.executeQuery();
+			int flag = 0;
 			while (rs.next()) {
-				String password = rs.getString("password"); 
+				flag++;
+				String password = rs.getString("password");
 				if (user.getPassword().equals(password)) {
-					user.setFirstName(rs.getString("first_name"));
-					user.setLastName(rs.getString("last_name"));
+					user.setName(rs.getString("name"));
+					user.setEmail(rs.getString("email"));
 					user.setUserId(rs.getInt("user_id"));
 					user.setPlayers(fetchPlayers(user));
 					user.setTeams(fetchTeams(user));
@@ -372,6 +374,9 @@ public class CricketDAO {
 				} else {
 					user = null;
 				}
+			}
+			if (flag == 0) {
+				user = null;
 			}
 		} catch (SQLException e) {
 			System.out.println("Exception caught at fetchUser(): " + e);
