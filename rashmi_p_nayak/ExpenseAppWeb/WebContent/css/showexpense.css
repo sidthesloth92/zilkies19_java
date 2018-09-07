@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-sizing: border-box;
+    font-family: 'Pacifico', cursive;
+}
+
+body,
+html {
+   width: 100%; 
+}
+
+.expense-list-container { 
+    display: flex;
+    flex-direction: column;
+}
+
+.expense-list-container__expense-preview-card {
+    height: 100px; 
+    background: olive;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.expense-list-container__expense-details-card {
+    height: 0px;
+    background: orange;
+    border: 1px solid black;
+    transition: visibility 0.2s linear;
+    overflow: hidden;
+}
+
+.expense-list-container__expense-details-card > * {
+    margin: 10px;
+}
+
+
+.expense-list-container__expense-preview-card-reveal + .expense-list-container__expense-details-card {
+    height: 200px;
+    overflow: scroll;
+}
+
+.expense-list-container__expense-preview-card > * {
+    margin: 10px;
+}
+
+.expense-preview-card__icon-container {
+    background: wheat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.icon-container__icon {
+    font-size: 40px;
+}
+
+.expense-preview-card__date-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.expense-preview-card__expense-info-container {
+    background: orange;
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 10px; 
+}
+
+.expense-preview-card__balance-container {
+    background: greenyellow;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.expense-members-container__expense-member {
+    background: honeydew;
+    border: 1px solid black;
+    display: flex;
+}
+
+.expense-members-container__expense-member > * {
+    margin: 10px;
+}
+
+.expense-member__display-picture {
+    height: 50px;
+    width: 50px;
+    background: black;
+    border-radius: 50px;
+}
+
+.expense-member__balance-details {
+    background: palevioletred;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
