@@ -2,7 +2,6 @@ package io.ztech.cricalert.servlets;
 
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,13 +30,18 @@ public class Login extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		request.getRequestDispatcher("/pages/index.jsp").forward(request, response);
+	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8");
-		PrintWriter out = response.getWriter();
 		String userName = request.getParameter("username");
 	    String password = request.getParameter("password");
 		User user = new User();
@@ -45,12 +49,11 @@ public class Login extends HttpServlet {
 		user.setPassword(password);
 		User verifiedUser = userController.verifyUser(user);
 		if (verifiedUser == null) {
-			out.println("<h1> Failed to log in! </h1>");
+			request.setAttribute("alertMessage", "Incorrect username or password. Failed to sign in!");
+	    	request.setAttribute("visibility", "visibility: visible;");
+	    	request.getRequestDispatcher("/pages/index.jsp").forward(request, response);
 		} else {
-			System.out.println("Verified user details are: ");
-			System.out.println(verifiedUser.getName() + " " + verifiedUser.getEmail());
-//			request.getRequestDispatcher("pages/home.jsp").forward(request, response);
-			response.sendRedirect("pages/home.jsp");
+			request.getRequestDispatcher("/pages/home.jsp").forward(request, response);
 		}
 	}
 

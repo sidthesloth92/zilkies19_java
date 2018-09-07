@@ -1,3 +1,13 @@
+setTimeout(function toggleAlertOpacity() {
+    var alert = document.querySelector(".header__alert");
+    alert.style.opacity = "0";
+}, 1000);
+
+setTimeout(function toggleAlertVisibility() {
+    var alert = document.querySelector(".header__alert");
+    alert.style.visibility = "hidden";
+}, 2000);
+
 function activeToggle(selection) {
     var login = document.getElementById("credentials__title__login-id");
     var loginForm = document.getElementById("credentials__login-id");

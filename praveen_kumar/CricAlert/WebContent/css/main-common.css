@@ -40,12 +40,16 @@
     box-shadow: 0 0 10px 2px;
 }
 
-.header__nav-bar a {
+.header__nav-bar div {
     text-decoration: none;
 }
 
-.header__nav-bar a:active {
+.header__nav-bar div:active {
     color: rgb(0, 0, 0);
+}
+
+.header__nav-bar div:hover {
+    cursor: pointer;
 }
 
 .header__title-bar {
