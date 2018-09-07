@@ -1,0 +1,127 @@
+* {
+    margin: 0;
+    border: none;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Pacifico', cursive;
+}
+
+body,
+html {
+    width: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-container {
+    position: relative;
+    background: pink;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    min-width: 280px;
+}
+
+.login-signup-container {
+    height: 400px;
+    overflow: hidden;
+    border-radius: 25px;
+    border: 2px solid black;
+    min-width: 280px;
+}
+.login-container {
+    position: relative;
+    box-sizing: content-box;
+    height: 350px;
+    min-width: 280px;
+    background: #62ab37;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.signup-container {
+    position: relative;
+    box-sizing: content-box;
+    height: 350px;
+    min-width: 280px;
+    background: #aad922;
+    transition: transform .6s ease-in-out;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.signup-container.reveal {
+    transform: translateY(-300px);
+}
+
+.login-circle-button {
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    background: linear-gradient(rgba(0,0,0,0) 50%, #62ab37 50%);
+    border-radius: 60px;
+    bottom: -30px;
+    right: 0px;
+    z-index: 1;     
+    transition: transform .6s ease-in-out;
+}
+
+.login-circle-button.moveup {
+    transform: translateY(-300px);
+}
+
+.signup-circle-button {
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    background: linear-gradient(#aad922 50%, rgba(0,0,0,0) 50%);
+    border-radius: 60px;
+    top: -30px;
+    right: 60px;
+    z-index: 1;     
+}
+
+.form-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    /* background: pink; */
+}
+
+input {
+    opacity: 0.9;
+    height: 50px;
+    background: #a0ca92;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+}
+
+.submit-button {
+    height: 40px;
+    width: 100px;
+    background: #a0ca92;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+@media only screen and (max-width: 280px) {
+    .login-signup-container {
+        border-radius: 0px;
+    }
+}
+
+
+
+
+
+
