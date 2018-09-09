@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import ="java.util.ArrayList"%>
+<%@ page import ="io.ztech.cricalert.beans.Player"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +13,7 @@
     <link rel="stylesheet" href="/CricAlert/css/playerstyle.css">
     <link href="https://fonts.googleapis.com/css?family=Cuprum|Lato|Lobster|Lobster+Two|Pacifico" rel="stylesheet">
     <title>Players</title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 
 <body>
@@ -35,50 +39,27 @@
             </nav>
         </header>
         <section class="content">
-            <div class="content__player-card" onclick="expandCard(event)" draggable="true" ondragstart="dragStart(event)" ondragend="dragStop(event)">
-                <div class="content__player-card-photo">
-                    <img src="/CricAlert/assets/icons/icons8-dp.png" draggable="false" alt="Display Picture">
-                </div>
-                <div class="content__player-card-name">MS Dhoni</div>
-            </div>
-            <div class="content__player-card" onclick="expandCard(event)" draggable="true" ondragstart="dragStart(event)" ondragend="dragStop(event)">
-                <div class="content__player-card-photo">
-                    <img src="/CricAlert/assets/icons/icons8-dp.png" draggable="false" alt="Display Picture">
-                </div>
-                <div class="content__player-card-name">R Jadeja</div>
-            </div>
-            <div class="content__player-card" onclick="expandCard(event)" draggable="true" ondragstart="dragStart(event)" ondragend="dragStop(event)">
-                <div class="content__player-card-photo">
-                    <img src="/CricAlert/assets/icons/icons8-dp.png" draggable="false" alt="Display Picture">
-                </div>
-                <div class="content__player-card-name">S Raina</div>
-            </div>
-            <div class="content__player-card" onclick="expandCard(event)" draggable="true" ondragstart="dragStart(event)" ondragend="dragStop(event)">
-                <div class="content__player-card-photo">
-                    <img src="/CricAlert/assets/icons/icons8-dp.png" draggable="false" alt="Display Picture">
-                </div>
-                <div class="content__player-card-name">D Bravo</div>
-            </div>
-            <div class="content__player-card" onclick="expandCard(event)" draggable="true" ondragstart="dragStart(event)" ondragend="dragStop(event)">
-                <div class="content__player-card-photo">
-                    <img src="/CricAlert/assets/icons/icons8-dp.png" draggable="false" alt="Display Picture">
-                </div>
-                <div class="content__player-card-name">Z Khan</div>
-            </div>
-            <div class="content__player-card" onclick="expandCard(event)" draggable="true" ondragstart="dragStart(event)" ondragend="dragStop(event)">
-                <div class="content__player-card-photo">
-                    <img src="/CricAlert/assets/icons/icons8-dp.png" draggable="false" alt="Display Picture">
-                </div>
-                <div class="content__player-card-name">V Kohli</div>
-            </div>
+            
+            <% 
+				ArrayList<Player> playerList = (ArrayList<Player>) request.getAttribute("playerList");
+				for (Player player : playerList) {
+					out.println("<div id='" + player.getPlayerId() + "' class='content__player-card' onclick='expandCard(this)' draggable='true' ondragstart='dragStart(event)' ondragend='dragStop(event)'>");
+					out.println("<div class='content__player-card-photo'>");
+					out.println("<img src='/CricAlert/assets/icons/icons8-dp.png' draggable='false' alt='Display Picture'>");
+					out.println("</div>");
+					out.println("<div class='content__player-card-name'>" + player.getFirstName() + " " + player.getLastName() + "</div>");
+					out.println("</div>");
+				}
+			%>
+            
             <div class="content__modal">
                 <div class="content__modal__player-info">
                     <div class="content__modal__player-info__photo">
                         <img src="/CricAlert/assets/icons/icons8-dp.png" alt="">
                     </div>
                     <span class="close">&times;</span>
-                    <h3 class="content__modal__player-info__name">Ravindra Jadeja</h3>
-                    <h3 class="content__modal__player-info__team">Chennai Super Kings</h3>
+                    <h3 class="content__modal__player-info__name"></h3>
+                    <h3 class="content__modal__player-info__team"></h3>
                 </div>
             </div>
         </section>
@@ -94,7 +75,7 @@
             <div class="footer__search" onclick="expandSearch()">
                 <img class="footer__search__icon" src="/CricAlert/assets/icons/icons8-search-2.png" alt="Search">
             </div>
-            <div class="footer__add-item" onclick="window.location='/CricAlert/pages/add-player.jsp'">
+            <div class="footer__add-item" onclick="window.location='/CricAlert/AddPlayer'">
                 <img class="footer__add-item__icon" src="/CricAlert/assets/icons/icons8-plus-6.png" alt="Add player">
             </div>
             <div class="footer__edit" ondrop="drop(event)" ondragover="allowDrop(event, this)">

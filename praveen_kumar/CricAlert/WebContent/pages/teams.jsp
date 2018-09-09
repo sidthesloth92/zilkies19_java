@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import ="java.util.ArrayList"%>
+<%@ page import ="io.ztech.cricalert.beans.Team"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,41 +38,20 @@
             </nav>
         </header>
         <section class="content">
-            <div class="content__team-card col-sm-12" onclick="expandTeam(this)" draggable="true" ondragstart="dragStart(event)" ondragend="dragStop(event)">
-                <div class="content__team-card__container-1">
-                    <img class="content__team-card__container-1__photo" draggable="false" src="/CricAlert/assets/icons/icons8-team.png" alt="Photo" />
-                    <h3 class="content__team-card__container-1__name">Chennai Super Kings</h3>
-                </div>
-                <div class="content__team-card__container-2"></div>
-            </div>
-            <div class="content__team-card col-sm-12" onclick="expandTeam(this)" draggable="true" ondragstart="dragStart(event)" ondragend="dragStop(event)">
-                <div class="content__team-card__container-1">
-                    <img class="content__team-card__container-1__photo" draggable="false" src="/CricAlert/assets/icons/icons8-team.png" alt="Photo" />
-                    <h3 class="content__team-card__container-1__name">Sunrisers Hyderabad</h3>
-                </div>
-                <div class="content__team-card__container-2"></div>
-            </div>
-            <div class="content__team-card col-sm-12" onclick="expandTeam(this)" draggable="true" ondragstart="dragStart(event)" ondragend="dragStop(event)">
-                <div class="content__team-card__container-1">
-                    <img class="content__team-card__container-1__photo" draggable="false" src="/CricAlert/assets/icons/icons8-team.png" alt="Photo" />
-                    <h3 class="content__team-card__container-1__name">Royal Challengers Bangalore</h3>
-                </div>
-                <div class="content__team-card__container-2"></div>
-            </div>
-            <div class="content__team-card col-sm-12" onclick="expandTeam(this)" draggable="true" ondragstart="dragStart(event)" ondragend="dragStop(event)">
-                <div class="content__team-card__container-1">
-                    <img class="content__team-card__container-1__photo" draggable="false" src="/CricAlert/assets/icons/icons8-team.png" alt="Photo" />
-                    <h3 class="content__team-card__container-1__name">Kolkata Knight Riders</h3>
-                </div>
-                <div class="content__team-card__container-2"></div>
-            </div>
-            <div class="content__team-card col-sm-12" onclick="expandTeam(this)" draggable="true" ondragstart="dragStart(event)" ondragend="dragStop(event)">
-                <div class="content__team-card__container-1">
-                    <img class="content__team-card__container-1__photo" draggable="false" src="/CricAlert/assets/icons/icons8-team.png" alt="Photo" />
-                    <h3 class="content__team-card__container-1__name">Mumbai Indians</h3>
-                </div>
-                <div class="content__team-card__container-2"></div>
-            </div>
+
+            <% 
+				ArrayList<Team> teamList = (ArrayList<Team>) request.getAttribute("teamList");
+				for (Team team : teamList) {
+					out.println("<div id='" + team.getTeamId() + "' class='content__team-card col-sm-12' onclick='expandTeam(this)' draggable='true' ondragstart='dragStart(event)' ondragend='dragStop(event)'>");
+					out.println("<div class='content__team-card__container-1'>");
+					out.println("<img class='content__team-card__container-1__photo' draggable='false' src='/CricAlert/assets/icons/icons8-team.png' alt='Photo' />");
+					out.println("<h3 class='content__team-card__container-1__name'>" + team.getTeamName() + "</h3>");
+					out.println("</div>");
+					out.println("<div class='content__team-card__container-2'></div>");
+					out.println("</div>");
+				}
+			%>
+            
         </section>
         <div class="minimize" onclick="minimizeSearch()">
             <img class="minimize__icon" src="/CricAlert/assets/icons/icons8-down.png" alt="Minimize Search">
@@ -83,7 +65,7 @@
             <div class="footer__search" onclick="expandSearch()">
                 <img class="footer__search__icon" src="/CricAlert/assets/icons/icons8-search-2.png" alt="Search">
             </div>
-            <div class="footer__add-item" onclick="window.location='/CricAlert/pages/add-team.jsp'">
+            <div class="footer__add-item" onclick="window.location='/CricAlert/AddTeam'">
                 <img class="footer__add-item__icon" src="/CricAlert/assets/icons/icons8-plus-6.png" alt="Add player">
             </div>
             <div class="footer__edit" ondrop="drop(event)" ondragover="allowDrop(event, this)">

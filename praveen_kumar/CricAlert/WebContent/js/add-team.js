@@ -5,7 +5,7 @@ var btn = document.querySelector(".details__form__add-players");
 var span = document.getElementsByClassName("close")[0];
 
 btn.onclick = function() {
-    modal.style.display = "block";
+    modal.style.display = "flex";
 };
 
 span.onclick = function() {

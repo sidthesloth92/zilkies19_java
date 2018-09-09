@@ -4,16 +4,6 @@ header {
     margin-top: 20px;
 }
 
-.confirm-details {
-    position: fixed;
-    bottom: 0;
-    height: 30px;
-    padding-top: 8px;
-    text-align: center;
-    box-shadow: 0 0 5px 1px;
-    background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 140%);
-}
-
 .details__photo {
     height: 150px;
     width: 110px;
@@ -47,9 +37,9 @@ header {
     flex-direction: column;
 }
 
-.details__form input {
+.details__form__input {
     height: 40px;
-    margin: 0 auto 40px auto;
+    margin: 0 auto 30px auto;
     border: none;
     border-radius: 10px;
     box-sizing: border-box;
@@ -61,6 +51,17 @@ header {
     width: 250px;
     height: 40px;
     margin: 0 auto 40px auto;
+}
+
+.confirm-details {
+    position: fixed;
+    bottom: 0;
+    height: 40px;
+    padding-bottom: 8px;
+    text-align: center;
+    border: none;
+    box-shadow: 0 0 5px 1px;
+    background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 140%);
 }
 
 .return-icon {

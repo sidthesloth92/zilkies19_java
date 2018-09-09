@@ -401,6 +401,7 @@ public class CricketDAO {
 				player.setPlayerId(rs.getInt(1));
 				player.setFirstName(rs.getString(2));
 				player.setLastName(rs.getString(3));
+				player.setTeamId(rs.getInt(4));
 				playerList.add(player);
 			}
 		} catch (SQLException e) {
@@ -436,6 +437,29 @@ public class CricketDAO {
 			connector.closeConnection(con, rs, ps);
 		}
 		return playerList;
+	}
+	
+	public Player fetchPlayer(User user, int playerId) {
+		PreparedStatement ps = null;
+		Connection con = connector.openConnection();
+		ResultSet rs = null;
+		Player player = new Player();
+		
+		try {
+			ps = con.prepareStatement(Queries.FETCH_PLAYER);
+			ps.setInt(1, playerId);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				player.setFirstName(rs.getString(1));
+				player.setLastName(rs.getString(2));
+				player.setTeamId(rs.getInt(3));
+			}
+		} catch (SQLException e) {
+			System.out.println("Exception caught at fetchPlayer(): " + e);
+		} finally {
+			connector.closeConnection(con, rs, ps);
+		}
+		return player;
 	}
 
 	public Team fetchTeam(int teamId) {

@@ -9,22 +9,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import io.ztech.cricalert.beans.Player;
 import io.ztech.cricalert.beans.Team;
 import io.ztech.cricalert.beans.User;
 import io.ztech.cricalert.controller.TeamController;
+import io.ztech.cricalert.exceptions.InvalidNameException;
 
 /**
- * Servlet implementation class Teams
+ * Servlet implementation class AddPlayer
  */
-@WebServlet("/Teams")
-public class Teams extends HttpServlet {
+@WebServlet("/AddPlayer")
+public class AddPlayer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	TeamController teamController;
-       
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Teams() {
+    public AddPlayer() {
         super();
         teamController = new TeamController();
         // TODO Auto-generated constructor stub
@@ -40,7 +42,7 @@ public class Teams extends HttpServlet {
 		ArrayList<Team> teamList = teamController.fetchTeams((User) request.getSession(false).getAttribute("user"));
 		request.setAttribute("teamList", teamList);
 		
-		request.getRequestDispatcher("/pages/teams.jsp").forward(request, response);
+		request.getRequestDispatcher("/pages/add-player.jsp").forward(request, response);
 	}
 
 	/**
@@ -48,7 +50,23 @@ public class Teams extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		response.setContentType("text/html");
+		response.setCharacterEncoding("UTF-8");
+		Player player = new Player();
+		String firstName = request.getParameter("fname");
+	    String lastName = request.getParameter("lname");
+	    int teamId = Integer.parseInt(request.getParameter("team"));
+	    player.setFirstName(firstName);
+	    player.setLastName(lastName);
+	    player.setTeamId(teamId);
+	    player.setUser((User) request.getSession(false).getAttribute("user"));
+	    try {
+	    	teamController.addNewPlayer(player, (User) request.getSession(false).getAttribute("user"));
+	    	request.getRequestDispatcher("/Players").forward(request, response);
+	    } catch(InvalidNameException e) {
+	    	System.out.println("Exception caught!");
+	    	request.getRequestDispatcher("/Players").forward(request, response);
+	    }
 	}
 
 }

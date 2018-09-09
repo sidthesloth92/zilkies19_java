@@ -1,5 +1,7 @@
 package io.ztech.cricalert.controller;
 
+import java.util.ArrayList;
+
 import io.ztech.cricalert.beans.Player;
 import io.ztech.cricalert.beans.Team;
 import io.ztech.cricalert.beans.User;
@@ -21,8 +23,12 @@ public class PlayerController {
 		playerDelegate.removePlayer(team);
 	}
 	
-	public void displayPlayer(User user) {
-		playerDelegate.displayPlayer(user);
+	public ArrayList<Player> fetchPlayers(User user) {
+		return playerDelegate.fetchPlayers(user);
+	}
+	
+	public Player fetchPlayer(User user, int playerId) {
+		return playerDelegate.fetchPlayer(user, playerId);
 	}
 	
 	public void updateTeamId(Team team) {

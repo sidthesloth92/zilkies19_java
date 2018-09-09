@@ -35,9 +35,16 @@
     margin: 15px;
     border: 1px solid black;
     border-radius: 5px;
-    height: 80px;
+    height: 180px;
+    box-sizing: border-box;
+    padding: 20px;
+    overflow: scroll;
+}
+
+.content__team-card__container-2 h4 {
+	text-align: center;
 }
 
 .expand-team {
-    height: 200px;
+    height: 300px;
 }

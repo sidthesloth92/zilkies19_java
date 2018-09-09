@@ -1,5 +1,7 @@
 package io.ztech.cricalert.controller;
 
+import java.util.ArrayList;
+
 import io.ztech.cricalert.beans.Player;
 import io.ztech.cricalert.beans.Team;
 import io.ztech.cricalert.beans.User;
@@ -18,8 +20,8 @@ public class TeamController {
 		validator = new Validator();
 	}
 
-	public void displayTeams(User user) {
-		teamDelegate.displayTeams(user);
+	public ArrayList<Team> fetchTeams(User user) {
+		return teamDelegate.fetchTeams(user);
 	}
 
 	public void createTeam(Team newTeam, User user) throws InvalidNameException {
@@ -59,6 +61,10 @@ public class TeamController {
 	
 	public Team fetchTeam(int teamId) {
 		return teamDelegate.fetchTeam(teamId);
+	}
+	
+	public ArrayList<Player> fetchTeamPlayers(Team team) {
+		return teamDelegate.fetchTeamPlayers(team);
 	}
 	
 	public boolean isTeamCreated(User user) {

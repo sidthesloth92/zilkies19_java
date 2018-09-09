@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import ="java.util.ArrayList"%>
+<%@ page import ="io.ztech.cricalert.beans.Team"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,20 +25,23 @@
             </div>
             <img class="details__add-photo" src="/CricAlert/assets/icons/icons8-plus-2.png" alt="Add Image" />
         </div>
-        <form class="details__form" action="#">
-            <input name="fname" type="text" placeholder="First Name" />
-            <input name="lname" type="text" placeholder="Last Name" />
+        <form class="details__form" action="/CricAlert/AddPlayer" method="POST">
+            <input class="details__form__input" name="fname" type="text" placeholder="First Name" />
+            <input class="details__form__input" name="lname" type="text" placeholder="Last Name" />
             <select name="team">
-                <option value="" selected disabled hidden>Choose Team</option>
-                <option value="csk">Chennai Super Kings</option>
-                <option value="srh">Sunrisers Hyderabad</option>
-                <option value="rcb">Royal Challengers Bangalore</option>
+            	<option value="" selected disabled hidden>Choose Team</option>
+            
+	            <% 
+					ArrayList<Team> teamList = (ArrayList<Team>) request.getAttribute("teamList");
+					for (Team team : teamList) {
+						out.println("<option value='" + team.getTeamId() + "'>" + team.getTeamName() + "</option>");
+					}
+				%>
+
             </select>
+            <input type="submit" class="confirm-details col-sm-12" name="Confirm Details"></input>
         </form>
     </section>
-    <footer class="confirm-details col-sm-12">
-        Confirm Details
-    </footer>
 </body>
 
 </html>

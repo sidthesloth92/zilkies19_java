@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+import io.ztech.cricalert.beans.Player;
 import io.ztech.cricalert.beans.Team;
 import io.ztech.cricalert.beans.User;
-import io.ztech.cricalert.constants.UserMessages;
 import io.ztech.cricalert.dao.CricketDAO;
 
 public class TeamDelegate {
@@ -22,13 +22,8 @@ public class TeamDelegate {
 		dao = new CricketDAO();
 	}
 	
-	public void displayTeams(User user) {
-		ArrayList<Team> teamList = dao.fetchTeams(user);
-		for (Team team : teamList) {
-			logger.info(UserMessages.TEAM_TABLE);
-			logger.info(team.getTeamId() + "\t" + team.getTeamName());
-			playerDelegate.printPlayerDetails(team);
-		}
+	public ArrayList<Team> fetchTeams(User user) {
+		return dao.fetchTeams(user);
 	}
 	
 	public void createTeam(User user) {
@@ -49,6 +44,10 @@ public class TeamDelegate {
 	
 	public Team fetchTeam(int teamId) {
 		return dao.fetchTeam(teamId);
+	}
+	
+	public ArrayList<Player> fetchTeamPlayers(Team team) {
+		return dao.fetchTeamPlayers(team);
 	}
 	
 	public boolean isTeamCreated(User user) {

@@ -53,6 +53,7 @@ public class Login extends HttpServlet {
 	    	request.setAttribute("visibility", "visibility: visible;");
 	    	request.getRequestDispatcher("/pages/index.jsp").forward(request, response);
 		} else {
+			request.getSession().setAttribute("user", verifiedUser);
 			request.getRequestDispatcher("/pages/home.jsp").forward(request, response);
 		}
 	}

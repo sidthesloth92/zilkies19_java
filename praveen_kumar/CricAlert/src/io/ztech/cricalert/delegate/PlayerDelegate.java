@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 import io.ztech.cricalert.beans.Player;
 import io.ztech.cricalert.beans.Team;
 import io.ztech.cricalert.beans.User;
-import io.ztech.cricalert.constants.UserMessages;
 import io.ztech.cricalert.dao.CricketDAO;
 
 public class PlayerDelegate {
@@ -29,20 +28,21 @@ public class PlayerDelegate {
 		dao.deletePlayer(team);
 	}
 	
-	public void displayPlayer(User user) {
-		ArrayList<Team> teamList = dao.fetchTeams(user);
-		for (Team team : teamList) {
-			printPlayerDetails(team);
-		}
+	public ArrayList<Player> fetchPlayers(User user) {
+		return dao.fetchPlayers(user);
 	}
 	
-	public void printPlayerDetails(Team team) {
+	public Player fetchPlayer(User user, int playerId) {
+		return dao.fetchPlayer(user, playerId);
+	}
+	
+/*	public void printPlayerDetails(Team team) {
 		ArrayList<Player> playerList = dao.fetchTeamPlayers(team);
 		logger.info(UserMessages.PLAYER_TABLE);
 		for (Player player : playerList) {
 			logger.info(player.getTeamId() + "\t" + player.getPlayerId() + "\t" + player.getFirstName() + "\t\t" + player.getLastName());
 		}
-	}
+	}*/
 	
 	public void updateTeamId(Team team) {
 		dao.updatePlayerTeam(team);

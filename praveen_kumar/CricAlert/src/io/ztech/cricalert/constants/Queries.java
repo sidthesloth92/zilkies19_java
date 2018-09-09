@@ -14,7 +14,8 @@ public class Queries {
 	public static final String FETCH_TEAMS = "select team_id, team_name from team where user_id = ?";
 	public static final String FETCH_TEAM_PLAYERS = "select team_id, player_id, first_name, last_name from player where team_id = ?";
 	public static final String FETCH_PLAYERS = "select player_id, first_name, last_name from player where player_id = ?";
-	public static final String FETCH_USER_PLAYERS = "select player_id, first_name, last_name from player where user_id = ?";
+	public static final String FETCH_PLAYER = "select first_name, last_name, team_id from player where player_id = ?";
+	public static final String FETCH_USER_PLAYERS = "select player_id, first_name, last_name, team_id from player where user_id = ?";
 	public static final String FETCH_MATCH = "select match_id, match_date, team_1_id, team_2_id, status, toss_won_by, match_result from matches where match_id = ?";
 	public static final String FETCH_SCHEDULED_MATCH = "select count(*) from matches where user_id = ? and status = 'scheduled'";
 	public static final String FETCH_MATCHES = "select match_id, match_date, team_1_id, team_2_id, status, toss_won_by, match_result from matches where user_id = ?";
