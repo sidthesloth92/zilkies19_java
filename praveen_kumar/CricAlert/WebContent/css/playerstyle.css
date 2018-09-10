@@ -36,20 +36,8 @@
     width: 60px;
 }
 
-.content__modal {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    z-index: 10;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
 .content__modal__player-info {
+	display: none;
     background-color: #fefefe;
     margin: 40% auto;
     padding: 20px;

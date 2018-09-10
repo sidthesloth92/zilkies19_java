@@ -1,7 +1,7 @@
 package io.ztech.cricalert.servlets;
 
-import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,28 +9,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import io.ztech.cricalert.beans.Player;
 import io.ztech.cricalert.beans.Team;
 import io.ztech.cricalert.beans.User;
 import io.ztech.cricalert.controller.PlayerController;
 import io.ztech.cricalert.controller.TeamController;
+import io.ztech.cricalert.exceptions.InvalidNameException;
 
 /**
- * Servlet implementation class PlayerModal
+ * Servlet implementation class EditPlayer
  */
-@WebServlet("/PlayerModal")
-public class PlayerModal extends HttpServlet {
+@WebServlet("/EditPlayer")
+public class EditPlayer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 	PlayerController playerController;
 	TeamController teamController;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PlayerModal() {
+    public EditPlayer() {
         super();
         playerController = new PlayerController();
         teamController = new TeamController();
@@ -43,6 +41,15 @@ public class PlayerModal extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		int playerId = Integer.parseInt(request.getParameter("id"));
+		Player player = playerController.fetchPlayer((User) request.getSession(false).getAttribute("user"), playerId);
+		player.setPlayerId(playerId);
+		request.setAttribute("player", player);
+		ArrayList<Team> teamList = teamController.fetchTeams((User) request.getSession(false).getAttribute("user"));
+		request.setAttribute("teamList", teamList);
+		
+		request.getRequestDispatcher("/pages/edit-player.jsp").forward(request, response);
 	}
 
 	/**
@@ -50,33 +57,21 @@ public class PlayerModal extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		StringBuilder buffer = new StringBuilder();
-		BufferedReader reader = request.getReader();
-		String line;
-		while ((line = reader.readLine()) != null) {
-			buffer.append(line);
-		}
-		String data = buffer.toString();
-		
-		JSONObject jsonObj;
-		try {
-			jsonObj = new JSONObject(data);
-			Player player = playerController.fetchPlayer((User) request.getSession(false).getAttribute("user"), Integer.parseInt((String) jsonObj.get("playerId")));
-			Team team = teamController.fetchTeam(player.getTeamId());
-			
-			JSONObject obj = new JSONObject();
-			obj.put("firstName", "" + player.getFirstName());
-			obj.put("lastName", "" + player.getLastName());
-			obj.put("teamName", "" + team.getTeamName());
-			
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write(obj.toString());
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Exception caught at PlayerModal!");
-			e.printStackTrace();
-		}
+		response.setContentType("text/html");
+		response.setCharacterEncoding("UTF-8");
+		Player player = new Player();
+		int playerId = Integer.parseInt(request.getParameter("playerId"));
+		String firstName = request.getParameter("fname");
+	    String lastName = request.getParameter("lname");
+	    int teamId = Integer.parseInt(request.getParameter("team"));
+	    
+	    player.setPlayerId(playerId);
+	    player.setFirstName(firstName);
+	    player.setLastName(lastName);
+	    player.setTeamId(teamId);
+	    player.setUser((User) request.getSession(false).getAttribute("user"));
+	    playerController.updatePlayer(player);
+    	request.getRequestDispatcher("/Players").forward(request, response);
 	}
 
 }

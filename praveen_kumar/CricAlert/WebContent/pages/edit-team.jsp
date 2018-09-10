@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import ="java.util.ArrayList"%>
 <%@ page import ="io.ztech.cricalert.beans.Player"%>
+<%@ page import ="io.ztech.cricalert.beans.Team"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/CricAlert/css/grid-common.css">
     <link rel="stylesheet" href="/CricAlert/css/add-team.css">
-    <title>Create Team</title>
+    <title>Edit Team</title>
 </head>
 
 <body>
@@ -26,16 +27,25 @@
             </div>
             <img class="details__add-photo" src="/CricAlert/assets/icons/icons8-plus-2.png" alt="Add Image" />
         </div>
-        <form class="details__form" action="/CricAlert/AddTeam" method="POST">
-            <input class="details__form__input" name="name" type="text" placeholder="Team Name" />
-            <button class="details__form__add-players" type="button">Add Players</button>
+        <form class="details__form" action="/CricAlert/EditTeam" method="POST">
+            <%
+            Team team = (Team) request.getAttribute("team");
+            out.println("<input class='details__form__input' name='teamId' type='hidden' value='" + team.getTeamId() +"'/>");
+            out.println("<input class='details__form__input' name='name' type='text' placeholder='Team Name' value='" + team.getTeamName() + "'/>");
+            %>
+            <button class="details__form__add-players" type="button">Change Players</button>
             <div class="details__form__modal">
                 <div class="details__form__modal__players-list">
                     <span class="close">&times;</span>
                     <% 
 					ArrayList<Player> playerList = (ArrayList<Player>) request.getAttribute("playerList");
+                    ArrayList<Integer> teamPlayersId = (ArrayList<Integer>) request.getAttribute("teamPlayersId");
 					for (Player player : playerList) {
-						out.println("<div class='details__form__modal__players-list__player'><input type='checkbox' name='players' value='" + player.getPlayerId() + "'><span>" + player.getFirstName() + " " + player.getLastName() + "</span></div>");
+						if (teamPlayersId.contains(player.getPlayerId())) {
+							out.println("<div class='details__form__modal__players-list__player'><input type='checkbox' name='players' value='" + player.getPlayerId() + "' checked><span>" + player.getFirstName() + " " + player.getLastName() + "</span></div>");
+						} else {
+							out.println("<div class='details__form__modal__players-list__player'><input type='checkbox' name='players' value='" + player.getPlayerId() + "'><span>" + player.getFirstName() + " " + player.getLastName() + "</span></div>");
+						}
 					}
 					%>
                 </div>

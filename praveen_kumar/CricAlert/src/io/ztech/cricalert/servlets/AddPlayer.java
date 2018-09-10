@@ -21,14 +21,12 @@ import io.ztech.cricalert.exceptions.InvalidNameException;
 @WebServlet("/AddPlayer")
 public class AddPlayer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	TeamController teamController;
 	
     /**
      * @see HttpServlet#HttpServlet()
      */
     public AddPlayer() {
         super();
-        teamController = new TeamController();
         // TODO Auto-generated constructor stub
     }
 
@@ -38,6 +36,7 @@ public class AddPlayer extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		TeamController teamController = new TeamController();
 		
 		ArrayList<Team> teamList = teamController.fetchTeams((User) request.getSession(false).getAttribute("user"));
 		request.setAttribute("teamList", teamList);
@@ -52,6 +51,7 @@ public class AddPlayer extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8");
+		TeamController teamController = new TeamController();
 		Player player = new Player();
 		String firstName = request.getParameter("fname");
 	    String lastName = request.getParameter("lname");

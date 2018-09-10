@@ -19,23 +19,30 @@ public class PlayerController {
 		return playerDelegate.searchPlayer(playerId, user);
 	}*/
 	
-	public void removePlayer(Team team) {
-		playerDelegate.removePlayer(team);
+	
+	// Called in DeletePlayer servlet
+	public void removePlayer(Player player) {
+		playerDelegate.removePlayer(player);
 	}
 	
 	public ArrayList<Player> fetchPlayers(User user) {
 		return playerDelegate.fetchPlayers(user);
 	}
 	
+	// Called by AddTeam servlet
 	public Player fetchPlayer(User user, int playerId) {
 		return playerDelegate.fetchPlayer(user, playerId);
 	}
 	
-	public void updateTeamId(Team team) {
+	/*public void updateTeamId(Team team) {
 		playerDelegate.updateTeamId(team);
 	}
 	
 	public void updatePlayerName(Player player, String query) {
 		playerDelegate.updatePlayerName(player, query);
+	}*/
+	
+	public void updatePlayer(Player player) {
+		playerDelegate.updatePlayer(player);
 	}
 }

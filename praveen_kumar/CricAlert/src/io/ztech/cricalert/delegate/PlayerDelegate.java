@@ -24,8 +24,8 @@ public class PlayerDelegate {
 		return dao.searchPlayer(user, playerId);
 	}*/
 	
-	public void removePlayer(Team team) {
-		dao.deletePlayer(team);
+	public void removePlayer(Player player) {
+		dao.deletePlayer(player);
 	}
 	
 	public ArrayList<Player> fetchPlayers(User user) {
@@ -44,11 +44,15 @@ public class PlayerDelegate {
 		}
 	}*/
 	
-	public void updateTeamId(Team team) {
+	/*public void updateTeamId(Team team) {
 		dao.updatePlayerTeam(team);
 	}
 	
 	public void updatePlayerName(Player player, String query) {
 		dao.updatePlayerName(player, query);
+	}*/
+	
+	public void updatePlayer(Player player) {
+		dao.updatePlayer(player);
 	}
 }

@@ -40,18 +40,27 @@
         <section class="content">
 
             <% 
-				ArrayList<Team> teamList = (ArrayList<Team>) request.getAttribute("teamList");
-				for (Team team : teamList) {
-					out.println("<div id='" + team.getTeamId() + "' class='content__team-card col-sm-12' onclick='expandTeam(this)' draggable='true' ondragstart='dragStart(event)' ondragend='dragStop(event)'>");
-					out.println("<div class='content__team-card__container-1'>");
-					out.println("<img class='content__team-card__container-1__photo' draggable='false' src='/CricAlert/assets/icons/icons8-team.png' alt='Photo' />");
-					out.println("<h3 class='content__team-card__container-1__name'>" + team.getTeamName() + "</h3>");
-					out.println("</div>");
-					out.println("<div class='content__team-card__container-2'></div>");
-					out.println("</div>");
-				}
+			ArrayList<Team> teamList = (ArrayList<Team>) request.getAttribute("teamList");
+			for (Team team : teamList) {
+				out.println("<div id='" + team.getTeamId() + "' class='content__team-card col-sm-12' onclick='expandTeam(this)' draggable='true' ondragstart='dragStart(event)' ondragend='dragStop(event)'>");
+				out.println("<div class='content__team-card__container-1'>");
+				out.println("<img class='content__team-card__container-1__photo' draggable='false' src='/CricAlert/assets/icons/icons8-team.png' alt='Photo' />");
+				out.println("<h3 class='content__team-card__container-1__name'>" + team.getTeamName() + "</h3>");
+				out.println("</div>");
+				out.println("<div class='content__team-card__container-2'></div>");
+				out.println("</div>");
+			}
 			%>
             
+            <div class="content__modal">
+				<div class="content__modal__delete-confirmation">
+                    <h3>Are you sure you want to delete the team?</h3>
+                    <div class="content__modal__delete-confirmation__response">
+                        <div class="content__modal__delete-confirmation__response__yes">Yes</div>
+                        <div class="content__modal__delete-confirmation__response__no">No</div>
+                    </div>
+                </div>
+            </div>
         </section>
         <div class="minimize" onclick="minimizeSearch()">
             <img class="minimize__icon" src="/CricAlert/assets/icons/icons8-down.png" alt="Minimize Search">
@@ -68,10 +77,10 @@
             <div class="footer__add-item" onclick="window.location='/CricAlert/AddTeam'">
                 <img class="footer__add-item__icon" src="/CricAlert/assets/icons/icons8-plus-6.png" alt="Add player">
             </div>
-            <div class="footer__edit" ondrop="drop(event)" ondragover="allowDrop(event, this)">
+            <div class="footer__edit" ondrop="editTeam(event)" ondragover="allowDrop(event, this)">
                 <img class="footer__edit__icon" src="/CricAlert/assets/icons/icons8-edit-1.png" alt="Edit">
             </div>
-            <div class="footer__delete" ondrop="drop(event)" ondragover="allowDrop(event, this)">
+            <div class="footer__delete" ondrop="deleteConfirmation(event)" ondragover="allowDrop(event, this)">
                 <img class="footer__delete__icon" src="/CricAlert/assets/icons/icons8-trash-1.png" alt="Delete">
             </div>
         </footer>

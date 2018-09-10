@@ -1,23 +1,29 @@
 package io.ztech.cricalert.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import io.ztech.cricalert.beans.Team;
+import io.ztech.cricalert.beans.User;
+import io.ztech.cricalert.controller.TeamController;
+
 /**
- * Servlet implementation class Home
+ * Servlet implementation class AddMatch
  */
-@WebServlet("/Home")
-public class Home extends HttpServlet {
+@WebServlet("/AddMatch")
+public class AddMatch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Home() {
+    public AddMatch() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +34,12 @@ public class Home extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.getRequestDispatcher("/pages/home.jsp").forward(request, response);
+		TeamController teamController = new TeamController();
+		
+		ArrayList<Team> teamList = teamController.fetchTeams((User) request.getSession(false).getAttribute("user"));
+		request.setAttribute("teamList", teamList);
+		
+		request.getRequestDispatcher("/pages/add-match.jsp").forward(request, response);
 	}
 
 	/**

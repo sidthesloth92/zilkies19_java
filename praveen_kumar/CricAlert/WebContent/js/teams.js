@@ -9,10 +9,8 @@ function expandTeam(element) {
 	}).then(function(response) {
 	    return response.json();
 	}).then(function(data) {
-	    console.log(data);
 	    var toAppend = '';
 	    for (var key in data) {
-	    	console.log(data[key]);
 	    	var divToInsertInto = element.querySelector(".content__team-card__container-2");
 	    	toAppend += '<h4>' + data[key].firstName + ' ' + data[key].lastName + '</h4><br>';
 	    }
@@ -37,4 +35,33 @@ function expandTeam(element) {
         child = element.querySelector(".content__team-card__container-2");
         child.style.display = "block";
     }
+}
+
+function editTeam(ev) {
+    ev.preventDefault();
+    var id = ev.dataTransfer.getData("id");
+    window.location = '/CricAlert/EditTeam?id=' + id;
+}
+
+function deleteConfirmation(ev) {
+    ev.preventDefault();
+    var id = ev.dataTransfer.getData("id");
+    
+    var modal = document.querySelector(".content__modal");
+    var modalDeleteConfirmation = document.querySelector(".content__modal__delete-confirmation");
+    var confirmYes = document.querySelector(".content__modal__delete-confirmation__response__yes");
+    var confirmNo = document.querySelector(".content__modal__delete-confirmation__response__no");
+    
+    modal.style.display = "flex";
+    modalDeleteConfirmation.style.display = "flex";
+    
+    window.onclick = function (event) {
+        if (event.target == modal || event.target == confirmNo || event.target == confirmYes) {
+            modal.style.display = "none";
+            modalDeleteConfirmation.style.display = "none";
+            if (event.target == confirmYes) {
+            	window.location = '/CricAlert/DeleteTeam?id=' + id;
+            }
+        }
+    };
 }

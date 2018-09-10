@@ -1,6 +1,6 @@
 package io.ztech.cricalert.controller;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import io.ztech.cricalert.beans.BallStats;
@@ -54,8 +54,8 @@ public class MatchController {
 		if (!(validator.validateInput(Regex.dateRegex, date, UserMessages.INVALID_DATE))) {
 			throw new InvalidDateException(UserMessages.INVALID_DATE_EXCEPTION);
 		}
-		Date newMatchDate = Date.valueOf(date);
-		match.setMatchDate(newMatchDate);
+		Timestamp newMatchDatetime = Date.valueOf(date);	// ?? how to do
+		match.setMatchDatetime(newMatchDate);
 		matchDelegate.updateMatchDate(match);
 	}
 

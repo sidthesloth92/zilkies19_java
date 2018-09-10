@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import io.ztech.cricalert.beans.Player;
+import io.ztech.cricalert.controller.PlayerController;
+
 /**
- * Servlet implementation class Home
+ * Servlet implementation class DeletePlayer
  */
-@WebServlet("/Home")
-public class Home extends HttpServlet {
+@WebServlet("/DeletePlayer")
+public class DeletePlayer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Home() {
+    public DeletePlayer() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +31,14 @@ public class Home extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.getRequestDispatcher("/pages/home.jsp").forward(request, response);
+		
+		PlayerController playerController = new PlayerController();
+		int playerId = Integer.parseInt(request.getParameter("id"));
+		Player player = new Player();
+		player.setPlayerId(playerId);
+		playerController.removePlayer(player);
+		
+		request.getRequestDispatcher("/Players").forward(request, response);
 	}
 
 	/**

@@ -42,14 +42,6 @@ public class TeamController {
 		return teamDelegate.searchTeam(teamId, user);
 	}*/
 	
-	public void updateTeamName(Team updateThisTeam, String newTeamName) throws InvalidNameException {
-		if (!(validator.validateInput(Regex.nameRegex, newTeamName, UserMessages.INVALID_NAME))) {
-			throw new InvalidNameException(UserMessages.INVALID_NAME_EXCEPTION);
-		}
-		updateThisTeam.setTeamName(newTeamName);
-		teamDelegate.updateTeamName(updateThisTeam);
-	}
-	
 	public void addNewPlayer(Player player, User user) throws InvalidNameException {
 		if (!(validator.validateInput(Regex.nameRegex, player.getFirstName(), UserMessages.INVALID_FIRST_NAME)
 				&& validator.validateInput(Regex.nameRegex, player.getLastName(), UserMessages.INVALID_LAST_NAME))) {
@@ -57,6 +49,17 @@ public class TeamController {
 		}
 		user.addPlayer(player);
 		teamDelegate.addNewPlayer(user);
+	}
+	
+	public void updateTeamName(Team team) throws InvalidNameException {
+		if (!(validator.validateInput(Regex.nameRegex, team.getTeamName(), UserMessages.INVALID_NAME))) {
+			throw new InvalidNameException(UserMessages.INVALID_NAME_EXCEPTION);
+		}
+		teamDelegate.updateTeamName(team);
+	}
+	
+	public void updateTeamPlayers(ArrayList<Player> playerList, Team team) {
+		teamDelegate.updateTeamPlayers(playerList, team);
 	}
 	
 	public Team fetchTeam(int teamId) {
@@ -69,5 +72,9 @@ public class TeamController {
 	
 	public boolean isTeamCreated(User user) {
 		return teamDelegate.isTeamCreated(user);
+	}
+	
+	public void removeTeam(Team team) {
+		teamDelegate.removeTeam(team);
 	}
 }

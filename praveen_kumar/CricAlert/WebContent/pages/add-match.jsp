@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import ="java.util.ArrayList"%>
+<%@ page import ="io.ztech.cricalert.beans.Team"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,48 +19,59 @@
         <img class="options-icon" src="/CricAlert/assets/icons/icons8-dots.png" alt="options" />
     </header>
     <section class="details">
-        <form class="details__match-form" action="#">
+<form class="details__match-form" action="#">
             <div class="details__match-form__team-container">
                 <div class="details__match-form__team">
-                    <select name="team-a">
-                        <option value="" selected disabled hidden>Choose Team</option>
-                        <option value="csk">Chennai Super Kings</option>
-                        <option value="srh">Sunrisers Hyderabad</option>
-                        <option value="rcb">Royal Challengers Bangalore</option>
-                    </select>
-                    <div class="details__match-form__team-lineup">
-                        Team Line Up
+                    <div class="details__match-form__team__choose">
+                        <img src="/CricAlert/assets/icons/icons8-team.png" alt="Team A">
+                        <select name="team-a" onchange="listTeamPlayers(this)">
+                            <option value="" selected disabled hidden>Choose Team</option>
+                            
+							<% 
+							ArrayList<Team> teamList = (ArrayList<Team>) request.getAttribute("teamList");
+							for (Team team : teamList) {
+								out.println("<option value='" + team.getTeamId() + "'>" + team.getTeamName() + "</option>");
+							}
+							%>
+
+                        </select>
+                    </div>
+                    <div class="details__match-form__team__lineup">
+                        Choose Line Up
                     </div>
                     <div class="details__match-form__modal">
-                        <div class="details__match-form__modal__players-list">
+                        <div class="details__match-form__modal__players-list-team-a">
                             <span class="close">&times;</span>
-                            <div class="details__match-form__modal__players-list__player"><input type="checkbox" name="a-players" value="11"><span>MS Dhoni</span></div>
-                            <div class="details__match-form__modal__players-list__player"><input type="checkbox" name="a-players" value="12"><span>Suresh Raina</span></div>
-                            <div class="details__match-form__modal__players-list__player"><input type="checkbox" name="a-players" value="13"><span>R Jadeja</span></div>
                         </div>            
                     </div>
                 </div>
                 <div class="details__match-form__team">
-                    <select name="team-b">
-                        <option value="" selected disabled hidden>Choose Team</option>
-                        <option value="csk">Chennai Super Kings</option>
-                        <option value="srh">Sunrisers Hyderabad</option>
-                        <option value="rcb">Royal Challengers Bangalore</option>
-                    </select>
-                    <div class="details__match-form__team-lineup">
-                        Team Line Up
+                    <div class="details__match-form__team__choose">
+                        <img src="/CricAlert/assets/icons/icons8-team.png" alt="Team B">
+                        <select name="team-b" onchange="listTeamPlayers(this)">
+                            <option value="" selected disabled hidden>Choose Team</option>
+                            
+                            <%
+							for (Team team : teamList) {
+								out.println("<option value='" + team.getTeamId() + "'>" + team.getTeamName() + "</option>");
+							}
+							%>
+							
+                        </select>
+                    </div>
+                    <div class="details__match-form__team__lineup">
+                        Choose Line Up
                     </div>
                     <div class="details__match-form__modal">
-                        <div class="details__match-form__modal__players-list">
+                        <div class="details__match-form__modal__players-list-team-b">
                             <span class="close">&times;</span>
-                            <div class="details__match-form__modal__players-list__player"><input type="checkbox" name="b-players" value="21"><span>Ricky Pointing</span></div>
-                            <div class="details__match-form__modal__players-list__player"><input type="checkbox" name="b-players" value="22"><span>Dwayne Bravo</span></div>
-                            <div class="details__match-form__modal__players-list__player"><input type="checkbox" name="b-players" value="23"><span>John Cena</span></div>
                         </div>            
                     </div>
                 </div>
             </div>
-            <input class="details__match-form__date" type="date" name="match-date" placeholder="Date"/>
+            <div class="details__match-form__schedule">Match Date: <input type="date" name="date" placeholder="Date"/></div>
+            <div class="details__match-form__schedule">Match Time: <input type="time" name="time" placeholder="Time"/></div>
+            <div class="details__match-form__schedule">Match Venue: <input type="text" name="venue" placeholder="Enter Venue"/></div>
         </form>
     </section>
     <footer class="confirm-details col-sm-12">

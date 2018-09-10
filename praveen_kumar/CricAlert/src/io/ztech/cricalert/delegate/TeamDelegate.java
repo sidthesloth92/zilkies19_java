@@ -22,32 +22,41 @@ public class TeamDelegate {
 		dao = new CricketDAO();
 	}
 	
-	public ArrayList<Team> fetchTeams(User user) {
-		return dao.fetchTeams(user);
-	}
-	
 	public void createTeam(User user) {
 		dao.insertTeam(user);
+	}
+	
+	public void addNewPlayer(User user) {
+		dao.insertPlayer(user);
 	}
 	
 	public void updateTeamName(Team team) {
 		dao.updateTeamName(team);
 	}
 	
+	public void updateTeamPlayers(ArrayList<Player> playerList, Team team) {
+		dao.removePlayerFromTeam(team);
+		dao.updateTeamPlayers(playerList);
+	}
+	
 	/*public boolean searchTeam(int teamId, User user) {
 		return dao.searchTeam(user, teamId);
 	}*/
-	
-	public void addNewPlayer(User user) {
-		dao.insertPlayer(user);
-	}
 	
 	public Team fetchTeam(int teamId) {
 		return dao.fetchTeam(teamId);
 	}
 	
+	public ArrayList<Team> fetchTeams(User user) {
+		return dao.fetchTeams(user);
+	}
+	
 	public ArrayList<Player> fetchTeamPlayers(Team team) {
 		return dao.fetchTeamPlayers(team);
+	}
+	
+	public void removeTeam(Team team) {
+		dao.deleteTeam(team);
 	}
 	
 	public boolean isTeamCreated(User user) {

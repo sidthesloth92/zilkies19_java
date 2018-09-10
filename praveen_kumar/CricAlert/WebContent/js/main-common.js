@@ -43,7 +43,7 @@ function allowDrop(ev, el) {
 }
 
 function dragStart(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
+    ev.dataTransfer.setData("id", ev.target.id);
     var search = document.getElementsByClassName("footer__search")[0];
     var addItem = document.getElementsByClassName("footer__add-item")[0];
     var editItem = document.getElementsByClassName("footer__edit")[0];
@@ -69,9 +69,4 @@ function dragStop(ev) {
     deleteItem.style.display = "none";
     search.style.display = "inline-block";
     addItem.style.display = "inline-block";
-}
-
-function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
 }

@@ -1,19 +1,25 @@
 package io.ztech.cricalert.beans;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import io.ztech.cricalert.constants.MatchResult;
 
 public class Match {
 	int matchId;
 	User user;
-	Date matchDate;
+	Timestamp matchDatetime;
 	Team teamA, teamB;
 	LineUp teamALineUp, teamBLineUp;
-	String status;
+	String status, venue;
 	int tossWonBy;
 	MatchResult matchResult;
 	
+	public String getVenue() {
+		return venue;
+	}
+	public void setVenue(String venue) {
+		this.venue = venue;
+	}
 	public LineUp getTeamALineUp() {
 		return teamALineUp;
 	}
@@ -62,11 +68,11 @@ public class Match {
 	public void setTossWonBy(int tossWonBy) {
 		this.tossWonBy = tossWonBy;
 	}
-	public Date getMatchDate() {
-		return matchDate;
+	public Timestamp getMatchDatetime() {
+		return matchDatetime;
 	}
-	public void setMatchDate(Date matchDate) {
-		this.matchDate = matchDate;
+	public void setMatchDatetime(Timestamp matchDatetime) {
+		this.matchDatetime = matchDatetime;
 	}
 	public String getStatus() {
 		return status;

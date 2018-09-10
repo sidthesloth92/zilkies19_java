@@ -68,7 +68,7 @@ public class CricketDAO {
 		}
 	}
 	
-	public void insertPlayer(Player player) {
+	/*public void insertPlayer(Player player) {
 		PreparedStatement ps = null;
 		Connection con = connector.openConnection();
 		
@@ -84,7 +84,7 @@ public class CricketDAO {
 		} finally {
 			connector.closeConnection(con, null, ps);
 		}
-	}
+	}*/
 	
 	public void insertTeam(User user) {
 		PreparedStatement ps = null;
@@ -100,9 +100,8 @@ public class CricketDAO {
 			team.setTeamId(getRecentTeamId());
 			for (Player player : team.getPlayers()) {
 				player.setTeamId(getRecentTeamId());
-				insertPlayer(player);
-				player.setPlayerId(getRecentPlayerId());
 			}
+			updateTeamPlayers(team.getPlayers());
 		} catch (SQLException e) {
 			System.out.println("Exception caught at insertTeam(): " + e);
 		} finally {
@@ -116,11 +115,12 @@ public class CricketDAO {
 		
 		try {
 			ps = con.prepareStatement(Queries.INSERT_MATCH);
-			ps.setDate(1, match.getMatchDate());
-			ps.setInt(2, match.getTeamA().getTeamId());
-			ps.setInt(3, match.getTeamB().getTeamId());
-			ps.setString(4, match.getStatus());
-			ps.setInt(5, match.getUser().getUserId());
+			ps.setTimestamp(1, match.getMatchDatetime());
+			ps.setString(2, match.getVenue());
+			ps.setInt(3, match.getTeamA().getTeamId());
+			ps.setInt(4, match.getTeamB().getTeamId());
+			ps.setString(5, match.getStatus());
+			ps.setInt(6, match.getUser().getUserId());
 			ps.execute();
 			int recentMatchId = getRecentMatchId();
 			match.getTeamALineUp().setMatchId(recentMatchId);
@@ -249,23 +249,25 @@ public class CricketDAO {
 		}
 	}
 	
-	public void updatePlayerTeam(Team team) {
+	public void updateTeamPlayers(ArrayList<Player> playerList) {
 		PreparedStatement ps = null;
 		Connection con = connector.openConnection();
 		
 		try {
-			ps = con.prepareStatement(Queries.UPDATE_PLAYER_TEAM);
-			ps.setInt(1, team.getTeamId());
-			Player player = team.getPlayers().get(0);
-			ps.setInt(2, player.getPlayerId());
-			ps.execute();
+			for (Player player : playerList) {
+				ps = con.prepareStatement(Queries.UPDATE_PLAYER_TEAM);
+				ps.setInt(1, player.getTeamId());
+				ps.setInt(2, player.getPlayerId());
+				ps.execute();
+			}
 		} catch (SQLException e) {
-			System.out.println("Exception caught at updatePlayerTeam(): " + e);
+			System.out.println("Exception caught at updateTeamPlayers(): " + e);
 		} finally {
 			connector.closeConnection(con, null, ps);
 		}
 	}
 	
+	/*
 	public void updatePlayerName(Player player, String query) {
 		PreparedStatement ps = null;
 		Connection con = connector.openConnection();
@@ -284,6 +286,24 @@ public class CricketDAO {
 		} finally {
 			connector.closeConnection(con, null, ps);
 		}
+	}*/
+	
+	public void updatePlayer(Player player) {
+		PreparedStatement ps = null;
+		Connection con = connector.openConnection();
+		
+		try {
+			ps = con.prepareStatement(Queries.UPDATE_PLAYER);
+			ps.setString(1, player.getFirstName());
+			ps.setString(2, player.getLastName());
+			ps.setInt(3, player.getTeamId());
+			ps.setInt(4, player.getPlayerId());
+			ps.execute();
+		} catch (SQLException e) {
+			System.out.println("Exception caught at updatePlayer(): " + e);
+		} finally {
+			connector.closeConnection(con, null, ps);
+		}
 	}
 	
 	public void updateMatchDate(Match match) {
@@ -293,7 +313,7 @@ public class CricketDAO {
 		
 		try {
 			ps = con.prepareStatement(Queries.UPDATE_MATCH_DATE);
-			ps.setDate(1, match.getMatchDate());
+			ps.setTimestamp(1, match.getMatchDatetime());
 			ps.setInt(2, match.getMatchId());
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -450,6 +470,7 @@ public class CricketDAO {
 			ps.setInt(1, playerId);
 			rs = ps.executeQuery();
 			while (rs.next()) {
+				player.setPlayerId(playerId);
 				player.setFirstName(rs.getString(1));
 				player.setLastName(rs.getString(2));
 				player.setTeamId(rs.getInt(3));
@@ -520,20 +541,22 @@ public class CricketDAO {
 			match = new Match();
 			while (rs.next()) {
 				match.setMatchId(rs.getInt(1));
-				match.setMatchDate(rs.getDate(2));
+				match.setMatchDatetime(rs.getTimestamp(2));
+				match.setVenue(rs.getString(3));
+				
 				Team teamA = new Team();
-				teamA.setTeamId(rs.getInt(3));
+				teamA.setTeamId(rs.getInt(4));
 				match.setTeamA(teamA);
 				
 				Team teamB = new Team();
-				teamB.setTeamId(rs.getInt(4));
+				teamB.setTeamId(rs.getInt(5));
 				match.setTeamB(teamB);
-				match.setStatus(rs.getString(5));
-				match.setTossWonBy(rs.getInt(6));
-				if (rs.getInt(7) == 0) {
+				match.setStatus(rs.getString(6));
+				match.setTossWonBy(rs.getInt(7));
+				if (rs.getInt(8) == 0) {
 					match.setMatchResult(null);
 				} else {
-					match.setMatchResult(MatchResult.values()[rs.getInt(6)-1]);
+					match.setMatchResult(MatchResult.values()[rs.getInt(7)-1]);
 				}
 				match.setTeamALineUp( fetchLineUp(match.getMatchId(), match.getTeamA().getTeamId()) );
 				match.setTeamBLineUp( fetchLineUp(match.getMatchId(), match.getTeamB().getTeamId()) );
@@ -559,24 +582,24 @@ public class CricketDAO {
 			while (rs.next()) {
 				Match match = new Match();
 				match.setMatchId(rs.getInt(1));
-				
-				match.setMatchDate(rs.getDate(2));
+				match.setMatchDatetime(rs.getTimestamp(2));
+				match.setVenue(rs.getString(3));
 				
 				Team teamA = new Team();
-				teamA.setTeamId(rs.getInt(3));
+				teamA.setTeamId(rs.getInt(4));
 				match.setTeamA(teamA);
 				
 				Team teamB = new Team();
-				teamB.setTeamId(rs.getInt(4));
+				teamB.setTeamId(rs.getInt(5));
 				match.setTeamB(teamB);
 				
-				match.setStatus(rs.getString(5));
+				match.setStatus(rs.getString(6));
 				
-				match.setTossWonBy(rs.getInt(6));
-				if (rs.getInt(7) == 0) {
+				match.setTossWonBy(rs.getInt(7));
+				if (rs.getInt(8) == 0) {
 					match.setMatchResult(null);
 				} else {
-					match.setMatchResult(MatchResult.values()[rs.getInt(6)-1]);
+					match.setMatchResult(MatchResult.values()[rs.getInt(7)-1]);
 				}
 				matchList.add(match);
 			}
@@ -739,19 +762,49 @@ public class CricketDAO {
 		return flag;
 	}
 	
-	public void deletePlayer(Team team) {
+	public void removePlayerFromTeam(Team team) {
+		PreparedStatement ps = null;
+		Connection con = connector.openConnection();
+		ResultSet rs = null;
+		
+		try {
+			ps = con.prepareStatement(Queries.REMOVE_PLAYER_TEAM);
+			ps.setInt(1, team.getTeamId());
+			ps.execute();
+		} catch (SQLException e) {
+			System.out.println("Exception caught at removePlayerFromTeam(): " + e);
+		} finally {
+			connector.closeConnection(con, rs, ps);
+		}
+	}
+	
+	public void deletePlayer(Player player) {
 		PreparedStatement ps = null;
 		Connection con = connector.openConnection();
 		ResultSet rs = null;
 		
 		try {
 			ps = con.prepareStatement(Queries.DELETE_PLAYER);
-			ps.setInt(1, team.getTeamId());
-			Player player = team.getPlayers().get(0);
-			ps.setInt(2, player.getPlayerId());
+			ps.setInt(1, player.getPlayerId());
 			ps.execute();
 		} catch (SQLException e) {
 			System.out.println("Exception caught at deletePlayer(): " + e);
+		} finally {
+			connector.closeConnection(con, rs, ps);
+		}
+	}
+	
+	public void deleteTeam(Team team) {
+		PreparedStatement ps = null;
+		Connection con = connector.openConnection();
+		ResultSet rs = null;
+		
+		try {
+			ps = con.prepareStatement(Queries.DELETE_TEAM);
+			ps.setInt(1, team.getTeamId());
+			ps.execute();
+		} catch (SQLException e) {
+			System.out.println("Exception caught at deleteTeam(): " + e);
 		} finally {
 			connector.closeConnection(con, rs, ps);
 		}

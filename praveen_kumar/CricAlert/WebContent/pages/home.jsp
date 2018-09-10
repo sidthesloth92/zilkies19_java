@@ -118,7 +118,7 @@
             </div>
         </section>
         <footer class="footer">
-            <div class="footer__add-item" onclick="window.location='/CricAlert/pages/add-match.jsp'">
+            <div class="footer__add-item" onclick="window.location='/CricAlert/AddMatch'">
                 <img class="footer__add-item__icon" src="/CricAlert/assets/icons/icons8-plus-6.png" alt="Add Match">
             </div>
         </footer>
