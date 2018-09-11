@@ -43,7 +43,7 @@ function allowDrop(ev, el) {
 }
 
 function dragStart(ev) {
-    ev.dataTransfer.setData("id", ev.target.id);
+	ev.dataTransfer.setData("text/plain", ev.target.id);
     var search = document.getElementsByClassName("footer__search")[0];
     var addItem = document.getElementsByClassName("footer__add-item")[0];
     var editItem = document.getElementsByClassName("footer__edit")[0];

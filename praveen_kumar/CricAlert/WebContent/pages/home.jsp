@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import ="java.util.ArrayList"%>
+<%@ page import ="io.ztech.cricalert.beans.Match"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,10 +20,10 @@
         <nav class="side-bar">
         	<img class="close-bar" src="/CricAlert/assets/icons/icons8-close.png" alt="close" onclick="sideBarClick()"/>
             <ul>
-                <li><a href="/CricAlert/pages/home.jsp" class="nav-highlight-2">Home</a></li>
-                <li><a href="/CricAlert/pages/teams.jsp" class="">Teams</a></li>
-                <li><a href="/CricAlert/pages/players.jsp" class="">Players</a></li>
-                <li><a href="/CricAlert/pages/index.jsp" class="">Logout</a></li>
+                <li><div onclick="window.location='/CricAlert/Home'" class="nav-highlight-2">Home</div></li>
+                <li><div onclick="window.location='/CricAlert/Teams'" class="">Teams</div></li>
+                <li><div onclick="window.location='/CricAlert/Players'" class="">Players</div></li>
+                <li><div onclick="window.location='/CricAlert/Login'" class="">Logout</div></li>
             </ul>
         </nav>
         <header class="header">
@@ -40,80 +41,115 @@
             <div class="content__matches col-sm-12">
                 <div class="content__matches__title">Live Matches</div>
                 <div class="content__matches__live">
-                    <div class="match-card" onclick="window.location='/CricAlert/pages/live-match.jsp'">
-                        <div class="match-card__schedule">
-                            <div class="match-card__schedule__date">01/11/2017</div>
-                            <div class="match-card__schedule__time">16:30</div>
-                        </div>
-                        <div class="match-card__teams">
-                            <div class="match-card__teams__team-a">
-                                <div class="match-card__teams__team-a__logo">
-                                    <img src="/CricAlert/assets/images/team-a-logo.png" alt="CSK">
-                                </div>
-                                <div class="match-card__teams__team-a__score">201-9</div>
-                            </div>
-                            vs
-                            <div class="match-card__teams__team-b">
-                                <div class="match-card__teams__team-b__logo">
-                                    <img src="/CricAlert/assets/images/team-b-logo.png" alt="SRH">
-                                </div>
-                                <div class="match-card__teams__team-b__score">115-3</div>
-                            </div>
-                        </div>
-                        <div class="match-card__venue">Chepauk Stadium</div>
-                    </div>
+                	<%
+                	ArrayList<Match> liveMatchList = (ArrayList<Match>) request.getAttribute("liveMatchList");
+                	if (liveMatchList.size() == 0) {
+                		out.println("<div class='content__matches__alert'>No live matches present at the moment</div>");
+					}
+                	for (Match match : liveMatchList) {
+	                	String date = match.getMatchDatetime().toString().split(" ")[0];
+	                	String time = match.getMatchDatetime().toString().split(" ")[1];
+	                	time = time.split(":")[0] + ":" + time.split(":")[1]; 
+	                	out.println("<div class='match-card' onclick=\"window.location='/CricAlert/pages/live-match.jsp'\">");
+	                		out.println("<div class='match-card__schedule'>");
+	                			out.println("<div class='match-card__schedule__date'>" + date + "</div>");
+	                			out.println("<div class='match-card__schedule__time'>" + time + "</div>");
+	                		out.println("</div>");
+	                		out.println("<div class='match-card__teams'>");
+	                			out.println("<div class='match-card__teams__team-a'>");
+	                				out.println("<div class='match-card__teams__team-a__logo'>");
+	                					out.println("<img src='/CricAlert/assets/images/team-a-logo.png' alt='CSK'>");
+	                				out.println("</div>");
+	                				out.println("<div class='match-card__teams__team-a__score'>201-9</div>");
+	                			out.println("</div>");
+	                			out.println("vs");
+	                			out.println("<div class='match-card__teams__team-b'>");
+		            				out.println("<div class='match-card__teams__team-b__logo'>");
+		            					out.println("<img src='/CricAlert/assets/images/team-b-logo.png' alt='SRH'>");
+		            				out.println("</div>");
+		            				out.println("<div class='match-card__teams__team-b__score'>115-3</div>");
+		            			out.println("</div>");
+		            		out.println("</div>");
+		            		out.println("<div class='match-card__venue'>" + match.getVenue() + "</div>");
+		            	out.println("</div>");
+                	}
+                	%>
                 </div>
             </div>
             <div class="content__matches col-sm-12">
                 <div class="content__matches__title">Upcoming Matches</div>
                 <div class="content__matches__upcoming">
-                    <div class="match-card" onclick="window.location='/CricAlert/pages/upcoming-match.jsp'">
-                        <div class="match-card__schedule">
-                            <div class="match-card__schedule__date"></div>
-                            <div class="match-card__schedule__time"></div>
-                        </div>
-                        <div class="match-card__teams">
-                            <div class="match-card__teams__team-a">
-                                <div class="match-card__teams__team-a__logo">
-
-                                </div>
-                                <div class="match-card__teams__team-a__score"></div>
-                            </div>
-                            <div class="match-card__teams__team-b">
-                                <div class="match-card__teams__team-b__logo">
-
-                                </div>
-                                <div class="match-card__teams__team-b__score"></div>
-                            </div>
-                        </div>
-                        <div class="match-card__venue"></div>
-                    </div>
+                    <%
+                	ArrayList<Match> upcomingMatchList = (ArrayList<Match>) request.getAttribute("upcomingMatchList");
+                    if (upcomingMatchList.size() == 0) {
+                		out.println("<div class='content__matches__alert'>No new matches have been scheduled yet!</div>");
+					}
+                    for (Match match : upcomingMatchList) {
+	                	String date = match.getMatchDatetime().toString().split(" ")[0];
+	                	String time = match.getMatchDatetime().toString().split(" ")[1];
+	                	time = time.split(":")[0] + ":" + time.split(":")[1]; 
+	                	out.println("<div class='match-card' onclick=\"window.location='/CricAlert/pages/live-match.jsp'\">");
+	                		out.println("<div class='match-card__schedule'>");
+	                			out.println("<div class='match-card__schedule__date'>" + date + "</div>");
+	                			out.println("<div class='match-card__schedule__time'>" + time + "</div>");
+	                		out.println("</div>");
+	                		out.println("<div class='match-card__teams'>");
+	                			out.println("<div class='match-card__teams__team-a'>");
+	                				out.println("<div class='match-card__teams__team-a__logo'>");
+	                					out.println("<img src='/CricAlert/assets/images/team-a-logo.png' alt='CSK'>");
+	                				out.println("</div>");
+	                				out.println("<div class='match-card__teams__team-a__score'>201-9</div>");
+	                			out.println("</div>");
+	                			out.println("vs");
+	                			out.println("<div class='match-card__teams__team-b'>");
+		            				out.println("<div class='match-card__teams__team-b__logo'>");
+		            					out.println("<img src='/CricAlert/assets/images/team-b-logo.png' alt='SRH'>");
+		            				out.println("</div>");
+		            				out.println("<div class='match-card__teams__team-b__score'>115-3</div>");
+		            			out.println("</div>");
+		            		out.println("</div>");
+		            		out.println("<div class='match-card__venue'>" + match.getVenue() + "</div>");
+		            	out.println("</div>");
+                	}
+                	%>
                 </div>
             </div>
             <div class="content__matches col-sm-12">
                 <div class="content__matches__title">Past Matches</div>
                 <div class="content__matches__past">
-                    <div class="match-card" onclick="window.location='/CricAlert/pages/past-match.jsp'">
-                        <div class="match-card__schedule">
-                            <div class="match-card__schedule__date"></div>
-                            <div class="match-card__schedule__time"></div>
-                        </div>
-                        <div class="match-card__teams">
-                            <div class="match-card__teams__team-a">
-                                <div class="match-card__teams__team-a__logo">
-
-                                </div>
-                                <div class="match-card__teams__team-a__score"></div>
-                            </div>
-                            <div class="match-card__teams__team-b">
-                                <div class="match-card__teams__team-b__logo">
-
-                                </div>
-                                <div class="match-card__teams__team-b__score"></div>
-                            </div>
-                        </div>
-                        <div class="match-card__venue"></div>
-                    </div>
+                	<%
+                	ArrayList<Match> pastMatchList = (ArrayList<Match>) request.getAttribute("pastMatchList");
+                	if (pastMatchList.size() == 0) {
+                		out.println("<div class='content__matches__alert'>No matches have been completed or ended yet!</div>");
+					}
+                	for (Match match : pastMatchList) {
+	                	String date = match.getMatchDatetime().toString().split(" ")[0];
+	                	String time = match.getMatchDatetime().toString().split(" ")[1];
+	                	time = time.split(":")[0] + ":" + time.split(":")[1]; 
+	                	out.println("<div class='match-card' onclick=\"window.location='/CricAlert/pages/live-match.jsp'\">");
+	                		out.println("<div class='match-card__schedule'>");
+	                			out.println("<div class='match-card__schedule__date'>" + date + "</div>");
+	                			out.println("<div class='match-card__schedule__time'>" + time + "</div>");
+	                		out.println("</div>");
+	                		out.println("<div class='match-card__teams'>");
+	                			out.println("<div class='match-card__teams__team-a'>");
+	                				out.println("<div class='match-card__teams__team-a__logo'>");
+	                					out.println("<img src='/CricAlert/assets/images/team-a-logo.png' alt='CSK'>");
+	                				out.println("</div>");
+	                				out.println("<div class='match-card__teams__team-a__score'>201-9</div>");
+	                			out.println("</div>");
+	                			out.println("vs");
+	                			out.println("<div class='match-card__teams__team-b'>");
+		            				out.println("<div class='match-card__teams__team-b__logo'>");
+		            					out.println("<img src='/CricAlert/assets/images/team-b-logo.png' alt='SRH'>");
+		            				out.println("</div>");
+		            				out.println("<div class='match-card__teams__team-b__score'>115-3</div>");
+		            			out.println("</div>");
+		            		out.println("</div>");
+		            		out.println("<div class='match-card__venue'>" + match.getVenue() + "</div>");
+		            	out.println("</div>");
+                	}
+                	%>
                 </div>
             </div>
         </section>

@@ -14,6 +14,10 @@
     background-color: #fcecbd;
 }
 
+.content__team-card:hover {
+    cursor: pointer;
+}
+
 .content__team-card__container-1 {
     display: flex;
     justify-content: space-around;

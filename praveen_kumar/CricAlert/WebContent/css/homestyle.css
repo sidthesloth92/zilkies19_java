@@ -1,7 +1,16 @@
-.content__matches,
-.content__matches,
 .content__matches {
-    margin: 0 20px 20px 20px;
+	overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.content__matches__title {
+	font-weight: bold;
+	margin-left: 15px;
+}
+
+.content__matches__alert {
+	font-style: italic;
+	color: gray;
 }
 
 .content__matches__live,
@@ -9,10 +18,12 @@
 .content__matches__past {
     height: 120px;
     display: flex;
+    align-items: center;
     flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    padding-left: 5px;
+    padding-left: 15px;
+    margin-bottom: 10px;
 }
 
 .match-card {

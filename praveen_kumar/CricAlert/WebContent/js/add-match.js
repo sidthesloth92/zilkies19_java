@@ -1,7 +1,23 @@
+var todayDate = new Date();
+var day = todayDate.getDate();
+var month = todayDate.getMonth() + 1;
+var year = todayDate.getFullYear();
+
+if (day < 10) {
+	day = '0' + day.toString();
+}
+
+if (month < 10) {
+	month = '0' + month.toString();
+}
+
+var minDate = year + "-" + month + "-" + day; 
+
+var calendar = document.querySelector(".calendar");
+calendar.setAttribute("min", minDate);
+
 var modals = document.getElementsByClassName("details__match-form__modal");
-
 var btns = document.getElementsByClassName("details__match-form__team__lineup");
-
 var spans = document.getElementsByClassName("close");
 
 btns[0].onclick = function() {
@@ -47,13 +63,17 @@ function listTeamPlayers(element) {
 	}).then(function(data) {
 	    var toAppend = '<span class="close" onclick="closeModal()">&times;</span>';
 	    var divToInsertInto = '';
+	    if (element.getAttribute("name") == "team-a") {
+    		divToInsertInto = document.querySelector(".details__match-form__modal__players-list-team-a");
+    	} else if (element.getAttribute("name") == "team-b") {
+    		divToInsertInto = document.querySelector(".details__match-form__modal__players-list-team-b");
+    	}
 	    for (var key in data) {
 	    	if (element.getAttribute("name") == "team-a") {
-	    		divToInsertInto = document.querySelector(".details__match-form__modal__players-list-team-a");
+	    		toAppend += "<div class='details__match-form__modal__players-list__player'><input type='checkbox' name='team-a-lineup' value='" + data[key].playerId + "'><span>" + data[key].firstName + " " + data[key].lastName + "</span></div>";
 	    	} else if (element.getAttribute("name") == "team-b") {
-	    		divToInsertInto = document.querySelector(".details__match-form__modal__players-list-team-b");
+	    		toAppend += "<div class='details__match-form__modal__players-list__player'><input type='checkbox' name='team-b-lineup' value='" + data[key].playerId + "'><span>" + data[key].firstName + " " + data[key].lastName + "</span></div>";
 	    	}
-	    	toAppend += "<div class='details__match-form__modal__players-list__player'><input type='checkbox' name='a-players' value='" + data[key].playerId + "'><span>" + data[key].firstName + " " + data[key].lastName + "</span></div>";
 	    }
 	    console.log(toAppend);
 	    divToInsertInto.innerHTML = toAppend;

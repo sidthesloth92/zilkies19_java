@@ -22,12 +22,9 @@ public class MatchController {
 		validator = new Validator();
 	}
 	
+	// Called by AddMatch servlet
 	public void setMatch(Match newMatch) {
 		matchDelegate.setMatch(newMatch);
-	}
-	
-	public void displayMatches(User user) {
-		matchDelegate.displayMatches(user);
 	}
 	
 	public boolean searchMatch(User user, int matchId) {
@@ -50,12 +47,7 @@ public class MatchController {
 		return matchDelegate.isMatchScheduled(user);
 	}
 	
-	public void updateMatchDate(String date, Match match) throws InvalidDateException {
-		if (!(validator.validateInput(Regex.dateRegex, date, UserMessages.INVALID_DATE))) {
-			throw new InvalidDateException(UserMessages.INVALID_DATE_EXCEPTION);
-		}
-		Timestamp newMatchDatetime = Date.valueOf(date);	// ?? how to do
-		match.setMatchDatetime(newMatchDate);
+	public void updateMatchDate(Match match) {
 		matchDelegate.updateMatchDate(match);
 	}
 

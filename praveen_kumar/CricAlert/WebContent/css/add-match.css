@@ -107,6 +107,18 @@ header {
     margin-right: 10px;
 }
 
+.confirm-details {
+    position: fixed;
+    bottom: 0;
+    height: 40px;
+    padding-bottom: 8px;
+    text-align: center;
+    border: none;
+    box-shadow: 0 0 5px 1px;
+    background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 140%);
+}
+
+
 .close {
     color: #aaa;
     float: right;

@@ -23,7 +23,11 @@
     margin: 50px;
 }
 
-.side-bar a {
+.side-bar li:hover {
+    cursor: pointer;
+}
+
+.side-bar div {
     text-decoration: none;
 }
 
@@ -99,8 +103,7 @@
 .content {
     display: flex;
     flex-wrap: wrap;
-    position: relative;
-    top: 100px;
+    padding-top: 100px;
 }
 
 .content__modal {

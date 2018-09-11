@@ -15,11 +15,11 @@
 
 <body>
     <header>
-        <img class="return-icon" src="/CricAlert/assets/icons/icons8-back-1.png" alt="return" onclick="window.location='/CricAlert/pages/home.jsp'" />
+        <img class="return-icon" src="/CricAlert/assets/icons/icons8-back-1.png" alt="return" onclick="window.location='/CricAlert/Home'" />
         <img class="options-icon" src="/CricAlert/assets/icons/icons8-dots.png" alt="options" />
     </header>
     <section class="details">
-<form class="details__match-form" action="#">
+		<form class="details__match-form" action="/CricAlert/AddMatch" method="POST">
             <div class="details__match-form__team-container">
                 <div class="details__match-form__team">
                     <div class="details__match-form__team__choose">
@@ -69,14 +69,12 @@
                     </div>
                 </div>
             </div>
-            <div class="details__match-form__schedule">Match Date: <input type="date" name="date" placeholder="Date"/></div>
+            <div class="details__match-form__schedule">Match Date: <input class="calendar" type="date" name="date" placeholder="Date"/></div>
             <div class="details__match-form__schedule">Match Time: <input type="time" name="time" placeholder="Time"/></div>
             <div class="details__match-form__schedule">Match Venue: <input type="text" name="venue" placeholder="Enter Venue"/></div>
+        	<input type="submit" class="confirm-details col-sm-12" value="Save Match"></input>
         </form>
     </section>
-    <footer class="confirm-details col-sm-12">
-        Save Match
-    </footer>
     <script src="/CricAlert/js/add-match.js"></script>
 </body>
 

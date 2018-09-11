@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <img class="return-icon" src="/CricAlert/assets/icons/icons8-back-1.png" alt="return" onclick="window.location='/CricAlert/pages/home.jsp'"/>
+        <img class="return-icon" src="/CricAlert/assets/icons/icons8-back-1.png" alt="return" onclick="window.location='/CricAlert/Home'"/>
         <img class="options-icon" src="/CricAlert/assets/icons/icons8-dots.png" alt="options"/>
     </header>
     <section class="details">

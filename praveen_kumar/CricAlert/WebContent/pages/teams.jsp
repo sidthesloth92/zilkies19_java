@@ -18,12 +18,12 @@
 <body>
     <div class="main-container">
         <nav class="side-bar">
+        	<img class="close-bar" src="/CricAlert/assets/icons/icons8-close.png" alt="close" onclick="sideBarClick()">
             <ul>
-                <img class="close-bar" src="/CricAlert/assets/icons/icons8-close.png" alt="close" onclick="sideBarClick()">
-                <li><a href="/CricAlert/pages/home.jsp" class="">Home</a></li>
-                <li><a href="/CricAlert/pages/teams.jsp" class="nav-highlight-2">Teams</a></li>
-                <li><a href="/CricAlert/pages/players.jsp" class="">Players</a></li>
-                <li><a href="/CricAlert/pages/index.jsp" class="">Logout</a></li>
+                <li><div onclick="window.location='/CricAlert/Home'" class="">Home</div></li>
+                <li><div onclick="window.location='/CricAlert/Teams'" class="nav-highlight-2">Teams</div></li>
+                <li><div onclick="window.location='/CricAlert/Players'" class="">Players</div></li>
+                <li><div onclick="window.location='/CricAlert/Login'" class="">Logout</div></li>
             </ul>
         </nav>
         <header class="header">

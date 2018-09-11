@@ -6,7 +6,7 @@ public class Queries {
 	public static final String INSERT_USER = "insert into user (name, email, user_name, password) values (?, ?, ?, ?)";
 	public static final String INSERT_PLAYER = "insert into player (team_id, first_name, last_name, user_id) values (?, ?, ?, ?)";
 	public static final String INSERT_TEAM = "insert into team (team_name, user_id) values (?, ?)";
-	public static final String INSERT_MATCH = "insert into matches (match_datetime, venue, team_1_id, team_2_id, status, user_id) values (?, ?, ?, ?, ?)";
+	public static final String INSERT_MATCH = "insert into matches (match_datetime, venue, team_1_id, team_2_id, status, user_id) values (?, ?, ?, ?, ?, ?)";
 	public static final String INSERT_BALL_STATS = "insert into ball_stats (match_id, team_batting, team_bowling, bowler_id, batsman_id, runs_given, wicket_taken) values (?, ?, ?, ?, ?, ?, ?)";
 	public static final String INSERT_LINE_UP = "insert into line_up (match_id, team_id, player_id) values (?, ?, ?)"; 
 	

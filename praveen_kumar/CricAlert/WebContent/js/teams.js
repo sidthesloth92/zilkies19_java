@@ -39,13 +39,13 @@ function expandTeam(element) {
 
 function editTeam(ev) {
     ev.preventDefault();
-    var id = ev.dataTransfer.getData("id");
+    var id = ev.dataTransfer.getData("text");
     window.location = '/CricAlert/EditTeam?id=' + id;
 }
 
 function deleteConfirmation(ev) {
     ev.preventDefault();
-    var id = ev.dataTransfer.getData("id");
+    var id = ev.dataTransfer.getData("text");
     
     var modal = document.querySelector(".content__modal");
     var modalDeleteConfirmation = document.querySelector(".content__modal__delete-confirmation");

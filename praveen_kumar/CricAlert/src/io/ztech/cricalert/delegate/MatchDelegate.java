@@ -29,35 +29,6 @@ public class MatchDelegate {
 		dao.insertMatch(newMatch);
 	}
 
-	public void displayMatches(User user) {
-		ArrayList<Match> matchList = dao.fetchMatches(user);
-		logger.info(UserMessages.MATCH_TABLE);
-		for (Match match : matchList) {
-			Team team = match.getTeamA();
-			team = dao.fetchTeam(team.getTeamId());
-			match.setTeamA(team);
-			team = match.getTeamB();
-			team = dao.fetchTeam(team.getTeamId());
-			match.setTeamB(team);
-			String toss;
-			if (match.getTossWonBy() == match.getTeamA().getTeamId()) {
-				toss = match.getTeamA().getTeamName();
-			} else if (match.getTossWonBy() == match.getTeamB().getTeamId()) {
-				toss = match.getTeamB().getTeamName();
-			} else {
-				toss = "NA";
-			}
-			
-			if (match.getMatchResult() == null) {
-				match.setMatchResult(MatchResult.NA);
-			}
-
-			logger.info(match.getMatchId() + "\t" + match.getMatchDate() + "\t" + match.getTeamA().getTeamName()
-					+ "\t" + match.getTeamB().getTeamName() + "\t" + match.getStatus() + "\t" + toss + "\t"
-					+ match.getMatchResult());
-		}
-	}
-
 	public boolean searchMatch(User user, int matchId) {
 		return dao.searchMatch(user, matchId);
 	}
