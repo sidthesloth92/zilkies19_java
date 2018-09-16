@@ -1,23 +1,23 @@
 package com.zilker.beans;
 
 public class AdminDetails {
-	String First_name = "", Last_name = "", password = "", email = "", mobile = "";
-	int age = 0;
+	String firstName, lastName, password, email, mobile;
+	int age;
 
-	public void setFirstName(String First_name) {
-		this.First_name = First_name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getFirst_name() {
-		return this.First_name;
+	public String getfirstName() {
+		return this.firstName;
 	}
 
-	public void setLastName(String Last_name) {
-		this.Last_name = Last_name;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public String getLast_name() {
-		return this.Last_name;
+	public String getlastName() {
+		return this.lastName;
 	}
 
 	public void setPassword(String password) {

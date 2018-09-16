@@ -10,29 +10,32 @@ import io.ztech.placementportal.constants.SqlConstants;
 import io.ztech.placementportal.dbutil.DbConnection;
 
 public class UpdateCompanyDetailDao {
-	PreparedStatement ps = null;
-	ResultSet rs = null;
+	PreparedStatement preparedStatement = null;
+	ResultSet resultSet = null;
 
 	public boolean updateCompany(Company company) {
-		Connection connection = DbConnection.getConnection();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 		try {
-			ps = connection.prepareStatement(SqlConstants.EDIT_COMPANY);
-			ps.setString(1, company.getCompany_name());
-			ps.setString(2, company.getCompany_description());
-			ps.setString(3, company.getCompany_type());
-			ps.setString(4, company.getJob_location());
-			ps.setString(5, company.getDesignation());
-			ps.setString(6, company.getPayment());
-			ps.setString(7, company.getDay_of_recruitment());
-			ps.setInt(8, company.getCompany_id());
-			if (ps.executeUpdate() >= 0)
+			connection = DbConnection.getConnection();
+			preparedStatement = connection.prepareStatement(SqlConstants.EDIT_COMPANY);
+			preparedStatement.setString(1, company.getCompanyName());
+			preparedStatement.setString(2, company.getCompanyDescription());
+			preparedStatement.setString(3, company.getCompanyType());
+			preparedStatement.setString(4, company.getJobLocation());
+			preparedStatement.setString(5, company.getDesignation());
+			preparedStatement.setString(6, company.getPayment());
+			preparedStatement.setString(7, company.getDayOfRecruitment());
+			preparedStatement.setInt(8, company.getCompanyId());
+			if (preparedStatement.executeUpdate() >= 0)
 				return true;
 			else
 				return false;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DbConnection.closeConnection(rs, ps, connection);
+			DbConnection.closeConnection(resultSet, preparedStatement, connection);
 		}
 		return false;
 

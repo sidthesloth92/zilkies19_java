@@ -1,39 +1,47 @@
 package io.ztech.placementportal.bean;
 
+import io.ztech.placementportal.constants.ApplicationConstants;
+
 public class Eligiblity {
-	int arrear_count;
-	float cgpa,Mark_X,Mark_XII;
-	String dept;
-	public float getMark_X() {
-		return Mark_X;
-	}
-	public void setMark_X(float f) {
-		Mark_X = f;
-	}
-	public float getMark_XII() {
-		return Mark_XII;
-	}
-	public void setMark_XII(float mark_XII) {
-		Mark_XII = mark_XII;
-	}
-	public int getArrear_count() {
-		return arrear_count;
-	}
-	public void setArrear_count(int arrear_count) {
-		this.arrear_count = arrear_count;
-	}
+	private float cgpa, MarkX, MarkXII;
+	private int arrearCount;
+
 	public float getCgpa() {
 		return cgpa;
 	}
+
 	public void setCgpa(float cgpa) {
 		this.cgpa = cgpa;
 	}
-	public String getDept() {
-		return dept;
-	}
-	public void setDept(String dept) {
-		this.dept = dept;
+
+	public float getMarkX() {
+		return MarkX;
 	}
 
+	public void setMarkX(float markX) {
+		MarkX = markX;
+	}
+
+	public float getMarkXII() {
+		return MarkXII;
+	}
+
+	public void setMarkXII(float markXII) {
+		MarkXII = markXII;
+	}
+
+	public int getArrearCount() {
+		return arrearCount;
+	}
+
+	public void setArrearCount(int arrearCount) {
+		this.arrearCount = arrearCount;
+	}
+
+	@Override
+	public String toString() {
+		return ApplicationConstants.CGPA + cgpa + ApplicationConstants.PERCENTAGE_X + MarkX
+				+ ApplicationConstants.PERCENTAGE_XII + MarkXII + ApplicationConstants.ARREAR_COUNT + arrearCount;
+	}
 
 }

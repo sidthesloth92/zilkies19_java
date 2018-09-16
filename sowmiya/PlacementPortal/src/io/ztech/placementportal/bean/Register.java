@@ -3,9 +3,9 @@ package io.ztech.placementportal.bean;
 import java.sql.Timestamp;
 
 public class Register {
-	String userName, password, email, role, reg_no;
-	boolean isActive;
-	Timestamp time;
+	private String userName, password, email, role, reg_no;
+	private boolean isActive;
+	private Timestamp time;
 
 	public String getRole() {
 		return role;
@@ -53,6 +53,14 @@ public class Register {
 
 	public void setReg_no(String reg_no) {
 		this.reg_no = reg_no;
+	}
+
+	public Timestamp getTime() {
+		return time;
+	}
+
+	public void setTime(Timestamp time) {
+		this.time = time;
 	}
 
 }

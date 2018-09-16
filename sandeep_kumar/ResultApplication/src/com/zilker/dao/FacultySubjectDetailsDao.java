@@ -16,7 +16,7 @@ public class FacultySubjectDetailsDao {
 	private static ResultSet rs;
 	private static Connection con;
 	
-	public boolean insertFacultySubjectDetails(long facultyRegistrationNumber, String subjectCode) {
+	public boolean insertFacultySubjectDetails(long facultyRegistrationNumber, String subjectCode)throws SQLException {
 		try {
 			con = Config.getConnection();
 			stmt = Config.conn.prepareStatement(SqlConstants.INSERT_FACULTY_SUBJECT);
@@ -26,15 +26,13 @@ public class FacultySubjectDetailsDao {
 			if(count>0) {
 				return true;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
+		}finally {
 			Config.closeConnection(con, stmt, rs);
 		}
 		return false;
 	}
 	
-	public boolean deleteFacultySubjectDetails(int facultySubjectId) {
+	public boolean deleteFacultySubjectDetails(int facultySubjectId)throws SQLException {
 		try {
 			con = Config.getConnection();
 			stmt = Config.conn.prepareStatement(SqlConstants.DELETE_FACULTY_SUBJECT);
@@ -43,15 +41,13 @@ public class FacultySubjectDetailsDao {
 			if(count>0) {
 				return true;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
+		}finally {
 			Config.closeConnection(con, stmt, rs);
 		}
 		return false;
 	}
 	
-	public ArrayList<LinkedHashMap<String, String>> getFacultySubjectDetailsById(long facultyRegistrationNumber) {
+	public ArrayList<LinkedHashMap<String, String>> getFacultySubjectDetailsById(long facultyRegistrationNumber)throws SQLException {
 		ArrayList<LinkedHashMap<String, String>> list=new ArrayList<LinkedHashMap<String, String>>();
 		try {
 			con = Config.getConnection();
@@ -65,9 +61,7 @@ public class FacultySubjectDetailsDao {
 				map.put("Subject Name: ", rs.getString("subject_name"));
 				list.add(map);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
+		}finally {
 			Config.closeConnection(con, stmt, rs);
 		}
 		return list;

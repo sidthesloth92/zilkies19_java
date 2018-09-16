@@ -3,10 +3,10 @@ package io.ztech.expensesapp.beans;
 import java.util.ArrayList;
 
 public class Group {
-	int gId;
-	String groupName;
-	ArrayList<GroupPayment> groupPayments;
-	ArrayList<User> users;
+	private int gId;
+	private String groupName;
+	private ArrayList<GroupPayment> groupPayments;
+	private ArrayList<User> users;
 
 	public Group() {
 		groupPayments = new ArrayList<>();

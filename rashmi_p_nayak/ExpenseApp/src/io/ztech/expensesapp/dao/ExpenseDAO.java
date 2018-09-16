@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLNonTransientConnectionException;
 import java.util.ArrayList;
 
 import io.ztech.expensesapp.beans.Expense;
@@ -26,7 +27,7 @@ public class ExpenseDAO {
 		dbManager = new DBManager();
 	}
 
-	public void signUp(User user) {
+	public void signUp(User user) throws SQLException {
 		try {
 			connection = dbManager.getConnection();
 			prepareStatement = connection.prepareStatement(QueryConstants.INSERT_INTO_USERS);
@@ -36,13 +37,13 @@ public class ExpenseDAO {
 			prepareStatement.setFloat(4, user.getExpenseLimit());
 			prepareStatement.execute();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException(DisplayConstants.SOMETHING_WENT_WRONG);
 		} finally {
 			dbManager.closeConnection(resultSet, prepareStatement, connection);
 		}
 	}
 
-	public boolean isExistingUserName(String userName) {
+	public boolean isExistingUserName(String userName) throws SQLException{
 		boolean isPresent = false;
 		try {
 
@@ -56,7 +57,7 @@ public class ExpenseDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException(DisplayConstants.SOMETHING_WENT_WRONG);
 		} finally {
 			dbManager.closeConnection(resultSet, prepareStatement, connection);
 
@@ -65,14 +66,13 @@ public class ExpenseDAO {
 
 	}
 
-	public User logIn(User user) {
+	public User logIn(User user) throws SQLException{
 		User activeUser = null;
 		try {
 			connection = dbManager.getConnection();
 			prepareStatement = connection.prepareStatement(QueryConstants.VALIDATE_USER);
 			prepareStatement.setString(1, user.getUserName());
-			prepareStatement.setString(2, user.getUserName());
-			prepareStatement.setString(3, user.getPassword());
+			prepareStatement.setString(2, user.getPassword());
 			resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
 				activeUser = new User();
@@ -81,16 +81,19 @@ public class ExpenseDAO {
 				activeUser.setExpenseLimit(resultSet.getFloat(3));
 				activeUser.setuId(resultSet.getInt(4));
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
+		}
+		
+		catch (SQLException e) {
+			throw new SQLException(DisplayConstants.SOMETHING_WENT_WRONG);
+		}
+		finally {
 			dbManager.closeConnection(resultSet, prepareStatement, connection);
 
 		}
 		return activeUser;
 	}
 
-	public void addNewExpense(Expense expense) {
+	public void addNewExpense(Expense expense) throws SQLException{
 		try {
 			connection = dbManager.getConnection();
 			prepareStatement = connection.prepareStatement(QueryConstants.INSERT_INTO_EXPENSES);
@@ -101,20 +104,20 @@ public class ExpenseDAO {
 			prepareStatement.setFloat(5, expense.getAmount());
 			prepareStatement.execute();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException(DisplayConstants.SOMETHING_WENT_WRONG);
 		} finally {
 			dbManager.closeConnection(resultSet, prepareStatement, connection);
 		}
 	}
 
-	public User showAllExpenses(User activeUser) {
+	public User showAllExpenses(User activeUser) throws SQLException{
 		User user = new User();
 		ArrayList<Expense> expenses = new ArrayList<Expense>();
 		try {
 			connection = dbManager.getConnection();
 			prepareStatement = connection.prepareStatement(QueryConstants.SELECT_GROUP_EXPENSES);
 			prepareStatement.setInt(1, activeUser.getuId());
-			System.out.println("ID:"+activeUser.getuId());
+			//System.out.println("ID:"+activeUser.getuId());
 			resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
 				GroupPayment expense = new GroupPayment();
@@ -155,7 +158,7 @@ public class ExpenseDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException(DisplayConstants.SOMETHING_WENT_WRONG);
 		} finally {
 			dbManager.closeConnection(resultSet, prepareStatement, connection);
 		}
@@ -163,7 +166,7 @@ public class ExpenseDAO {
 
 	}
 
-	public User viewGroups(User activeUser) {
+	public User viewGroups(User activeUser)throws SQLException {
 		User user = new User();
 		try {
 			connection = dbManager.getConnection();
@@ -189,7 +192,7 @@ public class ExpenseDAO {
 
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException(DisplayConstants.SOMETHING_WENT_WRONG);
 		} finally {
 			dbManager.closeConnection(resultSet, prepareStatement, connection);
 		}
@@ -226,7 +229,7 @@ public class ExpenseDAO {
 		}
 	}
 
-	public void addGroupExpense(GroupPayment groupExpense) {
+	public void addGroupExpense(GroupPayment groupExpense) throws SQLException{
 		try {
 			connection = dbManager.getConnection();
 			prepareStatement = connection.prepareStatement(QueryConstants.INSERT_INTO_GROUP_EXPENSES);
@@ -238,14 +241,14 @@ public class ExpenseDAO {
 			prepareStatement.setString(6, groupExpense.getDescription());
 			prepareStatement.execute();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException(DisplayConstants.SOMETHING_WENT_WRONG);
 		} finally {
 			dbManager.closeConnection(resultSet, prepareStatement, connection);
 
 		}
 	}
 
-	public void addExpenseMembers(GroupPayment groupPayment) {
+	public void addExpenseMembers(GroupPayment groupPayment) throws SQLException {
 		try {
 			connection = dbManager.getConnection();
 			prepareStatement = connection.prepareStatement(QueryConstants.INSERT_INTO_EXPENSE_MEMBERS);
@@ -257,14 +260,14 @@ public class ExpenseDAO {
 				prepareStatement.execute();
 			}
 		} catch (SQLException e) {
-			e.printStackTrace(); // TODO: handle exception
+			throw new SQLException(DisplayConstants.SOMETHING_WENT_WRONG); // TODO: handle exception
 		} finally {
 			dbManager.closeConnection(resultSet, prepareStatement, connection);
 
 		}
 	}
 
-	public Group viewGroupExpenses(Group activeGroup) {
+	public Group viewGroupExpenses(Group activeGroup) throws SQLException{
 		Group group = new Group();
 		try {
 			connection = dbManager.getConnection();
@@ -296,7 +299,7 @@ public class ExpenseDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException(DisplayConstants.SOMETHING_WENT_WRONG);
 		} finally {
 			dbManager.closeConnection(resultSet, prepareStatement, connection);
 		}
@@ -304,7 +307,7 @@ public class ExpenseDAO {
 
 	}
 
-	public void editExpenseLimit(User activeUser) {
+	public void editExpenseLimit(User activeUser) throws SQLException{
 		try {
 			connection = dbManager.getConnection();
 			prepareStatement = connection.prepareStatement(QueryConstants.UPDATE_EXPENSE_LIMIT);
@@ -312,13 +315,13 @@ public class ExpenseDAO {
 			prepareStatement.setFloat(1, activeUser.getExpenseLimit());
 			prepareStatement.execute();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException(DisplayConstants.SOMETHING_WENT_WRONG);
 		} finally {
 			dbManager.closeConnection(resultSet, prepareStatement, connection);
 		}
 	}
 
-	public GroupPayment viewBalances(Group activeGroup) {
+	public GroupPayment viewBalances(Group activeGroup) throws SQLException {
 		GroupPayment groupPayments = new GroupPayment();
 		try {
 			connection = dbManager.getConnection();
@@ -340,7 +343,7 @@ public class ExpenseDAO {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException(DisplayConstants.SOMETHING_WENT_WRONG);
 		} finally {
 			dbManager.closeConnection(resultSet, prepareStatement, connection);
 		}

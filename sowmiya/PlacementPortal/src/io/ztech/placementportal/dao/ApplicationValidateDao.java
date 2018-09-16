@@ -11,48 +11,45 @@ import io.ztech.placementportal.constants.SqlConstants;
 import io.ztech.placementportal.dbutil.DbConnection;
 
 public class ApplicationValidateDao {
-    PreparedStatement ps=null;
-    ResultSet rs=null;
+	PreparedStatement preparedStatement = null;
+	ResultSet resultSet = null;
+
 	public LocalDate getDate(Company company) {
-		Connection connection=DbConnection.getConnection();
+		Connection connection = DbConnection.getConnection();
 		try {
-			ps=connection.prepareStatement(SqlConstants.GETLASTDATE);
-			ps.setInt(1, company.getCompany_id());
-			rs=ps.executeQuery();
-			if(rs.isBeforeFirst()==false) {
-				return (LocalDate)null;	
+			preparedStatement = connection.prepareStatement(SqlConstants.GETLASTDATE);
+			preparedStatement.setInt(1, company.getCompanyId());
+			resultSet = preparedStatement.executeQuery();
+			if (resultSet.isBeforeFirst() == false) {
+				return (LocalDate) null;
 			}
-			rs.next();
-			return rs.getDate(1).toLocalDate();
+			resultSet.next();
+			return resultSet.getDate(1).toLocalDate();
+		} catch (SQLException e) {
+			return null;
+		} finally {
+			DbConnection.closeConnection(resultSet, preparedStatement, connection);
 		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		finally {
-			DbConnection.closeConnection(rs, ps, connection);
-		}
-		return null;	
+
 	}
+
 	public boolean checkIsApplied(Company company, String reg_no) {
-		Connection connection=DbConnection.getConnection();
-        try {
-        	ps=connection.prepareStatement(SqlConstants.CHECKAPPLIED);
-        	ps.setInt(1, company.getCompany_id());
-        	ps.setString(2, reg_no);
-        	rs=ps.executeQuery();
-        	if(rs.isBeforeFirst())
-        		return true;
-        	else
-        		return false;
-        	
-        }
-        catch(SQLException e) {
-        	
-        }
-        finally {
-        	DbConnection.closeConnection(rs, ps, connection);
-        }
-		return false;
+		Connection connection = DbConnection.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(SqlConstants.CHECKAPPLIED);
+			preparedStatement.setInt(1, company.getCompanyId());
+			preparedStatement.setString(2, reg_no);
+			resultSet = preparedStatement.executeQuery();
+			if (resultSet.isBeforeFirst())
+				return true;
+			else
+				return false;
+
+		} catch (SQLException e) {
+			return false;
+		} finally {
+			DbConnection.closeConnection(resultSet, preparedStatement, connection);
+		}
 	}
 
 }

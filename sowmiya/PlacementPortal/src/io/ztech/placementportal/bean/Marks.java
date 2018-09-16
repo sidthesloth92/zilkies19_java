@@ -1,38 +1,57 @@
 package io.ztech.placementportal.bean;
 
+import io.ztech.placementportal.constants.ApplicationConstants;
+
 public class Marks {
-	int arrear_count;
-	float cgpa,Mark_X,Mark_XII;
-	String student_id;
-	public float getMark_X() {
-		return Mark_X;
-	}
-	public void setMark_X(float f) {
-		Mark_X = f;
-	}
-	public float getMark_XII() {
-		return Mark_XII;
-	}
-	public void setMark_XII(float mark_XII) {
-		Mark_XII = mark_XII;
-	}
-	public int getArrear_count() {
-		return arrear_count;
-	}
-	public void setArrear_count(int arrear_count) {
-		this.arrear_count = arrear_count;
-	}
+	private float cgpa, MarkX, MarkXII;
+	private int arrearCount;
+	private String studentId;
+
 	public float getCgpa() {
 		return cgpa;
 	}
+
 	public void setCgpa(float cgpa) {
 		this.cgpa = cgpa;
 	}
-	public String getStudent_id() {
-		return student_id;
+
+	public float getMarkX() {
+		return MarkX;
 	}
-	public void setStudent_id(String student_id) {
-		this.student_id = student_id;
+
+	public void setMarkX(float markX) {
+		MarkX = markX;
+	}
+
+	public float getMarkXII() {
+		return MarkXII;
+	}
+
+	public void setMarkXII(float markXII) {
+		MarkXII = markXII;
+	}
+
+	public int getArrearCount() {
+		return arrearCount;
+	}
+
+	public void setArrearCount(int arrearCount) {
+		this.arrearCount = arrearCount;
+	}
+
+	public String getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(String studentId) {
+		this.studentId = studentId;
+	}
+
+	@Override
+	public String toString() {
+		return ApplicationConstants.CGPA + cgpa + "\n" + ApplicationConstants.PERCENTAGE_X + MarkX + "\n"
+				+ ApplicationConstants.PERCENTAGE_XII + MarkXII + "\n" + ApplicationConstants.ARREAR_COUNT
+				+ arrearCount;
 	}
 
 }

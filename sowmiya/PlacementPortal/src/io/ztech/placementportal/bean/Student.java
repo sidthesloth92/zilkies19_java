@@ -1,9 +1,11 @@
 package io.ztech.placementportal.bean;
 
+import io.ztech.placementportal.constants.ApplicationConstants;
+
 public class Student {
-	String name;
-	int placed;
-	String student_id,department;
+	private String name;
+	private int placed;
+	private String studentId, department;
 
 	public String getName() {
 		return name;
@@ -21,12 +23,12 @@ public class Student {
 		this.placed = placed;
 	}
 
-	public String getStudent_id() {
-		return student_id;
+	public String getStudentId() {
+		return studentId;
 	}
 
-	public void setStudent_id(String student_id) {
-		this.student_id = student_id;
+	public void setStudentId(String studentId) {
+		this.studentId = studentId;
 	}
 
 	public String getDepartment() {
@@ -35,6 +37,12 @@ public class Student {
 
 	public void setDepartment(String department) {
 		this.department = department;
+	}
+
+	@Override
+	public String toString() {
+		return ApplicationConstants.STUDENT_ID + studentId + "\n" + ApplicationConstants.NAME + name + "\n"
+				+ ApplicationConstants.DEPARTMENT + department;
 	}
 
 }

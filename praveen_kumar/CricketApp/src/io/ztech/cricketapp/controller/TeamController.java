@@ -5,53 +5,63 @@ import io.ztech.cricketapp.beans.Team;
 import io.ztech.cricketapp.beans.User;
 import io.ztech.cricketapp.constants.Regex;
 import io.ztech.cricketapp.constants.UserMessages;
-import io.ztech.cricketapp.delegate.TeamManager;
+import io.ztech.cricketapp.delegate.TeamDelegate;
 import io.ztech.cricketapp.exceptions.InvalidNameException;
 
 public class TeamController {
 
-	TeamManager teamManager;
+	TeamDelegate teamDelegate;
 	Validator validator;
 
 	public TeamController() {
-		teamManager = new TeamManager();
+		teamDelegate = new TeamDelegate();
 		validator = new Validator();
 	}
 
 	public void displayTeams(User user) {
-		teamManager.displayTeams(user);
+		teamDelegate.displayTeams(user);
 	}
 
-	public void createTeam(Team newTeam) throws InvalidNameException {
+	public void createTeam(Team newTeam, User user) throws InvalidNameException {
 		for (Player player : newTeam.getPlayers()) {
 			if (!(validator.validateInput(Regex.nameRegex, player.getFirstName(), UserMessages.INVALID_FIRST_NAME)
 					&& validator.validateInput(Regex.nameRegex, player.getLastName(), UserMessages.INVALID_LAST_NAME))) {
 				throw new InvalidNameException(UserMessages.INVALID_NAME_EXCEPTION);
 			}
 		}
-		teamManager.createTeam(newTeam);
+		
+		user.addTeam(newTeam);
+		user.addPlayer(newTeam.getPlayers());
+		
+		teamDelegate.createTeam(user);
 	}
 	
-	public boolean searchTeam(int teamId, User user) {
-		return teamManager.searchTeam(teamId, user);
-	}
+	/*public boolean searchTeam(int teamId, User user) {
+		return teamDelegate.searchTeam(teamId, user);
+	}*/
 	
-	public void updateTeamName(int teamId, String newTeamName) throws InvalidNameException {
+	public void updateTeamName(Team updateThisTeam, String newTeamName) throws InvalidNameException {
 		if (!(validator.validateInput(Regex.nameRegex, newTeamName, UserMessages.INVALID_NAME))) {
 			throw new InvalidNameException(UserMessages.INVALID_NAME_EXCEPTION);
 		}
-		teamManager.updateTeamName(teamId, newTeamName);
+		updateThisTeam.setTeamName(newTeamName);
+		teamDelegate.updateTeamName(updateThisTeam);
 	}
 	
-	public void addNewPlayer(Player player) throws InvalidNameException {
+	public void addNewPlayer(Player player, User user) throws InvalidNameException {
 		if (!(validator.validateInput(Regex.nameRegex, player.getFirstName(), UserMessages.INVALID_FIRST_NAME)
 				&& validator.validateInput(Regex.nameRegex, player.getLastName(), UserMessages.INVALID_LAST_NAME))) {
 			throw new InvalidNameException(UserMessages.INVALID_NAME_EXCEPTION);
 		}
-		teamManager.addNewPlayer(player);
+		user.addPlayer(player);
+		teamDelegate.addNewPlayer(user);
 	}
 	
 	public Team fetchTeam(int teamId) {
-		return teamManager.fetchTeam(teamId);
+		return teamDelegate.fetchTeam(teamId);
+	}
+	
+	public boolean isTeamCreated(User user) {
+		return teamDelegate.isTeamCreated(user);
 	}
 }

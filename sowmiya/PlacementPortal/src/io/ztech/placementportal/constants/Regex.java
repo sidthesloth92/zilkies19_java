@@ -12,5 +12,12 @@ public class Regex {
 	public static final String BLOOD_GROUP = "(A|B|AB|O)[+-]";
 	public static final String LOCATION = "^[A-Za-z]+";
 	public static final String GENDER = "^M$|^F$";
+	public static final String FLOAT = "\\d+(\\.\\d)?";
+	public static final String MARKS = "^(0*100{1,1}\\.?((?<=\\.)0*)?%?$)|(^0*\\d{0,2}\\.?((?<=\\.)\\d*)?)$";
+	public static final String CGPA = "^(10|\\d)(\\.\\d{1,3})?$";
+	public static final String ARREAR_COUNT = "^[0-9]$|^1[0-9]$|^2[0-9]$|^3[0-9]$|^4[0-5]$";
+	public static final String NUMBER = "^\\d+$";
+	public static final String CHOICE = "^Y$|^N$";
+	public static final String DEPARTMENT = "^CSE$|^ECE$|^EEE$|^IT$|^MECH$|^EI$|^AUTO$";
 
 }

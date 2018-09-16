@@ -1,11 +1,11 @@
 package io.ztech.carstats.beans;
 
 public class Specification {
-	private int carId;
+	private int carId = 0;
 
-	private String carName, airbag, abs, engineType, drivetrain, carStatus;
-	private int cylinder, displacement, transmission, 
-	power, torque, fuelCapacity, wheelbase, kerbWeight, price;
+	private String carName = "", airbag = "", abs = "", engineType = "", drivetrain = "", carStatus = "";
+	private int cylinder = 0, displacement = 0, transmission = 0, power = 0, torque = 0, fuelCapacity = 0,
+			wheelbase = 0, kerbWeight = 0, price = 0;
 
 	public int getCarId() {
 		return carId;

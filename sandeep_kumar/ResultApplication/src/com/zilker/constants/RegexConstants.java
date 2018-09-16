@@ -2,7 +2,7 @@ package com.zilker.constants;
 
 public class RegexConstants {
 	public static final String SEMESTER_REGEX="[1-8]";
-	public static final String INT_REGEX="[0-9]+";
+	public static final String NUMERIC_REGEX="[0-9]+";
 	public static final String ALPHA_NUMERIC_REGEX="[a-zA-Z0-9]+";
 	public static final String ALPHA_REGEX="[a-zA-Z]+";
 	public static final String COLLEGE_CODE_REGEX="[0-9]{4}";

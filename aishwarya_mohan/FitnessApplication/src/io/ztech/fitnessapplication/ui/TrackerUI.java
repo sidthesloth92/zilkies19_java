@@ -6,10 +6,10 @@ import java.util.logging.Logger;
 import io.ztech.fitnessapplication.DriverClass;
 import io.ztech.fitnessapplication.beans.FoodLog;
 import io.ztech.fitnessapplication.beans.UserAccount;
-import io.ztech.fitnessapplication.beans.UserStats;
+import io.ztech.fitnessapplication.beans.UserPhysicalDetails;
 import io.ztech.fitnessapplication.constants.DisplayStringConstants;
 import io.ztech.fitnessapplication.service.FoodService;
-import io.ztech.fitnessapplication.service.StatsService;
+import io.ztech.fitnessapplication.service.UserPhysicalDetailsService;
 
 public class TrackerUI {
 	private static final Logger logger = Logger.getLogger(DriverClass.class.getName());
@@ -17,12 +17,12 @@ public class TrackerUI {
 
 	private static final FoodService foodObj = new FoodService();
 
-	public boolean weightTracker(UserStats stats) {
+	public boolean weightTracker(UserPhysicalDetails stats) {
 		// when weight is uploaded, stats must be updated to change bmi,bmr accd
 		logger.info(DisplayStringConstants.WEIGHT);
 		float weight = sc.nextFloat();
 		stats.setWeight(weight);
-		boolean flag = new StatsService().trackWeight(stats);
+		boolean flag = new UserPhysicalDetailsService().trackWeight(stats);
 
 		if (flag) {
 			logger.info(DisplayStringConstants.DONE_MSG);
@@ -36,7 +36,7 @@ public class TrackerUI {
 	public boolean foodTracker(UserAccount account) {
 
 		FoodLog foodLog = new FoodLog();
-		foodLog.setRegID(account.getRegID());
+		foodLog.setUserName(account.getUserName());
 
 		logger.info(DisplayStringConstants.MEAL_TIME);
 		foodLog.setMealTime(sc.nextInt());
@@ -49,14 +49,11 @@ public class TrackerUI {
 		foodLog.setQuantity(sc.nextFloat());
 
 		int logID = foodObj.getLogID(foodLog);
-		float calories = foodObj.getCalories(foodLog);
 		int mealID = foodObj.getMealID(foodLog);
-		
-		System.out.println(logID+" "+calories+" "+mealID);
+		// System.out.println(logID+" "+mealID);
 
 		foodLog.setLogID(logID);
 		foodLog.setMealID(mealID);
-		foodLog.setCalories(calories);
 
 		return new FoodService().enterFoodLog(foodLog);
 

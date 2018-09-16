@@ -15,7 +15,7 @@ public class LoginDetailsDao {
 	private static ResultSet rs;
 	private static Connection con;
 
-	public boolean registerStudent(StudentData obj) {
+	public boolean registerStudent(StudentData obj) throws SQLException {
 		try {
 			con = Config.getConnection();
 			stmt = Config.conn.prepareStatement(SqlConstants.REGISTER_STUDENT);
@@ -23,15 +23,13 @@ public class LoginDetailsDao {
 			stmt.setString(2, "user123");
 			stmt.setString(3, "student");
 			stmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 			Config.closeConnection(con, stmt, rs);
 		}
 		return true;
 	}
 
-	public boolean registerFaculty(FacultyData obj) {
+	public boolean registerFaculty(FacultyData obj) throws SQLException {
 		try {
 			con = Config.getConnection();
 			stmt = Config.conn.prepareStatement(SqlConstants.REGISTER_FACULTY);
@@ -39,20 +37,17 @@ public class LoginDetailsDao {
 			stmt.setString(2, "user123");
 			stmt.setString(3, "faculty");
 			stmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 			Config.closeConnection(con, stmt, rs);
 		}
 		return true;
 	}
 
-	public LoggedInUserData isValidUser(long registrationNumber, String password) {
-		LoggedInUserData currentUser= new LoggedInUserData();
+	public LoggedInUserData isValidUser(long registrationNumber, String password) throws SQLException {
+		LoggedInUserData currentUser = new LoggedInUserData();
 		try {
 			con = Config.getConnection();
-			stmt = Config.conn
-					.prepareStatement(SqlConstants.LOGIN);
+			stmt = Config.conn.prepareStatement(SqlConstants.LOGIN);
 			stmt.setLong(1, registrationNumber);
 			stmt.setString(2, password);
 			rs = stmt.executeQuery();
@@ -71,8 +66,7 @@ public class LoginDetailsDao {
 					}
 
 				} else if (rs.getString("role").equals("faculty")) {
-					stmt = Config.conn
-							.prepareStatement(SqlConstants.SELECT_FACULTY);
+					stmt = Config.conn.prepareStatement(SqlConstants.SELECT_FACULTY);
 					stmt.setLong(1, regno);
 					rs = stmt.executeQuery();
 					if (rs.next()) {
@@ -83,17 +77,13 @@ public class LoginDetailsDao {
 						currentUser.setRole("faculty");
 					}
 
-				}
-				else if(rs.getString("role").equals("admin")) {
+				} else if (rs.getString("role").equals("admin")) {
 					currentUser.setRole("admin");
 				}
-			}
-			else {
+			} else {
 				currentUser.setRole("invalidUser");
 			}
 
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 			Config.closeConnection(con, stmt, rs);
 		}

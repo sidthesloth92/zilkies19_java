@@ -82,6 +82,7 @@ public class DisplayConstants {
 	public static final String EXPENSES_EMPTY = "\nNo Expenses!";
 	public static final String EXPENSE_LIMIT = "\nExpense Limit : ";
 	public static final String TOO_MANY_MEMBERS = "Enter number upto 10!";
+	public static final String SOMETHING_WENT_WRONG = "Something went wrong, please try again in some time! :(";
 
 	private DisplayConstants() {
 

@@ -8,8 +8,13 @@ import io.ztech.placementportal.constants.ApplicationConstants;
 import io.ztech.placementportal.services.BuildProfileService;
 
 public class BuildProfile {
-	Logger log = Logger.getLogger("BuildProfile.class");
-	static Scanner scan = new Scanner(System.in);
+	Logger log;
+	Scanner scan;
+
+	public BuildProfile() {
+		log = Logger.getLogger("BuildProfile.class");
+		scan = new Scanner(System.in);
+	}
 
 	public void getProfileDetail(String achievement) {
 		Profile profile = new Profile();

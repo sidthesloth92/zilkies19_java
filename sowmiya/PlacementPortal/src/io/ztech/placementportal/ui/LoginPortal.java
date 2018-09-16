@@ -1,45 +1,53 @@
 package io.ztech.placementportal.ui;
 
-import java.util.Scanner;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.logging.Logger;
 
-import io.ztech.placementportal.Driver;
+import io.ztech.placementportal.HomePage;
 import io.ztech.placementportal.bean.Register;
 import io.ztech.placementportal.constants.ApplicationConstants;
+import io.ztech.placementportal.constants.Regex;
 import io.ztech.placementportal.services.LoginServices;
 
 public class LoginPortal {
-	public Logger log = Logger.getLogger("LoginPortal");
-	public static Scanner scan = new Scanner(System.in);
+	private Logger log;
 	public static String active_user, reg_no;
 
+	public LoginPortal() {
+		log = Logger.getLogger("LoginPortal");
+	}
+
 	public void loginDetails() {
-		int role;
 		String success;
 		Register login = new Register();
+		ScanInput scan = new ScanInput();
+		Date date = new Date();
 		LoginServices loginService = new LoginServices();
 		log.info(ApplicationConstants.USERNAME);
-		login.setUserName(scan.nextLine());
+		login.setUserName(scan.getInput(Regex.USERNAME_REGEX, ApplicationConstants.VALID_USERNAME));
 		log.info(ApplicationConstants.PASSWORD);
-		login.setPassword(scan.nextLine());
-		log.info(ApplicationConstants.ROLE);
-		role = scan.nextInt();
-		if (role == 1)
-			login.setRole("admin");
-		if (role == 2)
-			login.setRole("student");
-		success = loginService.login(login);
-		if (success != null && login.getRole() == "admin") {
-			active_user = login.getUserName();
-			AdminDashboard admin = new AdminDashboard();
-			admin.viewDashboard();
-		} else if (success != null && login.getRole() == "student") {
-			StudentDashboard student = new StudentDashboard();
-			login.setReg_no(success);
-			student.viewDashboard(login);
-		} else {
-			Driver.main(null);
+		login.setPassword(scan.getInput(Regex.PASSWORD_REGEX, ApplicationConstants.VALID_PASSWORD));
+		login.setTime(new Timestamp(date.getTime()));
+		log.info(ApplicationConstants.SEPARATING_STRING);
+		try {
+			success = loginService.login(login);
+			if (success.equals("admin")) {
+				active_user = login.getUserName();
+				AdminDashboard admin = new AdminDashboard();
+				admin.viewDashboard();
+			} else if (success.equals("student")) {
+				reg_no = login.getUserName();
+				StudentDashboard student = new StudentDashboard();
+				student.viewDashboard(login);
+			} else {
+				log.info(ApplicationConstants.INVALID_CREDENTIALS);
+				log.info(ApplicationConstants.SEPARATING_STRING);
+				HomePage.main(null);
 
+			}
+		} catch (Exception e) {
+			log.warning(e.getMessage());
 		}
 
 	}

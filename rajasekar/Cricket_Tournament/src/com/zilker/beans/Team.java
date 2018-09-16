@@ -1,23 +1,23 @@
 package com.zilker.beans;
 
 public class Team {
-	String team_name = "",email="";
-	int tournament_id = 0;
+	String teamName,email;
+	int tournamentId;
 
-	public void setTeamName(String team_name) {
-		this.team_name = team_name;
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
 	}
 
 	public String getTeamName() {
-		return this.team_name;
+		return this.teamName;
 	}
 
-	public void setTournamentId(int tournament_id) {
-		this.tournament_id = tournament_id;
+	public void setTournamentId(int tournamentId) {
+		this.tournamentId = tournamentId;
 	}
 
 	public int getTournamentId() {
-		return this.tournament_id;
+		return this.tournamentId;
 	}
 	public void setEmail(String email) {
 		this.email = email;

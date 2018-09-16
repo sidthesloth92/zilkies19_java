@@ -2,6 +2,9 @@ package io.ztech.cricketapp.constants;
 
 public class UserMessages {
 	private UserMessages() {}
+	public static final String APP_TITLE = "Cricket Manager 2018\n======================";
+	public static final String SUCCESS_REGISTRATION = "You have successfully registered!";
+	public static final String LOG_OFF = "Logging off...\nExited application.";
 	
 	public static final String ENTER_FIRST_NAME = "\nEnter first name: ";
 	public static final String ENTER_LAST_NAME = "\nEnter last name: ";
@@ -23,6 +26,7 @@ public class UserMessages {
 	public static final String INVALID_BALL = "\nInvalid ball entered! Please follow the format";
 	public static final String INPUT_FORMAT = "Input format:\nRegular ball - r\nWide Ball - w+r\nNo Ball - no+r\nWicket - out+r\nr -> denotes runs taken. w/no are given 1 extra run automatically";
 	public static final String INVALID_NAME_EXCEPTION = "\nInvalid name exception caught. Please retry!";
+	public static final String INVALID_DATE_EXCEPTION = "\nInvalid date exception caught. Please retry!";
 	public static final String INCORRECT_PASSWORD = "\nThe password you have entered is incorrect. Please try again!";
 	public static final String INCORRECT_INPUT = "\nThe input is incorrect. ";
 	public static final String NO_SUCH_USER = "\nNo such user exists! Press (1) to sign up or (2) to retry: ";
@@ -30,12 +34,13 @@ public class UserMessages {
 	public static final String NO_SUCH_MATCH = "\nNo such match exists! Retry ";
 	public static final String NO_SUCH_PLAYER = "\nNo such player exists! Retry ";
 	
-	public static final String MAIN_MENU = "(1) Matches\n(2) Teams\n(3) Players\n(4) Exit\nEnter choice: ";
-	public static final String PLAYER_MENU = "\n(1) View Players\n(2) Edit Player\n(3) Create Player\nEnter choice: ";
-	public static final String TEAM_MENU = "\n(1) View Teams\n(2) Edit Team\n(3) Create Team\nEnter choice: ";
-	public static final String EDIT_TEAM_MENU = "\n(1) Change Team Name\n(2) Add Player\n(3) Remove Player\nEnter choice: ";
-	public static final String EDIT_PLAYER_MENU = "\n(1) Player Team\n(2) First Name\n(3) Last Name\nWhich field do you wish to alter: ";
-	public static final String MATCH_MENU = "\n(1) Play Match\n(2) View Matches\n(3) Edit Match\n(4) Create Match\nEnter choice: ";
+	public static final String MAIN_MENU = "Main Menu\n==========\n(1) Matches\n(2) Teams\n(3) Players\n(4) Exit\nEnter choice: ";
+	public static final String PLAYER_MENU = "\nPlayer Menu\n============\n(1) View Players\n(2) Edit Player\n(3) Create Player\n(4) Go back\nEnter choice: ";
+	public static final String TEAM_MENU = "\nTeam Menu\n==========\n(1) View Teams\n(2) Edit Team\n(3) Create Team\n(4) Go Back\nEnter choice: ";
+	public static final String EDIT_TEAM_MENU = "\n(1) Change Team Name\n(2) Add Player\n(3) Remove Player\n(4) Go Back\nEnter choice: ";
+	public static final String EDIT_PLAYER_MENU = "\n(1) Player Team\n(2) First Name\n(3) Last Name\n(4) Go Back\nWhich field do you wish to alter: ";
+	public static final String EDIT_MATCH_MENU = "\n(1) Match Date\n(2) Team A\n(3) Team B\n(4) Go Back\nWhich field do you wish to alter: ";
+	public static final String MATCH_MENU = "\nMatch Menu\n============\n(1) Start Match\n(2) View All Matches\n(3) Edit Scheduled Matches\n(4) Schedule a Match\n(5) Go Back\nEnter choice: ";
 	
 	public static final String CONTINUE = "\nDo you wish to continue to main menu (y/n)? ";
 	public static final String CONTINUE_PLAYER = "\nDo you wish to continue to players menu (y/n)? ";
@@ -71,5 +76,9 @@ public class UserMessages {
 	public static final String OFF_STRIKE = "\tOff Strike: ";
 	public static final String BOWLER = "\tBowler: ";
 	public static final String ALL_PLAYERS_OUT = "All the batsmen are knocked out! Your team's total score is ";
+	public static final String USER_ENTRY = "(1) Sign In\n(2) Sign Up\nEnter here: ";
+	public static final String NO_MATCHES_SCHEDULED = "There are no matches scheduled !";
+	public static final String NO_TEAMS_CREATED = "There are no teams created yet! Please build teams first";
+	public static final String SAME_TEAM = "Same team cannot be selected to compete against itself! Choose a different team";
 }
 

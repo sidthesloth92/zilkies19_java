@@ -1,24 +1,25 @@
 package io.ztech.fitnessapplication.service;
 
-import io.ztech.fitnessapplication.beans.UserStats;
+import io.ztech.fitnessapplication.beans.UserPhysicalDetails;
 
 public class CalculateService {
-	public static float calculateBMI(UserStats stats) {
+	public static float calculateBMI(UserPhysicalDetails stats) {
 		float bmiVal = 0;
 		float height = stats.getHeight() / 100;
 		bmiVal = stats.getWeight() / (height * height);
 		return bmiVal;
 	}
 
-
-	public static int calculateBMR(UserStats stats) {
+	public static int calculateBMR(UserPhysicalDetails stats) {
 		float bmr = (int) ((stats.getHeight() * 6.25) + (stats.getWeight() * 9.99) - (stats.getAge() * 4.92));
-		if (stats.getGender() == 'm' || stats.getGender() == 'M') {
+		if (stats.getGender().equalsIgnoreCase("male")) {
 			bmr += 5;
-		} else {
+		} else
+
+		{
 			bmr -= 161;
 		}
-		switch (stats.getActivityLevel()) {
+		switch (stats.getActivty()) {
 		case 1: // sedentary
 			bmr *= 1.2;
 			break;

@@ -1,0 +1,47 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.details__date {
+    font-size: 14px;
+    margin: 14px 0 0 14px;
+}
+
+.details__teams {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.details__teams__card {
+    height: 100px;
+    margin: 10px;
+    outline: 1px solid blue;
+}
+
+.details__teams__line-up-container {
+    padding: 10px;
+}
+
+.details__teams__line-up {
+    height: 200px;
+    margin: 10px;
+    border: 1px solid brown;
+}
+
+.return-icon {
+    margin-left: 5px;
+}
+
+.return-icon:hover {
+    cursor: pointer;
+}
+
+.options-icon {
+    margin-right: 5px;
+}
+
+.options-icon:hover {
+    cursor: pointer;
+}

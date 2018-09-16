@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import io.ztech.fitnessapplication.beans.UserAccount;
-import io.ztech.fitnessapplication.beans.UserProfile;
+import io.ztech.fitnessapplication.beans.UserAccountDetails;
 import io.ztech.fitnessapplication.constants.SQLQueryStringConstants;
 import io.ztech.fitnessapplication.dbutils.Config;
 
@@ -16,18 +16,19 @@ public class UserAccountDAO {
 	private static PreparedStatement ps = null;
 	private static ResultSet rs = null;
 
-	public boolean addUserAccount(UserProfile newProfile) {
+	public boolean addUserAccount(UserAccountDetails newAccount) {
 		try {
+			// user_name, password, role, first_name, last_name, email_id, phone_no
 			conn = con_obj.getConnection();
 
 			ps = conn.prepareStatement(SQLQueryStringConstants.INSERT_USER);
-			ps.setInt(1, 2);
-			ps.setString(2, newProfile.getFirstName());
-			ps.setString(3, newProfile.getLastName());
-			ps.setString(4, newProfile.getUserName());
-			ps.setString(5, newProfile.getPassword());
-			ps.setString(6, newProfile.getEmailID());
-			ps.setString(7, newProfile.getPhoneNo());
+			ps.setString(1, newAccount.getUserName());
+			ps.setString(2, newAccount.getPassword());
+			ps.setInt(3, newAccount.getRole());
+			ps.setString(4, newAccount.getFirstName());
+			ps.setString(5, newAccount.getLastName());
+			ps.setString(6, newAccount.getEmail());
+			ps.setString(7, newAccount.getPhone());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			return false;
@@ -37,42 +38,24 @@ public class UserAccountDAO {
 		return true;
 	}
 
-	public int findUser(UserAccount account) {
-		int regID = 0;
+	public boolean loginUser(UserAccount account) {
 		try {
 			conn = con_obj.getConnection();
 
-			ps = conn.prepareStatement(SQLQueryStringConstants.GET_REG_ID);
+			ps = conn.prepareStatement(SQLQueryStringConstants.GET_ACCOUNT_DETAILS);
 			ps.setString(1, account.getUserName());
 			ps.setString(2, account.getPassword());
 			rs = ps.executeQuery();
 			if (rs.next()) {
-				regID = rs.getInt(1);
+				return true;
 			}
-
-		} catch (SQLException e) {
-			return 0;
-		} finally {
-			con_obj.closeConnection(conn, rs, ps);
-		}
-		return regID;
-	}
-
-	public boolean setLogin(UserAccount account) {
-		try {
-			conn = con_obj.getConnection();
-
-			ps = conn.prepareStatement(SQLQueryStringConstants.SET_LOGIN_STATUS);
-			ps.setInt(1, account.getLoginStatus());
-			ps.setInt(2, account.getRegID());
-			ps.executeUpdate();
 
 		} catch (SQLException e) {
 			return false;
 		} finally {
 			con_obj.closeConnection(conn, rs, ps);
 		}
-		return true;
+		return false;
 	}
 
 	public int getUserAccesslevel(UserAccount account) {
@@ -81,7 +64,7 @@ public class UserAccountDAO {
 			conn = con_obj.getConnection();
 
 			ps = conn.prepareStatement(SQLQueryStringConstants.GET_USER_TYPE);
-			ps.setInt(1, account.getRegID());
+			ps.setString(1, account.getUserName());
 			rs = ps.executeQuery();
 			if (rs.next()) {
 				level = rs.getInt(1);
@@ -95,21 +78,23 @@ public class UserAccountDAO {
 		return level;
 	}
 
-	public UserProfile getProfile(UserAccount account) {
-		UserProfile profile = new UserProfile();
+	public UserAccountDetails getAccount(UserAccount curAccount) {
+		UserAccountDetails account = new UserAccountDetails();
 		try {
 			conn = con_obj.getConnection();
 
 			ps = conn.prepareStatement(SQLQueryStringConstants.GET_ACCOUNT_DETAILS);
-			ps.setInt(1, account.getRegID());
+			ps.setString(1, curAccount.getUserName());
+			ps.setString(2, curAccount.getPassword());
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				profile.setFirstName(rs.getString(3));
-				profile.setLastName(rs.getString(4));
-				profile.setUserName(rs.getString(5));
-				profile.setEmailID(rs.getString(7));
-				profile.setPhoneNo(rs.getString(8));
+				account.setUserName(rs.getString(1));
+
+				account.setFirstName(rs.getString(4));
+				account.setLastName(rs.getString(5));
+				account.setEmail(rs.getString(6));
+				account.setPhone(rs.getString(7));
 			}
 
 		} catch (SQLException e) {
@@ -117,7 +102,28 @@ public class UserAccountDAO {
 		} finally {
 			con_obj.closeConnection(conn, rs, ps);
 		}
-		return profile;
+		return account;
+	}
+
+	public boolean updateAccount(UserAccountDetails curAccount) {
+		try {
+			conn = con_obj.getConnection();
+
+			ps = conn.prepareStatement(SQLQueryStringConstants.UPDATE_ACCOUNT_DETAILS);
+			ps.setString(1, curAccount.getFirstName());
+			ps.setString(2, curAccount.getLastName());
+			ps.setString(3, curAccount.getEmail());
+			ps.setString(4, curAccount.getPhone());
+			ps.setString(5, curAccount.getUserName());
+
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			return false;
+		} finally {
+			con_obj.closeConnection(conn, rs, ps);
+		}
+		return true;
 	}
 
 }

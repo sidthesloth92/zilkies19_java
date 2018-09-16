@@ -7,10 +7,25 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import io.ztech.carstats.beans.*;
+import io.ztech.carstats.beans.CarType;
+import io.ztech.carstats.beans.Make;
+import io.ztech.carstats.beans.Rating;
+import io.ztech.carstats.beans.Request;
+import io.ztech.carstats.beans.Specification;
+import io.ztech.carstats.beans.Statistics;
+import io.ztech.carstats.beans.User;
 import io.ztech.carstats.constants.AppConstants;
-import io.ztech.carstats.delegate.*;
-import io.ztech.carstats.services.*;
+import io.ztech.carstats.delegate.Validator;
+import io.ztech.carstats.services.AddCarService;
+import io.ztech.carstats.services.AddRatingService;
+import io.ztech.carstats.services.AddStatisticsService;
+import io.ztech.carstats.services.CheckLoginService;
+import io.ztech.carstats.services.CheckMakeCarTypeIDService;
+import io.ztech.carstats.services.DeleteCarService;
+import io.ztech.carstats.services.FetchDetailsService;
+import io.ztech.carstats.services.FetchStatisticsService;
+import io.ztech.carstats.services.LoginService;
+import io.ztech.carstats.services.RequestCarService;
 
 public class UIClass {
 
@@ -22,6 +37,8 @@ public class UIClass {
 	AddStatisticsService addStatisticsService = new AddStatisticsService();
 	AddRatingService addRatingService = new AddRatingService();
 	RequestCarService requestCarService = new RequestCarService();
+	FetchStatisticsService fetchStatisticsService = new FetchStatisticsService();
+	CheckMakeCarTypeIDService checkMakeCarTypeIDService = new CheckMakeCarTypeIDService();
 
 	public static final Logger logger = Logger.getLogger(UIClass.class.getName());
 	public static final Scanner sc = new Scanner(System.in);
@@ -34,28 +51,38 @@ public class UIClass {
 	Rating rating = new Rating();
 	Request request = new Request();
 
-	public boolean getLoginUI() throws SQLException {
+	public boolean getLoginUI() {
 		while (true) {
-			logger.info("Enter user name:");
+			logger.info(AppConstants.ENTER_USERNAME);
 			user.setUserName(sc.next());
-			logger.info("Enter password:");
+			logger.info(AppConstants.ENTER_PASSWORD);
 			user.setPassword(sc.next());
-			if (!checkLoginService.isUser(user)) {
-				logger.info("User doesn't exist wanna signin?(y/n)");
-				if (sc.next().equals("y"))
-					this.getSignupUI();
-			} else
-				break;
+			try {
+				if (!checkLoginService.isUser(user)) {
+					logger.info(AppConstants.NO_USER_SIGNUP);
+					if (sc.next().equals(AppConstants.Y))
+						this.getSignupUI();
+				} else
+					break;
+			} catch (SQLException e) {
+				logger.info(AppConstants.LOGIN_ERROR);
+				continue;
+			}
 		}
 
-		if (checkLoginService.isAdmin(user)) {
-			return this.putLoginAdminUI();
-		} else {
-			return this.putLoginUserUI();
+		try {
+			if (checkLoginService.isAdmin(user)) {
+				return this.putLoginAdminUI();
+			} else {
+				return this.putLoginUserUI();
+			}
+		} catch (SQLException e) {
+			logger.info(AppConstants.LOGIN_ERROR);
+			return false;
 		}
 	}
 
-	public boolean putLoginUserUI() throws SQLException {
+	public boolean putLoginUserUI() {
 
 		user.setAdminStatus(AppConstants.USER);
 		loginService.login(user);
@@ -63,7 +90,7 @@ public class UIClass {
 		return true;
 	}
 
-	public boolean putLoginAdminUI() throws SQLException {
+	public boolean putLoginAdminUI() {
 
 		user.setAdminStatus(AppConstants.ADMIN);
 		loginService.login(user);
@@ -71,40 +98,65 @@ public class UIClass {
 		return true;
 	}
 
-	public boolean getSignupUI() throws SQLException {
+	public boolean getSignupUI() {
 
-		do {
+		while (true) {
 			do {
-				logger.info("Enter user name:");
+				logger.info(AppConstants.ENTER_USERNAME);
 				user.setUserName(sc.next());
 			} while (!Validator.validateUsername(user.getUserName()));
 			do {
-				logger.info("Enter password:");
+				logger.info(AppConstants.ENTER_PASSWORD);
 				user.setPassword(sc.next());
 			} while (!Validator.validatePassword(user.getPassword()));
-			if (checkLoginService.isUser(user))
-				logger.info("Username already exists, please try a new one!");
-		} while (checkLoginService.isUser(user));
+			try {
+				if (checkLoginService.isUser(user)) {
+					logger.info(AppConstants.USERNAME_EXISTS);
+				} else
+					break;
+			} catch (SQLException e) {
+				logger.info(AppConstants.ERROR_DATA);
+				return false;
+			}
+		}
 		return this.putSignupUI();
 	}
 
-	public boolean putSignupUI() throws SQLException {
-		if (!loginService.signup(user)) {
+	public boolean putSignupUI() {
+		try {
+			if (!loginService.signup(user)) {
+				return false;
+			}
+		} catch (SQLException e) {
+			logger.info(AppConstants.ERROR_DATA);
 			return false;
 		}
 		this.getLoginUI();
 		return true;
 	}
 
-	public boolean getMakeUI() throws SQLException {
+	public boolean getMakeUI() {
 		if (!this.displayMakesUI())
 			return false;
-		logger.info("Enter Make ID:");
-		this.putMakeUI(sc.nextInt());
+		while (true) {
+			logger.info(AppConstants.ENTER_MAKE_ID);
+			make.setMakeId(sc.nextInt());
+			try {
+				if (checkMakeCarTypeIDService.isMakeId(make, carType)) {
+					this.putMakeUI(make.getMakeId());
+					break;
+				}
+			} catch (SQLException e) {
+				logger.info(AppConstants.ERROR_DATA);
+				return false;
+			}
+			logger.info(AppConstants.INVALID_INPUT);
+		}
 		return true;
+
 	}
 
-	public boolean putMakeUI(int makeId) throws SQLException {
+	public boolean putMakeUI(int makeId) {
 		make.setMakeId(makeId);
 		if (!this.displayCarsUI()) {
 			return this.getCarTypeUI();
@@ -112,190 +164,279 @@ public class UIClass {
 		return true;
 	}
 
-	public boolean getCarTypeUI() throws SQLException {
+	public boolean getCarTypeUI() {
 		if (!this.displayCarTypesUI())
 			return false;
-		logger.info("Enter Car Type ID:");
-		this.putCarTypeUI(sc.nextInt());
+		while (true) {
+			logger.info(AppConstants.ENTER_CAR_TYPE_ID);
+			carType.setCarTypeId(sc.nextInt());
+			try {
+				if (checkMakeCarTypeIDService.isCarTypeId(make, carType)) {
+					this.putCarTypeUI(carType.getCarTypeId());
+					break;
+				}
+			} catch (SQLException e) {
+				logger.info(AppConstants.ERROR_DATA);
+				return false;
+			}
+			logger.info(AppConstants.INVALID_INPUT);
+		}
 		return true;
 	}
 
-	public boolean putCarTypeUI(int carTypeId) throws SQLException {
+	public boolean putCarTypeUI(int carTypeId) {
 		carType.setCarTypeId(carTypeId);
 		if (!this.displayCarsUI())
 			return this.getMakeUI();
 		return true;
 	}
 
-	public boolean displayCarsUI() throws SQLException {
-		HashMap<Integer, ArrayList<String>> cars = fetchdetailsService.getCars(make, carType);
+	public boolean displayCarsUI() {
+		ArrayList<Specification> cars;
+		try {
+			cars = fetchdetailsService.getCars(make, carType);
+		} catch (SQLException e) {
+			logger.info(AppConstants.ERROR_DATA);
+			return false;
+		}
 		if (cars == null)
 			return false;
-		for (Map.Entry<Integer, ArrayList<String>> entry : cars.entrySet()) {
-			ArrayList<String> specs = entry.getValue();
-			if (entry.getValue().get(14).equals("UNAPPROVED") && !user.getAdminStatus().equals("ADMIN")) {
+		for (Specification specification : cars) {
+			if (specification.getCarStatus().equals(AppConstants.UNAPPROVED)
+					&& !user.getAdminStatus().equals(AppConstants.ADMIN)) {
 				continue;
 			}
-			if (entry.getValue().get(14).equals("APPROVED") && request.getRequestId() == 1) {
+			if (specification.getCarStatus().equals(AppConstants.APPROVED) && request.getRequestId() == 1) {
 				continue;
 			}
-			logger.info(entry.getKey() + " ");
-			for (String spec : specs) {
-				logger.info(spec + " ");
-			}
-
+			this.printCar(specification);
 		}
-		if (user.getAdminStatus().equals("ADMIN") || request.getRequestId() == 1) {
+		if (user.getAdminStatus().equals(AppConstants.ADMIN) || request.getRequestId() == 1) {
 			return true;
 		}
-		logger.info("Enter Car ID:");
+		logger.info(AppConstants.ENTER_CAR_ID);
 		specification.setCarId(sc.nextInt());
 		return this.carMenu();
 
 	}
 
-	public boolean displayMakesUI() throws SQLException {
-		HashMap<Integer, String> makes = fetchdetailsService.displayMakes();
+	public boolean displayMakesUI() {
+		ArrayList<Make> makes;
+		try {
+			makes = fetchdetailsService.displayMakes(carType);
+		} catch (SQLException e) {
+			logger.info(AppConstants.ERROR_DATA);
+			return false;
+		}
 		if (makes == null)
 			return false;
-		for (Map.Entry<Integer, String> entry : makes.entrySet()) {
-			logger.info(entry.getKey() + " " + entry.getValue());
+		for (Make make : makes) {
+			logger.info(make.getMakeId() + " " + make.getMakeName());
 		}
 		return true;
 	}
 
-	public boolean displayCarTypesUI() throws SQLException {
-		HashMap<Integer, String> carTypes = fetchdetailsService.displayCarTypes();
+	public boolean displayCarTypesUI() {
+		ArrayList<CarType> carTypes;
+		try {
+			carTypes = fetchdetailsService.displayCarTypes(make);
+		} catch (SQLException e) {
+			logger.info(AppConstants.ERROR_DATA);
+			return false;
+		}
 		if (carTypes == null)
 			return false;
-		for (Map.Entry<Integer, String> entry : carTypes.entrySet()) {
-			logger.info(entry.getKey() + " " + entry.getValue());
+		for (CarType carType : carTypes) {
+			logger.info(carType.getCarTypeId() + " " + carType.getCarTypeName());
 		}
 		return true;
 	}
 
 	public boolean displayRatingUI() {
-		HashMap<String, Rating> ratings = fetchdetailsService.displayRating(specification);
-		if (ratings == null) {
-			logger.info("No Ratings!");
+		HashMap<User, Rating> ratings = null;
+		try {
+			ratings = fetchdetailsService.displayRating(specification);
+		} catch (SQLException e) {
+			logger.info(AppConstants.ERROR_DATA);
 			return false;
 		}
-		for (Map.Entry<String, Rating> entry : ratings.entrySet()) {
-			logger.info("Username:" + entry.getKey() + "\nRating:" + entry.getValue().getRating() + "\nReview:"
-					+ entry.getValue().getReview());
+		if (ratings == null) {
+			logger.info(AppConstants.NO_RATINGS);
+			return false;
 		}
+		int averageRating = 0;
+		for (Map.Entry<User, Rating> entry : ratings.entrySet()) {
+			logger.info("Username:" + entry.getKey().getUserName() + "\nRating:" + entry.getValue().getRating()
+					+ "\nReview:" + entry.getValue().getReview());
+			averageRating += Integer.parseInt(entry.getValue().getRating());
+		}
+		logger.info(AppConstants.AVERAGE_RATINGS + (float) (averageRating / ratings.size()));
 		return true;
 	}
 
 	public boolean displayStatisticsUI() {
-		ArrayList<Statistics> statistics = fetchdetailsService.displayStatistics(specification);
+		ArrayList<Statistics> statistics = null;
+		try {
+			statistics = fetchStatisticsService.displayAllStatisticsCar(specification);
+		} catch (Exception e) {
+			logger.info(AppConstants.ERROR_DATA);
+			return false;
+		}
 		for (Statistics statistic : statistics)
-			logger.info("Year:" + statistic.getStatisticsYear() + "\n" + statistic.getSaleCount());
+			logger.info(AppConstants.PRINT_YEAR + statistic.getStatisticsYear() + "\n" + statistic.getSaleCount());
 		return true;
 	}
 
-	public void addStatisticsUI() throws SQLException {
+	public boolean addStatisticsUI() {
 		this.getMakeUI();
-		logger.info("Enter Car ID to update:");
+		logger.info(AppConstants.ENTER_CAR_ID_UPDATE);
 		specification.setCarId(sc.nextInt());
-		logger.info("Enter Statistics Year:");
+		logger.info(AppConstants.ENTER_STATISTICS_YEAR);
 		statistics.setStatisticsYear(sc.nextInt());
-		logger.info("Enter Sales Count:");
+		logger.info(AppConstants.ENTER_SALES_COUNT);
 		statistics.setSaleCount(sc.nextInt());
-		addStatisticsService.addStatistics(specification, statistics);
+		try {
+			addStatisticsService.addStatistics(specification, statistics);
+		} catch (SQLException e) {
+			logger.info(AppConstants.ERROR_DATA);
+			return false;
+		}
+		return true;
 	}
 
-	public void addRatingUI() throws SQLException {
-		logger.info("Enter Rating(1-5):");
+	public boolean getRatingUI() {
+		logger.info(AppConstants.ENTER_RATING);
 		rating.setRating(sc.next());
 		sc.nextLine();
-		logger.info("Enter Review(500 words):");
+		logger.info(AppConstants.ENTER_REVIEW);
 		rating.setReview(sc.nextLine());
-		addRatingService.addRating(specification, rating, user);
+		return true;
 	}
 
-	public void addCarUI() throws SQLException {
+	public boolean addRatingUI() {
+		this.getRatingUI();
+		try {
+			if (!addRatingService.addRating(specification, rating, user)) {
+				logger.info(AppConstants.EDIT_RATING);
+				if (sc.next().equalsIgnoreCase(AppConstants.Y))
+					return this.editRatingUI();
+			}
+		} catch (SQLException e) {
+			logger.info(AppConstants.ERROR_DATA);
+			return false;
+		}
+		return true;
+	}
+
+	public boolean editRatingUI() {
+		this.getRatingUI();
+		return addRatingService.editRating(specification, rating, user);
+	}
+
+	public boolean addCarUI() {
 
 		this.displayCarTypesUI();
-		logger.info("Car Type ID(if new enter 0):");
+		logger.info(AppConstants.ENTER_CAR_TYPE_ID_NEW);
 		carType.setCarTypeId(sc.nextInt());
 		if (carType.getCarTypeId() == 0) {
-			logger.info("Enter new car type:");
+			logger.info(AppConstants.ENTER_CAR_TYPE_NAME);
 			carType.setCarTypeName(sc.next());
 		}
 		this.displayMakesUI();
-		logger.info("Make ID(if new enter 0):");
+		logger.info(AppConstants.ENTER_MAKE_ID_NEW);
 		make.setMakeId(sc.nextInt());
 		if (make.getMakeId() == 0) {
-			logger.info("Enter new make name:");
+			logger.info(AppConstants.ENTER_MAKE_NAME);
 			make.setMakeName(sc.next());
 		}
-		logger.info("Car Name:");
+		logger.info(AppConstants.ENTER_CAR_NAME);
 		specification.setCarName(sc.next());
-		logger.info("Engine type(PETROL,DIESEL):");
+		logger.info(AppConstants.ENTER_ENGINE_TYPE);
 		specification.setEngineType(sc.next());
-		logger.info("Cylinders:");
+		logger.info(AppConstants.ENTER_CYLINDERS);
 		specification.setCylinder(sc.nextInt());
-		logger.info("Displacement:");
+		logger.info(AppConstants.ENTER_DISPLACEMENT);
 		specification.setDisplacement(sc.nextInt());
-		logger.info("Transmission:");
+		logger.info(AppConstants.ENTER_TRANSMISSION);
 		specification.setTransmission(sc.nextInt());
-		logger.info("Power:");
+		logger.info(AppConstants.ENTER_POWER);
 		specification.setPower(sc.nextInt());
-		logger.info("Torque:");
+		logger.info(AppConstants.ENTER_TORQUE);
 		specification.setTorque(sc.nextInt());
-		logger.info("Fuel Capacity:");
+		logger.info(AppConstants.ENTER_FUEL_CAPACITY);
 		specification.setFuelCapacity(sc.nextInt());
-		logger.info("Wheelbase:");
+		logger.info(AppConstants.WHEELBASE);
 		specification.setWheelbase(sc.nextInt());
-		logger.info("Kerb Weight:");
+		logger.info(AppConstants.ENTER_KERB_WEIGHT);
 		specification.setKerbWeight(sc.nextInt());
-		logger.info("Airbag:");
+		logger.info(AppConstants.ENTER_AIRBAG);
 		specification.setAirbag(sc.next());
-		logger.info("ABS:");
+		logger.info(AppConstants.ENTER_ABS);
 		specification.setAbs(sc.next());
-		logger.info("Drivetrain(FWD,RWD,AWD):");
+		logger.info(AppConstants.ENTER_DRIVETRAIN);
 		specification.setDrivetrain(sc.next());
-		logger.info("Price:");
+		logger.info(AppConstants.ENTER_PRICE);
 		specification.setPrice(sc.nextInt());
-		if (user.getAdminStatus().equals("ADMIN")) {
-			specification.setCarStatus("APPROVED");
+		if (user.getAdminStatus().equals(AppConstants.ADMIN)) {
+			specification.setCarStatus(AppConstants.APPROVED);
 		} else {
-			specification.setCarStatus("UNAPPROVED");
+			specification.setCarStatus(AppConstants.UNAPPROVED);
 		}
-		addCarService.addCar(carType, make, specification);
+		try {
+			addCarService.addCar(carType, make, specification);
+		} catch (SQLException e) {
+			logger.info(AppConstants.ERROR_DATA);
+			return false;
+		}
+		return true;
 	}
 
-	public boolean deleteCarUI() throws SQLException {
+	public boolean deleteCarUI() {
 		if (request.getRequestId() == 0) {
 			if (!this.getMakeUI())
 				return false;
-			logger.info("Enter Car ID to delete:");
+			logger.info(AppConstants.ENTER_CAR_ID_DELETE);
 			specification.setCarId(sc.nextInt());
 		}
-		logger.info("Confirm Delete?(y/n)");
-		if (sc.next().equals("y"))
-			return deleteCarService.deleteCar(specification);
+		logger.info(AppConstants.CONFIRM_DELETE);
+		if (sc.next().equals(AppConstants.Y))
+			try {
+				return deleteCarService.deleteCar(specification);
+			} catch (SQLException e) {
+				logger.info(AppConstants.ERROR_DATA);
+				return false;
+			}
 		else
 			return true;
 	}
 
-	public boolean addCarUserRequestUI() throws SQLException {
+	public boolean addCarUserRequestUI() {
 		request.setRequestId(1);
-		this.addCarUI();
-
-		if (!requestCarService.addCarUserRequest(request, user, specification))
+		if (!this.addCarUI()) {
 			return false;
-		else {
-			logger.info("Your Request ID:" + request.getRequestId());
-			return true;
 		}
+		try {
+			requestCarService.addCarUserRequest(request, user, specification);
+		} catch (SQLException e) {
+			logger.info(AppConstants.ERROR_DATA);
+			request.setRequestId(0);
+			return false;
+		}
+		logger.info(AppConstants.YOUR_REQUEST_ID + request.getRequestId());
+		return true;
+
 	}
 
 	public boolean getRequests() {
-		ArrayList<Request> requests = requestCarService.getRequests(user);
+		ArrayList<Request> requests = null;
+		try {
+			requests = requestCarService.getRequests(user);
+		} catch (SQLException e) {
+			logger.info(AppConstants.ERROR_DATA);
+			return false;
+		}
 		if (requests == null) {
-			logger.info("No Pending Requests!");
+			logger.info(AppConstants.NO_PENDING_REQUESTS);
 			return false;
 		}
 		for (Request request : requests) {
@@ -304,39 +445,55 @@ public class UIClass {
 		return true;
 	}
 
-	public void getCarUI(Request request) {
-		specification = fetchdetailsService.getCar(request);
-		logger.info(specification.getCarId() + " " + specification.getCarName() + " " + specification.getEngineType()
-				+ " " + specification.getCylinder() + " " + specification.getDisplacement() + " "
-				+ specification.getTransmission() + " " + specification.getPower() + " " + specification.getTorque()
-				+ " " + specification.getFuelCapacity() + " " + specification.getWheelbase() + " "
-				+ specification.getKerbWeight() + " " + specification.getAirbag() + " " + specification.getAbs() + " "
-				+ specification.getDrivetrain() + " " + specification.getPrice() + " " + specification.getCarStatus());
+	public boolean printCar(Specification specification) {
+
+		logger.info(AppConstants.PRINT_CAR_ID + specification.getCarId() + AppConstants.PRINT_CAR_NAME
+				+ specification.getCarName() + AppConstants.PRINT_ENGINE_TYPE + specification.getEngineType()
+				+ AppConstants.PRINT_ENGINE_TYPE + specification.getCylinder() + AppConstants.PRINT_DISPLACEMENT
+				+ specification.getDisplacement() + AppConstants.PRINT_TRANSMISSION + specification.getTransmission()
+				+ AppConstants.PRINT_POWER + specification.getPower() + AppConstants.PRINT_TORQUE
+				+ specification.getTorque() + AppConstants.PRINT_FUEL_CAPACITY + specification.getFuelCapacity()
+				+ AppConstants.PRINT_WHEELBASE + specification.getWheelbase() + AppConstants.PRINT_KERB_WEIGHT
+				+ specification.getKerbWeight() + AppConstants.PRINT_AIRBAG + specification.getAirbag()
+				+ AppConstants.PRINT_ABS + specification.getAbs() + AppConstants.PRINT_DRIVETRAIN
+				+ specification.getDrivetrain() + AppConstants.PRINT_PRICE + specification.getPrice());
+		return true;
 	}
 
-	public boolean reviewAddRequestsUI() throws SQLException {
+	public boolean reviewAddRequestsUI() {
 		if (!this.getRequests())
 			return false;
-		logger.info("Enter Request ID to review:");
+		logger.info(AppConstants.ENTER_REQUEST_ID_REVIEW);
 		request.setRequestId(sc.nextInt());
-		this.getCarUI(request);
-		logger.info("Approve or Delete?(a/d)");
-		if (sc.next().equalsIgnoreCase("a")) {
-			requestCarService.approveCar(specification, request);
-		} else {
+
+		try {
+			this.printCar(fetchdetailsService.getCar(request));
+		} catch (SQLException e) {
+			logger.info(AppConstants.ERROR_DATA);
+			return false;
+		}
+		logger.info(AppConstants.APPROVE_DELETE);
+		if (sc.next().equalsIgnoreCase(AppConstants.A)) {
+			try {
+				requestCarService.approveCar(specification, request);
+			} catch (SQLException e) {
+				logger.info(AppConstants.ERROR_DATA);
+				return false;
+			}
+		} else if (sc.next().equalsIgnoreCase(AppConstants.D)) {
 			this.deleteCarUI();
 		}
 		return true;
 	}
 
-	public boolean carMenu() throws SQLException {
+	public boolean carMenu() {
 		while (true) {
 			int choice = 0;
 			try {
-				logger.info("1.Ratings&Reviews\n2.Statistics\n3.Add Rating\n4.Main Menu");
+				logger.info(AppConstants.CAR_MENU);
 				choice = sc.nextInt();
 			} catch (Exception e) {
-				logger.info("Invalid Input! Try Again");
+				logger.info(AppConstants.INVALID_INPUT);
 				sc.nextLine();
 			}
 			switch (choice) {
@@ -350,27 +507,37 @@ public class UIClass {
 			}
 			case 3: {
 				if (!User.getLoginStatus()) {
-					logger.info("Please login to add your rating!!");
+					logger.info(AppConstants.LOGIN_RATING);
 					return true;
 				}
 				this.addRatingUI();
 				break;
 			}
 			case 4: {
+				if (!User.getLoginStatus()) {
+					logger.info(AppConstants.LOGIN_RATING);
+					return true;
+				}
+				if (this.editRatingUI()) {
+					logger.info(AppConstants.EDIT_SUCCESSFUL);
+				}
+				break;
+			}
+			case 5: {
 				return true;
 			}
 			}
 		}
 	}
 
-	public boolean userMenu() throws SQLException {
+	public boolean userMenu() {
 		while (true) {
 			int choice = 0;
 			try {
-				logger.info("1.Car by Make\n2.Car by Type\n3.Request Add Car\n4.Show Pending Requests\n5.Logout");
+				logger.info(AppConstants.USER_MENU);
 				choice = sc.nextInt();
 			} catch (Exception e) {
-				logger.info("Invalid Input! Try Again");
+				logger.info(AppConstants.INVALID_INPUT);
 				sc.nextLine();
 			}
 			switch (choice) {
@@ -402,14 +569,14 @@ public class UIClass {
 		}
 	}
 
-	public boolean adminMenu() throws SQLException {
+	public boolean adminMenu() {
 		while (true) {
 			int choice = 0;
 			try {
-				logger.info("1.Add Car\n2.Delete Car\n3.Add Statistics\n4.Review Add Car Requests\n5.Logout");
+				logger.info(AppConstants.ADMIN_MENU);
 				choice = sc.nextInt();
 			} catch (Exception e) {
-				logger.info("Invalid Input! Try Again");
+				logger.info(AppConstants.INVALID_INPUT);
 				sc.nextLine();
 			}
 			switch (choice) {
@@ -431,7 +598,7 @@ public class UIClass {
 			case 4: {
 				this.clearAll(make, carType);
 				if (!this.reviewAddRequestsUI())
-					logger.info("No requests to review!");
+					logger.info(AppConstants.NO_PENDING_REQUESTS);
 				break;
 			}
 			case 5: {
@@ -443,14 +610,14 @@ public class UIClass {
 		}
 	}
 
-	public boolean mainMenu() throws SQLException {
+	public boolean mainMenu() {
 		while (true) {
 			int choice = 0;
 			try {
-				logger.info("1.Car by Make\n2.Car by Type\n3.Login\n4.Signup\n5.Exit");
+				logger.info(AppConstants.MAIN_MENU);
 				choice = sc.nextInt();
 			} catch (Exception e) {
-				logger.info("Invalid Input! Try Again");
+				logger.info(AppConstants.INVALID_INPUT);
 				sc.nextLine();
 			}
 			switch (choice) {
@@ -466,13 +633,13 @@ public class UIClass {
 			}
 			case 3: {
 				while (!this.getLoginUI()) {
-					logger.info("Login Error! Try Again");
+					logger.info(AppConstants.LOGIN_ERROR);
 				}
 				break;
 			}
 			case 4: {
 				while (!this.getSignupUI()) {
-					logger.info("Signup Error! Try Again");
+					logger.info(AppConstants.SIGNUP_ERROR);
 				}
 				break;
 			}

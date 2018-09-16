@@ -3,16 +3,13 @@ package io.ztech.carstats.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.logging.Logger;
 
 import io.ztech.carstats.beans.User;
-import io.ztech.carstats.constants.AppConstants;
 import io.ztech.carstats.constants.SQLConstants;
 import io.ztech.carstats.dbutils.DBUtils;
 
 public class LoginDAO {
 
-	private final Logger logger = Logger.getLogger(FetchDetailsDAO.class.getName());
 	private Connection con = null;
 	private PreparedStatement pst = null;
 
@@ -23,7 +20,7 @@ public class LoginDAO {
 		return true;
 	}
 
-	public boolean signup(User user) {
+	public boolean signup(User user) throws SQLException {
 		try {
 			con = DBUtils.getConnection();
 			pst = con.prepareStatement(SQLConstants.INSERT_USER);
@@ -31,8 +28,7 @@ public class LoginDAO {
 			pst.setString(2, user.getPassword());
 			pst.executeUpdate();
 		} catch (SQLException e) {
-			logger.info(AppConstants.SQL_ERROR);
-			return false;
+			throw new SQLException();
 		} finally {
 			DBUtils.closeConnection(con, pst, null);
 		}

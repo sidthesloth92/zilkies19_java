@@ -4,38 +4,41 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Date;
 
 import io.ztech.placementportal.bean.Register;
+import io.ztech.placementportal.constants.ApplicationConstants;
 import io.ztech.placementportal.constants.SqlConstants;
 import io.ztech.placementportal.dbutil.DbConnection;
 
 public class LoginDao {
 
-	public String login(Register login) {
-		Connection connection = DbConnection.getConnection();
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+	public String login(Register login) throws Exception {
+		Connection connection=null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		String role = "";
 		try {
-			String reg_no = "";
-			ps = connection.prepareStatement(SqlConstants.LOGIN_SQL);
-			ps.setString(1, login.getUserName());
-			ps.setString(2, login.getPassword());
-			ps.setString(3, login.getRole());
-			ps.setInt(4, 1);
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				reg_no = rs.getString("reg_no");
+			connection = DbConnection.getConnection();
+			preparedStatement = connection.prepareStatement(SqlConstants.LOGIN_SQL);
+			preparedStatement.setString(1, login.getUserName());
+			preparedStatement.setString(2, login.getPassword());
+			preparedStatement.setInt(3, 1);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				role = resultSet.getString("role");
+				preparedStatement = connection.prepareStatement(SqlConstants.SET_RECENT_LOGIN);
+				preparedStatement.setString(1, login.getTime().toString());
+				preparedStatement.setString(2, login.getUserName());
+				if (preparedStatement.executeUpdate() >= 0) {
+				}
 			}
-			return reg_no;
+			return role;
 
 		} catch (SQLException e) {
-			System.out.println(e);
+			throw new Exception(ApplicationConstants.ERROR);
 		} finally {
-			DbConnection.closeConnection(rs, ps, connection);
+			DbConnection.closeConnection(resultSet, preparedStatement, connection);
 		}
-		return null;
 
 	}
 

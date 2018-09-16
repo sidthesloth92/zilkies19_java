@@ -1,41 +1,48 @@
 package io.ztech.placementportal.ui;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
 import java.util.logging.Logger;
 
+import io.ztech.placementportal.bean.Company;
 import io.ztech.placementportal.bean.PlacedDetail;
 import io.ztech.placementportal.constants.ApplicationConstants;
+import io.ztech.placementportal.constants.Regex;
+import io.ztech.placementportal.services.RetrieveDetailsService;
 import io.ztech.placementportal.services.UpdateStudentDetailService;
-import io.ztech.placementportal.services.ViewDetailsService;
 
 public class UpdatePlacementStatus {
-    Logger log=Logger.getLogger("UpdatePlacementStatus.class");
-    Scanner scan=new Scanner(System.in);
-	public void getPlacementDetail(PlacedDetail student) {
-		ViewDetailsService viewJob = new ViewDetailsService();
-		UpdateStudentDetailService update=new UpdateStudentDetailService();
-		ArrayList<HashMap<String, String>> list;
-		list = viewJob.viewCompanyDetails();
-		int choice;
-		for (HashMap<String, String> entry : list) {
-          System.out.println(ApplicationConstants.COMPANY_ID+entry.get(ApplicationConstants.COMPANY_ID)+" "
-		   +ApplicationConstants.COMPANY_NAME+entry.get(ApplicationConstants.COMPANY_NAME));
-		   	}
-	  log.info(ApplicationConstants.ENTER+ApplicationConstants.COMPANY_ID);
-	  student.setCompany_id(scan.nextInt());
-	  log.info(ApplicationConstants.ENTER+ApplicationConstants.JOB_STATUS);
-	  choice=scan.nextInt();
-	  if(choice==1)
-		  student.setJobStatus("INTERN");
-	  if(choice==2)
-		  student.setJobStatus("OFFER");
-	  if(update.updatePlacementDetail(student))
-		  log.info(ApplicationConstants.UPADTED);
-	  else
-		  log.info(ApplicationConstants.ERROR);
-		
+	private Logger log;
+	private ScanInput scan;
+
+	public UpdatePlacementStatus() {
+		log = Logger.getLogger("UpdatePlacementStatus.class");
+		scan = new ScanInput();
 	}
 
+	public void getPlacementDetail(PlacedDetail student) {
+		RetrieveDetailsService viewJob = new RetrieveDetailsService();
+		UpdateStudentDetailService update = new UpdateStudentDetailService();
+		ArrayList<Company> list;
+		try {
+			list = viewJob.viewCompanyDetails();
+			int choice;
+			list.forEach(item -> log.info(ApplicationConstants.COMPANY_ID + item.getCompanyId() + "\n"
+					+ ApplicationConstants.COMPANY_NAME + item.getCompanyName()));
+			log.info(ApplicationConstants.ENTER + ApplicationConstants.COMPANY_ID);
+			student.setCompanyId(Integer.parseInt(scan.getInput(Regex.NUMBER, ApplicationConstants.VALID_COMPANY_ID)));
+			log.info(ApplicationConstants.ENTER + ApplicationConstants.JOB_STATUS);
+			choice = Integer.parseInt(scan.getInput(Regex.NUMBER, ApplicationConstants.VALID_OPTION));
+			if (choice == 1)
+				student.setJobStatus("INTERN");
+			if (choice == 2)
+				student.setJobStatus("OFFER");
+			update.updatePlacementDetail(student);
+			log.info(ApplicationConstants.UPDATED);
+		} catch (SQLException e) {
+			log.info(ApplicationConstants.ERROR);
+
+		}
+
+	}
 }

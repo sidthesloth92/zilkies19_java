@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 import com.zilker.delegates.Validator;
 import com.zilker.services.StudentServices;
 import com.zilker.beans.*;
-import com.zilker.constants.DisplayConstants;
+import com.zilker.constants.StringConstants;
 import com.zilker.constants.RegexConstants;
 
 public class StudentUI {
@@ -38,9 +38,9 @@ public class StudentUI {
 
 	public void viewResult(LoggedInUserData currentUser) {
 		int semester = 0;
-		semester = Integer.parseInt(this.scanInput(DisplayConstants.ENTER_SEMESTER, RegexConstants.SEMESTER_REGEX, DisplayConstants.INVALID_INPUT));
+		semester = Integer.parseInt(this.scanInput(StringConstants.ENTER_SEMESTER, RegexConstants.SEMESTER_REGEX, StringConstants.INVALID_INPUT));
 		if (print(studentService.getResultById(currentUser.getRegistrationNumber(), semester,1))) {
-			LOGGER.info(DisplayConstants.AFTER_REVAL);
+			LOGGER.info(StringConstants.AFTER_REVAL);
 			print(studentService.checkRevaluationStatusById(currentUser.getRegistrationNumber(),currentUser.getSemester()-1));
 		}
 
@@ -49,11 +49,11 @@ public class StudentUI {
 	public void applyRevaluation(LoggedInUserData currentUser) {
 		int resultId = 0;
 		if (print(studentService.getResultById(currentUser.getRegistrationNumber(), currentUser.getSemester()-1,2))) {
-			resultId = Integer.parseInt(this.scanInput(DisplayConstants.RESULT_ID, RegexConstants.INT_REGEX, DisplayConstants.INVALID_INPUT));
+			resultId = Integer.parseInt(this.scanInput(StringConstants.RESULT_ID, RegexConstants.NUMERIC_REGEX, StringConstants.INVALID_INPUT));
 			if (studentService.applyRevaluation(resultId,currentUser)) {
-				LOGGER.info(DisplayConstants.APPLY_SUCCESS);
+				LOGGER.info(StringConstants.APPLY_SUCCESS);
 			} else {
-				LOGGER.info(DisplayConstants.LIMIT_EXCEED);
+				LOGGER.info(StringConstants.LIMIT_EXCEED);
 			}
 		}
 	}
@@ -64,16 +64,16 @@ public class StudentUI {
 
 	public static boolean print(ArrayList<LinkedHashMap<String, String>> result) {
 		if (result.isEmpty()) {
-			LOGGER.info(DisplayConstants.NO_RECORDS);
+			LOGGER.info(StringConstants.NO_RECORDS);
 			return false;
 		}
 		for (LinkedHashMap<String, String> map : result) {
-			LOGGER.info(DisplayConstants.STAR);
+			LOGGER.info(StringConstants.STAR);
 			for (Entry<String, String> pair : map.entrySet()) {
 				LOGGER.info(pair.getKey() + pair.getValue());
 			}
 		}
-		LOGGER.info(DisplayConstants.STAR);
+		LOGGER.info(StringConstants.STAR);
 		return true;
 	}
 
@@ -81,7 +81,7 @@ public class StudentUI {
 		LOGGER.info("STUDENT PORTAL: WELCOME " + currentUser.getName());
 		int option = 0;
 		do {
-			option = Integer.parseInt(this.scanInput(DisplayConstants.STUDENT_MENU, "[1-4]", DisplayConstants.INVALID_INPUT));
+			option = Integer.parseInt(this.scanInput(StringConstants.STUDENT_MENU, "[1-4]", StringConstants.INVALID_INPUT));
 			switch (option) {
 			case 1:
 				this.viewResult(currentUser);

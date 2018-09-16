@@ -40,8 +40,8 @@ public class LoginUI {
 		LoggedInUserData currentUser= new LoggedInUserData();
 		LOGGER.info("LOGIN PAGE");
 		do {
-			long registrationNumber = Long.parseLong(this.scanInput(DisplayConstants.ENTER_REGNO,"[0-9]+", DisplayConstants.INVALID_REGNO));
-			String password = this.scanInput(DisplayConstants.ENTER_PASS,"[a-zA-Z0-9]+", DisplayConstants.INVALID_PASS);
+			long registrationNumber = Long.parseLong(this.scanInput(StringConstants.ENTER_REGNO,"[0-9]+", StringConstants.INVALID_REGNO));
+			String password = this.scanInput(StringConstants.ENTER_PASS,"[a-zA-Z0-9]+", StringConstants.INVALID_PASS);
 			LoginServices loginService = new LoginServices();
 			currentUser = loginService.isValidUser(registrationNumber, password);
 			if (currentUser.getRole().equals("student")) {

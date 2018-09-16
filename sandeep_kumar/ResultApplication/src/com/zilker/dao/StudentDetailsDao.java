@@ -17,7 +17,7 @@ public class StudentDetailsDao {
 	private static ResultSet rs;
 	private static Connection con;
 
-	public boolean insertStudentDetails(StudentData obj) {
+	public boolean insertStudentDetails(StudentData obj) throws SQLException {
 		try {
 			con = Config.getConnection();
 			stmt = Config.conn.prepareStatement(SqlConstants.INSERT_STUDENT);
@@ -30,15 +30,13 @@ public class StudentDetailsDao {
 			if (count > 0) {
 				return true;
 			}
-		} catch (SQLException e) {
-			
 		} finally {
 			Config.closeConnection(con, stmt, rs);
 		}
 		return false;
 	}
 
-	public boolean deleteStudentDetails(long studentRegistrationNumber) {
+	public boolean deleteStudentDetails(long studentRegistrationNumber) throws SQLException {
 		try {
 			con = Config.getConnection();
 			stmt = Config.conn.prepareStatement(SqlConstants.DELETE_STUDENT);
@@ -47,28 +45,28 @@ public class StudentDetailsDao {
 			if (count > 0) {
 				return true;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 			Config.closeConnection(con, stmt, rs);
 		}
 		return false;
 	}
 
-	public boolean updateStudentDetails(long studentRegistrationNumber, String dataToValidate, int column, int flag) {
+	public boolean updateStudentDetails(long studentRegistrationNumber, String dataToValidate, int column, int flag)
+			throws SQLException {
 		try {
 			con = Config.getConnection();
 			if (column == 1) {
-				stmt = Config.conn.prepareStatement("UPDATE student_details SET ?=? WHERE student_registration_number=?");
-			}
-			else if (column == 2) {
-				stmt = Config.conn.prepareStatement("UPDATE student_details SET studnt_name=? WHERE student_registration_number=?");
-			}
-			else if (column == 3) {
-				stmt = Config.conn.prepareStatement("UPDATE student_details SET department=? WHERE student_registration_number=?");
-			}
-			else if (column == 4) {
-				stmt = Config.conn.prepareStatement("UPDATE student_details SET semester=? WHERE student_registration_number=?");
+				stmt = Config.conn
+						.prepareStatement("UPDATE student_details SET ?=? WHERE student_registration_number=?");
+			} else if (column == 2) {
+				stmt = Config.conn.prepareStatement(
+						"UPDATE student_details SET studnt_name=? WHERE student_registration_number=?");
+			} else if (column == 3) {
+				stmt = Config.conn.prepareStatement(
+						"UPDATE student_details SET department=? WHERE student_registration_number=?");
+			} else if (column == 4) {
+				stmt = Config.conn
+						.prepareStatement("UPDATE student_details SET semester=? WHERE student_registration_number=?");
 			}
 			if (flag == 1) {
 				stmt.setInt(1, Integer.parseInt(dataToValidate));
@@ -81,15 +79,13 @@ public class StudentDetailsDao {
 			if (count > 0) {
 				return true;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 			Config.closeConnection(con, stmt, rs);
 		}
 		return false;
 	}
 
-	public ArrayList<LinkedHashMap<String, String>> getAllStudentDetails() {
+	public ArrayList<LinkedHashMap<String, String>> getAllStudentDetails() throws SQLException {
 		ArrayList<LinkedHashMap<String, String>> list = new ArrayList<LinkedHashMap<String, String>>();
 		try {
 			con = Config.getConnection();
@@ -104,8 +100,6 @@ public class StudentDetailsDao {
 				map.put("Semester: ", rs.getString("semester"));
 				list.add(map);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 			Config.closeConnection(con, stmt, rs);
 		}

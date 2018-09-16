@@ -3,164 +3,377 @@ package com.zilker.ui;
 import com.zilker.beans.AdminDetails;
 import com.zilker.beans.Login;
 import com.zilker.beans.Player;
+import com.zilker.beans.Scorecard;
 import com.zilker.beans.Team;
 import com.zilker.beans.Tournament;
+import com.zilker.beans.Score;
 import com.zilker.beans.UserDetails;
 import com.zilker.constant.ConsoleStrings;
 import com.zilker.service.ServiceCrudOperations;
+import com.zilker.delegates.Schedule;
 import com.zilker.ui.FetchAndDisplay;
 import com.zilker.service.*;
 import java.io.IOException;
 import java.util.*;
+import java.util.logging.Logger;
 
 public class DisplayMenu {
 
-	int option = 0, loginOption = 0, userOption = 0, adminOption = 0, tournament_id = 0, team_id = 0,
-			total_teams = 0,status=0,flag_status=0,team_count=0,player_id=0;
-	boolean flag = false;
-	int[] teamId=new int[2];
-	char ch = ' ',flagstatus=' ';
-	String email = "", password = "", admin_password = "",team="";
-	String team_name[]=new String[2];
+	int option, loginOption, userOption, adminOption, tournamentId, totalTeams, status, flagStatus, teamCount, playerId;
+	boolean flag;
+	int[] teamId = new int[2];
+	Logger logger = Logger.getLogger(DisplayMenu.class.getName());
+	char ch, flagstatus;
+	String email, password, adminPassword, team;
+	String teamName[] = new String[2];
 	ArrayList<Player> al = new ArrayList<Player>();
-	ArrayList<String> team_list = new ArrayList<String>();
-	int teamid=0;
-	ArrayList hm=new ArrayList();
-	ArrayList<String> arrayList=new ArrayList<String>();
-	Login loginObj=null;
-	Team obj=null;
-	FetchAndDisplay fetch=new FetchAndDisplay();
-	ServiceCrudOperations service=new ServiceCrudOperations();
-	Schedule scheduleObj=new Schedule();
+	ArrayList<String> teamList = new ArrayList<String>();
+	int teamid;
+	ArrayList hm = new ArrayList();
+	ArrayList<String> arrayList = new ArrayList<String>();
+	Login loginObj;
+	Team obj;
+	FetchAndDisplay fetch = new FetchAndDisplay();
+	ServiceCrudOperations service = new ServiceCrudOperations();
+	Schedule scheduleObj = new Schedule();
+
+	public DisplayMenu() {
+		obj = null;
+		loginObj = null;
+		email = "";
+		password = "";
+		adminPassword = null;
+		team = "";
+		ch = ' ';
+		flagstatus = ' ';
+		flag = false;
+		playerId = 0;
+		option = 0;
+		loginOption = 0;
+		userOption = 0;
+		adminOption = 0;
+		teamid = 0;
+		tournamentId = 0;
+		totalTeams = 0;
+		status = 0;
+		flagStatus = 0;
+		teamCount = 0;
+	}
+
 	public void Login() {
-		loginObj= fetch.login();
-		flag=service.getUserLoginInfo(loginObj);
+		loginObj = fetch.login();
+		try {
+			flag = service.getUserLoginInfo(loginObj);
+		} catch (Exception e) {
+			logger.info(ConsoleStrings.DB_ERROR);
+		}
 		if (flag == false) {
 			fetch.displayInvalid();
 			Login();
 		}
-		while (ch==' ') {
-			hm = service.showTournament();
-			tournament_id=fetch.displayTournament(hm);
-			if (tournament_id == 0) {
+		ch = ' ';
+		while (ch == ' ') {
+			hm.clear();
+			try {
+				hm = service.showTournament();
+			} catch (Exception e) {
+				logger.info(ConsoleStrings.DB_ERROR);
+			}
+			tournamentId = fetch.displayTournament(hm);
+			if (tournamentId == 0) {
 				continue;
 			}
 			do {
-			option=fetch.getUserOption();
-			switch(option) {
-			case 1:
-				while(flag_status==0) {
-					obj = fetch.teamDetails(tournament_id,loginObj.getEmail());
-					flag_status=service.checkTeamName(obj,tournament_id);
-					fetch.showMessage(flag_status);
+				option = fetch.getUserOption();
+				Team teamobject = new Team();
+				teamobject.setTournamentId(tournamentId);
+				switch (option) {
+				case 1:
+					while (flagStatus == 0) {
+						obj = fetch.teamDetails(tournamentId, loginObj.getEmail());
+						try {
+							flagStatus = service.checkTeamName(obj, teamobject);
+						} catch (Exception e) {
+							logger.info(ConsoleStrings.DB_ERROR);
+						}
+						fetch.showMessage(flagStatus);
 					}
-					teamid=service.addTeam(obj);
+					try {
+						teamid = service.addTeam(obj);
+					} catch (Exception e) {
+						logger.info(ConsoleStrings.DB_ERROR);
+					}
 					al = fetch.getPlayerDetails(teamid);
-					service.addPlayer(al);
+					try {
+						service.addPlayer(al);
+					} catch (Exception e) {
+						logger.info(ConsoleStrings.DB_ERROR);
+					}
 					fetch.teamRegister();
-					team_list=service.viewTeams(obj.getTournamentId());
-					fetch.displayTeam(team_list);
-					team_list.clear();
+					try {
+						teamList = service.viewTeams(teamobject);
+					} catch (Exception e) {
+						logger.info(ConsoleStrings.DB_ERROR);
+					}
+					fetch.displayTeam(teamList);
+					teamList.clear();
 					break;
-			case 2:
-				option=fetch.getEditOption();
-				if(option==1) {
-					team_list.clear();
-					team_list=service.viewTeams(tournament_id,loginObj.getEmail());
-					fetch.displayTeam(team_list);
-					if(team_list.size()==0) {
-						fetch.displayNoTeamsAvailable();
-					}
-					else {
-					team_name=fetch.getTeamName();
-					team_count=service.updateTeamName(team_name,tournament_id);
-					if(team_count==0) {
-						ch='y';
-						fetch.displayInvalidTeamName(team_count);
-						continue;
-					}
-					else {
-						fetch.displayInvalidTeamName(team_count);
-					}
-					}
-				}
-				else if(option==2) {
-					team_list.clear();
-					team_list=service.viewTeams(tournament_id,loginObj.getEmail());
-					fetch.displayTeam(team_list);
-					if(team_list.size()==0) {
+				case 2:
+					option = fetch.getEditOption();
+					if (option == 1) {
+						teamList.clear();
+						try {
+							teamList = service.viewTeams(teamobject, loginObj);
+						} catch (Exception e) {
+							logger.info(ConsoleStrings.DB_ERROR);
+						}
+						fetch.displayTeam(teamList);
+						if (teamList.size() == 0) {
+							fetch.displayNoTeamsAvailable();
+						} else {
+							teamName = fetch.getTeamName();
+							try {
+								teamCount = service.updateTeamName(teamName, teamobject);
+							} catch (Exception e) {
+								logger.info(ConsoleStrings.DB_ERROR);
+							}
+							if (teamCount == 0) {
+								ch = 'y';
+								fetch.displayInvalidTeamName(teamCount);
+								continue;
+							} else {
+								fetch.displayInvalidTeamName(teamCount);
+							}
+						}
+					} else if (option == 2) {
+						teamList.clear();
+						try {
+							teamList = service.viewTeams(teamobject, loginObj);
+						} catch (Exception e) {
+							logger.info(ConsoleStrings.DB_ERROR);
+						}
+						fetch.displayTeam(teamList);
+						if (teamList.size() == 0) {
+							fetch.displayInvalid();
+						} else {
+							hm.clear();
+							team = fetch.getTeam();
+							teamobject.setTeamName(team);
+							try {
+								hm = service.showPlayer(teamobject);
+							} catch (Exception e) {
+								logger.info(ConsoleStrings.DB_ERROR);
+							}
+							if (hm.size() != 0) {
+								do {
+									playerId = fetch.getPlayerId(hm);
+									arrayList = fetch.updatePlayerDetails(team);
+									Player playerobject = new Player();
+									playerobject.setPlayerId(playerId);
+									try {
+										service.updatePlayer(arrayList, playerobject);
+									} catch (Exception e) {
+										logger.info(ConsoleStrings.DB_ERROR);
+									}
+									ch = fetch.option();
+								} while (ch == 'y' || ch == 'Y');
+							} else {
+								fetch.noPlayers();
+							}
+						}
+					} else {
 						fetch.displayInvalid();
 					}
-					else {
+					break;
+				case 3:
+					try {
+						hm = service.viewSchedule(teamobject);
+					} catch (Exception e) {
+						logger.info(ConsoleStrings.DB_ERROR);
+					}
+					fetch.displaySchedule(hm);
 					hm.clear();
-					team=fetch.getTeam();
-					hm=service.showPlayer(team);
-					if(hm.size()!=0) {
-						do {
-					player_id=fetch.getPlayerId(hm);
-					arrayList=fetch.updatePlayerDetails(team);
-					service.updatePlayer(arrayList,player_id);
-					ch=fetch.option();
-						}while(ch=='y'||ch=='Y');
+					break;
+				case 4:
+					try {
+						hm = service.viewSchedule(teamobject);
+					} catch (Exception e) {
+						logger.info(ConsoleStrings.DB_ERROR);
 					}
-					else {
-						fetch.noPlayers();
+					fetch.displaySchedule(hm);
+					int matchNo = 0;
+					if (hm.size() != 0)
+						matchNo = fetch.getMatchNo();
+					hm.clear();
+					Scorecard score = new Scorecard();
+					score.setmatchNo(matchNo);
+					try {
+						hm = service.viewScorecard(score);
+					} catch (Exception e) {
+						logger.info(ConsoleStrings.DB_ERROR);
 					}
-					}
+					fetch.displayScorecard(hm);
+					break;
 				}
-				else {
-					fetch.displayInvalid();
-				}
-				break;
-			case 3:
-				hm=service.viewSchedule(tournament_id);
-				fetch.displaySchedule(hm);
-				break;
-			}
-			ch=fetch.tournamentMenu();
-		}while(ch=='y' || ch=='Y');
-			ch='f';
+				ch = fetch.tournamentMenu();
+			} while (ch == 'y' || ch == 'Y');
+			ch = 'f';
 		}
 	}
-	public void adminLogin() {
-		loginObj= fetch.login();
-		flag=service.getAdminLoginInfo(loginObj);
-		if (flag == false) {
-			fetch.displayInvalid();
-			adminLogin();
-		}
+
+	public void adminLogin() throws IOException {
+		String password = fetch.adminLogin();
+		adminPassword = fetch.getAdminPassword();
+		  if ((password.equals(adminPassword))) {
+			  fetch.displayInvalid();
+			  adminLogin();
+		  }
 		do {
+			Team teamobject = new Team();
 			adminOption = fetch.adminOption();
-		if (adminOption == 1) {
-			Tournament obj = fetch.getTournamentDetails();
-			service.addTournament(obj);
-		} else if (adminOption == 2) {
-			hm= service.showTournament();
-			tournament_id=fetch.displayTournament(hm);
-			if (tournament_id == 0) {
-				return;
+			if (adminOption == 1) {
+				Tournament obj = fetch.getTournamentDetails();
+				try {
+					service.addTournament(obj);
+				} catch (Exception e) {
+					logger.info(ConsoleStrings.DB_ERROR);
+				}
+			} else if (adminOption == 2) {
+				hm.clear();
+				teamList.clear();
+				try {
+					hm = service.showTournament();
+				} catch (Exception e) {
+					logger.info(ConsoleStrings.DB_ERROR);
+				}
+				tournamentId = fetch.displayTournament(hm);
+				/*
+				 * if (tournamentId == 0) { return; }
+				 */
+				teamobject.setTournamentId(tournamentId);
+				try {
+					teamList = service.viewTeams(teamobject);
+				} catch (Exception e) {
+					logger.info(ConsoleStrings.DB_ERROR);
+				}
+				fetch.displayTeam(teamList);
+				if (teamList.size() == 0) {
+					fetch.displayNoTeamsAvailable();
+				} else {
+					try {
+						status = service.deleteFixtures(teamobject);
+					} catch (Exception e) {
+						logger.info(ConsoleStrings.DB_ERROR);
+					}
+					arrayList = scheduleObj.scheduleMatches(teamList);
+					for (int i = 0; i < arrayList.size(); i++) {
+						String array[] = arrayList.get(i).split("v");
+						try {
+							teamId = service.getTeamId(array);
+						} catch (Exception e) {
+							logger.info(ConsoleStrings.DB_ERROR);
+						}
+						com.zilker.beans.Schedule obj = fetch.fixSchedule(teamId, arrayList.get(i), tournamentId);
+						if (status == 1) {
+							try {
+								service.fixtures(obj);
+							} catch (Exception e) {
+								logger.info(ConsoleStrings.DB_ERROR);
+							}
+						}
+					}
+					fetch.showScheduled();
+				}
+			} else if (adminOption == 3) {
+				hm.clear();
+				try {
+					hm = service.showTournament();
+				} catch (Exception e) {
+					logger.info(ConsoleStrings.DB_ERROR);
+				}
+				tournamentId = fetch.displayTournament(hm);
+				teamobject.setTournamentId(tournamentId);
+				hm.clear();
+				try {
+					hm = service.viewSchedule(teamobject);
+				} catch (Exception e) {
+					logger.info(ConsoleStrings.DB_ERROR);
+				}
+				fetch.displaySchedule(hm);
+				int choice = 0;
+				if (hm.size() != 0) {
+					fetch.displayUpdate();
+					int info[] = new int[2];
+					info = fetch.matchInfo();
+					Score obj = fetch.getScore();
+					try {
+						service.updateScore(info, obj);
+					} catch (Exception e) {
+						logger.info(ConsoleStrings.DB_ERROR);
+					}
+				}
+			} else if (adminOption == 4) {
+				hm.clear();
+				try {
+					hm = service.showTournament();
+				} catch (Exception e) {
+					logger.info(ConsoleStrings.DB_ERROR);
+				}
+				tournamentId = fetch.displayTournament(hm);
+				teamobject.setTournamentId(tournamentId);
+				try {
+					status = service.deleteTournament(teamobject);
+				} catch (Exception e) {
+					logger.info(ConsoleStrings.DB_ERROR);
+				}
+				fetch.deleteInfo(status);
+			} else if (adminOption == 5) {
+				int choice = fetch.showViewMenu();
+				if (choice == 1) {
+					hm.clear();
+					try {
+						hm = service.showTournament();
+					} catch (Exception e) {
+						logger.info(ConsoleStrings.DB_ERROR);
+					}
+					tournamentId = fetch.displayTournament(hm);
+					teamobject.setTournamentId(tournamentId);
+					try {
+						hm = service.viewSchedule(teamobject);
+					} catch (Exception e) {
+						logger.info(ConsoleStrings.DB_ERROR);
+					}
+					fetch.displaySchedule(hm);
+				} else if (choice == 2) {
+					hm.clear();
+					try {
+						hm = service.showTournament();
+					} catch (Exception e) {
+						logger.info(ConsoleStrings.DB_ERROR);
+					}
+					tournamentId = fetch.displayTournament(hm);
+					teamobject.setTournamentId(tournamentId);
+					try {
+						hm = service.viewSchedule(teamobject);
+					} catch (Exception e) {
+						logger.info(ConsoleStrings.DB_ERROR);
+					}
+					fetch.displaySchedule(hm);
+					hm.clear();
+					int match = fetch.getMatchNo();
+					Scorecard score = new Scorecard();
+					score.setmatchNo(match);
+					try {
+						hm = service.viewScorecard(score);
+					} catch (Exception e) {
+						logger.info(ConsoleStrings.DB_ERROR);
+					}
+					fetch.displayScorecard(hm);
+				}
 			}
-			team_list=service.viewTeams(tournament_id,loginObj.getEmail());
-			fetch.displayTeam(team_list);
-			if(team_list.size()==0) {
-				fetch.displayNoTeamsAvailable();
-			}
-			else {
-			status=service.deleteFixtures(tournament_id);
-			arrayList=scheduleObj.scheduleMatches(team_list);
-			for(int i=0;i<arrayList.size();i++) {
-				String array[]=arrayList.get(i).split("v");
-				teamId=service.getTeamId(array);
-				com.zilker.beans.Schedule obj=fetch.fixSchedule(teamId,arrayList.get(i),tournament_id);
-				if(status==1)
-				service.fixtures(obj);
-			}
-			fetch.showScheduled();
-			}
-		}
-		flagstatus=fetch.getAdminMenu();
-	}while(flagstatus=='y'||flagstatus=='Y');
-}
+			flagstatus = fetch.getAdminMenu();
+		} while (flagstatus == 'y' || flagstatus == 'Y');
+	}
 
 	public void UserMenu() {
 		loginOption = fetch.loginRegisterChoice();
@@ -168,7 +381,12 @@ public class DisplayMenu {
 			Login();
 		} else if (loginOption == 2) {
 			UserDetails userObj = fetch.getUserDetails();
-			service.insertUserDetails(userObj);
+			try {
+				service.insertUserDetails(userObj);
+			} catch (Exception e) {
+				logger.info(ConsoleStrings.DB_ERROR);
+				UserMenu();
+			}
 			fetch.registerStatus();
 			Login();
 		} else {
@@ -178,40 +396,25 @@ public class DisplayMenu {
 	}
 
 	public void AdminMenu() throws IOException {
-		loginOption = fetch.loginRegisterChoice();
-		if (loginOption == 1) {
 			adminLogin();
-		} else if (loginOption == 2) {
-			AdminDetails adminObj = fetch.getAdminDetails();
-			admin_password = fetch.getAdminPassword();
-			/*if (!(adminObj.getPassword().equals(admin_password))) {
-				fetch.displayInvalid();
-				return;
-			}*/
-			service.insertAdminDetails(adminObj);
-			fetch.registerStatus();
-			adminLogin();
-		} else {
-			fetch.displayInvalid();
-		}
 	}
 
 	public void showOption() throws IOException {
 		do {
-		option = fetch.loginOption();
-		switch (option) {
-		case 1:
-			UserMenu();
-			break;
-		case 2:
-			AdminMenu();
-			break;
-		default:
-			fetch.displayInvalid();
-			break;
-		}
-		ch=fetch.getMainmenu();
-		}while(ch=='y' || ch=='Y');
-		
+			option = fetch.loginOption();
+			switch (option) {
+			case 1:
+				UserMenu();
+				break;
+			case 2:
+				AdminMenu();
+				break;
+			default:
+				fetch.displayInvalid();
+				break;
+			}
+			ch = fetch.getMainmenu();
+		} while (ch == 'y' || ch == 'Y');
+
 	}
 }
