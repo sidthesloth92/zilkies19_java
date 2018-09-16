@@ -20,16 +20,21 @@ create table employee(
     uan varchar(12) unique not null,
     present_address varchar(100),
     permanent_address varchar(100),
-    emp_status varchar(20) not null default "PROBATION");
+    emp_status varchar(20) not null default "PROBATION",
+    foreign key(designation_id) references designation(designation_id) on delete cascade);
     
     
-drop table employee;
-desc employee;
+-- drop table employee;
+-- drop table designation;
+-- desc employee;
+-- drop table experience ;
+-- drop table emergency_contact;
+
 create table designation (
 	designation_id bigint primary key auto_increment,
     designation_name varchar(30) not null);
 
-drop table designation;
+
     
 insert into designation values(default,"Developer Trainee");
 insert into designation values(default,"Trainee Consultant");
@@ -52,33 +57,39 @@ select * from skill;
     
 create table experience (
 	emp_id bigint not null,
-    skill_id bigint not null);
+    skill_id bigint not null,
+    foreign key(emp_id) references employee(emp_id) on delete cascade,
+    foreign key(skill_id) references skill(skill_id) on delete cascade);
     
-drop table experience ;
+
     
 create table phone (
 	phone_id bigint primary key auto_increment,
     emp_id bigint not null,
     phone_number varchar(15) not null,
-    phone_type varchar(10) not null);
+    phone_type varchar(10) not null,
+    foreign key(emp_id) references employee(emp_id) on delete cascade);
     
 create table emergency_contact(
 	emergency_contact_id bigint primary key auto_increment,
     emp_id bigint not null, 
     emergency_contact_phone varchar(15) not null, 
-    emergency_contact_name varchar(25) not null);
+    emergency_contact_name varchar(25) not null,
+    foreign key(emp_id) references employee(emp_id) on delete cascade);
     
 create table mail(
 	mail_id bigint primary key auto_increment,
 	emp_id bigint not null,
     mail_address varchar(254) unique not null,
-    mail_type varchar(20) not null);
+    mail_type varchar(20) not null,
+    foreign key(emp_id) references employee(emp_id) on delete cascade);
     
 create table project(
 	project_id bigint primary key auto_increment,
     project_name varchar(30) not null,
     location varchar(30) not null,
-    reporting_manager_id bigint not null);
+    reporting_manager_id bigint not null,
+    foreign key(reporting_manager_id) references employee(emp_id) on delete cascade);
     
 create table unit (
 	unit_id bigint primary key auto_increment,
@@ -89,7 +100,10 @@ create table assign (
     assign_date date not null,
     project_id bigint not null,
     emp_id bigint not null,
-    unit_id bigint not null);
+    unit_id bigint not null,
+    foreign key(emp_id) references employee(emp_id) on delete cascade,
+    foreign key(project_id) references project(project_id) on delete cascade,
+    foreign key(unit_id) references unit(unit_id) on delete cascade);
     
 create table grievance (
 	grievance_id bigint primary key not null,
@@ -97,9 +111,10 @@ create table grievance (
     grievance_message varchar(25) not null,
     emp_response varchar(15) not null default "APPEALED",
     admin_response varchar(15) not null default "PENDING",
-    grievance_status varchar(15) not null default "OPEN");
+    grievance_status varchar(15) not null default "OPEN",
+    foreign key(emp_id) references employee(emp_id) on delete cascade);
     
-drop table emergency_contact;
+
 
 delete from employee;
 delete from designation;

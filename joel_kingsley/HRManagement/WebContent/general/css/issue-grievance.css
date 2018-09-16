@@ -1,0 +1,55 @@
+.middle {
+    height: 700px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(33, 150, 243);
+    background: linear-gradient(165deg, rgba(33, 150, 243, 1) 33%, rgba(106, 207, 252, 1) 50%, rgba(106, 207, 252, 1) 55%);
+}
+
+#first-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#grievance-subject-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    padding: 10px;
+}
+
+#grievance-subject {
+    box-sizing: border-box;
+    margin: 10px;
+    padding: 10px;
+    width: 100%;
+}
+
+#grievance-text-div {
+    width: 80% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    padding: 10px;
+}
+
+#grievance-text {
+    height: 200px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    resize: none;
+    width: 80% !important;
+    text-align: start;
+}
+
+#leave-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

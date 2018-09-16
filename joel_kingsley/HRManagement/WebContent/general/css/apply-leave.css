@@ -1,0 +1,73 @@
+.middle {
+    height: 700px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(33, 150, 243);
+    background: linear-gradient(165deg, rgba(33, 150, 243, 1) 33%, rgba(106, 207, 252, 1) 50%, rgba(106, 207, 252, 1) 55%);
+}
+
+#first-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#leave-subject-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    padding: 10px;
+}
+
+#leave-subject {
+    box-sizing: border-box;
+    margin: 10px;
+    padding: 10px;
+    width: 100%;
+}
+
+#leave-period-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px;
+    padding: 10px;
+}
+
+#start-date {
+    width: 40%;
+    padding: 10px;
+}
+
+#end-date {
+    width: 40%;
+    padding: 10px;
+}
+
+#leave-reason-div {
+    width: 80% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    padding: 10px;
+}
+
+#leave-reason {
+    width: 80% !important;
+    height: 200px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    resize: none;
+    text-align: start;
+}
+
+#leave-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -10,20 +10,20 @@ public class Fields {
 	public static final String TABLE_DESIGNATION = "designation";
 	public static final String TABLE_PROJECT = "project";
 	public static final String TABLE_SKILL = "skill";
-	
+
 	public static final String SKILL_KEY_NAME = "skill_name";
 	public static final String SKILL_KEY_ID = "skill_id";
-	
+
 	public static final String EMERGENCY_CONTACT_KEY_ID = "emergency_contact_id";
 	public static final String EMERGENCY_CONTACT_KEY_EMP_ID = "emp_id";
 	public static final String EMERGENCY_CONTACT_KEY_NAME = "emergency_contact_name";
 	public static final String EMERGENCY_CONTACT_KEY_PHONE = "emergency_contact_phone";
-	
+
 	public static final String MAIL_KEY_ID = "mail_id";
 	public static final String MAIL_KEY_ADDRESS = "mail_address";
 	public static final String MAIL_KEY_TYPE = "mail_type";
 	public static final String MAIL_KEY_EMP_ID = "emp_id";
-	
+
 	public static final String EMPLOYEE_KEY_NAME = "emp_name";
 	public static final String EMPLOYEE_KEY_PASSWORD = "emp_password";
 	public static final String EMPLOYEE_KEY_ID = "emp_id";
@@ -41,17 +41,17 @@ public class Fields {
 	public static final String EMPLOYEE_KEY_PERMANENT_ADDRESS = "permanent_address";
 	public static final String EMPLOYEE_KEY_PRESENT_ADDRESS = "present_address";
 	public static final String EMPLOYEE_KEY_UAN = "uan";
-	
+
 	public static final String DESIGNATION_KEY_ID = "designation_id";
 	public static final String DESIGNATION_KEY_NAME = "designation_name";
-	
+
 	public static final String PHONE_KEY_EMP_ID = "emp_id";
 	public static final String PHONE_KEY_ID = "phone_id";
 	public static final String PHONE_KEY_NUMBER = "phone_number";
 	public static final String PHONE_KEY_TYPE = "phone_type";
 	public static final String EXPERIENCE_KEY_EMP_ID = "emp_id";
 	public static final String EXPERIENCE_KEY_SKILL_ID = "skill_id";
-	
+
 	public static final String PROJECT_KEY_ID = "project_id";
 	public static final String PROJECT_KEY_NAME = "project_name";
 	public static final String PROJECT_KEY_LOCATION = "location";

@@ -1,0 +1,33 @@
+/* * {
+    border: 1px solid pink;
+} */
+
+body {
+    margin: 0;
+}
+
+header {
+    display: flex;
+    width: 100%;
+    background-color: white;
+    padding: 5px;
+}
+
+#ztech-logo {
+    width: 300px;
+    height: auto;
+    align-self: center;
+    display: inline-block;
+}
+
+#ztech-logo img {
+    height: auto;
+}
+
+.title {
+    display: inline-block;
+    padding: 0;
+    margin-left: 20px;
+    font-size: 100%;
+    color: white;
+}

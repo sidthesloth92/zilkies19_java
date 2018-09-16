@@ -1,30 +1,25 @@
-package io.ztech.jkingsley.employeemanagement.ui;
+package io.ztech.jkingsley.hrmanagement.ui;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import io.ztech.jkingsley.employeemanagement.constants.Regex;
-import io.ztech.jkingsley.employeemanagement.constants.Titles;
-import io.ztech.jkingsley.employeemanagementsystem.beans.objects.EmergencyContact;
-import io.ztech.jkingsley.employeemanagementsystem.beans.objects.Experience;
-import io.ztech.jkingsley.employeemanagementsystem.beans.objects.Mail;
-import io.ztech.jkingsley.employeemanagementsystem.beans.objects.Phone;
-import io.ztech.jkingsley.employeemanagementsystem.beans.objects.Profile;
-import io.ztech.jkingsley.employeemanagementsystem.beans.objects.Project;
-import io.ztech.jkingsley.employeemanagementsystem.beans.objects.Skill;
-import io.ztech.jkingsley.employeemanagementsystem.beans.types.EmployeeStatus;
-import io.ztech.jkingsley.employeemanagementsystem.services.EmployeeManagement;
+import io.ztech.jkingsley.hrmanagement.beans.objects.EmergencyContact;
+import io.ztech.jkingsley.hrmanagement.beans.objects.Experience;
+import io.ztech.jkingsley.hrmanagement.beans.objects.Mail;
+import io.ztech.jkingsley.hrmanagement.beans.objects.Phone;
+import io.ztech.jkingsley.hrmanagement.beans.objects.Profile;
+import io.ztech.jkingsley.hrmanagement.constants.Regex;
+import io.ztech.jkingsley.hrmanagement.constants.Titles;
+import io.ztech.jkingsley.hrmanagement.services.EmployeeManagement;
 
-public class ManagerUI {
-	public enum ManagerMenuOption {
-		ADD_PHONE_NUMBER, ADD_EMERGENCY_CONTACT, ADD_MAIL, ADD_EXPERIENCE, ADD_SKILL,ADD_PROJECT,/*ASSIGN_PROJECT,*/
+public class EmployeeLimitedEmployeeManagementUI {
 
-		FIND_EMPLOYEE_BY_ID,GET_EMPLOYEE_DETAILS,
+	public enum EmployeeLimitedMenuOption {
+		ADD_PHONE_NUMBER, ADD_EMERGENCY_CONTACT, ADD_MAIL, ADD_EXPERIENCE,
 
-		UPDATE_EMP_STATUS,
+		GET_EMPLOYEE_DETAILS,
 
 		UPDATE_PHONE_NUMBER, UPDATE_EMERGENCY_CONTACT, UPDATE_MAIL, BACK
 	}
@@ -34,91 +29,91 @@ public class ManagerUI {
 	Scanner scanner;
 	BigInteger empID;
 
-	public ManagerUI(BigInteger empID) {
+	public EmployeeLimitedEmployeeManagementUI(BigInteger empID) {
 		super();
 		scanner = new Scanner(System.in);
 		this.empID = empID;
 	}
 
-	public void displayManagerMenu() {
+	public void displayEmployeeMenuLimited() {
 		LOGGER.info("\n");
-		LOGGER.info(Titles.EMPLOYEE_MANAGAMENT_MANAGER);
-		ManagerMenuOption[] menuOptions = ManagerMenuOption.values();
+		LOGGER.info(Titles.EMPLOYEE_MANAGAMENT_EMPLOYEE_LIMITED);
+		EmployeeLimitedMenuOption[] menuOptions = EmployeeLimitedMenuOption.values();
 		for (int i = 0; i < menuOptions.length; i++) {
 			LOGGER.info(i + 1 + ". " + menuOptions[i].toString());
 		}
 		LOGGER.info("Enter an option (" + 1 + "-" + menuOptions.length + ") :");
 	}
 
-	public ManagerMenuOption getMenuOption() {
+	public EmployeeLimitedMenuOption getMenuOption() {
 		int n = 0;
 		do {
 			String input = scanner.nextLine();
 			if(Validation.isValid(input, Regex.INTEGER_REGEX)) {
 				n = Integer.parseInt(input);
 			}
-			if (n < 1 || n > ManagerMenuOption.values().length) {
+			if (n < 1 || n > EmployeeLimitedMenuOption.values().length) {
 				LOGGER.info(Titles.INVALID_OPTION);
 			}
-		} while (n < 1 || n > ManagerMenuOption.values().length);
+		} while (n < 1 || n > EmployeeLimitedMenuOption.values().length);
 
-		ManagerMenuOption menuOption = ManagerMenuOption.values()[n - 1];
+		EmployeeLimitedMenuOption menuOption = EmployeeLimitedMenuOption.values()[n - 1];
 		return menuOption;
 	}
 
-	public boolean execute(ManagerMenuOption menuOption) {
+	public boolean execute(EmployeeLimitedMenuOption menuOption) {
+
 		boolean notExit = true;
+
 		EmployeeManagement employeeManagement = new EmployeeManagement();
+
 		switch (menuOption) {
-		case ADD_EMERGENCY_CONTACT:
-			EmergencyContact emergencyContact = getInputForAddEmergencyContact();
-			emergencyContact.setEmp_id(empID);
-			EmployeeManagement employeeManagement2 = new EmployeeManagement();
-			if(employeeManagement2.addEmergencyContact(emergencyContact)) {
-				LOGGER.info(Titles.ADDED_EMERGENCY_CONTACT);
-			}
-			break;
-		case ADD_EXPERIENCE:
-			Experience experience = getInputForAddExperience();
-			if(experience == null) {
+		case ADD_PHONE_NUMBER:
+			Phone phone = getInputForAddPhoneNumber();
+			if(phone == null) {
+				LOGGER.info(Titles.NOTHING_ADDED);
 				break;
 			}
-			experience.setEmp_id(empID);
-			if(employeeManagement.addExperience(experience)) {
-				LOGGER.info(Titles.ADDED_EXPERIENCE);
+			phone.setEmp_id(empID);
+			if (employeeManagement.addPhoneNumber(phone)) {
+				LOGGER.info("Phone Number added");
+			}
+			break;
+		case ADD_EMERGENCY_CONTACT:
+			EmergencyContact emergencyContact = getInputForAddEmergencyContact();
+			if(emergencyContact == null) {
+				LOGGER.info(Titles.NOTHING_ADDED);
+				break;
+			}
+			emergencyContact.setEmp_id(empID);
+			if (employeeManagement.addEmergencyContact(emergencyContact)) {
+				LOGGER.info("Emergency Contact added");
 			}
 			break;
 		case ADD_MAIL:
 			Mail mail = getInputForAddMail();
 			if(mail == null) {
+				LOGGER.info(Titles.NOTHING_ADDED);
 				break;
 			}
 			mail.setEmp_id(empID);
-			EmployeeManagement employeeManagement3 = new EmployeeManagement();
-			if(employeeManagement3.addMailAddress(mail)) {
+			if (employeeManagement.addMailAddress(mail)) {
 				LOGGER.info(Titles.ADDED_MAIL);
 			}
 			break;
-		case ADD_PHONE_NUMBER:
-			Phone phone = getInputForAddPhoneNumber();
-			if(phone == null) {
+		case ADD_EXPERIENCE:
+			Experience experience = getInputForAddExperience();
+			if(experience == null) {
+				LOGGER.info(Titles.NOTHING_ADDED);
 				break;
 			}
-			phone.setEmp_id(empID);
-			if (employeeManagement.addPhoneNumber(phone)) {
-				LOGGER.info(Titles.ADDED_PHONE_NUMBER);
+			experience.setEmp_id(empID);
+			if (employeeManagement.addExperience(experience)) {
+				LOGGER.info(Titles.ADDED_EXPERIENCE);
 			}
 			break;
-
-		/*
-		 * case ASSIGN_PROJECT: Assign assign = getInputForAssignProject(); break;
-		 */
 		case GET_EMPLOYEE_DETAILS:
 			Profile profile = employeeManagement.findEmployeeById(empID);
-			if(profile == null) {
-				LOGGER.info(Titles.EMPLOYEE_NOT_FOUND);
-				break;
-			}
 			Printer printer = new Printer();
 			printer.print(profile);
 			break;
@@ -146,96 +141,25 @@ public class ManagerUI {
 			Mail mail2 = getInputForUpdateMail();
 			if(mail2 == null) {
 				LOGGER.info(Titles.NO_MAIL_ADDRESSES);
+				break;
 			}
 			if(employeeManagement.updateMailAddressOfID(mail2)) {
 				LOGGER.info(Titles.UPDATED_MAIL);
 			}
 			break;
-		case ADD_SKILL:
-			Skill skill = getInputForAddSkill();
-			if(employeeManagement.addSkill(skill)) {
-				LOGGER.info(Titles.ADDED_SKILL);
-			}
-			break;
-	
-		case ADD_PROJECT:
-			Project project = getInputForAddProject();
-			if(employeeManagement.addProject(project)) {
-				LOGGER.info(Titles.ADDED_PROJECT);
-			}
-			break;
-		case FIND_EMPLOYEE_BY_ID:
-			BigInteger empID = getInputForFindEmployeeByID();
-			Profile profile2 = employeeManagement.findEmployeeById(empID);
-			Printer printer2 =new Printer();
-			printer2.print(profile2);
-			break;
-		case UPDATE_EMP_STATUS:
-			HashMap<BigInteger,EmployeeStatus> map = getInputForUpdateEMPStatus();
-			if(employeeManagement.updateEmployeeStatus((BigInteger)map.keySet().toArray()[0],(EmployeeStatus)map.values().toArray()[0])){
-				LOGGER.info(Titles.UPDATE_EMP_STATUS);
-			}
-			break;
 		case BACK:
 			notExit = false;
-			break;
 		default:
+			notExit = false;
 			break;
-
 		}
 		return notExit;
-	}
-
-	/*private Assign getInputForAssignProject() {
-		Assign assign = new Assign();
-		assign.setEmp_id(InputHandler.getEmployeeID());
-		assign.setProject_id(InputHandler.getProjectID());
-		assign.setAssign_date(InputHandler.getAssignDate());
-		assign.setUnit_id(InputHandler.getUnitID());
-		return null;
-	}*/
-
-	private HashMap<BigInteger, EmployeeStatus> getInputForUpdateEMPStatus() {
-		HashMap<BigInteger,EmployeeStatus> map = new HashMap<>();
-		BigInteger empID = InputHandler.getEmployeeID();
-		EmployeeStatus empStatus = InputHandler.getEmployeeStatus();
-		map.put(empID, empStatus);
-		return map;
-	}
-
-	private BigInteger getInputForFindEmployeeByID() {
-		return InputHandler.getEmployeeID();
-	}
-
-	private Project getInputForAddProject() {
-		return InputHandler.getProject();
-	}
-
-	private Skill getInputForAddSkill() {
-		return InputHandler.getSkill();
-	}
-
-	private Phone getInputForAddPhoneNumber() {
-
-		return InputHandler.getPhoneNumber();
-	}
-	
-	private Mail getInputForAddMail() {
-		return InputHandler.getMailAddress();
-	}
-	
-	private Experience getInputForAddExperience() {
-		return InputHandler.getExperience(empID);
-	}
-	
-	private EmergencyContact getInputForAddEmergencyContact() {
-		return InputHandler.getEmergencyContact();
 	}
 
 	private Mail getInputForUpdateMail() {
 		EmployeeManagement employeeManagement = new EmployeeManagement();
 		ArrayList<Mail> mails = employeeManagement.findMailAddressesOfID(empID);
-		LOGGER.info(Titles.LIST_MAIL_OF_ID + empID);
+		LOGGER.info("List of all mails of ID: " + empID);
 		for (int i = 0; i < mails.size(); i++) {
 			LOGGER.info(Integer.toString(i + 1) + ". " + mails.get(i).getMail_address() + " "
 					+ mails.get(i).getMail_type());
@@ -250,13 +174,13 @@ public class ManagerUI {
 			if (Validation.isValid(input, Regex.INTEGER_REGEX)) {
 				option = Integer.parseInt(input);
 			}
-			if (option <= 0 || option > mails.size()) {
+			if (option > 0 || option <= mails.size()) {
 				mail.setMail_id(mails.get(option - 1).getMail_id());
 				mail.setEmp_id(empID);
 				mail.setMail_address(mails.get(option - 1).getMail_address());
 				mail.setMail_type(mails.get(option - 1).getMail_type());
 			} else {
-				LOGGER.info(Titles.INVALID_OPTION);
+				LOGGER.info("Please enter a valid option within the values specified.");
 			}
 		} while (option <= 0 || option > mails.size());
 		Mail newMail = InputHandler.getMailAddress();
@@ -283,7 +207,7 @@ public class ManagerUI {
 			if (Validation.isValid(input, Regex.INTEGER_REGEX)) {
 				option = Integer.parseInt(input);
 			}
-			if (option <= 0 || option > emergencyContacts.size()) {
+			if (option > 0 || option <= emergencyContacts.size()) {
 				emergencyContact.setEmergency_contact_id(emergencyContacts.get(option - 1).getEmergency_contact_id());
 				emergencyContact.setEmp_id(empID);
 				emergencyContact.setEmergency_contact_phone(emergencyContacts.get(option - 1).getEmergency_contact_phone());
@@ -316,7 +240,7 @@ public class ManagerUI {
 			if (Validation.isValid(input, Regex.INTEGER_REGEX)) {
 				option = Integer.parseInt(input);
 			}
-			if (option <= 0 || option > phones.size()) {
+			if (option > 0 && option <= phones.size()) {
 				phone.setPhone_id(phones.get(option - 1).getPhone_id());
 				phone.setEmp_id(empID);
 				phone.setPhone_number(phones.get(option - 1).getPhone_number());
@@ -325,11 +249,27 @@ public class ManagerUI {
 				LOGGER.info(Titles.INVALID_OPTION);
 			}
 		} while (option <= 0 || option > phones.size());
-		LOGGER.info(Titles.INPUT_NEW_PHONE);
+		LOGGER.info(Titles.INPUT_PHONE);
 		Phone newPhone = InputHandler.getPhoneNumber();
 		newPhone.setEmp_id(empID);
 		newPhone.setPhone_id(phone.getPhone_id());
 		return newPhone;
 	}
-	
+
+	private Experience getInputForAddExperience() {
+		return InputHandler.getExperience(empID);
+	}
+
+	private Mail getInputForAddMail() {
+		return InputHandler.getMailAddress();
+	}
+
+	private EmergencyContact getInputForAddEmergencyContact() {
+		return InputHandler.getEmergencyContact();
+	}
+
+	private Phone getInputForAddPhoneNumber() {
+
+		return InputHandler.getPhoneNumber();
+	}
 }

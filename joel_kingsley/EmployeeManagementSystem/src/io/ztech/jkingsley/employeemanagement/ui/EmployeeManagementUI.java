@@ -4,9 +4,9 @@ import java.math.BigInteger;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import io.ztech.jkingsley.employeemanagement.ui.AdminUI.AdminMenuOption;
-import io.ztech.jkingsley.employeemanagement.ui.EmployeeLimitedUI.EmployeeLimitedMenuOption;
-import io.ztech.jkingsley.employeemanagement.ui.ManagerUI.ManagerMenuOption;
+import io.ztech.jkingsley.employeemanagement.ui.AdminEmployeeManagementUI.AdminMenuOption;
+import io.ztech.jkingsley.employeemanagement.ui.EmployeeLimitedEmployeeManagementUI.EmployeeLimitedMenuOption;
+import io.ztech.jkingsley.employeemanagement.ui.ManagerEmployeeManagementUI.ManagerMenuOption;
 import io.ztech.jkingsley.employeemanagementsystem.beans.objects.Profile;
 import io.ztech.jkingsley.employeemanagementsystem.beans.types.AccountType;
 import io.ztech.jkingsley.employeemanagementsystem.services.EmployeeManagement;
@@ -40,13 +40,13 @@ public class EmployeeManagementUI {
 			
 			switch (accountType) {
 			case ADMIN:
-				AdminUI adminUI = new AdminUI(emp_id);
+				AdminEmployeeManagementUI adminUI = new AdminEmployeeManagementUI(emp_id);
 				adminUI.displayAdminMenu();
 				AdminMenuOption adminMenuOption = adminUI.getMenuOption();
 				notExit = adminUI.execute(adminMenuOption);
 				break;
 			case EMPLOYEE_LIMITED:
-				EmployeeLimitedUI employeeLimitedUI = new EmployeeLimitedUI(emp_id);
+				EmployeeLimitedEmployeeManagementUI employeeLimitedUI = new EmployeeLimitedEmployeeManagementUI(emp_id);
 				employeeLimitedUI.displayEmployeeMenuLimited();
 				EmployeeLimitedMenuOption employeeLimitedMenuOption = employeeLimitedUI.getMenuOption();
 				notExit = employeeLimitedUI.execute(employeeLimitedMenuOption);
@@ -54,7 +54,7 @@ public class EmployeeManagementUI {
 			case EMPLOYEE_MAX:
 				break;
 			case MANAGER:
-				ManagerUI managerUI = new ManagerUI(emp_id);
+				ManagerEmployeeManagementUI managerUI = new ManagerEmployeeManagementUI(emp_id);
 				managerUI.displayManagerMenu();
 				ManagerMenuOption managerMenuOption = managerUI.getMenuOption();
 				notExit = managerUI.execute(managerMenuOption);

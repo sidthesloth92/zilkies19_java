@@ -1,0 +1,31 @@
+.center-button {
+    display: table;
+    margin: 0 auto;
+}
+
+.middle {
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(33, 150, 243);
+    background: linear-gradient(165deg, rgba(33, 150, 243, 1) 33%, rgba(106, 207, 252, 1) 50%, rgba(106, 207, 252, 1) 55%);
+}
+
+.middle-form {
+    margin-top: 10%;
+}
+
+#login {
+    margin: 20px 0;
+}
+
+#forgot-password {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.textboxes-container input {
+    width: 200px;
+    padding: 10px;
+}

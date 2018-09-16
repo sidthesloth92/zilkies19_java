@@ -28,7 +28,6 @@
 <fullyQualifiedTypeName name="io.ztech.jkingsley.streetrun.beans.Group"/>
 <fullyQualifiedTypeName name="io.ztech.jkingsley.employeemanagement.utils.DBUtils"/>
 <fullyQualifiedTypeName name="io.ztech.jkingsley.employeemanagement.constants.Query"/>
-<fullyQualifiedTypeName name="java.math.BigInteger"/>
 <fullyQualifiedTypeName name="io.ztech.jkingsley.employeemanagementsystem.delegates.AddEmployeeDelegate"/>
 <fullyQualifiedTypeName name="io.ztech.jkingsley.employeemanagementsystem.delegates.SearchEmployeeDelegate"/>
 <fullyQualifiedTypeName name="io.ztech.jkingsley.employeemanagementsystem.delegates.UpdateEmployeeDelegate"/>
@@ -52,4 +51,7 @@
 <fullyQualifiedTypeName name="io.ztech.jkingsley.employeemanagement.constants.Constants"/>
 <fullyQualifiedTypeName name="io.ztech.jkingsley.employeemanagement.constants.Titles"/>
 <fullyQualifiedTypeName name="io.ztech.jkingsley.employeemanagement.ui.AdminUI.AdminMenuOption"/>
+<fullyQualifiedTypeName name="io.ztech.jkingsley.hrmanagement.services.EmployeeLogin"/>
+<fullyQualifiedTypeName name="java.math.BigInteger"/>
+<fullyQualifiedTypeName name="org.apache.commons.codec.digest.DigestUtils"/>
 </qualifiedTypeNameHistroy>

@@ -14,6 +14,10 @@ public class Titles {
 	public static final String EMPLOYEE_MANAGAMENT_MANAGER = "Employee Management - Manager";
 	public static final String EMPLOYEE_MANAGAMENT_ADMIN = "Employee Management - Admin";
 	
+	public static final String GRIEVANCE_MANAGAMENT_EMPLOYEE = "Grievance Management - Employee";
+	public static final String GRIEVANCE_MANAGAMENT_MANAGER = "Grievance Management - Manager";
+	public static final String GRIEVANCE_MANAGAMENT_ADMIN = "Grievance Management - Admin";
+	
 	public static final String INPUT_MAIL_TYPE = "Enter type(personal/company):";
 	public static final String INPUT_MAIL = "Enter mail:";
 	public static final String INPUT_NEW_PHONE = "List of all phone numbers of ID: ";

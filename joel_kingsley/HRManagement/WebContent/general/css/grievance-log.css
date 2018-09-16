@@ -1,0 +1,68 @@
+.middle {
+    display: flex;
+    height: 1100px;
+    flex-direction: column;
+    background: rgb(33, 150, 243);
+    background: linear-gradient(165deg, rgba(33, 150, 243, 1) 33%, rgba(106, 207, 252, 1) 50%, rgba(106, 207, 252, 1) 55%);
+}
+
+.middle > div > div {
+    border: 2px solid whitesmoke;
+    border-radius: 5px;
+    background-color: whitesmoke;
+}
+
+#grievance-item {
+    height: 70px;
+    border: 2px solid #ddd;
+    background-color: #ddd;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#grievance-item:hover {
+    box-shadow: 9px 9px #999;
+    background-color: #e9e9e9;
+}
+
+#first-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#grievance-log {
+    box-sizing: border-box;
+    height: 600px;
+    margin: 10px;
+    display: block;
+    overflow: scroll;
+    flex-direction: column;
+    text-align: center;
+
+    /* flex-wrap: wrap; */
+}
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active,
+.accordion:hover {
+    background-color: #ccc;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+}

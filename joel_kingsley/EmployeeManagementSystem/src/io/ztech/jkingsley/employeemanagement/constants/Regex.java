@@ -11,4 +11,3 @@ public class Regex {
 	public static final String MAIL_REGEX = "^[A-Za-z0-9]+@[a-z]+\\.[a-z]{2,6}$";
 	public static final String INTEGER_REGEX = "^[0-9]+$";
 }
-	
