@@ -61,7 +61,10 @@ public class PlayerModal extends HttpServlet {
 		JSONObject jsonObj;
 		try {
 			jsonObj = new JSONObject(data);
-			Player player = playerController.fetchPlayer((User) request.getSession(false).getAttribute("user"), Integer.parseInt((String) jsonObj.get("playerId")));
+			
+			User user = (User) request.getSession(false).getAttribute("user");
+			
+			Player player = playerController.fetchPlayer(Integer.parseInt((String) jsonObj.get("playerId")));
 			Team team = teamController.fetchTeam(player.getTeamId());
 			
 			JSONObject obj = new JSONObject();

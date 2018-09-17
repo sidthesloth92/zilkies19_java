@@ -32,6 +32,7 @@ public class Home extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.setProperty("java.util.logging.SimpleFormatter.format","%5$s%6$s%n");
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		User user = (User) request.getSession(false).getAttribute("user");

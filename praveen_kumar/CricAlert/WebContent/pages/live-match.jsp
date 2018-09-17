@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import ="io.ztech.cricalert.beans.Team"%>
+<%@ page import ="io.ztech.cricalert.beans.Match"%>
+<%@ page import ="java.sql.Timestamp"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +18,12 @@
         <img class="options-icon" src="/CricAlert/assets/icons/icons8-dots.png" alt="options"/>
     </header>
     <section class="details">
+    	<% 
+    	Match match = (Match) request.getAttribute("match");
+    	Timestamp ts = match.getMatchDatetime();
+    	String date = ts.toString().split(" ")[0];
+    	String time = ts.toString().split(" ")[1].split(":")[0] + ":" + ts.toString().split(" ")[1].split(":")[1];
+    	%>
         <div class="details__teams col-sm-12">
             <div class="details__teams__card col-sm-6"></div>
             <div class="details__teams__card col-sm-6"></div>
@@ -23,7 +33,7 @@
         <h2 class="details__stats-title">Match Stats</h2><hr>
         <div class="details__stats"></div>
     </section>
-    <footer class="track-match col-sm-12">
+    <%= "<footer class='track-match col-sm-12' onclick=\"window.location='/CricAlert/pages/play.jsp?id=" + match.getMatchId() + "&type=live'\">" %>
         Track Match
     </footer>
 </body>

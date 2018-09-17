@@ -1,0 +1,231 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal__choose-players,
+.modal__toss,
+.modal__next-bowler,
+.modal__next-batsman,
+.modal__innings-end,
+.modal__match-end {
+    display: none;
+    background-color: #fefefe;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    height: 250px;
+    width: 240px;
+    font-size: 15px;
+}
+
+.modal__toss,
+.modal__innings-end,
+.modal__match-end {
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.modal__toss {
+	display: flex;
+}
+
+.modal__next-bowler,
+.modal__next-batsman {
+	box-sizing: border-box;
+	padding: 20px;
+}
+
+.modal__toss__container {
+    display: flex;
+    justify-content: center;
+}
+
+.modal__toss__container__team-A,
+.modal__toss__container__team-B,
+.modal__toss__container__bat,
+.modal__toss__container__bowl,
+.modal__toss__confirm {
+    margin: 10px 20px;
+    border: 1px solid gray;
+    width: 60px;
+    height: 30px;
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 1px 0px;
+    background-color: #6effe44f;
+    cursor: pointer;
+}
+
+.modal__toss__confirm {
+    height: 35px;
+    width: 80px;
+    border-radius: 30px;
+}
+
+.user-selection {
+	background-color: #43e97b;
+}
+
+.modal__choose-players form,
+.modal__next-bowler form,
+.modal__next-batsman form {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.overview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid hotpink;
+    font-size: 13px;
+}
+
+.overview__batsmen,
+.overview__bowler {
+    border: none;
+}
+
+.overview__batsmen td,
+.overview__bowler td {
+    padding: 3px 15px;
+}
+
+.balls {
+	width: 320px;
+	height: 50px;
+	display: flex;
+	flex-wrap: nowrap;
+    overflow-x: auto;
+    box-sizing: border-box;
+    padding: 10px 0;
+}
+
+.balls__played {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 6px 0;
+    text-align: center;
+}
+
+.input {
+    display: flex;
+    margin-top: 80px;
+    justify-content: center;
+    /* border: 2px solid indigo; */
+}
+
+.input__extra,
+.input__runs {
+    height: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    position: relative;
+    margin: 0 10px;
+    /* border: 2px solid lightseagreen; */
+}
+
+.input__extra {
+    width: 100px;
+}
+
+.input__runs {
+    width: 180px;
+    flex-direction: column;
+}
+
+.input__extra *,
+.input__runs * {
+    /* position: absolute; */
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid chartreuse;
+    cursor: pointer;
+}
+
+.scorecard {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    height: 60px;
+    border: 2px solid lime;
+}
+
+.scorecard__container-1 {
+    width: 100px;
+    border: 2px solid lightseagreen;
+}
+
+.scorecard__container-1 {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.scorecard__container-1__team-a,
+.scorecard__container-1__team-b {
+    width: 50px;
+    box-sizing: border-box;
+    padding-top: 5px;
+}
+
+.scorecard__container-1__team--active {
+    border: 1px solid black;
+    border-bottom: none;
+}
+
+.scorecard__container-1__score {
+    width: 100px;
+    padding-top: 5px;
+    border: 1px solid black;
+}
+
+.scorecard__container-2 {
+    width: 150px;
+    font-size: 14px;
+    border: 2px solid lightseagreen;
+    text-align: center;
+}
+
+.scorecard__container-2__overs,
+.scorecard__container-2__target {
+    padding: 5px;
+}
+
+.scorecard__container-3 {
+    /* width: 150px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 12px;
+    border: 2px solid lightseagreen;
+    text-align: center;
+}

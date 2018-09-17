@@ -62,12 +62,9 @@ public class AddTeam extends HttpServlet {
 	    
 	    String[] playerIds = request.getParameterValues("players");
 	    for (String playerId : playerIds) {
-	    	System.out.println("String: " + playerId + " Integer: " + Integer.parseInt(playerId));
-    		Player player = playerController.fetchPlayer(user, Integer.parseInt(playerId));
-    		System.out.println(player.getPlayerId());
+    		Player player = playerController.fetchPlayer(Integer.parseInt(playerId));
     		player.setUser(user);
     		team.addPlayer(player);
-    		System.out.println(player.getPlayerId() + " " + player.getFirstName());
     	}
 	    try {
 	    	System.out.println(team.getTeamId() + " " + team.getTeamName());

@@ -4,27 +4,27 @@ header {
     margin-top: 20px;
 }
 
-.details__date {
+.content__schedule {
     font-size: 14px;
     margin: 14px 0 0 14px;
 }
 
-.details__teams {
+.content__teams {
     display: flex;
     flex-wrap: wrap;
 }
 
-.details__teams__card {
+.content__teams__card {
     height: 100px;
     margin: 10px;
     outline: 1px solid blue;
 }
 
-.details__teams__line-up-container {
+.content__teams__line-up-container {
     padding: 10px;
 }
 
-.details__teams__line-up {
+.content__teams__line-up {
     height: 200px;
     margin: 10px;
     border: 1px solid brown;
@@ -43,5 +43,17 @@ header {
 }
 
 .options-icon:hover {
+    cursor: pointer;
+}
+
+.track-match {
+    height: 30px;
+    width: 95%;
+    margin: 10px auto;
+    padding-top: 5px;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 0 0 5px 1px;
+    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
     cursor: pointer;
 }

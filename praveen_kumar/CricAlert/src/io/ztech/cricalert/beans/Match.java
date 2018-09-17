@@ -5,14 +5,14 @@ import java.sql.Timestamp;
 import io.ztech.cricalert.constants.MatchResult;
 
 public class Match {
-	int matchId;
-	User user;
-	Timestamp matchDatetime;
-	Team teamA, teamB;
-	LineUp teamALineUp, teamBLineUp;
-	String status, venue;
-	int tossWonBy;
-	MatchResult matchResult;
+	private int matchId;
+	private User user;
+	private Timestamp matchDatetime;
+	private Team teamA, teamB;
+	private LineUp teamALineUp, teamBLineUp;
+	private String status, venue;
+	private int tossWonBy;
+	private MatchResult matchResult;
 	
 	public String getVenue() {
 		return venue;

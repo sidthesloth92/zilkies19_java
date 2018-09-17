@@ -6,11 +6,10 @@ import java.util.logging.Logger;
 
 import io.ztech.cricalert.beans.BallStats;
 import io.ztech.cricalert.beans.Match;
+import io.ztech.cricalert.beans.MatchStats;
 import io.ztech.cricalert.beans.Player;
-import io.ztech.cricalert.beans.Team;
+import io.ztech.cricalert.beans.PlayerStats;
 import io.ztech.cricalert.beans.User;
-import io.ztech.cricalert.constants.MatchResult;
-import io.ztech.cricalert.constants.UserMessages;
 import io.ztech.cricalert.dao.CricketDAO;
 
 public class MatchDelegate {
@@ -32,16 +31,27 @@ public class MatchDelegate {
 	public boolean searchMatch(User user, int matchId) {
 		return dao.searchMatch(user, matchId);
 	}
-
+	
+	// Called by Play
 	public Match fetchMatch(int matchId) {
 		return dao.fetchMatch(matchId);
+	}
+	
+	// Called by FetchMatchStats
+	public MatchStats fetchMatchStats(int matchId) {
+		return dao.fetchMatchStats(matchId);
+	}
+	
+	// Called by FetchPlayerStats
+	public ArrayList<PlayerStats> fetchPlayerStats(int matchId) {
+		return dao.fetchPlayerStats(matchId);
 	}
 
 	public ArrayList<Player> fetchPlayers(ArrayList<Integer> players) {
 		return dao.fetchPlayers(players);
 	}
 
-	public void insertBallStats(BallStats ballStats) {
+	public void updateBallStats(BallStats ballStats) {
 		dao.insertBallStats(ballStats);
 	}
 	
@@ -55,5 +65,20 @@ public class MatchDelegate {
 	
 	public void updateTeam(Match match, String team) {
 		dao.updateTeam(match, team);
+	}
+	
+	// Called by WriteMatch
+	public void updateMatchStatus(Match match) {
+		dao.updateMatchStatus(match);
+	}
+	
+	// Called by WriteMatchStats
+	public void updateMatchStats(MatchStats matchStats) {
+		dao.updateMatchStats(matchStats);
+	}
+	
+	// Called by WritePlayerStats
+	public void updatePlayerStats(PlayerStats playerStats) {
+		dao.updatePlayerStats(playerStats);
 	}
 }

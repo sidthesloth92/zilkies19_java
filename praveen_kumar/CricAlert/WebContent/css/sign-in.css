@@ -46,6 +46,7 @@ body {
     padding: 15px;
     color: rgb(80, 78, 78);
     font-weight: bold;
+    cursor: pointer;
 }
 
 .credentials__title__signup {
@@ -53,7 +54,10 @@ body {
 }
 
 .credentials__title__active {
-    box-shadow: 0 0 5px 1px;
+    /* box-shadow: 0 0 5px 1px; */
+    border-top: 1px solid #606060;
+	border-left: 1px solid #606060;
+	border-right: 1px solid #606060;
 }
 
 .credentials__title__inactive {
@@ -101,6 +105,7 @@ body {
     margin-bottom: 0 !important;
     background-color: #01d661 !important;
     color: rgb(95, 95, 95);
+    cursor: pointer;
 }
 
 .fade-in {
