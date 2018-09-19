@@ -1,0 +1,96 @@
+.content__player-card {
+    height: 150px;
+    width: 130px;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fefbd8;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px #888;
+    border: 1px solid #888;
+    cursor: pointer;
+    transition: all 0.1s linear;
+}
+
+.content__player-card:active {
+    border: none;
+    box-shadow: 0 0 1px 1px;
+    background-color: #fcecbd;
+}
+
+.content__player-card-photo {
+    border: 1px solid black;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Remove this later */
+.content__player-card-photo img {
+    width: 60px;
+}
+
+.content__modal__player-info {
+	display: none;
+    background-color: #fefefe;
+    margin: 40% auto;
+    padding: 20px;
+    border-radius: 10px;
+    height: 250px;
+    width: 240px;
+}
+
+.content__modal__player-info__photo {
+    background-color: antiquewhite;
+    box-shadow: 0 0 4px #888;
+    border-radius: 50%;
+    height: 125px;
+    width: 125px;
+    position: relative;
+    bottom: 60px;
+    margin: 0 auto;
+}
+
+.content__modal__player-info__photo img {
+    padding: 22px;
+}
+
+.content__modal__player-info__name {
+    text-align: center;
+    position: relative;
+    bottom: 70px;
+}
+
+.content__modal__player-info__team {
+    text-align: center;
+    color: white;
+    background-color: rgb(156, 156, 156);
+    border-radius: 10px;
+    height: 40px;
+    width: 220px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+.close {
+    color: #aaa;
+    position: relative;
+    bottom: 130px;
+    left: 220px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

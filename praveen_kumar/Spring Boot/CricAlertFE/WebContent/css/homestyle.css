@@ -1,0 +1,116 @@
+.content__matches {
+	overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.content__matches__title {
+	font-weight: bold;
+	margin-left: 15px;
+}
+
+.content__matches__alert {
+	font-style: italic;
+	color: gray;
+}
+
+.content__matches__live,
+.content__matches__upcoming,
+.content__matches__past {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-left: 15px;
+    margin-bottom: 10px;
+}
+
+.match-card {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    height: 100px;
+    width: 180px;
+    box-shadow: 0 0 5px 1px;
+    border-radius: 10px;
+    margin: 10px 20px 10px 0;
+    background-color: #fefbd8;
+    transition: all 0.1s linear;
+}
+
+.match-card:hover {
+    cursor: pointer;
+}
+
+.match-card__schedule {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 2px 5px;
+    height: 20%;
+    font-size: 10px;
+    font-style: italic;
+    /* outline: 1px solid hotpink; */
+}
+
+.match-card__teams {
+    display: flex;
+    justify-content: space-around;
+    height: 60%;
+    /* outline: 1px solid royalblue; */
+}
+
+.match-card__teams__team-a,
+.match-card__teams__team-b {
+    height: 100%;
+    width: 45%;
+    /* outline: 1px solid black; */
+}
+
+.match-card__teams__team-a__score,
+.match-card__teams__team-b__score {
+    font-size: 12px;
+    text-align: center;
+    /* outline: 1px solid springgreen; */
+}
+
+.match-card__teams__team-a__logo,
+.match-card__teams__team-b__logo {
+    height: 45px;
+    width: 50px;
+    /* outline: 1px solid indianred; */
+    margin: 0 auto;
+}
+
+.match-card__teams__team-a__logo img,
+.match-card__teams__team-b__logo img {
+    max-height: 45px;
+    max-width: 50px;
+}
+
+.match-card__venue {
+    height: 20%;
+    font-style: italic;
+    font-size: 12px;
+    padding-left: 5px;
+    /* outline: 1px solid firebrick; */
+}
+
+.match-card:active {
+    box-shadow: 0 0 1px 1px;
+    background-color: #fcecbd;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.header__title-bar__hamburger:hover {
+    cursor: pointer;
+}
+
+.close-bar:hover {
+    cursor: pointer;
+}
