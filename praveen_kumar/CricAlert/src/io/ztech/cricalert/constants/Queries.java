@@ -20,10 +20,10 @@ public class Queries {
 	public static final String FETCH_PLAYER_STATS = "select * from player_stats where match_id = ?";
 	public static final String CHECK_PLAYER_STATS = "select * from player_stats where match_id = ? and player_id = ?";
 	public static final String FETCH_USER_PLAYERS = "select player_id, first_name, last_name, team_id from player where user_id = ?";
-	public static final String FETCH_MATCH = "select match_id, match_datetime, venue, team_1_id, team_2_id, status, toss_won_by, match_result from matches where match_id = ?";
+	public static final String FETCH_MATCH = "select match_id, match_datetime, venue, team_1_id, team_2_id, status, match_result from matches where match_id = ?";
 	public static final String FETCH_MATCH_STATS = "select * from match_stats where match_id = ?";
 	public static final String FETCH_SCHEDULED_MATCH = "select count(*) from matches where user_id = ? and status = 'scheduled'";
-	public static final String FETCH_MATCHES = "select match_id, match_datetime, venue, team_1_id, team_2_id, status, toss_won_by, match_result from matches where user_id = ?";
+	public static final String FETCH_MATCHES = "select match_id, match_datetime, venue, team_1_id, team_2_id, status, match_result from matches where user_id = ?";
 	public static final String FETCH_USER = "select * from user where user_name = ?";
 	public static final String FETCH_USER_ID = "select user_id from user where user_name = ?";
 	public static final String FETCH_LINE_UP = "select player_id from line_up where match_id = ? and team_id = ?";
@@ -45,7 +45,7 @@ public class Queries {
 	public static final String UPDATE_MATCH_DATE = "update matches set match_datetime = ? where match_id = ?";
 	public static final String UPDATE_MATCH_TEAM_A = "update matches set team_1_id = ? where match_id = ?";
 	public static final String UPDATE_MATCH_TEAM_B = "update matches set team_2_id = ? where match_id = ?";
-	public static final String UPDATE_MATCH_STATUS = "update matches set status = ? where match_id = ?";
+	public static final String UPDATE_MATCH_STATUS = "update matches set status = ?, match_result = ? where match_id = ?";
 	public static final String UPDATE_MATCH_STATS = "update match_stats set batting_team = ?, bowling_team = ?, team_a_score = ?, team_b_score = ?, team_a_wickets = ?, team_b_wickets = ?, overs = ?, onstrike = ?, offstrike = ?, bowler = ?, inning = ? where match_id = ?";
 	
 	public static final String ADD_PLAYER_TO_TEAM = "insert into player (team_id, first_name, last_name, user_id) values (?, ?, ?, ?)";

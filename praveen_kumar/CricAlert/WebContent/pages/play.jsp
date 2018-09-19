@@ -14,9 +14,16 @@
 	<%-- <c:set var="match" scope="request" value='${requestScope["match"]}'></c:set>
 	<c:set var="teamA" scope="request" value='${match.getTeamA()}'></c:set>
 	<c:set var="teamB" scope="request" value='${match.getTeamB()}'></c:set> --%>
-    <header>
-        <img class="return-icon" src="/CricAlert/assets/icons/icons8-back-1.png" alt="return" onclick="pauseMatch()" />
-        <img class="options-icon" src="/CricAlert/assets/icons/icons8-dots.png" alt="options" />
+        <header class="header">
+        <div class="header__title-bar col-sm-12">
+            <img class="header__title-bar__return" src="/CricAlert/assets/icons/icons8-back-1.png" alt="return" onclick="pauseMatch()" />
+            <h1 class="header__title-bar__title"></h1>
+        </div>
+        <nav class="header__nav-bar col-sm-12">
+            <a href="#" class="nav-highlight">Live</a>
+            <a href="#" class="">Scorecard</a>
+            <a href="#" class="">Overs</a>
+        </nav>
     </header>
     <div class="modal">
         <div class="modal__toss">
@@ -63,7 +70,7 @@
         </div>
         <div class="modal__match-end">
             <p>The match has ended!</p>
-            <img class="modal__match-end__photo" src="CricAlert/assets/icons/icons8-team.png" alt="team">
+            <img class="modal__match-end__photo" src="/CricAlert/assets/icons/icons8-team.png" alt="team">
             <p class="modal__match-end__team"></p>
             <p class="modal__match-end__result"></p>
             <p class="modal__match-end__wickets"></p>

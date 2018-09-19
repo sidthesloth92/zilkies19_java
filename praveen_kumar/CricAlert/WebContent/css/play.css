@@ -1,7 +1,57 @@
-header {
+body {
     display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    width: 100%;
+    box-shadow: 0 0 10px 2px;
+}
+
+.header__nav-bar a {
+    text-decoration: none;
+}
+
+.header__nav-bar a:active {
+    color: rgb(0, 0, 0);
+}
+
+.header__title-bar {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+}
+
+.header__title-bar__return {
+    height: 20px;
+    width: 23px;
+    margin-left: 7px;
+    cursor: pointer;
+}
+
+.header__title-bar__title {
+    font-size: 20px;
+    font-weight: 100;
+    margin-left: auto;
+    padding-right: 23px;
+    margin-right: auto;
+}
+
+.header__nav-bar {
+    height: 37px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 15px;
+    background-image: linear-gradient(to right, #42bb6b 0%, #32e2c2 100%);
+}
+
+.nav-highlight {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .modal {
@@ -80,10 +130,6 @@ header {
     border-radius: 30px;
 }
 
-.user-selection {
-	background-color: #43e97b;
-}
-
 .modal__choose-players form,
 .modal__next-bowler form,
 .modal__next-batsman form {
@@ -94,11 +140,15 @@ header {
 }
 
 .overview {
+	width: 310px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 2px solid hotpink;
+    background-color: rgb(255, 241, 214);
+    border-radius: 5px;
+    box-shadow: 0 0 2px 1px;
     font-size: 13px;
+    margin-top: 20px;
 }
 
 .overview__batsmen,
@@ -112,7 +162,7 @@ header {
 }
 
 .balls {
-	width: 320px;
+	width: 300px;
 	height: 50px;
 	display: flex;
 	flex-wrap: nowrap;
@@ -122,21 +172,28 @@ header {
 }
 
 .balls__played {
-    width: 30px;
+    min-width: 30px;
     height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 0 10px;
     border: 1px solid gray;
     border-radius: 5px;
     box-sizing: border-box;
     padding: 6px 0;
     text-align: center;
+    background-color: azure;
+}
+
+.user-selection {
+	background-color: #43e97b !important;
 }
 
 .input {
     display: flex;
-    margin-top: 80px;
+    margin-top: 65px;
     justify-content: center;
-    /* border: 2px solid indigo; */
 }
 
 .input__extra,
@@ -146,8 +203,6 @@ header {
     flex-wrap: wrap;
     align-content: center;
     position: relative;
-    margin: 0 10px;
-    /* border: 2px solid lightseagreen; */
 }
 
 .input__extra {
@@ -161,30 +216,30 @@ header {
 
 .input__extra *,
 .input__runs * {
-    /* position: absolute; */
     height: 40px;
     width: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid chartreuse;
     cursor: pointer;
+    background-color: rgb(238, 208, 127);
+    box-shadow: 0 0 1px 1px;
+    margin: 1px;
+    border-radius: 5px;
 }
 
 .scorecard {
     display: flex;
     justify-content: center;
-    margin-top: 60px;
+    margin-top: 50px;
     height: 60px;
-    border: 2px solid lime;
+    background-color: azure;
+    box-shadow: 0 0 2px 0px;
+    border-radius: 5px;
 }
 
 .scorecard__container-1 {
-    width: 100px;
-    border: 2px solid lightseagreen;
-}
-
-.scorecard__container-1 {
+	width: 100px;
     display: flex;
     flex-wrap: wrap;
     text-align: center;
@@ -198,20 +253,18 @@ header {
 }
 
 .scorecard__container-1__team--active {
-    border: 1px solid black;
-    border-bottom: none;
+    border-bottom: 2px solid firebrick;
 }
 
 .scorecard__container-1__score {
     width: 100px;
     padding-top: 5px;
-    border: 1px solid black;
 }
 
 .scorecard__container-2 {
     width: 150px;
     font-size: 14px;
-    border: 2px solid lightseagreen;
+    border-right: 2px solid lightseagreen;
     text-align: center;
 }
 
@@ -221,11 +274,10 @@ header {
 }
 
 .scorecard__container-3 {
-    /* width: 150px; */
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     font-size: 12px;
-    border: 2px solid lightseagreen;
     text-align: center;
+    padding: 0 5px;
 }

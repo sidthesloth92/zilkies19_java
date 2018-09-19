@@ -44,7 +44,7 @@
 			for (Team team : teamList) {
 				out.println("<div id='" + team.getTeamId() + "' class='content__team-card col-sm-12' onclick='expandTeam(this)' draggable='true' ondragstart='dragStart(event)' ondragend='dragStop(event)'>");
 				out.println("<div class='content__team-card__container-1'>");
-				out.println("<img class='content__team-card__container-1__photo' draggable='false' src='/CricAlert/assets/icons/icons8-team.png' alt='Photo' />");
+				out.println("<img class='content__team-card__container-1__photo' draggable='false' src='/CricAlert/assets/images/" + team.getTeamName() + ".png' onerror=\"if (this.src != '/CricAlert/assets/icons/icons8-team.png') this.src = '/CricAlert/assets/icons/icons8-team.png';\" alt='Photo' />");
 				out.println("<h3 class='content__team-card__container-1__name'>" + team.getTeamName() + "</h3>");
 				out.println("</div>");
 				out.println("<div class='content__team-card__container-2'></div>");

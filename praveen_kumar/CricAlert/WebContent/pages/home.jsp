@@ -50,7 +50,7 @@
 	                	String date = match.getMatchDatetime().toString().split(" ")[0];
 	                	String time = match.getMatchDatetime().toString().split(" ")[1];
 	                	time = time.split(":")[0] + ":" + time.split(":")[1]; 
-	                	out.println("<div class='match-card' onclick=\"window.location='/CricAlert/MatchInfo?id=" + match.getMatchId() + "&type=live' \">");
+	                	out.println("<div class='match-card' onclick=\"window.location='/CricAlert/pages/play.jsp?id=" + match.getMatchId() + "&type=live'\">"); //onclick=\"window.location='/CricAlert/MatchInfo?id=" + match.getMatchId() + "&type=live' \">"
 	                		out.println("<div class='match-card__schedule'>");
 	                			out.println("<div class='match-card__schedule__date'>" + date + "</div>");
 	                			out.println("<div class='match-card__schedule__time'>" + time + "</div>");
@@ -60,14 +60,14 @@
 	                				out.println("<div class='match-card__teams__team-a__logo'>");
 	                					out.println("<img src='/CricAlert/assets/images/" + match.getTeamA().getTeamName() + ".png' alt='Team A'>");
 	                				out.println("</div>");
-	                				out.println("<div class='match-card__teams__team-a__score'>201-9</div>");
+	                				out.println("<div class='match-card__teams__team-a__score'>" + match.getMatchStats().getTeamAscore() + "-" + match.getMatchStats().getTeamAwickets() + "</div>");
 	                			out.println("</div>");
 	                			out.println("vs");
 	                			out.println("<div class='match-card__teams__team-b'>");
 		            				out.println("<div class='match-card__teams__team-b__logo'>");
 		            					out.println("<img src='/CricAlert/assets/images/" + match.getTeamB().getTeamName() + ".png' alt='Team B'>");
 		            				out.println("</div>");
-		            				out.println("<div class='match-card__teams__team-b__score'>115-3</div>");
+		            				out.println("<div class='match-card__teams__team-b__score'>" + match.getMatchStats().getTeamBscore() + "-" + match.getMatchStats().getTeamBwickets() + "</div>");
 		            			out.println("</div>");
 		            		out.println("</div>");
 		            		out.println("<div class='match-card__venue'>" + match.getVenue() + "</div>");
@@ -88,7 +88,7 @@
 	                	String date = match.getMatchDatetime().toString().split(" ")[0];
 	                	String time = match.getMatchDatetime().toString().split(" ")[1];
 	                	time = time.split(":")[0] + ":" + time.split(":")[1]; 
-	                	out.println("<div class='match-card' onclick=\"window.location='/CricAlert/MatchInfo?id=" + match.getMatchId() + "&type=upcoming' \">");
+	                	out.println("<div class='match-card' onclick=\"window.location='/CricAlert/pages/play.jsp?id=" + match.getMatchId() + "&type=upcoming'\">");
 	                		out.println("<div class='match-card__schedule'>");
 	                			out.println("<div class='match-card__schedule__date'>" + date + "</div>");
 	                			out.println("<div class='match-card__schedule__time'>" + time + "</div>");
@@ -124,7 +124,7 @@
 	                	String date = match.getMatchDatetime().toString().split(" ")[0];
 	                	String time = match.getMatchDatetime().toString().split(" ")[1];
 	                	time = time.split(":")[0] + ":" + time.split(":")[1]; 
-	                	out.println("<div class='match-card' onclick=\"window.location='/CricAlert/MatchInfo?id=" + match.getMatchId() + "&type=past' \">");
+	                	out.println("<div class='match-card' onclick=\"window.location='/CricAlert/pages/play.jsp?id=" + match.getMatchId() + "&type=past'\">");
 	                		out.println("<div class='match-card__schedule'>");
 	                			out.println("<div class='match-card__schedule__date'>" + date + "</div>");
 	                			out.println("<div class='match-card__schedule__time'>" + time + "</div>");
@@ -134,14 +134,14 @@
 	                				out.println("<div class='match-card__teams__team-a__logo'>");
 	                					out.println("<img src='/CricAlert/assets/images/" + match.getTeamA().getTeamName() + ".png' alt='Team A'>");
 	                				out.println("</div>");
-	                				out.println("<div class='match-card__teams__team-a__score'>201-9</div>");
+	                				out.println("<div class='match-card__teams__team-a__score'>" + match.getMatchStats().getTeamAscore() + "-" + match.getMatchStats().getTeamAwickets() + "</div>");
 	                			out.println("</div>");
 	                			out.println("vs");
 	                			out.println("<div class='match-card__teams__team-b'>");
 		            				out.println("<div class='match-card__teams__team-b__logo'>");
 		            					out.println("<img src='/CricAlert/assets/images/" + match.getTeamB().getTeamName() + ".png' alt='Team B'>");
 		            				out.println("</div>");
-		            				out.println("<div class='match-card__teams__team-b__score'>115-3</div>");
+		            				out.println("<div class='match-card__teams__team-b__score'>" + match.getMatchStats().getTeamBscore() + "-" + match.getMatchStats().getTeamBwickets() + "</div>");
 		            			out.println("</div>");
 		            		out.println("</div>");
 		            		out.println("<div class='match-card__venue'>" + match.getVenue() + "</div>");

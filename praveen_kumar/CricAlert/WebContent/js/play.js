@@ -206,6 +206,8 @@ function confirmPlayers() {
 	setBowler(bowler);
 	updateTable();
 	initializeScorecard();
+	match.status = 'ongoing';
+	console.log("written match status: " + match.status);
 	writeMatch();
 }
 
@@ -326,13 +328,8 @@ function addBall(event) {
 		updateMatchStats(ballRuns + additionalRuns, 'regular');
 	}
 	
-	if ( parseInt(matchStats.overs * 10) % 10 == 6) {
-		updateBowler();
-	}
 	updateScorecard();
 	updateTable();
-	
-	// check if overs are over!
 }
 
 function addExtra(event) {
@@ -379,35 +376,67 @@ function updateMatchStats(totalRuns, type) {
 	if (type != 'noball' && type != 'wide') {
 		matchStats.overs += 0.1;
 	}
+	
+	// Checking if over is complete, if it is, then round off but don't call updateBowler()
+	if (parseInt(matchStats.overs * 10) % 10 == 6) {
+		matchStats.overs += 0.4;
+	}
+	
 	if (match.teamA.teamId == matchStats.battingTeam.teamId) {
 		matchStats.teamAscore += totalRuns;
+		if ((matchStats.teamAscore > matchStats.teamBscore && matchStats.inning == 1) || parseInt(matchStats.overs) == 20) {
+			endInnings();
+		} else {
+			// Calling updateBowler() after checking whether inning is over, to ensure two modals aren't displayed
+			if (parseInt(matchStats.overs * 10) % 10 == 0) {
+				updateBowler();
+			}
+		}
 	} else {
 		matchStats.teamBscore += totalRuns;
+		if ((matchStats.teamBscore > matchStats.teamAscore && matchStats.inning == 1) || parseInt(matchStats.overs) == 20) {
+			endInnings();
+		} else {
+			// Calling updateBowler() after checking whether inning is over, to ensure two modals aren't displayed
+			if (parseInt(matchStats.overs * 10) % 10 == 0) {
+				updateBowler();
+			}
+		}
 	}
 }
 
 function updateScorecard() {
 	scorecardOvers.innerHTML = "Overs: " + matchStats.overs.toFixed(1) + " / 20";
+	if (matchStats.overs == 0) {
+		scorecardRunrate.innerHTML = "RR: 0.0";
+	}
 	if (match.teamA.teamId == matchStats.battingTeam.teamId) {
 		scorecardTeamA.classList.add("scorecard__container-1__team--active");
+		scorecardTeamB.classList.remove("scorecard__container-1__team--active");
 		scorecardTarget.innerHTML = "Target: " + matchStats.teamBscore;
 		scorecardScore.innerHTML = matchStats.teamAscore + " - "  + matchStats.teamAwickets;
+		if (matchStats.overs != 0) {
+			scorecardRunrate.innerHTML = "RR: " + (matchStats.teamAscore / matchStats.overs).toFixed(1);
+		}
+		if (matchStats.teamBscore != 0) {
+			scorecardRequired.innerHTML = "RQ: " + ((matchStats.teamBscore - matchStats.teamAscore) / (20 - matchStats.overs)).toFixed(1);
+		}
 	} else {
+		scorecardTeamA.classList.remove("scorecard__container-1__team--active");
 		scorecardTeamB.classList.add("scorecard__container-1__team--active");
 		scorecardTarget.innerHTML = "Target: " + matchStats.teamAscore;
 		scorecardScore.innerHTML = matchStats.teamBscore + " - "  + matchStats.teamBwickets;
-	}
-	if (matchStats.overs == 0) {
-		scorecardRunrate.innerHTML = "RR: 0.0";
-	} else {
-		scorecardRunrate.innerHTML = "RR: " + (matchStats.teamAscore / matchStats.overs).toFixed(1);
-	}
-	if (matchStats.teamBscore != 0) {
-		scorecardRequired.innerHTML = "RQ: " + ((matchStats.teamBscore - matchStats.teamAscore) / (20 - matchStats.overs)).toFixed(1);
+		if (matchStats.overs != 0){
+			scorecardRunrate.innerHTML = "RR: " + (matchStats.teamBscore / matchStats.overs).toFixed(1);
+		}
+		if (matchStats.teamAscore != 0) {
+			scorecardRequired.innerHTML = "RQ: " + ((matchStats.teamAscore - matchStats.teamBscore) / (20 - matchStats.overs)).toFixed(1);
+		}
 	}
 }
 
 function updateTable() {
+	document.querySelector(".header__title-bar__title").innerHTML = match.teamA.abbreviation + ' vs ' + match.teamB.abbreviation;
 	nameCellA.innerHTML = matchStats.onstrike.lastName;
 	nameCellB.innerHTML = matchStats.offstrike.lastName;
 	runsCellA.innerHTML = playerStatsMap[matchStats.onstrike.playerId].runsScored;
@@ -430,12 +459,6 @@ function updateTable() {
 }
 
 function updateBowler() {
-	matchStats.overs += 0.4;
-	
-	if (matchStats.overs == 20) {
-		endInnings();
-	}
-	
 	modal.style.display = "flex";
 	modalNextBowler.style.display = "flex";
 	var bowler = bowlerForm.querySelector('select[name="bowler"]');
@@ -511,11 +534,12 @@ function wicketTaken() {
 function endInnings() {
 	document.querySelector(".modal__innings-end__team").innerHTML = matchStats.battingTeam.teamName;
 	document.querySelector(".modal__innings-end__overs").innerHTML = matchStats.overs.toFixed(1);
-	if (matchStats.inning == 0) {
+	if (match.teamA.teamId == matchStats.battingTeam.teamId) {
 		document.querySelector(".modal__innings-end__score").innerHTML = matchStats.teamAscore + ' - ' + matchStats.teamAwickets;
 	} else {
 		document.querySelector(".modal__innings-end__score").innerHTML = matchStats.teamBscore + ' - ' + matchStats.teamBwickets;
 	}
+	
 	modal.style.display = "flex";
 	modalInningsEnd.style.display = "flex";
 	if (matchStats.inning == 0) {
@@ -546,7 +570,6 @@ function displayResult() {
 		var wicketsLeft = match.teamB.players.length - matchStats.teamBwickets;
 		document.querySelector(".modal__match-end__wickets").innerHTML = wicketsLeft + ' wicket(s)';
 	}
-	match.status = "completed";
 	document.querySelector(".modal__match-end__result").innerHTML = match.matchResult + ' the match by';
 	modalInningsEnd.style.display = "none";
 	modal.display = "flex";
@@ -557,11 +580,11 @@ function endMatch() {
 	match.status = 'completed';
 	modal.style.display = "none";
 	modalMatchEnd.style.display = "none";
+	writeMatch();
 	writeMatchStats();
 }
 
 function writeMatch() {
-	match.status = 'ongoing';
 	fetch('/CricAlert/WriteMatch', {
 		method: 'post',
 		body: JSON.stringify(match)

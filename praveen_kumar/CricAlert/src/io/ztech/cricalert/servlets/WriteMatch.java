@@ -15,8 +15,8 @@ import org.json.JSONObject;
 
 import io.ztech.cricalert.beans.Match;
 import io.ztech.cricalert.beans.User;
+import io.ztech.cricalert.constants.MatchResult;
 import io.ztech.cricalert.controller.MatchController;
-import io.ztech.cricalert.dao.CricketDAO;
 
 /**
  * Servlet implementation class WriteMatch
@@ -62,6 +62,15 @@ public class WriteMatch extends HttpServlet {
 			matchJson = new JSONObject(data);
 			match.setMatchId(matchJson.getInt("matchId"));
 			match.setStatus(matchJson.getString("status"));
+			if (matchJson.getString("matchResult").equals("WIN")) {
+				match.setMatchResult(MatchResult.WIN);
+			} else if (matchJson.getString("matchResult").equals("LOSE")) {
+				match.setMatchResult(MatchResult.LOSE);
+			} else if (matchJson.getString("matchResult").equals("DRAW")) {
+				match.setMatchResult(MatchResult.DRAW);
+			} else {
+				match.setMatchResult(null);
+			}
 			matchController.updateMatchStatus(match, (User) request.getSession(false).getAttribute("user"));
 		} catch (JSONException e) {
 			e.printStackTrace();

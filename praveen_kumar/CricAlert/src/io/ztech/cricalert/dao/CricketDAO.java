@@ -18,7 +18,6 @@ import io.ztech.cricalert.beans.User;
 import io.ztech.cricalert.constants.MatchResult;
 import io.ztech.cricalert.constants.Queries;
 import io.ztech.cricalert.dbutils.Connector;
-import io.ztech.cricketapp.ui.UserEntry;
 
 public class CricketDAO {
 	Connector connector;
@@ -361,7 +360,12 @@ public class CricketDAO {
 		try {
 			ps = con.prepareStatement(Queries.UPDATE_MATCH_STATUS);
 			ps.setString(1, match.getStatus());
-			ps.setInt(2, match.getMatchId());
+			if (match.getMatchResult() == null) {
+				ps.setNull(2, java.sql.Types.INTEGER);
+			} else {
+				ps.setInt(2, match.getMatchResult().ordinal());
+			}
+			ps.setInt(3, match.getMatchId());
 			ps.execute();
 		} catch (SQLException e) {
 			logger.info("Exception caught at updateMatchStatus(): " + e);
@@ -655,14 +659,14 @@ public class CricketDAO {
 				teamB = fetchTeam(teamB.getTeamId());
 				match.setTeamB(teamB);
 				match.setStatus(rs.getString(6));
-				match.setTossWonBy(rs.getInt(7));
-				if (rs.getInt(8) == 0) {
+				if (rs.getInt(7) == 0) {
 					match.setMatchResult(null);
 				} else {
 					match.setMatchResult(MatchResult.values()[rs.getInt(7)-1]);
 				}
-				match.setTeamALineUp( fetchLineUp(match.getMatchId(), match.getTeamA().getTeamId()) );
-				match.setTeamBLineUp( fetchLineUp(match.getMatchId(), match.getTeamB().getTeamId()) );
+				match.setTeamALineUp(fetchLineUp(match.getMatchId(), match.getTeamA().getTeamId()));
+				match.setTeamBLineUp(fetchLineUp(match.getMatchId(), match.getTeamB().getTeamId()));
+				match.setMatchStats(fetchMatchStats(match.getMatchId()));
 			}
 		} catch (SQLException e) {
 			logger.info("Exception caught at fetchMatch(): " + e);
@@ -687,21 +691,19 @@ public class CricketDAO {
 				match.setMatchId(rs.getInt(1));
 				match.setMatchDatetime(rs.getTimestamp(2));
 				match.setVenue(rs.getString(3));
-				
 				Team teamA = fetchTeam(rs.getInt(4));
 				match.setTeamA(teamA);
-				
 				Team teamB = fetchTeam(rs.getInt(5));
 				match.setTeamB(teamB);
-				
 				match.setStatus(rs.getString(6));
-				
-				match.setTossWonBy(rs.getInt(7));
-				if (rs.getInt(8) == 0) {
+				if (rs.getInt(7) == 0) {
 					match.setMatchResult(null);
 				} else {
 					match.setMatchResult(MatchResult.values()[rs.getInt(7)-1]);
 				}
+				match.setTeamALineUp(fetchLineUp(match.getMatchId(), match.getTeamA().getTeamId()));
+				match.setTeamBLineUp(fetchLineUp(match.getMatchId(), match.getTeamB().getTeamId()));
+				match.setMatchStats(fetchMatchStats(match.getMatchId()));
 				matchList.add(match);
 			}
 		} catch (SQLException e) {
