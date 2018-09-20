@@ -1,0 +1,312 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Lato", sans-serif;
+}
+
+.container {
+	height: 100vh;
+	background: url(../images/background-image-car-2.jpeg);
+	background-position: 0;
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+}
+
+.topbar {
+	height: 70px;
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	background-color: rgb(123, 138, 151);
+	position: fixed;
+	z-index: 1;
+}
+
+.topbar .logo-container>img {
+	width: 150px;
+	height: 50px;
+}
+
+.topbar .logo-container {
+	width: 20%;
+	display: flex;
+	align-items: center;
+}
+
+.topbar .logo-container:hover {
+	cursor: pointer;
+}
+
+.login-container {
+	display: flex;
+	flex-wrap: wrap;
+	width: 70%;
+}
+
+.user-container {
+	width: 70%;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.user-container-username {
+	height: 100%;
+	width: 50px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	margin-right: 50px;
+}
+
+.user-container-username>p {
+	height: 20px;
+	width: 50px;
+	color: wheat;
+	background-color: rgba(0, 0, 0, 0.479);
+}
+
+.user-container-username>p:hover {
+	cursor: pointer;
+}
+
+.user-container-dropdown {
+	height: 200px;
+	width: 150px;
+	background-color: rgb(123, 138, 151, 0.8);
+	position: absolute;
+	left: -30px;
+	top: 70px;
+	display: none;
+	font-size: 15px;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.user-container-dropdown>* {
+	width: 80%;
+	text-align: center;
+}
+
+.user-container-dropdown input {
+	border: none;
+	background-color: transparent;
+}
+
+.user-container-dropdown>*:hover, .user-container-dropdown input:hover {
+	cursor: pointer;
+	color: wheat;
+}
+
+.login {
+	height: 70%;
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.login * {
+	margin-left: 10px;
+}
+
+.login input {
+	height: 30px;
+	padding-left: 5px;
+	border: none;
+}
+
+.login input:hover {
+	box-shadow: 2px 2px 3px 3px black;
+}
+
+.login button {
+	height: 30px;
+	width: 60px;
+	background: #1AAB8A;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+	transition: 800ms ease all;
+	outline: none;
+}
+
+.login button:hover {
+	background: #fff;
+	color: #1AAB8A;
+}
+
+.signup {
+	height: 30%;
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	padding-right: 8%;
+	color: black;
+}
+
+.signup a {
+	text-decoration: none;
+	color: black;
+}
+
+.signup a:hover {
+	color: wheat;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+.inner-container {
+	overflow-y: scroll;
+	height: -webkit-calc(100% - 70px);
+	position: absolute;
+	top: 70px;
+	width: 100%;
+}
+
+.inner-container-main {
+	height: 100%;
+	width: 100%;
+	background: url(../images/background-image-main.jpeg);
+	background-position: 0;
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	display: flex;
+	flex-wrap: wrap;
+	padding-bottom: 10px;
+}
+
+.inner-container-main-options {
+	width: 100%;
+	height: 40%;
+	display: flex;
+}
+
+.inner-container-main-options a {
+	display: block;
+}
+
+.inner-container-main-options>div {
+	width: 50%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Permanent Marker', cursive;
+}
+
+.inner-container-main-options>div button {
+	width: 50%;
+	height: 50%;
+	background-color: rgba(0, 0, 0, 0.4);
+	border: none;
+}
+
+.button--hover:hover {
+	background-color: rgba(0, 0, 0, 0.7);
+	cursor: pointer;
+}
+
+.inner-container-main-options>div button p {
+	font-size: 40px;
+	font-family: 'Permanent Marker', cursive;
+}
+
+.inner-container-main-list {
+	width: 90%;
+	height: 60%;
+	margin: auto;
+	display: flex;
+	/* flex-direction: column; */
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+	background-color: rgba(0, 0, 0, 0.4);
+	color: wheat;
+	overflow-y: scroll;
+	padding: 15px;
+}
+
+.inner-container-main-list div {
+	list-style-type: none;
+	width: 100px;
+	height: 50px;
+	background-color: rgba(0, 0, 0, 0.329);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.inner-container-cars {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.inner-container-cars-car-header {
+	text-align: center;
+	padding: 50px 80px;
+	background-color: #282e34;
+	color: #dddddd;
+}
+
+.inner-container-cars-info {
+	height: 250px;
+	width: 90%;
+	margin: auto;
+	margin-top: 10px;
+	display: flex;
+	background-color: rgb(102, 102, 102, 0.7);
+	border-radius: 5px;
+	color: wheat;
+}
+
+.inner-container-cars-info-car-name {
+	width: 40%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.inner-container-cars-info-car-specs {
+	width: 60%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	flex-wrap: wrap;
+}
+
+.inner-container-cars-info-car-specs>p {
+	min-width: 100px;
+	height: 40px;
+}
+
+footer {
+	height: 70px;
+	width: 100%;
+	background-color: #333333;
+	color: #fff;
+	line-height: 40px;
+	font-size: 15px;
+	text-align: center;
+	bottom: 0;
+	margin-top: 10px;
+}

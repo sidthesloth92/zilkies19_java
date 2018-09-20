@@ -1,0 +1,57 @@
+.inner-container-edit-car {
+	height: -webkit-calc(100% - 50px);
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+}
+
+.inner-container-edit-car__select {
+	width: 100%;
+	height: 20%;
+	display: flex;
+	flex-grow: 1;
+}
+
+.inner-container-edit-car__select>div {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.inner-container-edit-car__select>div>select {
+	width: 60%;
+}
+
+.inner-container-edit-car__edit {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.inner-container-edit-car__edit>input,
+.inner-container-edit-car__edit>select
+{
+	width: 60%;
+	height: 40px;
+}
+
+.inner-container-edit-car__edit>label {
+	width: 60%;
+	height: 40px;
+	display: flex;
+	align-items: flex-end;
+}
+
+.inner-container-edit-car__edit>button {
+	width: 100px;
+	height: 30px;
+}
+
+
