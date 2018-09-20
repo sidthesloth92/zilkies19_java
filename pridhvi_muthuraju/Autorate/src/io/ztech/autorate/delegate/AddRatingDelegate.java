@@ -17,4 +17,8 @@ public class AddRatingDelegate {
 	public boolean editRating(Specification specification, Rating rating, User user) {
 		return addRatingDAO.editRating(specification, rating, user);
 	}
+
+	public boolean isRating(Specification specification, User user) throws SQLException {
+		return addRatingDAO.isRating(specification, user);
+	}
 }

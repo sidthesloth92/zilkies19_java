@@ -31,6 +31,10 @@
     background-color: rgba(0, 0, 0, 0.3);
 }
 
+.signup-inner-container-main form p {
+    color: red;
+}
+
 .signup-inner-container-main h2,
 .signup-inner-container-main input:placeholder-shown,
 .signup-inner-container-main button

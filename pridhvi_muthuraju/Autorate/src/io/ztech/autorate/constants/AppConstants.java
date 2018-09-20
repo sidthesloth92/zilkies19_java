@@ -15,6 +15,7 @@ public class AppConstants {
 	public static String ADMIN = "ADMIN";
 	public static String RATING = "rating";
 	public static String REVIEW = "review";
+	public static String SUBJECT = "review_subject";
 	public static String USER_NAME = "user_name";
 	public static String STATISTICS_YEAR = "statistics_year";
 	public static String CAR_ID = "car_id";
