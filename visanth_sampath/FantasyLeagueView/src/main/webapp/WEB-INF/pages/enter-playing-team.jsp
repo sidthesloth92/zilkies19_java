@@ -15,11 +15,12 @@
 </head>
 <body>
     <div class="header">
-        <div class="topnav" id="myTopnav">
-                <a href="PageRedirectionServlet?page-name=add-match">Add Match</a>
-                <a href="PageRedirectionServlet?page-name=end-match">End Match</a>
-                <a href="PageRedirectionServlet?page-name=add-player">Add Player</a>
-                <a href="PageRedirectionServlet?page-name=edit-rating">Edit Player Rating</a>
+       <div class="topnav" id="myTopnav">
+                <a href="PageRedirectionServlet?page-name=user-home">Home</a>
+                <a href="PageRedirectionServlet?page-name=matches-upcoming">Pick Team</a>
+                <a href="PageRedirectionServlet?page-name=available-matches">View Team</a>
+                <a href="PageRedirectionServlet?page-name=leaderboard">LeaderBoard</a>
+                <a href="PageRedirectionServlet?page-name=top-picks">Top picks</a>
                 <a href="LogOutServlet">Logout</a>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                     <i class="fa fa-bars"></i>

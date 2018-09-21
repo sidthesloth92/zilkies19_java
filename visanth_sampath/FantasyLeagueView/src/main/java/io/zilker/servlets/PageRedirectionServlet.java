@@ -9,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import io.zilker.fantasy.bean.Match;
+import io.zilker.fantasy.bean.User;
 import io.zilker.fantasy.delegates.AdminDelegate;
 import io.zilker.fantasy.delegates.UserDelegate;
 
@@ -35,6 +37,16 @@ public class PageRedirectionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String page = (String) request.getParameter("page-name");
 		if(page.equals("user-home")) {
+			HttpSession session = request.getSession();
+			User user = (User)session.getAttribute("user");
+			int userId = user.getUserId();
+			ArrayList<Match> matches = new UserDelegate().displayActiveMatches();
+            request.setAttribute("matchList", matches);
+            ArrayList<Boolean> pickedStatus = new ArrayList<Boolean> ();
+            for(int i=0; i< matches.size();i++) {
+            	pickedStatus.add(UserDelegate.isTeamTaken( matches.get(i).getMatchId() ,userId));
+            }
+            request.setAttribute("pickedStatus", pickedStatus);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/user-home.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -85,7 +97,7 @@ public class PageRedirectionServlet extends HttpServlet {
 			request.setAttribute("matchList", matchList);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/end-match.jsp");
 			dispatcher.forward(request, response);
-		}
+		} 
 		//RequestDispatcher dispatcher = request.getRequestDispatcher("");
 	}
 

@@ -52,12 +52,17 @@
                     //session.setAttribute("user", user);
                     */
                 	%>
-                	
-                 	<c:forEach items="${matchList}"  var="matches">
+          
+                 	<c:forEach items="${matchList}"  var="matches" varStatus="status">
                 		<div class='match-card row'>
 	                		<div class='col-sm-2 col-md-3 col-lg-3'>
 		                		 <div class='team-logo'>
-		         
+		         					<c:if test="${pickedStatus[status.index]== true}">
+		         					<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flat_tick_icon.svg/2000px-Flat_tick_icon.svg.png' alt='team-taken' />
+		         					</c:if>
+		         					<c:if test="${pickedStatus[status.index] == false}">
+		         					<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Flat_cross_icon.svg/2000px-Flat_cross_icon.svg.png' alt='yet to be picked' />
+		         					</c:if>
 		                		 </div>
 		                	</div>
               	
@@ -67,9 +72,19 @@
                         <c:out value="${matches.getTeamTwo()} " />
 						</h3>
                     </div> 
-                    <div class='col-sm-2 col-md-3 col-lg-3'>
-	                    <div class='team-logo'>
-			            </div>
+                    <div class='col-sm-2 col-md-3 col-lg-3 button-container'>
+	                    <c:if test="${pickedStatus[status.index]== true}">
+		         					<form action='ViewTeamServlet' method='get'>
+		         					<input type='text' name='match-id' value='<c:out value="${matches.getMatchId()}" />' hidden />
+		         					<button type='submit' class='team-name view-team_button'> View Team</button>
+		         					</form>
+		         					</c:if>
+		         					<c:if test="${pickedStatus[status.index] == false}">
+		         					<form action='PickTeamServlet' method='get'>
+		         					<input type='text' name='match-id' value='<c:out value="${matches.getMatchId()}" />' hidden />
+		         					<button type='submit' class='team-name pick-team_button'> Pick Team</button>
+		         					</form>
+		         					</c:if>
                     </div>
                     </div>
                 		 

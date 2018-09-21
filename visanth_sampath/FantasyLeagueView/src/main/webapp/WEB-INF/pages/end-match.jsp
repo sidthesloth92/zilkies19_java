@@ -15,7 +15,7 @@
 </head>
 <body>
     <div class="header">
-        <div class="topnav" id="myTopnav">
+      <div class="topnav" id="myTopnav">
                 <a href="PageRedirectionServlet?page-name=add-match">Add Match</a>
                 <a href="PageRedirectionServlet?page-name=end-match">End Match</a>
                 <a href="PageRedirectionServlet?page-name=add-player">Add Player</a>

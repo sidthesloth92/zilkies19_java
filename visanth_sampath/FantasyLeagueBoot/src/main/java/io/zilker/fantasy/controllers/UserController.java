@@ -97,5 +97,11 @@ public class UserController {
 		 return  new UserOperations().displayActiveMatches();
 	}
 	
-	
+	@RequestMapping("/Team-Status")
+	public JSONObject modifyTeam(@RequestParam("match-id") int matchId , @RequestParam("user-id") int userId) {
+		 boolean status = new UserOperations().isTeamTaken(matchId, userId);
+		 JSONObject json = new JSONObject();
+		 json.put("status", status);
+		 return json;
+	}
 }

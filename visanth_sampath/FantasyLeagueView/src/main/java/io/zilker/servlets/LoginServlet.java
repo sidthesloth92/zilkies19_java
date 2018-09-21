@@ -77,6 +77,11 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("userObject", newUser);
 			ArrayList<Match> matches = new UserDelegate().displayActiveMatches();
             request.setAttribute("matchList", matches);
+            ArrayList<Boolean> pickedStatus = new ArrayList<Boolean> ();
+            for(int i=0; i< matches.size();i++) {
+            	pickedStatus.add(UserDelegate.isTeamTaken( matches.get(i).getMatchId() ,newUser.getUserId()));
+            }
+            request.setAttribute("pickedStatus", pickedStatus);
 			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/pages/user-home.jsp");
 		    rd.forward(request, response);
 			//response.sendRedirect("pages/user-home.jsp");
