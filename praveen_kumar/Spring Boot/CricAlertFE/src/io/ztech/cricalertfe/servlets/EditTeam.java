@@ -86,8 +86,9 @@ public class EditTeam extends HttpServlet {
 			if (!(validator.validateInput(Regex.nameRegex, team.getTeamName(), UserMessages.INVALID_NAME))) {
 				throw new InvalidNameException(UserMessages.INVALID_NAME_EXCEPTION);
 			}
-			teamDelegate.updateTeamName(team);
-			teamDelegate.updateTeamPlayers(playerList, team);
+			teamDelegate.updateTeam(team);
+			/*teamDelegate.updateTeamName(team);
+			teamDelegate.updateTeamPlayers(playerList, team);*/
 		} catch (InvalidNameException e) {
 			logger.info("Exception caught!");
 		} finally {

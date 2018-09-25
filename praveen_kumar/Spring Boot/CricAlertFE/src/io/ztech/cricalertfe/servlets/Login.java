@@ -41,8 +41,6 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.info("Entered Login.java");
 		UserDelegate userDelegate = new UserDelegate();
-		response.setContentType("text/html");
-		response.setCharacterEncoding("UTF-8");
 		String userName = request.getParameter("username");
 	    String password = request.getParameter("password");
 		User user = new User();

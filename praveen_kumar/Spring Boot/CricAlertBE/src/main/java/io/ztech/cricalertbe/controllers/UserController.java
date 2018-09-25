@@ -1,33 +1,32 @@
 package io.ztech.cricalertbe.controllers;
 
-import io.ztech.cricalertfe.beans.User;
-import io.ztech.cricalertfe.constants.Regex;
-import io.ztech.cricalertfe.constants.UserMessages;
-import io.ztech.cricalertfe.delegates.UserDelegate;
+import java.util.logging.Logger;
 
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import io.ztech.cricalertbe.beans.User;
+import io.ztech.cricalertbe.delegates.UserDelegate;
+
+@RestController
+@RequestMapping("CricAlertBE/users")
 public class UserController {
-	UserDelegate userDelegate;
-	Validator validator;
 
-	public UserController() {
-		userDelegate = new UserDelegate();
-		validator = new Validator();
+	@PostMapping("/verify")
+	public User verifyUser(@RequestBody User user) {
+		Logger logger = Logger.getLogger(UserController.class.getName());
+		logger.info("Entered UserController");
+		UserDelegate userDelegate = new UserDelegate();
+		User returnUser = userDelegate.verifyUser(user);
+		logger.info("Exited UserController");
+		return returnUser;
 	}
 
-/*	public boolean checkUser(User user) {
-		return userDelegate.checkUser(user);
-	}
-*/
-	public User verifyUser(User user) {
-		return userDelegate.verifyUser(user);
-	}
-
-	public boolean createUser(User newUser) {
-		if (validator.validateInput(Regex.nameRegex, newUser.getName(), UserMessages.INVALID_FIRST_NAME)
-				&& validator.validateInput(Regex.emailRegex, newUser.getEmail(), UserMessages.INVALID_EMAIL)) {
-			return userDelegate.createUser(newUser);
-		} else {
-			return false;
-		}
+	@PostMapping("/create")
+	public boolean createUser(@RequestBody User newUser) {
+		UserDelegate userDelegate = new UserDelegate();
+		return userDelegate.createUser(newUser);
 	}
 }

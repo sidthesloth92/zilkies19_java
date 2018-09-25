@@ -9,6 +9,8 @@ var openingForm = document.forms["opening-players"];
 var bowlerForm = document.forms["next-bowler"];
 var batsmanForm = document.forms["next-batsman"];
 var extra;
+var pauseFlag = false;
+var scorecardFlag = false;
 
 var batsmenTable = document.querySelector(".overview__batsmen");
 var rowA = batsmenTable.insertRow(1);
@@ -74,7 +76,7 @@ function fetchMatch() {
     	modalToss.style.display = "none";
     	modal.style.display = "none";
     }
-	fetch('/CricAlert/Play?id='+matchId, {
+	fetch('/CricAlertFE/Play?id='+matchId, {
 	    method: 'get',
 	    headers: {
 	        'Accept': 'application/json',
@@ -96,7 +98,7 @@ function fetchMatch() {
 }
 
 function fetchMatchStats() {
-	fetch('/CricAlert/FetchMatchStats?id='+matchId, {
+	fetch('/CricAlertFE/FetchMatchStats?id='+matchId, {
 	    method: 'get',
 	    headers: {
 	        'Accept': 'application/json',
@@ -114,7 +116,7 @@ function fetchMatchStats() {
 }
 
 function fetchPlayerStats() {
-	fetch('/CricAlert/FetchPlayerStats?id='+matchId, {
+	fetch('/CricAlertFE/FetchPlayerStats?id='+matchId, {
 	    method: 'get',
 	    headers: {
 	        'Accept': 'application/json',
@@ -585,7 +587,7 @@ function endMatch() {
 }
 
 function writeMatch() {
-	fetch('/CricAlert/WriteMatch', {
+	fetch('/CricAlertFE/WriteMatch', {
 		method: 'post',
 		body: JSON.stringify(match)
 	}).then(function (response) {
@@ -596,7 +598,7 @@ function writeMatch() {
 }
 
 function writeMatchStats() {
-	fetch('/CricAlert/WriteMatchStats', {
+	fetch('/CricAlertFE/WriteMatchStats', {
 		method: 'post',
 		body: JSON.stringify(matchStats)
 	}).then(function (response) {
@@ -608,18 +610,30 @@ function writeMatchStats() {
 }
 
 function writePlayerStats() {
-	fetch('/CricAlert/WritePlayerStats', {
+	fetch('/CricAlertFE/WritePlayerStats', {
 		method: 'post',
 		body: JSON.stringify(playerStatsMap)
 	}).then(function (response) {
 		console.log("Response received from WritePlayerStats");
-		window.location = '/CricAlert/Home';
+		if (pauseFlag == true) {
+			window.location = '/CricAlertFE/Home';
+			pauseFlag = false;
+		} else if (scorecardFlag == true) {
+			window.location = '/CricAlertFE/Scorecard?id=' + match.matchId;
+			scorecardFlag = false;
+		}
 	}).catch(function(err) {
 		console.log(err);
 	});
 }
 
 function pauseMatch() {
+	pauseFlag = true;
 	writeMatchStats();
 //	writeBallStats();
+}
+
+function openScorecard() {
+	scorecardFlag = true;
+	writeMatchStats();
 }

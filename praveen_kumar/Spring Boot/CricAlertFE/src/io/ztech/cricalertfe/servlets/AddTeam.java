@@ -81,7 +81,7 @@ public class AddTeam extends HttpServlet {
 			}
 			user.addTeam(team);
 			user.addPlayer(team.getPlayers());
-			teamDelegate.createTeam(user);
+			teamDelegate.createTeam(team);
 	    	request.getRequestDispatcher("/Teams").forward(request, response);
 	    } catch(InvalidNameException e) {
 	    	logger.info("Exception caught!");
