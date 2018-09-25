@@ -1,0 +1,146 @@
+.student-details {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(52, 54, 66, .9);
+}
+
+.details__container {
+	display: flex;
+	justify-content: center;
+	align-self: center;
+	flex-direction: column;
+	padding: 0em 2em;
+	background-color: white;
+	border-radius: 1em;
+	display: none;
+	min-height: 80%;
+	/*animation-name: animatetop;
+	animation-duration: 0.4s;
+	position: relative;
+ */
+}
+
+.fa-plus {
+	position: static !important;
+	padding: 0 !important;
+}
+
+#msg, #edit_msg, .delete_msg {
+	display: block;
+	border-radius: 0.5em;
+	padding: 5px;
+	box-sizing: border-box;
+	text-align: center;
+}
+
+.details__wrapper {
+	margin: 0em !important;
+	border: none !important;
+}
+
+.details__wrapper>label {
+	margin-top: 5%;
+	padding: 5px;
+}
+
+.details__input {
+	margin-bottom: 5%;
+	padding: 10px;
+	border: 1px solid #d2d8d8;
+	border-radius: 0.25em;
+	outline: none;
+}
+
+@
+keyframes animatetop {from { top:-300px;
+	opacity: 0
+}
+
+to {
+	top: 0;
+	opacity: 1
+}
+
+}
+.button--add>button {
+	color: white;
+	cursor: pointer;
+	padding: 10px;
+	outline-style: none;
+	border: none;
+	border-radius: 1em;
+	background-color: #03a9f4;
+}
+
+.button--add {
+	align-self: flex-start;
+	padding: 5px;
+}
+
+.close-icon--close>i {
+	color: grey;
+	justify-content: flex-end;
+	font-size: 2em;
+	cursor: pointer;
+}
+
+.close-icon--close {
+	display: flex;
+	justify-content: flex-end;
+}
+
+#edit-form {
+	align-self: center;
+	display: none
+}
+
+.errormsg {
+	color: red;
+	text-align: center;
+}
+
+.student__details {
+	padding: 10px;
+	text-align: center;
+	background-color: #78909C;
+}
+
+
+.details__info {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
+	font-size: 15px;
+	padding: 10px;
+}
+
+.details__info i {
+	position: static !important;
+	color: #4a90e2;
+}
+
+.button--save, .button--edit {
+	border: none;
+	border-radius: 0.25em;
+	outline: none;
+	padding: 10px;
+	margin-top: 5%;
+	margin-bottom: 5%;
+	box-sizing: content-box;
+	color: white;
+	cursor: pointer;
+	background-color: #2f889a;
+}
+
+.button__wrapper {
+	background-color: #2f889a;
+}
+
+.form {
+	align-self: center;
+	animation-name: animatetop;
+	animation-duration: 0.4s;
+	position: relative;
+}

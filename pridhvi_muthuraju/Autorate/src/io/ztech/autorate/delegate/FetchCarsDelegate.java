@@ -38,8 +38,15 @@ public class FetchCarsDelegate {
 	public HashMap<User, Rating> displayRating(Specification specification) throws SQLException {
 		return fetchCarsDAO.displayRating(specification);
 	}
+	
+	public Rating getRating(Specification specification, User user) throws SQLException {
+		return fetchCarsDAO.getRating(specification,user);
+	}
 
 	public Specification getCar(Request request) throws SQLException {
-		return fetchCarsDAO.getCar(request);
+		if (request.getCarId() != 0)
+			return fetchCarsDAO.getCar(request);
+		else
+			return fetchCarsDAO.getCarByRequest(request);
 	}
 }

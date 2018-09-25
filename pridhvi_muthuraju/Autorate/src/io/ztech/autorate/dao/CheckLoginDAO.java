@@ -19,7 +19,7 @@ public class CheckLoginDAO {
 		try {
 			con = DBUtils.getConnection();
 			pst = con.prepareStatement(SQLConstants.IS_USER);
-			pst.setString(1, user.getUserName());
+			pst.setString(1, user.getUsername());
 			pst.setString(2, user.getPassword());
 			res = pst.executeQuery();
 			res.next();
@@ -38,7 +38,7 @@ public class CheckLoginDAO {
 		try {
 			con = DBUtils.getConnection();
 			pst = con.prepareStatement(SQLConstants.IS_ADMIN);
-			pst.setString(1, user.getUserName());
+			pst.setString(1, user.getUsername());
 			pst.setString(2, user.getPassword());
 			res = pst.executeQuery();
 			res.next();

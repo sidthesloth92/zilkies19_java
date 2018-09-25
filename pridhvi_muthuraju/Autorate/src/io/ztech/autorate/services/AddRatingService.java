@@ -17,4 +17,8 @@ public class AddRatingService {
 	public boolean editRating(Specification specification, Rating rating, User user) {
 		return addRatingDelegate.editRating(specification, rating, user);
 	}
+	
+	public boolean isRating(Specification specification,User user) throws SQLException {
+		return addRatingDelegate.isRating(specification, user);
+	}
 }

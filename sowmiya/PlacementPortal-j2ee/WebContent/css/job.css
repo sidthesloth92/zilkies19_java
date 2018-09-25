@@ -1,0 +1,126 @@
+body {
+	margin: 0 auto;
+	padding: 0;
+	height: 100vh;
+	box-sizing: border-box;
+}
+
+.body__content {
+	padding: 10px;
+}
+
+.content__jobs {
+	border-radius: 1em;
+}
+
+.jobs__details {
+	padding: 10px;
+	text-align: center;
+	background-color: rgb(177, 173, 173);
+}
+
+.details__company {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
+}
+
+.details__company>span {
+	font-weight: 700;
+	color: #4a90e2;
+	text-decoration: none;
+	justify-content: center;
+	text-transform: uppercase;;
+}
+
+.details__company>p {
+	justify-content: center;
+	align-self: center;
+}
+
+/* form > button {
+    align-self: center;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    width:50%;
+    color: white;
+    cursor: pointer;
+    outline-style: none;
+    background-color: green;
+
+}
+ */
+.company__campus-date, .company__salary {
+	font-size: 15px;
+}
+
+.company__campus-date>label, .company__salary>label {
+	font-weight: 600;
+}
+
+.content {
+	padding: 10px;
+	background-color: white;
+}
+
+.apply-date {
+	display: none;
+}
+
+.details {
+	margin-top: 5px;
+	border-bottom: 1px solid grey !important;
+}
+
+@media only screen and (max-width: 600px) {
+	.content__jobs {
+		display: none;
+	}
+	.details__company>button {
+		align-self: flex-end;
+	}
+	.apply-date {
+		display: block;
+		font-weight: 600;
+	}
+	.details__company>button {
+		width: 30%;
+	}
+}
+
+@media screen and (max-width: 900px) {
+	.details__company {
+		text-align: left;
+	}
+	.header__icon {
+		display: none;
+	}
+	.body__left-panel {
+		width: 100%;
+		position: fixed;
+		z-index: 1000;
+		transform: translateX(-5000%);
+		transition: all 1s;
+	}
+	.header a.icon {
+		display: flex;
+		align-self: center;
+		justify-content: space-around;
+	}
+	.body__left-panel.responsive {
+		animation-name: "animatetop";
+		animation-duration: 0.4s;
+	}
+	.left-panel__side-nav.responsive .icon {
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+	.body__left-panel.responsive {
+		transform: translateX(0%);
+		transition: all 1s;
+		text-align: left;
+	}
+}

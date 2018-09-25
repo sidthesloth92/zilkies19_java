@@ -82,7 +82,8 @@ public class FetchCarsDAO {
 				User user = new User();
 				rating.setRating(res.getString(AppConstants.RATING));
 				rating.setReview(res.getString(AppConstants.REVIEW));
-				user.setUserName(res.getString(AppConstants.USER_NAME));
+				rating.setSubject(res.getString(AppConstants.SUBJECT));
+				user.setUsername(res.getString(AppConstants.USER_NAME));
 				ratings.put(user, rating);
 			}
 		} catch (SQLException e) {
@@ -95,17 +96,45 @@ public class FetchCarsDAO {
 		else
 			return ratings;
 	}
+	
+	public Rating getRating(Specification specification, User user) throws SQLException {
+		
+		Rating rating=new Rating();
+		try {
+			con = DBUtils.getConnection();
+			pst = con.prepareStatement(SQLConstants.SELECT_RATING_USER);
+			pst.setInt(1, specification.getCarId());
+			pst.setString(2, user.getUsername());
+			res=pst.executeQuery();
+			res.next();
+			rating.setRating(res.getString(AppConstants.RATING));
+			rating.setReview(res.getString(AppConstants.REVIEW));
+			rating.setSubject(res.getString(AppConstants.SUBJECT));
+		} catch (SQLException e) {System.out.println(e);
+			throw new SQLException();
+		} finally {
+			DBUtils.closeConnection(con, pst, null);
+		}
+		return rating;
+	}
 
 	public ArrayList<Specification> getCars(Make make, CarType carType) throws SQLException {
-		if (make.getMakeId() == 0 || carType.getCarTypeId() == 0) {
-			return null;
-		}
+		
 		ArrayList<Specification> cars = new ArrayList<Specification>();
 		try {
 			con = DBUtils.getConnection();
-			pst = con.prepareStatement(SQLConstants.SELECT_ALL_CAR);
-			pst.setInt(1, make.getMakeId());
-			pst.setInt(2, carType.getCarTypeId());
+			if (make.getMakeId() == 0) {
+				pst = con.prepareStatement(SQLConstants.SELECT_ALL_CARS_TYPE);
+				pst.setInt(1, carType.getCarTypeId());
+			}
+			else if (make.getMakeId() == 0 && carType.getCarTypeId() == 0) {
+				pst = con.prepareStatement(SQLConstants.ALL_CARS);
+			}
+			else {
+				pst = con.prepareStatement(SQLConstants.SELECT_ALL_CAR);
+				pst.setInt(1, make.getMakeId());
+				pst.setInt(2, carType.getCarTypeId());
+			}
 			res = pst.executeQuery();
 
 			while (res.next()) {
@@ -141,6 +170,40 @@ public class FetchCarsDAO {
 		try {
 			con = DBUtils.getConnection();
 			pst = con.prepareStatement(SQLConstants.SELECT_CAR);
+			pst.setInt(1, request.getCarId());
+			res = pst.executeQuery();
+
+			while (res.next()) {
+				specification.setCarId(res.getInt(AppConstants.CAR_ID));
+				specification.setAbs(res.getString(AppConstants.ABS));
+				specification.setAirbag(res.getString(AppConstants.AIRBAG));
+				specification.setCarName(res.getString(AppConstants.CAR_NAME));
+				specification.setCarStatus(res.getString(AppConstants.CAR_STATUS));
+				specification.setCylinder(res.getInt(AppConstants.CYLINDER));
+				specification.setDisplacement(res.getInt(AppConstants.DISPLACEMENT));
+				specification.setDrivetrain(res.getString(AppConstants.DRIVETRAIN));
+				specification.setEngineType(res.getString(AppConstants.ENGINE_TYPE));
+				specification.setFuelCapacity(res.getInt(AppConstants.FUEL_CAPACITY));
+				specification.setKerbWeight(res.getInt(AppConstants.KERB_WEIGHT));
+				specification.setPower(res.getInt(AppConstants.POWER));
+				specification.setPrice(res.getInt(AppConstants.PRICE));
+				specification.setTorque(res.getInt(AppConstants.TORQUE));
+				specification.setTransmission(res.getInt(AppConstants.TRANSMISSION));
+				specification.setWheelbase(res.getInt(AppConstants.WHEELBASE));
+			}
+		} catch (SQLException e) {
+			throw new SQLException();
+		} finally {
+			DBUtils.closeConnection(con, pst, res);
+		}
+		return specification;
+	}
+	
+	public Specification getCarByRequest(Request request) throws SQLException {
+		Specification specification = new Specification();
+		try {
+			con = DBUtils.getConnection();
+			pst = con.prepareStatement(SQLConstants.SELECT_CAR_BY_REQUEST);
 			pst.setInt(1, request.getRequestId());
 			res = pst.executeQuery();
 

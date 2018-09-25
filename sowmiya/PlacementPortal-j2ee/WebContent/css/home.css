@@ -1,0 +1,151 @@
+.image {
+	background-size: 100% 100%;
+	height: 450px;
+}
+
+
+#login {
+	display: none;
+}
+
+
+.body-content {
+	height: 70%;
+}
+
+.content {
+	background-image: url('../assets/background.jpeg');
+	justify-content: center;
+	align-items: center;
+	background-size: cover;
+}
+
+.content-text {
+	border: 1px solid white;
+	padding: 10px;
+	z-index: 10;
+	border-radius: 1em;
+	color: black;
+	background-color: rgba(255, 255, 255, 0.2);
+}
+
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+	.header__title {
+		font-size: 50px;
+	}
+}
+
+@media only screen and (min-width: 901px) {
+	.header__title {
+		font-size: 50px;
+	}
+}
+
+.form__container {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0em 2em;
+	background-color: white;
+	animation-name: animatetop;
+	animation-duration: 0.4s;
+	position: relative;
+}
+
+@keyframes animatetop {from { top:-300px;
+	opacity: 0
+}
+
+to {
+	top: 0;
+	opacity: 1
+}
+
+}
+.modal-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(52, 54, 66, .9);
+	border-radius: 0.25em;
+	z-index: 3;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+.username__wrapper, .password__wrapper {
+	display: flex;
+	margin-top: 5%;
+	margin-bottom: 5%;
+	padding: 10px;
+	border: 1px solid #d2d8d8;
+	border-radius: 0.25em;
+	position: relative;
+}
+
+.username__icon, .password__icon {
+	background-image: url("../assets/icons8-user-32.png");
+	background-repeat: no-repeat;
+	height: 30px;
+	width: 30px;
+	margin-right: 5px;
+}
+
+.password__icon {
+	background-image: url("../assets/icons8-key-32.png");
+}
+
+.username__input, .password__input {
+	display: block;
+	border: none;
+}
+
+.button--login {
+	border: none;
+	border-radius: 0.25em;
+	outline: none;
+	padding: 10px;;
+	margin-top: 5%;
+	margin-bottom: 5%;
+	box-sizing: content-box;
+	color: white;
+	cursor: pointer;
+	background-color: #2f889a;
+}
+
+.button__wrapper {
+	background-color: #2f889a;
+}
+
+.close-icon--close {
+	display: flex;
+	flex-direction: row-reverse;
+	cursor: pointer;
+}
+
+.close-icon--close>span {
+	border: none;
+}
+
+img {
+	height: 100%;
+	width: 100%;
+}
+
+.form__container span {
+	color: red;
+	font-size: 1em;
+}
+
+.close-icon--close>i {
+	color: grey;
+	font-size: 2em;
+	margin-top: 10px;
+}
+
+.close-icon--close {
+	display: flex;
+}

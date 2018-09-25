@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+h3, p {
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	font-size: 18px;
+	padding: 10px;
+}
+
+h3 {
+	color: rgb(4, 37, 30);
+	font-size: 25px;
+}
+
+.description {
+	padding: 10px;
+}
+
+@media only screen and (min-width: 500px) {
+	.main-wrapper {
+		margin-top: 125px;
+	}
+}
+
+.main-wrapper {
+	margin-left: 200px;
+}
+
+.calculator-box ul {
+	list-style: none;
+}
+
+.calculator-box form input {
+	width: 300px;
+	padding: 5px 5px 5px 10px;
+	border: 2px solid green;
+}
+
+.calculator-box input[type="button"] {
+	width: 150px;
+	height: 30px;
+	margin-left: 200px;
+}
+
+.calculator-box form div {
+	padding: 10px;
+}
+
+.food-input-box {
+	position: relative;
+}
+
+.food-suggestion-list {
+	margin-left: 100px;
+}
+
+
+.food-suggestion-list>div {
+	height: 40px;
+	padding: 0px;
+	width: 300px;
+	border: 2px solid green;
+	background-color: white;
+}
+
+.food-suggestion-list>div:hover {
+	background-color: blanchedalmond;
+}
+
+.selected-food-list>div>span {
+	display: inline-block;
+	width: 150px;
+	margin-right: 4px;
+}
+
+.selected-food-list>div {
+	height: 20px;
+}
+
+.calculator-box_input-wrapper {
+	background-color: rgb(168, 243, 178);
+	padding: 10px;
+}
+
+.calculator-box_input-list>div>span {
+	display: inline-block;
+	width: 150px;
+}
+
+.selected-food-list {
+	min-height: 100px;
+	border: 2px solid green;
+}
+
+.calculator-box_result-wrapper {
+	height: 100px;
+	width: 100%;
+	padding: 20px;
+	background-color: rgb(168, 243, 178);
+}
+
+.calculator-box button {
+	margin: 20px 0px 20px 0px;
+}

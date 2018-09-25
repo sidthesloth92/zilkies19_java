@@ -1,0 +1,374 @@
+.header {
+	background-color: gray;
+	display: flex;
+	justify-content: space-between;
+	position:fixed;
+	top:0px;
+	width:100%;
+}
+
+.header__left-option {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-evenly;
+}
+
+.header__right-option {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-evenly;
+}
+
+.explorer {
+	padding-left: 30px;
+}
+
+.logo {
+	padding-left: 10px;
+}
+
+.border {
+	margin-top:80px;
+}
+
+.login button {
+	margin-right: 30px;
+}
+
+.tournament-container__sidenav {
+	height: 100%;
+	width: 200px;
+	position: fixed;
+	z-index: 1;
+	top: 70px;
+	background-color: #111;
+	overflow-x: hidden;
+	padding-top: 20px;
+}
+
+.tournament-container__sidenav a {
+	padding: 10px 6px 50px 32px;
+	text-decoration: none;
+	font-size: 25px;
+	color: #818181;
+	display: block;
+}
+
+.tournament-container__sidenav a:hover {
+	color: white;
+}
+
+.schedule-container {
+	display: flex;
+}
+
+.border {
+	margin-top:70px;
+}
+
+.teams {
+	flex-grow: 1;
+}
+
+.team,.view {
+	color:black;
+	text-align: center;
+}
+
+.team {
+	align:center;
+	width:30%;
+}
+
+.view {
+	align:center;
+	width:40%;
+}
+
+.teams {
+	margin-top: 10px;
+	height:100vh;
+	border: 5px solid gray;
+	display: flex;
+	flex-direction: column;
+	/*background-image:
+		url("https://www.cricket.com.au/-/media/News/2018/01/25KohliPitch.ashx?h=1556&w=2400&la=en");*/
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	overflow:scroll;
+	margin-left:220px;
+}
+
+.pic-container {
+	flex-grow: 1;
+	display: none;
+	background-image:
+		url("http://signup.goodtogogang.org/wp-content/uploads/2017/08/black-back-curtains.jpg");
+	height: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.team-container {
+	flex-grow: 1;
+}
+
+.login i {
+	font-size: 60px;
+}
+
+.team-container {
+	margin: 10px;
+	border: 1px solid black;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+
+.team-view {
+	flex-grow: 1;
+}
+
+button {
+	background-color: #4CAF50;
+	border: none;
+	color: white;
+	padding: 16px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	transition-duration: 0.4s;
+	cursor: pointer;
+	background-color: white;
+	color: black;
+	border: 2px solid #4CAF50;
+	margin-left:10px;
+}
+
+button:hover {
+	background-color: #4CAF50;
+	color: white;
+}
+
+.team-container-dropdown {
+	margin: 10px;
+	display: flex;
+	margin-left: 220px;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+
+select:hover {
+	border-color: #333;
+}
+
+select {
+	padding: 20px;
+}
+
+.scorecard {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-content: center;
+	align-items: center;
+}
+
+.team-1, .team-2 {
+	flex-grow: 1;
+}
+
+.team-1, .sub-titles {
+	display: flex;
+	justify-content: space-between;
+	align-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+button h2{
+	margin:10px;
+	line-height:3px;
+}
+
+.team-name, .score, .runs, .overs, .wkts, .score {
+	flex-grow: 1;
+	padding: 20px;
+}
+
+.scorecard {
+	display: none;
+}
+
+.close {
+	margin-left: 60%;
+	font-size: 40px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.card {
+	background-color: gray;
+	border: 1px solid black;
+	padding: 20px;
+}
+.container {
+    width: 100px;
+    display: flex;
+    position: absolute;
+}
+
+.stump-1,
+.stump-2,
+.stump-3 {
+    height: 100px;
+    width: 50px;
+    margin: 10%;
+    border: 1px solid black;
+    flex-grow: 1;
+}
+
+.stump-1 {
+    margin-left: 10%;
+}
+
+.stump-2 {
+    margin-left: 12%;
+}
+
+.stump-3 {
+    margin-left: 14%;
+}
+
+.bails {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.bails-1,
+.bails-2 {
+    height: 10px;
+    background-color: black;
+    margin-top: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-delay: 0.4s;
+    animation-direction: alternate-reverse;
+}
+
+.bails-1 {
+    animation-name: bails-1;
+}
+
+.bails-2 {
+    animation-name: bails-2;
+}
+
+@keyframes bails-1 {
+    0% {
+        background-color: red;
+        margin-left: 0px;
+        margin-top: 50px;
+        transform: rotate(-60deg);
+    }
+}
+
+@keyframes bails-2 {
+    0% {
+        background-color: red;
+        margin-right: 0px;
+        margin-top: 50px;
+        transform: rotate(60deg);
+    }
+}
+
+.bails-1 {
+    width: 60px;
+}
+
+.bails-2 {
+    width: 60px;
+}
+
+.ball {
+    color: red;
+    width: 35px;
+    height: 35px;
+    margin-top: 300%;
+    margin-left: 35%;
+    animation-name: ball;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-delay: 1s;
+    animation-direction: alternate;
+    border-radius: 70%;
+}
+
+hr {
+    color: white;
+}
+
+@keyframes ball {
+    from {
+        background-color: red;
+        margin-top: 30px;
+    }
+    to {
+        background-color: red;
+        margin-top: 150px;
+    }
+}
+
+.outer-stump {
+    position: relative;
+    height: 400px;
+}
+
+.ball-container {
+    width: 100px;
+    position: absolute;
+}
+
+.bails-container {
+    width: 10%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stump-container {
+	display:none;
+}
+
+.form-element button {
+    background-color: Red;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    border: 2px solid red;
+    line-height:3px;
+}
+
+.login h3{
+	margin-bottom: 0.5em;
+}
+
+.form-element button:hover {
+    background-color: red;
+    color: white;
+}

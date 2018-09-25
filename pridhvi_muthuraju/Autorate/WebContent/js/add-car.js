@@ -1,0 +1,7 @@
+function validateAddCarForm() {
+	
+}
+
+function validateCarName() {
+	
+}

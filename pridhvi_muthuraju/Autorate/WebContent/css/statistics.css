@@ -1,0 +1,22 @@
+.container {
+	background: aliceblue;
+}
+
+.inner-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.inner-container__filter {
+	width: 90%;
+	height: 50px;
+	border: 2px solid black;
+}
+
+.inner-container__stat {
+	width: 90%;
+	height: 400px;
+	border: 2px solid black;
+}
