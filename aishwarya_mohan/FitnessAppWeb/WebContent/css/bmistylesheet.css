@@ -1,0 +1,162 @@
+* {
+    /* border: 1px solid red; */
+}
+
+.wrapper {
+    margin-top: 120px;
+}
+
+.bmi-description {
+    padding: 10px;
+}
+
+h3,
+p {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 18px;
+    padding: 10px;
+}
+
+h3 {
+    color: rgb(4, 37, 30);
+    font-size: 25px;
+}
+
+.bmi-calculate-wrapper {
+    justify-content: center;
+}
+
+.bmi-input-form-wrapper {
+    margin: 20px;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.bmi-input-form-wrapper input {
+    height: 30px;
+    margin: 10px;
+    width: 100px;
+    border: 2px solid rgb(11, 109, 19);
+}
+
+.bmi-input-form-wrapper input[type="button"] {
+    float: right;
+    width: 100px;
+    background-color: rgb(15, 151, 26);
+    color: white;
+    font-size: 20px;
+}
+
+.bmi-analysis-image {
+    margin: 20px;
+    padding: 5px;
+    border: 2px solid black;
+    border-radius: 10px;
+    height: 350px;
+}
+
+.bmi-analysis-image img {
+    height: 100%;
+    width: 100%;
+}
+
+.measurement-system-toggle {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.measurement-system-toggle_option {
+    width: 120px;
+    text-align: center;
+    border: 2px solid rgb(11, 109, 19);
+    border-radius: 10px;
+}
+
+input[id^="height-imperial"] {
+    width: 100px;
+}
+
+.input-box-toggle {
+    position: relative;
+    background-color: rgb(168, 243, 178);
+    z-index: 1;
+}
+
+.input-box-toggle_options {
+    border: 2px solid rgb(11, 109, 19);
+    display: none;
+    background-size: contain;
+}
+
+.measurement-system-toggle>span:hover,
+.bmi-input-form-wrapper input[type="button"]:hover {
+    background-color: rgb(11, 109, 19);
+    color: white;
+    cursor: pointer;
+}
+
+.shown {
+    display: block;
+}
+
+.chosen {
+    background-color: rgb(11, 109, 19);
+    color: white;
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 0%;
+}
+
+.input-box-toggle_options>div {
+    padding: 10px;
+}
+
+.bmi-result {
+    border: 2px solid rgb(11, 85, 69);
+    background-color: rgb(137, 241, 168);
+    border-radius: 10px;
+    padding: 0;
+    text-align: center;
+    transform: translateY(-120%);
+    margin: 10px;
+}
+
+.result-show {
+    transform: translateY(10%);
+    transition: transform 2s;
+}
+
+.bmi-comment {
+    opacity: 0;
+    transition: opacity 1s;
+    margin: 20px;
+    border-left: 5px solid rgb(26, 26, 26);
+    padding: 10px;
+    background-color: rgba(114, 117, 117, 0.212);
+}
+
+.bmi-comment span {
+    font-family: "Bubblegum Sans";
+    font-size: 20px;
+    display: block;
+    color: green;
+    text-align: center;
+}
+
+.comment-show {
+    opacity: 1;
+}
+
+.note {
+    margin: 20px;
+    border-left: 5px solid rgb(26, 26, 26);
+    padding: 10px;
+    background-color: rgba(114, 117, 117, 0.212);
+}
+
+.bmi-value span:nth-child(2),
+.bmi-status span:nth-child(2) {
+    color: rgb(5, 114, 5);
+    font-size: 25px;
+}
