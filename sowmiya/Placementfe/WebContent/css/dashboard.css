@@ -1,0 +1,46 @@
+.content__placed-students {
+    border-radius: 1em;
+}
+
+.placed-students__details {
+    padding: 10px;
+    text-align: center;
+    font-weight: 600;
+    flex:1;
+    background-color: rgb(177, 173, 173);
+}
+
+.details__student {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+
+}
+
+.details__student > p {
+    justify-content: center;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.body__content > p {
+    text-align: center;
+    padding:10px;
+    font-size:20px;
+}
+
+.details__student > label {
+    display: none;
+}
+
+@media only screen and (max-width: 600px){
+
+    .placed-students__details {
+        font-size:10px;
+        /* text-align: left; */
+        padding: 0;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+}

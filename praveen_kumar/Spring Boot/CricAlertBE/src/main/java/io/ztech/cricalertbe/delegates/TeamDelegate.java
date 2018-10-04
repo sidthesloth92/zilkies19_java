@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 
 import io.ztech.cricalertbe.beans.Player;
 import io.ztech.cricalertbe.beans.Team;
-import io.ztech.cricalertbe.beans.User;
+import io.ztech.cricalertbe.beans.UpdateTeam;
 import io.ztech.cricalertbe.dao.CricketDAO;
 
 public class TeamDelegate {
@@ -22,49 +22,38 @@ public class TeamDelegate {
 		dao = new CricketDAO();
 	}
 	
-	public void createTeam(User user) {
-		dao.insertTeam(user);
-	}
-	
-	public void addNewPlayer(User user) {
-		dao.insertPlayer(user);
-	}
-	
-	public void updateTeamName(Team team) {
-		dao.updateTeamName(team);
-	}
-	
-	public void updateTeamPlayers(ArrayList<Player> playerList, Team team) {
-		dao.removePlayerFromTeam(team);
-		dao.updateTeamPlayers(playerList);
-	}
-	
-	/*public boolean searchTeam(int teamId, User user) {
-		return dao.searchTeam(user, teamId);
-	}*/
-	
 	public Team fetchTeam(int teamId) {
 		return dao.fetchTeam(teamId);
 	}
 	
-	public ArrayList<Team> fetchTeams(User user) {
-		return dao.fetchTeams(user);
+	public ArrayList<Team> fetchTeams(int userId) {
+		return dao.fetchTeams(userId);
 	}
 	
-	public ArrayList<Player> fetchTeamPlayers(Team team) {
-		return dao.fetchTeamPlayers(team);
+	public ArrayList<Player> fetchTeamPlayers(int teamId) {
+		return dao.fetchTeamPlayers(teamId);
+	}
+	
+	public void createTeam(Team team) {
+		dao.insertTeam(team);
+	}
+	
+	public void updateTeam(UpdateTeam updateTeam) {
+		dao.updateTeamName(updateTeam.getTeam());
+		dao.removePlayerFromTeam(updateTeam.getTeam());
+		dao.updateTeamPlayers(updateTeam.getPlayerList());
 	}
 	
 	public void removeTeam(Team team) {
 		dao.deleteTeam(team);
 	}
 	
-	public boolean isTeamCreated(User user) {
-		ArrayList<Team> teamList = dao.fetchTeams(user);
-		if (teamList.size() == 0) {
-			return false;
-		} else {
-			return true;
-		}
+	/*public void updateTeamName(Team team) {
+		dao.updateTeamName(team);
 	}
+	
+	public void updateTeamPlayers(ArrayList<Player> playerList, Team team) {
+		dao.removePlayerFromTeam(team);
+		dao.updateTeamPlayers(playerList);
+	}*/
 }

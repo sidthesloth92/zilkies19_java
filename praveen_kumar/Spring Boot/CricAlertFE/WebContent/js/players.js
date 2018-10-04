@@ -1,5 +1,5 @@
 function expandCard(element) {
-	fetch('/CricAlert/PlayerModal', {
+	fetch('/CricAlertFE/PlayerModal', {
 	    method: 'post',
 	    headers: {
 	        'Accept': 'application/json',
@@ -42,7 +42,7 @@ function expandCard(element) {
 function editPlayer(ev) {
     ev.preventDefault();
     var id = ev.dataTransfer.getData("text");
-    window.location = '/CricAlert/EditPlayer?id=' + id;
+    window.location = '/CricAlertFE/EditPlayer?id=' + id;
 }
 
 function deleteConfirmation(ev) {
@@ -62,7 +62,7 @@ function deleteConfirmation(ev) {
             modal.style.display = "none";
             modalDeleteConfirmation.style.display = "none";
             if (event.target == confirmYes) {
-            	window.location = '/CricAlert/DeletePlayer?id=' + id;
+            	window.location = '/CricAlertFE/DeletePlayer?id=' + id;
             }
         }
     };

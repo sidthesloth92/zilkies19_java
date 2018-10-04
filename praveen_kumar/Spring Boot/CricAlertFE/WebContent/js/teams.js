@@ -1,5 +1,5 @@
 function expandTeam(element) {
-	fetch('/CricAlert/TeamPlayers', {
+	fetch('/CricAlertFE/TeamPlayers', {
 	    method: 'post',
 	    headers: {
 	        'Accept': 'application/json',
@@ -40,7 +40,7 @@ function expandTeam(element) {
 function editTeam(ev) {
     ev.preventDefault();
     var id = ev.dataTransfer.getData("text");
-    window.location = '/CricAlert/EditTeam?id=' + id;
+    window.location = '/CricAlertFE/EditTeam?id=' + id;
 }
 
 function deleteConfirmation(ev) {
@@ -60,7 +60,7 @@ function deleteConfirmation(ev) {
             modal.style.display = "none";
             modalDeleteConfirmation.style.display = "none";
             if (event.target == confirmYes) {
-            	window.location = '/CricAlert/DeleteTeam?id=' + id;
+            	window.location = '/CricAlertFE/DeleteTeam?id=' + id;
             }
         }
     };

@@ -1,0 +1,103 @@
+@charset "UTF-8";
+.fa-info-circle {
+    color: #4a90e2;
+}
+
+.info {
+    margin: 2em !important;
+    background-color: #BDE5F8;
+}
+
+.details__company {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+.details__header>p {
+    font-size: 20px;
+    font-family: Ariel;
+    color: #03a9f4;
+}
+
+.details__info {
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    box-sizing: border-box;
+}
+
+.details__info>div {
+    font-weight: 700;
+    min-width: 200px;
+}
+
+.details__info>p {
+    text-transform: uppercase;
+}
+
+.details-table {
+    align-self: center;
+    border: none !important;
+}
+
+.details-container {
+    padding: 10px;
+}
+
+.details {
+    margin-bottom: 5px;
+    background-color: white;
+}
+
+.profile__edit,
+.project__edit,
+.certifications__edit,
+.achievements__edit {
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+}
+
+.details__eligiblity {
+    padding: 15px !important;
+    font-weight: 600;
+}
+
+.details__header {
+    flex-direction: row;
+}
+
+.details__header>p {
+    flex: 1;
+    text-align: center;
+}
+
+.details__header>i {
+    align-self: flex-end;
+}
+
+/*.company__edit {
+	position: relative;
+	width: 50px;
+	height: 50px;
+	top: 0;
+}
+
+.company__edit:after {
+	content: ' ';
+	position: absolute;
+	border-style: solid;
+	border-width: 50px 0 0 50px;
+	border-color: blue transparent;
+}*/
+
+.form__wrapper {
+    justify-content: center;
+}
+
+.fa-plus {
+    font-size: 15px;
+    position: static !important;
+}

@@ -1,0 +1,15 @@
+section {
+    padding: 3%;
+    position: relative;
+    top: 45px;
+}
+
+.homepage-image-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+footer {
+	position: static !important;
+	padding: 10px !important;
+}

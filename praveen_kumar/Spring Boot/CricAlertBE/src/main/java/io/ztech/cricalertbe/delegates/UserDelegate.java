@@ -1,5 +1,7 @@
 package io.ztech.cricalertbe.delegates;
 
+import java.util.logging.Logger;
+
 import io.ztech.cricalertbe.beans.User;
 import io.ztech.cricalertbe.dao.CricketDAO;
 
@@ -15,7 +17,11 @@ public class UserDelegate {
 	}
 	
 	public User verifyUser(User user) {
-		return dao.fetchUser(user);
+		Logger logger = Logger.getLogger(UserDelegate.class.getName());
+		logger.info("Entered UserDelegate (BackEnd)");
+		User returnUser = dao.fetchUser(user);
+		logger.info("Exited UserDelegate (BackEnd)");
+		return returnUser;
 	}
 	
 	public boolean createUser(User newUser) {

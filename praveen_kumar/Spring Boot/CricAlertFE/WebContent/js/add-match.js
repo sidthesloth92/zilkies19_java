@@ -51,7 +51,7 @@ function listTeamPlayers(element) {
 	console.log("Inside listTeamPlayers");
 	console.log(element.value);
 	
-	fetch('/CricAlert/TeamPlayers', {
+	fetch('/CricAlertFE/TeamPlayers', {
 	    method: 'post',
 	    headers: {
 	        'Accept': 'application/json',

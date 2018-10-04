@@ -2,46 +2,49 @@ package io.ztech.cricalertbe.controllers;
 
 import java.util.ArrayList;
 
-import io.ztech.cricalertfe.beans.Player;
-import io.ztech.cricalertfe.beans.User;
-import io.ztech.cricalertfe.delegates.PlayerDelegate;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import io.ztech.cricalertbe.beans.Player;
+import io.ztech.cricalertbe.delegates.PlayerDelegate;
+
+@RestController
+@RequestMapping("/CricAlertBE/players")
 public class PlayerController {
+	
+	@GetMapping("/{id}")
+	public Player fetchPlayer(@PathVariable ("id") int id) {
+		PlayerDelegate playerDelegate = new PlayerDelegate();
+		return playerDelegate.fetchPlayer(id);
+	}
 
-	PlayerDelegate playerDelegate;
-	
-	public PlayerController() {
-		playerDelegate = new PlayerDelegate();
+	@GetMapping("/user/{id}")
+	public ArrayList<Player> fetchPlayers(@PathVariable ("id") int userId) {
+		PlayerDelegate playerDelegate = new PlayerDelegate();
+		return playerDelegate.fetchPlayers(userId);
 	}
 	
-	/*public boolean searchPlayer(int playerId, User user) {
-		return playerDelegate.searchPlayer(playerId, user);
-	}*/
-	
-	
-	// Called in DeletePlayer servlet
-	public void removePlayer(Player player) {
-		playerDelegate.removePlayer(player);
+	@PostMapping("/")
+	public void addNewPlayer(@RequestBody Player player) {
+		PlayerDelegate playerDelegate = new PlayerDelegate();
+		playerDelegate.addNewPlayer(player);
 	}
 	
-	public ArrayList<Player> fetchPlayers(User user) {
-		return playerDelegate.fetchPlayers(user);
-	}
-	
-	// Called by AddTeam servlet
-	public Player fetchPlayer(int playerId) {
-		return playerDelegate.fetchPlayer(playerId);
-	}
-	
-	/*public void updateTeamId(Team team) {
-		playerDelegate.updateTeamId(team);
-	}
-	
-	public void updatePlayerName(Player player, String query) {
-		playerDelegate.updatePlayerName(player, query);
-	}*/
-	
-	public void updatePlayer(Player player) {
+	@PutMapping("/{id}")
+	public void updatePlayer(@RequestBody Player player) {
+		PlayerDelegate playerDelegate = new PlayerDelegate();
 		playerDelegate.updatePlayer(player);
+	}
+	
+	@DeleteMapping("/{id}")
+	public void removePlayer(@RequestBody Player player) {
+		PlayerDelegate playerDelegate = new PlayerDelegate();
+		playerDelegate.removePlayer(player);
 	}
 }

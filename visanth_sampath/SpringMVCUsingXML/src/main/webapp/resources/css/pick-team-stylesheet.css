@@ -1,0 +1,80 @@
+.player-card {
+    background-color: #a55522;
+
+    /* #D9E5D6; */
+    border-radius: 2%;
+    width: 80%;
+    margin: 20px;
+}
+
+.player-image {
+    width: 80%;
+    /* display: block; */
+}
+
+.team-card_outer-container {
+    height: 80vh;
+    overflow: scroll;
+    padding: 3%;
+}
+
+.player-name, .player-type , .player-rating , .player-button{
+    color: white;
+    text-align: center;
+    padding: 5px;
+}
+
+/*
+.player-card {
+    background-color: aquamarine;
+    color: #B55522;
+} */
+@media only screen and (max-width: 320px) {
+    .team-card_outer-container {
+        height: 60vh;
+    }
+}
+
+.add-button {
+	background-color: green;
+	color: white;
+	border: 0;
+	padding: 5px;
+}
+
+.players-submit_button {
+	display: none;
+	background-color: #4CAF50;
+	color : white;
+	border: none;
+    padding: 5px;
+    text-align: center;
+}
+
+.team-title {
+	font-size: 20px;
+	display: block;
+}
+
+.remaining-display_batsman , .remaining-display_bowler , .remaining-display_all-rounder , .remaining-display_wicket-keeper {
+	color: lightgreen;
+	font-family: 'Ruslan Display', cursive;
+	font-size: 20px;
+}
+
+.remaining-credits {
+	color: yellow;
+	margin: 20px;
+	font-size: 20px;
+}
+
+.player_seperator {
+	font-size: 20px;
+	padding: 3px;
+}
+
+.table_heading {
+	font-size: 20px;
+	padding: 3px;
+	color: greenyellow;
+}
