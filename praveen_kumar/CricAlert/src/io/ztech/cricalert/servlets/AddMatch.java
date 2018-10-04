@@ -53,6 +53,7 @@ public class AddMatch extends HttpServlet {
 		// TODO Auto-generated method stub
 		User user = (User) request.getSession(false).getAttribute("user");
 		MatchController matchController = new MatchController();
+		TeamController teamController = new TeamController();
 		Match match = new Match();
 		Team teamA = new Team();
 		Team teamB = new Team();
@@ -77,8 +78,8 @@ public class AddMatch extends HttpServlet {
 		
 		String datetime = date + " " + time + ":00";
 		Timestamp matchDatetime = Timestamp.valueOf(datetime);
-		teamA.setTeamId(teamAid);
-		teamB.setTeamId(teamBid);
+		teamA = teamController.fetchTeam(teamAid);
+		teamB = teamController.fetchTeam(teamBid);
 		lineUpA.setPlayerId(playerIdsA);
 		lineUpB.setPlayerId(playerIdsB);
 		match.setUser(user);

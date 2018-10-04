@@ -3,8 +3,8 @@ package io.ztech.cricalert.beans;
 import java.util.ArrayList;
 
 public class LineUp {
-	int matchId, teamId;
-	ArrayList<Integer> playerId;
+	private int matchId, teamId;
+	private ArrayList<Integer> playerId;
 	
 	public LineUp() {
 		playerId = new ArrayList<>();

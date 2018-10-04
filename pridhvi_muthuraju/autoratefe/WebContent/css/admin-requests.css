@@ -1,0 +1,13 @@
+.user-request-status>i {
+    font-size: 50px;
+    margin-left: 20px;
+}
+
+.user-request-status>i:hover {
+    opacity: 0.5;
+}
+
+.user-request-status>p {
+    font-size: 20px;
+    margin-left: 10px;
+}

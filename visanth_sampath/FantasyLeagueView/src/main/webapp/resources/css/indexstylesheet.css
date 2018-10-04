@@ -1,0 +1,139 @@
+body {
+    background-image: linear-gradient(#e56439, #ff944d);
+    color: aliceblue;
+}
+
+.header-image {
+    display: inline-block;
+    height: auto;
+    width: 50px;
+}
+
+h2 {
+	font-family: 'Allan';
+}
+
+p {
+    padding: 30px;
+    font-family: 'Indie Flower', cursive;
+}
+
+.top-space {
+    padding-top: 2%;
+
+    /* background-color: #e56439; */
+}
+
+.content-display {
+    padding: 5%;
+    font-size: 120%;
+}
+
+.header {
+    /* background-color: #e56439; */
+}
+
+.button {
+    background-color: orange;
+    padding: 15px;;
+    border: none;
+    border-radius: 10%;
+    box-shadow: 2px 2px #ff944d;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.center-container_outermost {
+    /* background-color: #e56439; */
+}
+
+.content-image {
+    height: auto;
+    width: 40%;
+}
+
+.fantasy-name {
+    display: inline-block;
+}
+
+.modal-box {
+    display: none;
+    position: fixed;
+    padding: 5%;
+
+    /* z-index: 1; */
+    width: 100%;
+    left: 0;
+    top: 0;
+   // opacity: 0.2;
+    overflow: auto;
+    background-color: #e56439;
+}
+
+.close-button {
+    float: right;
+    font-size: 200%;
+}
+
+.close-button:hover {
+    cursor: pointer;
+}
+
+.modal-inner {
+    background-color: #ff944d;
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+    color: white;
+    opacity: 1;
+    font-size: 100%;
+}
+
+.login-button_modal {
+    padding: 10px;
+    color: whitesmoke;
+    background-color: green;
+}
+
+input {
+    background-color: #ff944d;
+    border: 0;
+    border-bottom: 2px solid gray;
+    display: block;
+    padding: 1%;
+    margin: 2%;
+}
+
+.aboutus-block-words {
+    font-size: 30px;
+    height: 30px;
+}
+
+.contact-image {
+    font-size: 30px;
+}
+
+.contact-heading {
+    color: lightblue;
+    text-shadow: blue 1px 1px;
+    font-size: 30px;
+    padding: 0;
+}
+
+.contact-info {
+    font-size: 20px;
+    padding: 0;
+}
+
+#map {
+    width: 100%;
+    height: 500px;
+}
+
+.name-error_signup ,.email-error_signup , .password-error_signup , .match-error_signup ,.name-error_login , .password-error_login {
+	color: red;
+	font-family: 'Allan';
+	font-size: 20px;
+}

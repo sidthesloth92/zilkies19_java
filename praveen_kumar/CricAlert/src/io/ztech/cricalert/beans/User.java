@@ -3,11 +3,11 @@ package io.ztech.cricalert.beans;
 import java.util.ArrayList;
 
 public class User {
-	int userId;
-	String userName, name, email, password;
-	ArrayList<Player> players;
-	ArrayList<Team> teams;
-	ArrayList<Match> matches;
+	private int userId;
+	private String userName, name, email, password;
+	private ArrayList<Player> players;
+	private ArrayList<Team> teams;
+	private ArrayList<Match> matches;
 
 	public User() {
 		players = new ArrayList<>();

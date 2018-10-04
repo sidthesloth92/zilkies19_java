@@ -1,0 +1,17 @@
+.rating-block {
+    font-size: 30px;
+    color: lightblue;
+    text-shadow: 2px 2px blue;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.updated-rating_form,
+.player-name_form {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.player-rating_updation_block {
+	display: none;
+}

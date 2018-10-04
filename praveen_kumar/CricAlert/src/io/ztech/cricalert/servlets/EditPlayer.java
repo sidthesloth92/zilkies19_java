@@ -43,7 +43,7 @@ public class EditPlayer extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		int playerId = Integer.parseInt(request.getParameter("id"));
-		Player player = playerController.fetchPlayer((User) request.getSession(false).getAttribute("user"), playerId);
+		Player player = playerController.fetchPlayer(playerId);
 		player.setPlayerId(playerId);
 		request.setAttribute("player", player);
 		ArrayList<Team> teamList = teamController.fetchTeams((User) request.getSession(false).getAttribute("user"));

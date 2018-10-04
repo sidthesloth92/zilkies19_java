@@ -1,0 +1,403 @@
+.user-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.header, .tournament-container, .footer {
+	flex-grow: 1;
+}
+
+.header {
+	background-color: gray;
+	display: flex;
+	justify-content: space-between;
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	color:white;
+}
+
+.header__left-option {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-evenly;
+}
+
+.header__right-option {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-evenly;
+}
+
+.explorer {
+	padding-left: 30px;
+}
+
+.logo {
+	padding-left: 10px;
+}
+
+.login {
+	padding-right: 30px;
+}
+
+.signup {
+	padding-right: 10px;
+}
+
+.tournament-container__sidenav {
+	height: 100%;
+	width: 200px;
+	position: fixed;
+	z-index: 1;
+	top: 70px;
+	background-color: #111;
+	overflow-x: hidden;
+	padding-top: 20px;
+	opacity: 0.8;
+}
+
+.tournament-container__sidenav a {
+	padding: 10px 6px 50px 32px;
+	text-decoration: none;
+	font-size: 25px;
+	color: #818181;
+	display: block;
+}
+
+.tournament-container__sidenav a:hover {
+	color: white;
+}
+
+.tournament-container__content {
+	margin-left: 200px;
+}
+
+.card-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-content: space-between;
+	overflow-y: scroll;
+	height: 80vh;
+	margin-top:50px;
+}
+
+.card-1 {
+	display: flex;
+	flex-direction: column;
+	background-color: darkgray;
+	margin: 20px;
+	border: 3px solid black;
+}
+
+.card-1__image {
+	display: flex;
+}
+
+.card-1__button {
+	display: flex;
+	padding-left: 100px;
+}
+
+.tour-1 {
+	padding-left: 40px;
+}
+
+.card-border {
+	background-color: white;
+}
+
+.card-border:hover {
+	background-color: aliceblue;
+}
+
+button {
+	background-color: green;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+::-webkit-scrollbar {
+	width: 20px;
+}
+
+::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px gray;
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: gray;
+	border-radius: 10px;
+}
+
+.card-1:hover {
+	background-color: #111;
+}
+
+.tour-1 {
+	color: white;
+}
+
+.footer {
+	background-color: black;
+	opacity: 0.8;
+	margin-left: 210px;
+	padding: 50px;
+}
+
+.footer-section {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.location-div {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	flex-grow: 1;
+	align-content: space-between;
+	color: white;
+}
+
+.facebook-div {
+	flex-grow: 1;
+	display: flex;
+	justify-content: space-between;
+	color: white;
+	align-items: center;
+}
+
+.location {
+	flex-grow: 1;
+	font-size: 30px;
+}
+
+.phone {
+	flex-grow: 1;
+	font-size: 30px;
+}
+
+.mail {
+	flex-grow: 1;
+	font-size: 30px;
+}
+
+.facebook, .twitter, .linked-in {
+	font-size: 50px;
+	flex-grow: 1;
+}
+
+a {
+	background-color: black;
+	opacity: 0.8;
+}
+
+.form-container {
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.form-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-content: space-between;
+	padding: 50px;
+	border: 5px solid gray;
+	border-radius: 20px;
+	overflow-y: auto;
+}
+
+.login-text {
+	font-family: Poppins-Bold;
+}
+
+.email {
+	padding: 10px;
+}
+
+.password {
+	padding: 10px;
+}
+
+input, select {
+	padding: 20px;
+	font-size: 20px;
+	background-color: transparent;
+}
+
+input:hover, select:hover {
+	border-color: #333;
+}
+
+button {
+	background-color: darkgreen;
+	border: none;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	transition-duration: 0.4s;
+	cursor: pointer;
+	background-color: white;
+	color: black;
+	border: 2px solid darkgreen;
+}
+
+button:hover {
+	background-color: darkgreen;
+	color: white;
+	text-transform: uppercase;
+}
+
+.sign-up__link {
+	padding: 20px;
+	display: flex;
+	justify-content: space-between;
+	font-size: 20px;
+}
+
+.plain-text {
+	flex-grow: 1;
+}
+
+.link {
+	flex-grow: 1;
+}
+
+.close {
+	font-size: 40px;
+	font-weight: bold;
+	cursor: pointer;
+	color: white;
+}
+
+.form-container {
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	align-items: center;
+	height: 100vh;
+}
+
+.form-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-content: space-between;
+	padding: 50px;
+	border: 5px solid gray;
+	border-radius: 20px;
+	overflow-y: auto;
+}
+
+.login-text {
+	font-family: Poppins-Bold;
+	color: white;
+}
+
+.email {
+	padding: 10px;
+}
+
+.password {
+	padding: 10px;
+}
+
+input, select {
+	padding: 20px;
+	border: 2px solid #ccc;
+	border-radius: 5px;
+	font-size: 20px;
+	color: white;
+}
+
+input:hover, select:hover {
+	border-color: #333;
+}
+
+.login-button button {
+	padding: 25px;
+	border-radius: 10px;
+	font-size: 16px;
+	background-color: white;
+}
+
+.login-button button:hover {
+	background-color: black;
+	color: white;
+}
+
+.sign-up__link {
+	padding: 20px;
+	display: flex;
+	justify-content: space-between;
+	font-size: 20px;
+	color: white;
+}
+
+.plain-text {
+	flex-grow: 1;
+}
+
+.link {
+	flex-grow: 1;
+}
+
+.first-name {
+	padding: 10px;
+}
+
+.last-name {
+	padding: 10px;
+}
+
+.age {
+	padding: 10px;
+}
+
+.mobile {
+	padding: 10px;
+}
+
+.form-container {
+	display: none;
+	background-image:
+		url("/CricketTournament/images/signup.jpg");
+	height: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+span {
+	margin-left: 100%;
+}
+
+p {
+	color: white;
+}
+
+.login h3{
+	margin-bottom: 0.5em;
+}
+
+.switch-link {
+	text-decoration: underline;
+	cursor: pointer;
+	color: aqua;
+}
+
+.login-button {
+	line-height: 3px;
+}

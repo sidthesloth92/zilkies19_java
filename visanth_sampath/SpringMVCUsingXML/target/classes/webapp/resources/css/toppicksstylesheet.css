@@ -1,0 +1,61 @@
+.team-logo {
+    height: auto;
+    margin-left: 3%;
+    width: 60%;
+
+    /* height: 70px; */
+    border-radius: 40%;
+}
+
+.match-card {
+    background-color: #b55522;
+
+    /* #D9E5D6; */
+    border-radius: 2%;
+    margin-top: 2%;
+}
+
+.team-card_outer-container,
+.leaderboard-outer_container {
+    height: 80vh;
+    overflow: scroll;
+    padding: 3%;
+}
+
+.team-name {
+    color: white;
+    text-align: center;
+    padding: 10%;
+}
+
+.player-card {
+    background-color: aquamarine;
+    color: #b55522;
+}
+
+@media only screen and (max-width: 320px) {
+    .team-card_outer-container {
+        height: 60vh;
+    }
+}
+
+.team-names {
+	width:100%;
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+.player {
+	font-size: 20px;
+	padding: 20px;
+}
+
+.badge {
+	height: 100%;
+	width: 100%;
+}
+
+.image {
+	height: 10vh;
+}

@@ -1,0 +1,149 @@
+@charset "UTF-8";
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	border: 1px solid red;
+}
+
+.date-time-wrapper>form>div, .calculator-box_input>form>div {
+	display: inline-block;
+}
+
+span {
+	display: inline-block;
+	height: 40px;
+	padding: 10px;
+	font-weight: 600;
+}
+
+input, select {
+	height: 25px;
+	padding-left: 5px;
+}
+
+input[type="button"] {
+	background-color: rgba(49, 161, 23, 0.719);
+	border-right: 2px solid rgba(15, 37, 10, 0.719);
+	border-bottom: 2px solid rgba(15, 37, 10, 0.719);
+	color: white;
+	width: 100px;
+	padding: 2px;
+	height: 25px;
+	margin-top: 20px;
+	float: right;
+}
+
+input[type="button"]:hover {
+	background-color: rgba(48, 161, 23, 0.884);
+	border: none;
+}
+
+.food-input-box_wrapper {
+	display: flex;
+}
+
+.food-input-box_wrapper>span {
+	margin: 0;
+	padding: 0;
+}
+
+.food-suggestion-list>div {
+	background-color: white;
+	border: 1px solid blanchedalmond;
+}
+
+.feature-box_food-tracker>div {
+	flex: 50%;
+}
+
+.feature-box_food-tracker {
+	flex-direction: row;
+	justify-content: flex-start;
+}
+
+.time-form, .food-form {
+	display: flex;
+	justify-content: space-around;
+	padding: 20px 0px 20px 0px;
+}
+
+.food-input-box {
+	width: 200px;
+}
+
+.input-box>span:nth-child(2) {
+	float: right;
+}
+
+.input-box {
+	justify-content: space-between;
+}
+
+.feature-box_food-tracker_wrapper1 {
+	background-color: rgba(157, 255, 182, 0.664);
+}
+
+.feature-box_food-tracker_wrapper2 {
+	background-color: #FFB506;
+}
+
+.title {
+	padding: 20px;
+	font-family: "Bubblegum Sans";
+	font-size: 25px;
+}
+
+.calculator-box_input-list_column-names>span {
+	width: 100px;
+	min-height: 20px;
+	padding: 0;
+	text-align: center;
+}
+
+.list-rows>span {
+	width: 100px;
+	height: 20px;
+	font-weight: 100;
+	padding: 0;
+	text-align: center;
+	margin: 2px;
+}
+
+.calculator-box_input-list>div>button {
+	background-color: rgba(49, 161, 23, 0.719);
+	border-right: 2px solid rgba(15, 37, 10, 0.719);
+	border-bottom: 2px solid rgba(15, 37, 10, 0.719);
+	color: white;
+	width: 100px;
+	padding: 2px;
+	height: 25px;
+	margin: 20px;
+}
+
+.done-box {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.done-message {
+	height: 40px;
+	width: 40px;
+	margin: 10px;
+}
+
+.done-message>img {
+	height: 100%;
+	width: 100%;
+}
+
+.calendar-error-message {
+	color: red;
+	font-size: 80%;
+	opacity: 0;
+}
+
+.calendar-error-message_display {
+	opacity: 1;
+}

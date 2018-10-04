@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+.record-form {
+	display: flex;
+	justify-content: center;
+}
+
+.body__content {
+	box-sizing: border-box;
+}
+
+.details {
+	border-radius: 0em;
+	border-left:none;
+	border-top:none;
+	border-right: none;
+}
+
+select {
+	border: none;
+	background-color: #4a90e2;
+	color: white;
+	padding: 5px;
+}
+
+.details__info {
+	display: flex;
+	justify-content: center !important;
+
+	}

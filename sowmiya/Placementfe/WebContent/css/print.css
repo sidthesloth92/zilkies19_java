@@ -1,0 +1,106 @@
+@charset "UTF-8";
+
+@page {
+	size: A4;
+	background-color: blue;
+}
+
+.footer {
+	display: none !important;
+}
+
+.header, .footer, .body__left-panel, .modal-container, .icon,
+	.project__edit, .certifications__edit, .print_resume,
+	.academic-qualification {
+	display: none;
+}
+
+.fa-plus {
+	display: none;
+}
+
+body {
+	margin: 5mm 5mm 5mm 5mm;
+	border: 1px solid #03a9f4;
+	background-color: #d9d9d9;
+}
+
+.profile-container {
+	box-sizing: border-box;
+	padding: 5px;
+}
+
+.student-profile, .student-project, .student-certifications,
+	.student-achievements, .academic-qualification-printOnly {
+	display: flex;
+	/* 	justify-content: flex-end;*/
+	flex-direction: column;
+	border: 2px solid white;
+	border-radius: 2em;
+	border-top-right-radius: 0;
+	background-color: white;
+	border: 2px solid white;
+}
+
+img {
+	width: 100%;
+	height: auto;
+}
+
+.title {
+	font-weight: 900;
+	width: 30%;
+}
+
+.student-profile__details, .project__details, .certifications__details,
+	.achievements__details, .qualifiaction__details {
+	margin: 20px;
+}
+
+.qualification__details {
+	left: 10%;
+	right: 10%;
+	margin-left: 30px;
+}
+
+.profile__image {
+	height: 100px;
+}
+
+.student-profile__note {
+	color: blue;
+	font-size: 15px;
+	text-align: center;
+}
+
+.profile {
+	display: none;
+}
+
+.profile, .project, .certifications, .achievements {
+	justify-content: space-between;
+	margin-bottom: 2px;
+}
+
+.profile__image {
+	display: none;
+}
+
+.project>p, .certifications>p, .profile>p, .qualification__title,
+	.achievements>p {
+	text-align: left;
+	color: #03a9f4;
+	padding-left: 20px;
+}
+{
+display
+
+
+:
+
+
+block
+;
+
+
+}

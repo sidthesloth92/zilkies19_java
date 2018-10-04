@@ -1,0 +1,21 @@
+.leaderboard-heading {
+    font-size: 30px;
+    text-align: center;
+}
+
+.leaderboard-outer_container div[class^="col"] {
+    border: 1px solid palegoldenrod;
+    padding: 10px;
+}
+
+.team-names {
+	width:100%;
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+.team-card_outer-container {
+	height: 80vh;
+	overflow: scroll;
+}

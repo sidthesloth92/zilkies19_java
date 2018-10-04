@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+.chart-wrapper {
+	display: flex;
+	flex-direction: column;
+	background-color: #fcaf3e;
+}
+
+canvas {
+	background-color: #fce94f;
+	width: 50%;
+	height: 50%;
+	margin: auto;
+}
+
+.calender-wrapper {
+	background-color: rgb(184, 245, 184);
+}
+.chart-wrapper>div, .calender-wrapper>div {
+	font-family: "Bubblegum Sans";
+	font-size: 20px;
+}
+
+.chart-wrapper div, .calender-wrapper div {
+	padding: 20px;
+}
+
+.calender-wrapper input {
+	margin: 2px;
+	padding: 2px 10px 2px 10px;
+	height: 30px;
+	width: 200px;
+}
+
+.calender-wrapper input[type="button"] {
+	width: 100px;
+	margin-left: 110px;
+}

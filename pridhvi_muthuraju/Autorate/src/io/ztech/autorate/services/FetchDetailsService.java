@@ -29,6 +29,10 @@ public class FetchDetailsService {
 	public HashMap<User, Rating> displayRating(Specification specification) throws SQLException {
 		return fetchCarsDelegate.displayRating(specification);
 	}
+	
+	public Rating getRating(Specification specification,User user) throws SQLException {
+		return fetchCarsDelegate.getRating(specification,user);
+	}
 
 	public Specification getCar(Request request) throws SQLException {
 		return fetchCarsDelegate.getCar(request);

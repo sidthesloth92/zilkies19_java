@@ -1,0 +1,22 @@
+.icons {
+    height: auto;
+    width: 40%;
+}
+
+.player-container {
+    padding: 1%;
+    background-color: #b55522;
+}
+
+.plus-button {
+    background-color: thistle;
+    width: 100%;
+}
+
+.player-inner_container {
+    padding: 10px;
+}
+
+.player-name {
+    font-size: 20px;
+}

@@ -32,8 +32,8 @@ public class PlayerDelegate {
 		return dao.fetchPlayers(user);
 	}
 	
-	public Player fetchPlayer(User user, int playerId) {
-		return dao.fetchPlayer(user, playerId);
+	public Player fetchPlayer(int playerId) {
+		return dao.fetchPlayer(playerId);
 	}
 	
 /*	public void printPlayerDetails(Team team) {

@@ -1,9 +1,9 @@
 package io.ztech.cricalert.beans;
 
 public class Player {
-	int teamId, playerId;
-	String firstName, lastName;
-	User user;
+	private int teamId, playerId;
+	private String firstName, lastName;
+	private User user;
 	
 	public User getUser() {
 		return user;

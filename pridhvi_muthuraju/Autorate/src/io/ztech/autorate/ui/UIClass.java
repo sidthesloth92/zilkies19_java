@@ -54,7 +54,7 @@ public class UIClass {
 	public boolean getLoginUI() {
 		while (true) {
 			logger.info(AppConstants.ENTER_USERNAME);
-			user.setUserName(sc.next());
+			user.setUsername(sc.next());
 			logger.info(AppConstants.ENTER_PASSWORD);
 			user.setPassword(sc.next());
 			try {
@@ -107,14 +107,14 @@ public class UIClass {
 			user.setLastName(sc.next());
 			do {
 				logger.info(AppConstants.ENTER_USERNAME);
-				user.setUserName(sc.next());
-			} while (!Validator.validateUsername(user.getUserName()));
+				user.setUsername(sc.next());
+			} while (!Validator.validate("",user.getUsername()));
 			logger.info(AppConstants.ENTER_EMAILID);
 			user.setEmailId(sc.next());
 			do {
 				logger.info(AppConstants.ENTER_PASSWORD);
 				user.setPassword(sc.next());
-			} while (!Validator.validatePassword(user.getPassword()));
+			} while (!Validator.validate("",user.getPassword()));
 			try {
 				if (checkLoginService.isUser(user)) {
 					logger.info(AppConstants.USERNAME_EXISTS);
@@ -272,7 +272,7 @@ public class UIClass {
 		}
 		int averageRating = 0;
 		for (Map.Entry<User, Rating> entry : ratings.entrySet()) {
-			logger.info("Username:" + entry.getKey().getUserName() + "\nRating:" + entry.getValue().getRating()
+			logger.info("Username:" + entry.getKey().getUsername() + "\nRating:" + entry.getValue().getRating()
 					+ "\nReview:" + entry.getValue().getReview());
 			averageRating += Integer.parseInt(entry.getValue().getRating());
 		}

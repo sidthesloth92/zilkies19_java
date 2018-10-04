@@ -1,8 +1,18 @@
 package io.ztech.cricalert.beans;
 
 public class BallStats {
-	int matchId, teamBatting, teamBowling, bowlerId, batmsanId, runsGiven;
-	boolean wicketTaken;
+	private int matchId, overNo, bowlerId, onstrikeId, offstrikeId;
+	private String summary;
+	
+	public BallStats(int matchId, int overNo, int bowlerId, int onstrikeId, int offstrikeId, String summary) {
+		super();
+		this.matchId = matchId;
+		this.overNo = overNo;
+		this.bowlerId = bowlerId;
+		this.onstrikeId = onstrikeId;
+		this.offstrikeId = offstrikeId;
+		this.summary = summary;
+	}
 
 	public int getMatchId() {
 		return matchId;
@@ -12,20 +22,12 @@ public class BallStats {
 		this.matchId = matchId;
 	}
 
-	public int getTeamBatting() {
-		return teamBatting;
+	public int getOverNo() {
+		return overNo;
 	}
 
-	public void setTeamBatting(int teamBatting) {
-		this.teamBatting = teamBatting;
-	}
-
-	public int getTeamBowling() {
-		return teamBowling;
-	}
-
-	public void setTeamBowling(int teamBowling) {
-		this.teamBowling = teamBowling;
+	public void setOverNo(int overNo) {
+		this.overNo = overNo;
 	}
 
 	public int getBowlerId() {
@@ -36,39 +38,27 @@ public class BallStats {
 		this.bowlerId = bowlerId;
 	}
 
-	public int getBatmsanId() {
-		return batmsanId;
+	public int getOnstrikeId() {
+		return onstrikeId;
 	}
 
-	public void setBatmsanId(int batmsanId) {
-		this.batmsanId = batmsanId;
+	public void setOnstrikeId(int onstrikeId) {
+		this.onstrikeId = onstrikeId;
 	}
 
-	public int getRunsGiven() {
-		return runsGiven;
+	public int getOffstrikeId() {
+		return offstrikeId;
 	}
 
-	public void setRunsGiven(int runsGiven) {
-		this.runsGiven = runsGiven;
+	public void setOffstrikeId(int offstrikeId) {
+		this.offstrikeId = offstrikeId;
 	}
 
-	public boolean getWicketTaken() {
-		return wicketTaken;
+	public String getSummary() {
+		return summary;
 	}
 
-	public void setWicketTaken(boolean wicketTaken) {
-		this.wicketTaken = wicketTaken;
-	}
-
-	public BallStats(int matchId, int teamBatting, int teamBowling, int bowlerId, int batmsanId, int runsGiven,
-			boolean wicketTaken) {
-		super();
-		this.matchId = matchId;
-		this.teamBatting = teamBatting;
-		this.teamBowling = teamBowling;
-		this.bowlerId = bowlerId;
-		this.batmsanId = batmsanId;
-		this.runsGiven = runsGiven;
-		this.wicketTaken = wicketTaken;
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
 }

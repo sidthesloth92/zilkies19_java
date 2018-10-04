@@ -26,7 +26,7 @@ public class RequestCarDAO {
 			con = DBUtils.getConnection();
 			pst = con.prepareStatement(SQLConstants.INSERT_REQUEST);
 			pst.setInt(1, specification.getCarId());
-			pst.setString(2, user.getUserName());
+			pst.setString(2, user.getUsername());
 			pst.executeUpdate();
 		} catch (SQLException e) {
 			throw new SQLException();
@@ -71,7 +71,7 @@ public class RequestCarDAO {
 			con = DBUtils.getConnection();
 			if (user.getAdminStatus().equals("USER")) {
 				pst = con.prepareStatement(SQLConstants.SELECT_REQUEST);
-				pst.setString(1, user.getUserName());
+				pst.setString(1, user.getUsername());
 			} else
 				pst = con.prepareStatement(SQLConstants.SELECT_ALL_REQUEST);
 			res = pst.executeQuery();

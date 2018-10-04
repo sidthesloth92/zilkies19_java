@@ -1,0 +1,49 @@
+.container {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(0, 0, 0);
+    background-image: url('../images/background-image-add-car.jpeg');
+    background-position: 0;
+    background-size: cover;
+}
+
+.inner-container {
+    overflow-y: unset;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 60%;
+    text-align: center;
+    /* background-color: rgb(99, 99, 70); */
+}
+
+.inner-container>* {
+    display: block;
+    height: 30px;
+    width: 300px;
+    padding-left: 5px;
+    border: none;
+    color: white;
+    background-color: rgb(0, 0, 0, 0.8);
+}
+
+.inner-container input:hover {
+    box-shadow: 2px 2px 3px 3px white;
+}
+
+.inner-container button {
+    height: 25px;
+    width: 200px;
+    background:#1AAB8A;
+    color:white;
+    border:none;
+    cursor:pointer;
+    transition:500ms ease all;
+    outline:none;
+}
+
+.inner-container button:hover{
+    background:white;
+    color:#1AAB8A;
+}

@@ -30,8 +30,8 @@ public class PlayerController {
 	}
 	
 	// Called by AddTeam servlet
-	public Player fetchPlayer(User user, int playerId) {
-		return playerDelegate.fetchPlayer(user, playerId);
+	public Player fetchPlayer(int playerId) {
+		return playerDelegate.fetchPlayer(playerId);
 	}
 	
 	/*public void updateTeamId(Team team) {

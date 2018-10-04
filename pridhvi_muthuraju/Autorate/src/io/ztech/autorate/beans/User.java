@@ -3,7 +3,7 @@ package io.ztech.autorate.beans;
 public class User {
 
 	private static boolean loginStatus;
-	private String firstName = "", lastName = "", userName = "", emailId = "", password = "", adminStatus = "";
+	private String firstName = "", lastName = "", username = "", emailId = "", password = "", adminStatus = "";
 
 	public String getAdminStatus() {
 		return adminStatus;
@@ -45,12 +45,12 @@ public class User {
 		User.loginStatus = loginStatus;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {

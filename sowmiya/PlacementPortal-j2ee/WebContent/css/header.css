@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+.header__title {
+	font-family: 'Alex Brush', cursive;
+}
+
+.icon {
+	color: black;
+	font-size: 20px;
+}
