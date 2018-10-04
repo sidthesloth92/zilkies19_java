@@ -34,6 +34,11 @@ public class Phone {
 	public void setPhone_type(PhoneType phone_type) {
 		this.phone_type = phone_type;
 	}
+	@Override
+	public String toString() {
+		return "Phone [phone_number=" + phone_number + ", phone_type=" + phone_type + "]";
+	}
+	
 	
 	
 }

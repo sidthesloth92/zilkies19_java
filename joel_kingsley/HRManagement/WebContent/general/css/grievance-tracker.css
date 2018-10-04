@@ -29,15 +29,16 @@
     background-color: #e9e9e9;
 }
 
-#apply-grievance {
+#issue-grievance {
     height: 90px;
     box-sizing: border-box;
     margin: 10px;
+    cursor: pointer !important;
     text-align: center;
     box-shadow: 0 5px #999;
 }
 
-#apply-grievance:hover {
+#issue-grievance:hover {
     box-shadow: 9px 9px #999;
     background-color: #e9e9e9;
 }

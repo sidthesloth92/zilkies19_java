@@ -1,8 +1,13 @@
 package io.ztech.jkingsley.hrmanagement.beans.objects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Profile {
+public class Profile implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public Employee employee;
 	public ArrayList<Phone> phoneNumbers;
 	public ArrayList<EmergencyContact> emergencyContacts;

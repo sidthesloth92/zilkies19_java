@@ -85,7 +85,7 @@ public class GatewayUI {
 	private Profile getInputForAddEmployee() {
 		Profile profile = new Profile();
 		profile.employee.setEmp_name(InputHandler.getEmployeeName());
-		profile.employee.setPassword(InputHandler.getPassword());
+		profile.employee.setEmp_password(InputHandler.getPassword());
 		profile.employee.setAccount_type(AccountType.EMPLOYEE_LIMITED);
 		profile.employee.setGender(InputHandler.getGender());
 		profile.employee.setMarital_status(InputHandler.getMaritalStatus());

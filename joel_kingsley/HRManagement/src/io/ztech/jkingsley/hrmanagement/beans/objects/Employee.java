@@ -13,7 +13,7 @@ import io.ztech.jkingsley.hrmanagement.beans.types.Qualification;
 public class Employee {
 	BigInteger emp_id;
 	String emp_name;
-	String password;
+	String emp_password;
 	AccountType account_type;
 	Gender gender;
 	MaritalStatus marital_status;
@@ -21,7 +21,7 @@ public class Employee {
 	Date dob;
 	Date doj;
 	Qualification highest_qualification;
-	BloodGroup bloodGroup;
+	BloodGroup blood_group;
 	String pan;
 	String aadhar;
 	String uan;
@@ -41,11 +41,11 @@ public class Employee {
 	public void setEmp_name(String emp_name) {
 		this.emp_name = emp_name;
 	}
-	public String getPassword() {
-		return password;
+	public String getEmp_password() {
+		return emp_password;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setEmp_password(String emp_password) {
+		this.emp_password = emp_password;
 	}
 	public AccountType getAccount_type() {
 		return account_type;
@@ -90,10 +90,10 @@ public class Employee {
 		this.highest_qualification = highest_qualification;
 	}
 	public BloodGroup getBloodGroup() {
-		return bloodGroup;
+		return blood_group;
 	}
 	public void setBloodGroup(BloodGroup bloodGroup) {
-		this.bloodGroup = bloodGroup;
+		this.blood_group = bloodGroup;
 	}
 	public String getPan() {
 		return pan;
@@ -131,6 +131,16 @@ public class Employee {
 	public void setEmp_status(EmployeeStatus emp_status) {
 		this.emp_status = emp_status;
 	}
+	@Override
+	public String toString() {
+		return "Employee [emp_id=" + emp_id + ", emp_name=" + emp_name + ", password=" + emp_password + ", account_type="
+				+ account_type + ", gender=" + gender + ", marital_status=" + marital_status + ", designation_id="
+				+ designation_id + ", dob=" + dob + ", doj=" + doj + ", highest_qualification=" + highest_qualification
+				+ ", bloodGroup=" + blood_group + ", pan=" + pan + ", aadhar=" + aadhar + ", uan=" + uan
+				+ ", present_address=" + present_address + ", permanent_address=" + permanent_address + ", emp_status="
+				+ emp_status + "]";
+	}
+	
 	
 	
 }

@@ -21,7 +21,7 @@
     </header>
     <section class="navbar">
         <div class="open-sans-condensed bold">
-            <a href="/HR_Management/general/pages/generic-login.jsp" class="active menu-button">Dashboard</a>
+            <a href="/HR_Management/employee/pages/dashboard.jsp" class="menu-button">Dashboard</a>
             <div class="dropdown-content dashboard-drop">
                 <a href="/HR_Management/general/pages/profile.jsp">Profile</a>
                 <a href="/HR_Management/employee/pages/projects.jsp">Project</a>
@@ -61,7 +61,7 @@
             </form>
             <div id="forgot-password" class="open-sans-condensed italics">
                 <a href="">Forgot Password?</a>
-            </div> 
+            </div>
         </section>
     </section>
     <footer>

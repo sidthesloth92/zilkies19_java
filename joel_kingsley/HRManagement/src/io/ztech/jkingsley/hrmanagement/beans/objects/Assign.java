@@ -1,9 +1,14 @@
 package io.ztech.jkingsley.hrmanagement.beans.objects;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.sql.Date;
 
-public class Assign {
+public class Assign implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	BigInteger assign_id;
 	Date assign_date;
 	BigInteger project_id;

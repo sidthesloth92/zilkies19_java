@@ -32,5 +32,7 @@ public class Query {
 	public static final String UPDATE_EMPLOYEE_STATUS = "update " + Fields.TABLE_EMPLOYEE + " set "
 			+ Fields.EMPLOYEE_KEY_EMP_STATUS + " = ? " + " where " + Fields.EMPLOYEE_KEY_ID + " = ?";
 	public static final String LIST_ALL_PROJECTS = "select * from " + Fields.TABLE_PROJECT;
+	public static final String FIND_DESIGNATION_OF_ID = "select * from " + Fields.TABLE_DESIGNATION + " where " 
+			+ Fields.DESIGNATION_KEY_ID + " = ? ";
 
 }

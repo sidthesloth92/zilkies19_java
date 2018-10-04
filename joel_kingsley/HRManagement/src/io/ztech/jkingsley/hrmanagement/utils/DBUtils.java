@@ -19,6 +19,7 @@ public class DBUtils {
 			connection = DriverManager.getConnection(Constants.DRIVER_URL,Constants.DRIVER_USERNAME,Constants.DRIVER_PASSWORD);
 			return connection;
 		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
 			throw new PersistenceException(Titles.ERROR_CONNECTION_OPENING,e);
 		}
 	}

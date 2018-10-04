@@ -50,6 +50,15 @@
     flex-grow: 2;
     font-size: 20px;
     width: 100%;
+}
+
+.profile-text-scroll {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 2;
+    font-size: 20px;
+    width: 100%;
     overflow: scroll;
 }
 
@@ -144,6 +153,10 @@
 .php {
     width: 60%; background-color: #808080;
 } /* Dark Grey */
+
+::-webkit-scrollbar { 
+    display: none; 
+}
 
 @media screen and (min-width: 700px) {
     .middle{

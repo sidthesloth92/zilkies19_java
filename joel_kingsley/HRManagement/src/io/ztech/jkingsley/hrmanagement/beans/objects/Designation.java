@@ -12,7 +12,7 @@ public class Designation {
 	public void setDesignation_id(BigInteger designation_id) {
 		this.designation_id = designation_id;
 	}
-	public String getDesgination_name() {
+	public String getDesignation_name() {
 		return desgination_name;
 	}
 	public void setDesgination_name(String desgination_name) {

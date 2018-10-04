@@ -19,28 +19,36 @@
         <div id="ztech-logo">
             <img src="/HR_Management/assets/img/hr-logo.png">
         </div>
+        <div class="drop">
+            <div class="drop-image">
+                <img src="/HR_Management/assets/img/joel.jpeg">
+            </div>
+            <div class="drop-text open-sans-condensed italics">
+                Joel Kingsley
+            </div>
+        </div>
     </header>
     <section class="navbar">
         <div class="open-sans-condensed bold">
-            <a href="/HR_Management/general/pages/generic-login.jsp" class="menu-button">Dashboard</a>
+            <a href="/HR_Management/manager/pages/dashboard.jsp" class="menu-button">Dashboard</a>
             <div class="dropdown-content dashboard-drop">
                 <a href="/HR_Management/general/pages/profile.jsp">Profile</a>
-                <a href="/HR_Management/employee/pages/projects.jsp">Project</a>
-                <a href="/HR_Management/employee/pages/documents.jsp">Documents</a>
+                <a href="/HR_Management/manager/pages/projects.jsp">Project</a>
+                <a href="/HR_Management/manager/pages/documents.jsp">Documents</a>
             </div>
         </div>
         <div class="open-sans-condensed bold">
-            <a href="/HR_Management/employee/pages/leave-tracker.jsp" class="active menu-button">Leave Tracker</a>
+            <a href="/HR_Management/manager/pages/leave-tracker.jsp" class="active menu-button">Leave Tracker</a>
             <div class="dropdown-content lt-drop">
-                <a href="/HR_Management/employee/pages/apply-leave.jsp">Apply Leave</a>
-                <a href="/HR_Management/employee/pages/leave-log.jsp">Leave Log</a>
+                <a href="/HR_Management/manager/pages/apply-leave.jsp">Apply Leave</a>
+                <a href="/HR_Management/manager/pages/leave-log.jsp">Leave Log</a>
             </div>
         </div>
         <div class="open-sans-condensed bold">
-            <a href="/HR_Management/employee/pages/grievance-tracker.jsp" class="menu-button">Grievance Tracker</a>
+            <a href="/HR_Management/manager/pages/grievance-tracker.jsp" class="menu-button">Grievance Tracker</a>
             <div class="dropdown-content gt-drop">
-                <a href="/HR_Management/employee/pages/issue-grievance.jsp">Issue Grievance</a>
-                <a href="/HR_Management/employee/pages/grievance-log.jsp">Grievance Log</a>
+                <a href="/HR_Management/manager/pages/issue-grievance.jsp">Issue Grievance</a>
+                <a href="/HR_Management/manager/pages/grievance-log.jsp">Grievance Log</a>
             </div>
         </div>
         <input type="text" placeholder="Search..." class="open-sans-condensed">
@@ -90,7 +98,7 @@
                             </div>
                         </div>
                         <div id="more" class="open-sans-condensed italics white">
-                            <a href="../pages/leave-log.html">More</a>
+                            <a href="../pages/leave-log.jsp">More</a>
                         </div>
                     </div>
             </div>
@@ -133,7 +141,7 @@
                         </div>
                     </div>
                     <div id="more" class="open-sans-condensed italics white">
-                        <a href="../pages/leave-log.html">More</a>
+                        <a href="../pages/leave-log.jsp">More</a>
                     </div>
                 </div>
             </div>
