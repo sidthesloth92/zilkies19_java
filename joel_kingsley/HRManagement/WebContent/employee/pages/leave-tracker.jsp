@@ -19,10 +19,18 @@
         <div id="ztech-logo">
             <img src="/HR_Management/assets/img/hr-logo.png">
         </div>
+        <div class="drop">
+            <div class="drop-image">
+                <img src="/HR_Management/assets/img/joel.jpeg">
+            </div>
+            <div class="drop-text open-sans-condensed italics">
+                Joel Kingsley
+            </div>
+        </div>
     </header>
     <section class="navbar">
         <div class="open-sans-condensed bold">
-            <a href="/HR_Management/general/pages/generic-login.jsp" class="menu-button">Dashboard</a>
+            <a href="/HR_Management/employee/pages/dashboard.jsp" class="menu-button">Dashboard</a>
             <div class="dropdown-content dashboard-drop">
                 <a href="/HR_Management/general/pages/profile.jsp">Profile</a>
                 <a href="/HR_Management/employee/pages/projects.jsp">Project</a>
@@ -83,7 +91,7 @@
                         </div>
                     </div>
                     <div id="more" class="open-sans-condensed italics white">
-                        <a href="../pages/leave-log.html">More</a>
+                        <a href="../pages/leave-log.jsp">More</a>
                     </div>
                 </div>
             </div>

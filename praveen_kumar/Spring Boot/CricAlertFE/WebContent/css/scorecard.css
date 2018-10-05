@@ -1,0 +1,122 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    width: 100%;
+    box-shadow: 0 0 10px 2px;
+}
+
+.header__nav-bar a {
+    text-decoration: none;
+}
+
+.header__nav-bar a:active {
+    color: rgb(0, 0, 0);
+}
+
+.header__title-bar {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+}
+
+.header__title-bar__return {
+    height: 20px;
+    width: 23px;
+    margin-left: 7px;
+    cursor: pointer;
+}
+
+.header__title-bar__title {
+    font-size: 20px;
+    font-weight: 100;
+    margin-left: auto;
+    padding-right: 23px;
+    margin-right: auto;
+}
+
+.header__nav-bar {
+    height: 37px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 15px;
+    background-image: linear-gradient(to right, #42bb6b 0%, #32e2c2 100%);
+}
+
+.nav-highlight {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.team-a,
+.team-b {
+    width: 310px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(255, 241, 214);
+    /* border-radius: 5px; */
+    box-shadow: 0 0 2px 1px;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.team-a__container-1,
+.team-b__container-1 {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    /* border-top-left-radius: 5px; */
+    /* border-top-right-radius: 5px; */
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.team-a__container-2,
+.team-b__container-2 {
+    width: 100%;
+    max-height: 0;
+    -webkit-transition: max-height 1s ease-out;
+    transition: max-height 1s ease-out;
+    overflow: hidden;
+}
+
+.team__container-1--active {
+    background-color: rgba(62, 241, 169, 0.74);
+}
+
+.team__container-2--active {
+    max-height: 200px;
+}
+
+.team-a__container-2__batsmen,
+.team-a__container-2__bowlers,
+.team-b__container-2__batsmen,
+.team-b__container-2__bowlers {
+    width: 100%;
+    margin: 5px 0;
+    height: 0;
+}
+
+.team-a__container-2__batsmen td,
+.team-a__container-2__bowlers td,
+.team-b__container-2__batsmen td,
+.team-b__container-2__bowlers td {
+    padding: 3px 15px;
+}
+
+.team-a__container-1__name,
+.team-a__container-1__score,
+.team-b__container-1__name,
+.team-b__container-1__score {
+    margin: 0 10px;
+}

@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import ="io.ztech.cricalertfe.constants.Paths"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/CricAlert/css/play.css">
-    <link rel="stylesheet" href="/CricAlert/css/grid-common.css">
+    <link rel="stylesheet" href=<%= Paths.PLAY_CSS %>>
+    <link rel="stylesheet" href=<%= Paths.GRID_CSS %>>
     <title>Play Match</title>
 </head>
 <body>
@@ -16,12 +17,12 @@
 	<c:set var="teamB" scope="request" value='${match.getTeamB()}'></c:set> --%>
         <header class="header">
         <div class="header__title-bar col-sm-12">
-            <img class="header__title-bar__return" src="/CricAlert/assets/icons/icons8-back-1.png" alt="return" onclick="pauseMatch()" />
+            <img class="header__title-bar__return" src=<%= Paths.ICONS_BACK %> alt="return" onclick="pauseMatch()" />
             <h1 class="header__title-bar__title"></h1>
         </div>
         <nav class="header__nav-bar col-sm-12">
             <a href="#" class="nav-highlight">Live</a>
-            <a href="#" class="">Scorecard</a>
+            <a onclick="openScorecard()" class="">Scorecard</a>
             <a href="#" class="">Overs</a>
         </nav>
     </header>
@@ -70,7 +71,7 @@
         </div>
         <div class="modal__match-end">
             <p>The match has ended!</p>
-            <img class="modal__match-end__photo" src="/CricAlert/assets/icons/icons8-team.png" alt="team">
+            <img class="modal__match-end__photo" src=<%= Paths.ICONS_TEAM %> alt="team">
             <p class="modal__match-end__team"></p>
             <p class="modal__match-end__result"></p>
             <p class="modal__match-end__wickets"></p>
@@ -135,6 +136,6 @@
             <div class="scorecard__container-3__required"></div>
         </div>
     </footer>
-    <script src="/CricAlert/js/play.js"></script>
+    <script src=<%= Paths.PLAY_SCRIPT %>></script>
 </body>
 </html>

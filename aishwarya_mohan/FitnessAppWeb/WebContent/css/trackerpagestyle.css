@@ -1,0 +1,37 @@
+@charset "UTF-8";
+* {
+    box-sizing: border-box;
+}
+
+.wrapper {
+    margin-top: 100px;
+    justify-content: space-around;
+}
+
+.nav-toggle_option {
+    border: 2px solid black;
+    padding: 5px;
+    text-align: center;
+    font-family: "Bubblegum Sans";
+    font-size: 25px;
+}
+
+.nav-toggle_option_chosen,
+.nav-toggle_option:hover {
+    background-color: rgb(83, 156, 83);
+    color: white;
+}
+
+.feature-wrapper {
+    border: 5px solid rgb(2, 31, 2);
+    min-height: 400px;
+}
+
+.feature-box_food-tracker,
+.feature-box_weight-tracker {
+    display: none;
+}
+
+.show-feature {
+    display: flex;
+}

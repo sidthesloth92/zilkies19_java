@@ -13,6 +13,7 @@ import io.ztech.jkingsley.hrmanagement.beans.objects.Project;
 import io.ztech.jkingsley.hrmanagement.beans.objects.Skill;
 import io.ztech.jkingsley.hrmanagement.beans.types.EmployeeStatus;
 import io.ztech.jkingsley.hrmanagement.delegates.AddEmployeeDelegate;
+import io.ztech.jkingsley.hrmanagement.delegates.MappingDelegate;
 import io.ztech.jkingsley.hrmanagement.delegates.SearchEmployeeDelegate;
 import io.ztech.jkingsley.hrmanagement.delegates.UpdateEmployeeDelegate;
 import io.ztech.jkingsley.hrmanagement.utils.PersistenceException;
@@ -186,6 +187,16 @@ public class EmployeeManagement {
 	public ArrayList<Project> findAllProjects() {
 		try {
 			return searchEmployeeDelegate.findAllProjects();
+		} catch (PersistenceException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public Designation findDesignationOfDesignationID(BigInteger designationID) {
+		MappingDelegate mappingDelegate = new MappingDelegate();
+		try {
+			return mappingDelegate.findDesignationOfDesignationID(designationID);
 		} catch (PersistenceException e) {
 			e.printStackTrace();
 			return null;

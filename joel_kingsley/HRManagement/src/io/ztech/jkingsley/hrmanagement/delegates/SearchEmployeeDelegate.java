@@ -1,17 +1,29 @@
 package io.ztech.jkingsley.hrmanagement.delegates;
 
 import java.math.BigInteger;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 
+import javax.json.JsonArray;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import io.ztech.jkingsley.hrmanagement.beans.objects.Assign;
 import io.ztech.jkingsley.hrmanagement.beans.objects.Designation;
 import io.ztech.jkingsley.hrmanagement.beans.objects.EmergencyContact;
+import io.ztech.jkingsley.hrmanagement.beans.objects.Employee;
 import io.ztech.jkingsley.hrmanagement.beans.objects.Experience;
 import io.ztech.jkingsley.hrmanagement.beans.objects.Mail;
 import io.ztech.jkingsley.hrmanagement.beans.objects.Phone;
 import io.ztech.jkingsley.hrmanagement.beans.objects.Profile;
 import io.ztech.jkingsley.hrmanagement.beans.objects.Project;
+import io.ztech.jkingsley.hrmanagement.beans.objects.ResponseObject;
 import io.ztech.jkingsley.hrmanagement.beans.objects.Skill;
-import io.ztech.jkingsley.hrmanagement.dao.AssignDAO;
+import io.ztech.jkingsley.hrmanagement.constants.StatusCodes;
 import io.ztech.jkingsley.hrmanagement.dao.DesignationDAO;
 import io.ztech.jkingsley.hrmanagement.dao.EmergencyContactDAO;
 import io.ztech.jkingsley.hrmanagement.dao.EmployeeDAO;
@@ -21,8 +33,16 @@ import io.ztech.jkingsley.hrmanagement.dao.PhoneDAO;
 import io.ztech.jkingsley.hrmanagement.dao.ProjectDAO;
 import io.ztech.jkingsley.hrmanagement.dao.SkillDAO;
 import io.ztech.jkingsley.hrmanagement.utils.PersistenceException;
+import io.ztech.jkingsley.hrmanagement.utils.RestCaller;
 
 public class SearchEmployeeDelegate {
+	
+	RestCaller restCaller;
+	
+	public SearchEmployeeDelegate() {
+		super();
+		restCaller = new RestCaller();
+	}
 
 	public ArrayList<Designation> findAllDesignations() throws PersistenceException {
 		DesignationDAO designationDAO = new DesignationDAO();
@@ -40,7 +60,55 @@ public class SearchEmployeeDelegate {
 	}
 
 	public Profile findEmployeeByID(BigInteger emp_id) throws PersistenceException {
-		EmployeeDAO employeeDAO = new EmployeeDAO();
+		
+		Profile profile = new Profile();
+		ResponseObject responseObject = new ResponseObject();
+		
+		try {
+			JsonReader reader = restCaller.doGet("http://localhost:8080/profiles/" + emp_id);
+			JsonObject jsonObj = reader.readObject();
+			reader.close();
+			
+			responseObject.setStatus(jsonObj.getInt("status"));
+			
+			if(responseObject.getStatus() == StatusCodes.SUCCESS) {
+				JsonArray jsonArray = jsonObj.getJsonArray("objects");
+				JsonObject jsonObject = jsonArray.getJsonObject(0);
+				JsonObject empObj = jsonObject.getJsonObject("employee");
+				JsonArray phObj = jsonObject.getJsonArray("phoneNumbers");
+				JsonArray eContactsObj = jsonObject.getJsonArray("emergencyContacts");
+				JsonArray mAddressesObj = jsonObject.getJsonArray("mailAddresses");
+				JsonArray pAssigned = jsonObject.getJsonArray("projectsAssigned");
+				JsonArray tExperience = jsonObject.getJsonArray("totalExperience");
+				
+				Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+				
+				Employee employee = gson.fromJson(empObj.toString(), Employee.class);
+				ArrayList<Phone> phoneNumbers = gson.fromJson(phObj.toString(), new TypeToken<ArrayList<Phone>>(){}.getType());
+				ArrayList<EmergencyContact> emergencyContacts = gson.fromJson(eContactsObj.toString(), new TypeToken<ArrayList<EmergencyContact>>() {}.getType());
+				ArrayList<Mail> mails = gson.fromJson(mAddressesObj.toString(), new TypeToken<ArrayList<Mail>>() {}.getType());
+				ArrayList<Assign> assignments = gson.fromJson(pAssigned.toString(), new TypeToken<ArrayList<Assign>>() {}.getType());
+				ArrayList<Experience> experience = gson.fromJson(tExperience.toString(), new TypeToken<ArrayList<Experience>>() {}.getType());
+						
+				profile.setEmployee(employee);
+				profile.setPhoneNumbers(phoneNumbers);
+				profile.setEmergencyContacts(emergencyContacts);
+				profile.setMailAddresses(mails);
+				profile.setProjectsAssigned(assignments);
+				profile.setTotalExperience(experience);
+				
+			} else {
+				
+			}
+			
+			
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+
+		} finally {
+			
+		}
+/*		EmployeeDAO employeeDAO = new EmployeeDAO();
 		Profile profile = new Profile();
 		profile.setEmployee(employeeDAO.findEmployeeById(emp_id));
 		
@@ -57,7 +125,7 @@ public class SearchEmployeeDelegate {
 		profile.setTotalExperience(experienceDAO.findTotalExperienceOfID(emp_id));
 		
 		AssignDAO assignDAO = new AssignDAO();
-		profile.setProjectsAssigned(assignDAO.findProjectsAssignedByID());
+		profile.setProjectsAssigned(assignDAO.findProjectsAssignedByID());*/
 		return profile; 
 	}
 

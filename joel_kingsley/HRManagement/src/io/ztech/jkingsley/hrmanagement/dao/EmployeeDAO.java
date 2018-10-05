@@ -43,7 +43,7 @@ public class EmployeeDAO {
 					Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, employee.getEmp_name());
 
-			String sha256hex = org.apache.commons.codec.digest.DigestUtils.sha256Hex(employee.getPassword());
+			String sha256hex = org.apache.commons.codec.digest.DigestUtils.sha256Hex(employee.getEmp_password());
 
 			preparedStatement.setString(2, sha256hex);
 			preparedStatement.setString(3, employee.getAccount_type().toString());
@@ -109,7 +109,7 @@ public class EmployeeDAO {
 						Qualification.valueOf(rs.getString(Fields.EMPLOYEE_KEY_HIGHEST_QUALIFICATION)));
 				employee.setMarital_status(MaritalStatus.valueOf(rs.getString(Fields.EMPLOYEE_KEY_MARITAL_STATUS)));
 				employee.setPan(rs.getString(Fields.EMPLOYEE_KEY_PAN));
-				employee.setPassword(rs.getString(Fields.EMPLOYEE_KEY_PASSWORD));
+				employee.setEmp_password(rs.getString(Fields.EMPLOYEE_KEY_PASSWORD));
 				employee.setPermanent_address(rs.getString(Fields.EMPLOYEE_KEY_PERMANENT_ADDRESS));
 				employee.setPresent_address(rs.getString(Fields.EMPLOYEE_KEY_PRESENT_ADDRESS));
 				employee.setUan(rs.getString(Fields.EMPLOYEE_KEY_UAN));

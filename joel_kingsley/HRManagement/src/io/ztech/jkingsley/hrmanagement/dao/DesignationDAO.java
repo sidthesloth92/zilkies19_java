@@ -45,4 +45,34 @@ public class DesignationDAO {
 		}
 
 	}
+	
+	public Designation findDesignationOfDesignationID(BigInteger designationID) throws PersistenceException {
+		Designation designation = new Designation();
+
+		Connection connection = DBUtils.getConnection();
+		
+		ResultSet rs = null;
+		
+		try {
+			PreparedStatement findDesignation = connection.prepareStatement(Query.FIND_DESIGNATION_OF_ID);
+
+			findDesignation.setLong(1, designationID.longValue());
+			
+			rs = findDesignation.executeQuery();
+
+			if (rs.first()) {
+		
+				designation.setDesignation_id(BigInteger.valueOf(rs.getLong(Fields.DESIGNATION_KEY_ID)));
+				designation.setDesgination_name(rs.getString(Fields.DESIGNATION_KEY_NAME));
+			}
+
+			return designation;
+		} catch (SQLException e) {
+			//throw new PersistenceException("Error in finding all designations",e);
+			e.printStackTrace();
+			return null;
+		} finally {
+			DBUtils.closeConnection(connection,rs);
+		}
+	}
 }

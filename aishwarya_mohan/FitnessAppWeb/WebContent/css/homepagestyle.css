@@ -1,0 +1,130 @@
+body {
+    background-image: url(../assets/background-template.jpg);
+    background-size: cover;
+}
+
+.main-content {
+    margin-top: 80px;
+}
+
+.slides {
+    height: 500px;
+    width: 100%;
+}
+
+.slides img {
+    height: 100%;
+    width: 100%;
+    opacity: 0.4;
+}
+
+.slides span {
+    font-family: "Bubblegum Sans";
+    color: rgb(255, 255, 255);
+    text-shadow: 3px 3px green;
+}
+
+.slides span:nth-child(2) {
+    position: absolute;
+    top: 250px;
+    left: 5%;
+    font-weight: 600;
+    font-size: 50px;
+}
+
+.slides span:nth-child(3) {
+    position: absolute;
+    top: 350px;
+    left: 40%;
+    font-weight: 400;
+    font-size: 40px;
+}
+
+@media only screen and (max-width: 500px) {
+    .slides span:nth-child(2) {
+        font-weight: 600;
+        font-size: 30px;
+    }
+    .slides span:nth-child(3) {
+        font-weight: 200;
+        font-size: 20px;
+    }
+}
+
+.features-box {
+    margin: 10px;
+}
+
+.features-box a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.features-box>a>div {
+    height: 90%;
+    width: 90%;
+    border: 3px solid gold;
+    border-radius: 5px;
+    box-shadow: 5px 5px goldenrod;
+}
+
+.features-box>a>div>img {
+    height: 100%;
+    width: 100%;
+    opacity: 0.6;
+    padding: 0;
+}
+
+.signup-box {
+    position: relative;
+    top: -100px;
+}
+
+.signup-box button {
+    color: white;
+    background-color: green;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    font-family: "Bubblegum Sans";
+    font-size: 20px;
+    transition: all 1s;
+    cursor: pointer;
+    margin: 5px;
+    text-align: center;
+}
+
+.animate {
+    position: relative;
+    animation-name: move;
+    animation-duration: 1.2s;
+    animation-iteration-count: infinite;
+}
+
+.signup-box button span::after {
+    content: '   \00bb';
+    font-size: 25px;
+}
+
+@keyframes move {
+    0% {
+        background-color: green;
+        left: 0;
+    }
+    50% {
+        color: rgb(26, 87, 7);
+        background-color: rgb(67, 236, 67);
+    }
+    100% {
+        left: 500px;
+    }
+}
+
+.features-box_text {
+    font-family: "Bubblegum Sans"; 
+    font-size: 30px; 
+    color: rgb(2, 10, 2);
+    display: flex;
+    justify-content: center;
+}

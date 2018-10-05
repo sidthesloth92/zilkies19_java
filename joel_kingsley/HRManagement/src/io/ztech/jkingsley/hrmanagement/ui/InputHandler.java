@@ -119,7 +119,7 @@ public class InputHandler {
 		}
 
 		for (int i = 0; i < designations.size(); i++) {
-			LOGGER.info(String.valueOf(i + 1) + ". " + designations.get(i).getDesgination_name() + " ("
+			LOGGER.info(String.valueOf(i + 1) + ". " + designations.get(i).getDesignation_name() + " ("
 					+ designations.get(i).getDesignation_id() + ")");
 		}
 

@@ -1,0 +1,100 @@
+body {
+	background-image: none !important;
+}
+
+#login {
+	display: none;
+}
+
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+	.header__title {
+		font-size: 50px;
+	}
+}
+
+@media only screen and (min-width: 901px) {
+	.header__title {
+		font-size: 50px;
+	}
+}
+
+.header--login {
+	border-radius: 50em;
+	background-color: #505260;
+	color: white;
+	padding: 10px;
+	justify-content: flex-end;
+	align-self: center;
+	text-align: center;
+	border: none;
+}
+
+.body__content {
+	display: flex;
+	justify-content: center;
+	background-color: aquamarine;
+}
+
+.container__body {
+	overflow: hidden !important;
+	height: 80%;
+}
+
+#login {
+	display: block !important;
+}
+
+.reset-password {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 100px;
+}
+
+.password__container {
+	display: flex;
+	justify-content: center;
+	align-self: center;
+	flex-direction: column;
+	padding: 0em 2em;
+	background-color: white;
+	border-radius: 1em;
+}
+
+.password__wrapper {
+	margin: 0em !important;
+	border: none !important;
+}
+
+.password__wrapper>label {
+	margin-top: 5%;
+	padding: 5px;
+}
+
+.password__input {
+	margin-bottom: 5%;
+	padding: 10px;
+	border: 1px solid #d2d8d8;
+	border-radius: 0.25em;
+}
+
+.button--save {
+	border: none;
+	border-radius: 0.25em;
+	outline: none;
+	padding: 5% 17%;
+	margin-top: 5%;
+	margin-bottom: 5%;
+	box-sizing: content-box;
+	color: white;
+	cursor: pointer;
+	background-color: #2f889a;
+}
+
+.button__wrapper {
+	background-color: #2f889a;
+}
+
+a {
+	outline: none;
+}

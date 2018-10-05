@@ -15,7 +15,6 @@ import org.json.JSONObject;
 
 import io.ztech.cricalertfe.beans.Player;
 import io.ztech.cricalertfe.beans.Team;
-import io.ztech.cricalertfe.beans.User;
 import io.ztech.cricalertfe.delegates.PlayerDelegate;
 import io.ztech.cricalertfe.delegates.TeamDelegate;
 
@@ -63,9 +62,6 @@ public class PlayerModal extends HttpServlet {
 		JSONObject jsonObj;
 		try {
 			jsonObj = new JSONObject(data);
-			
-			User user = (User) request.getSession(false).getAttribute("user");
-			
 			Player player = playerDelegate.fetchPlayer(Integer.parseInt((String) jsonObj.get("playerId")));
 			Team team = teamDelegate.fetchTeam(player.getTeamId());
 			

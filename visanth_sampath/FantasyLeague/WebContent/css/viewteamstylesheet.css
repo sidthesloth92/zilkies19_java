@@ -1,0 +1,40 @@
+.icons {
+    height: auto;
+    width: 80%;
+}
+
+.players-and-role_container {
+    background-color: #b55522;
+    margin: 10px;
+    /* #6D590A; */
+
+    /* #AA9B5C; */
+}
+
+.player-image {
+    height: 60px;
+    width: 60%;
+    border-radius: 10%;
+}
+
+@media only screen and (min-width: 720px) {
+    .col-lg-spcl {
+        width: 60%;
+    }
+}
+
+.players-hidden_load {
+	display: none;
+}
+
+.col-sm-7.col-md-7.col-lg-7 {
+	padding: 20px;
+}
+
+.modify-team_button {
+	background-color: green;
+	color: white;
+	padding: 10px;
+	border: 0;
+	cursor: pointer;
+}

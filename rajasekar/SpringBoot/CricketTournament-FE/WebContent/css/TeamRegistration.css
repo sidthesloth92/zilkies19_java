@@ -1,0 +1,116 @@
+.header {
+    background-color: gray;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__left-option {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+
+.header__right-option {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-evenly;
+}
+
+.explorer {
+    padding-left: 30px;
+}
+
+.logo {
+    padding-left: 10px;
+}
+
+.login {
+    padding-right: 30px;
+}
+
+.signup {
+    padding-right: 10px;
+}
+
+.tournament-container__sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 100;
+    left: 20;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.tournament-container__sidenav a {
+    padding: 10px 6px 50px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+
+.tournament-container__sidenav a:hover {
+    color: white;
+}
+
+.login i {
+    font-size: 60px;
+}
+
+.team-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: space-between;
+}
+
+.form-div {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-between;
+}
+
+.player-1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.player-name,
+.player-role {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.form-card {
+    margin-left: 220px;
+    margin-right: 20px;
+}
+
+.user-container {
+    height: 100vh;
+}
+
+.tournament-container {
+    height: 100vh;
+    margin-top: 20px;
+}
+
+.outer-player {
+   background-color: #249682;
+}
+
+.tournament-container {
+    overflow-y: scroll;
+}
+
+input {
+	color:black;
+}

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -53,13 +54,11 @@ public class CricketDAO {
 		}
 	}
 	
-	public void insertPlayer(User user) {
+	public void insertPlayer(Player player) {
 		PreparedStatement ps = null;
 		Connection con = connector.openConnection();
 		
 		try {
-			ArrayList<Player> playerList = user.getPlayers();
-			Player player = playerList.get(playerList.size() - 1);
 			ps = con.prepareStatement(Queries.INSERT_PLAYER);
 			ps.setInt(1, player.getTeamId());
 			ps.setString(2, player.getFirstName());
@@ -68,37 +67,17 @@ public class CricketDAO {
 			ps.execute();
 			player.setPlayerId(getRecentPlayerId());
 		} catch (SQLException e) {
-			logger.info("Exception caught at insertPlayer(User): " + e);
+			logger.info("Exception caught at insertPlayer(Player): " + e);
 		} finally {
 			connector.closeConnection(con, null, ps);
 		}
 	}
 	
-	/*public void insertPlayer(Player player) {
+	public void insertTeam(Team team) {
 		PreparedStatement ps = null;
 		Connection con = connector.openConnection();
 		
 		try {
-			ps = con.prepareStatement(Queries.INSERT_PLAYER);
-			ps.setInt(1, player.getTeamId());
-			ps.setString(2, player.getFirstName());
-			ps.setString(3, player.getLastName());
-			ps.setInt(4, player.getUser().getUserId());
-			ps.execute();
-		} catch (SQLException e) {
-			logger.info("Exception caught at insertPlayer(Player): " + e);
-		} finally {
-			connector.closeConnection(con, null, ps);
-		}
-	}*/
-	
-	public void insertTeam(User user) {
-		PreparedStatement ps = null;
-		Connection con = connector.openConnection();
-		
-		try {
-			ArrayList<Team> teamList = user.getTeams();
-			Team team = teamList.get(teamList.size() - 1);
 			ps = con.prepareStatement(Queries.INSERT_TEAM);
 			ps.setString(1, team.getTeamName());
 			ps.setString(2, team.getAbbreviation());
@@ -122,7 +101,7 @@ public class CricketDAO {
 		
 		try {
 			ps = con.prepareStatement(Queries.INSERT_MATCH);
-			ps.setTimestamp(1, match.getMatchDatetime());
+			ps.setTimestamp(1, Timestamp.valueOf(match.getMatchDatetime()));
 			ps.setString(2, match.getVenue());
 			ps.setInt(3, match.getTeamA().getTeamId());
 			ps.setInt(4, match.getTeamB().getTeamId());
@@ -320,7 +299,7 @@ public class CricketDAO {
 		
 		try {
 			ps = con.prepareStatement(Queries.UPDATE_MATCH_DATE);
-			ps.setTimestamp(1, match.getMatchDatetime());
+			ps.setTimestamp(1, Timestamp.valueOf(match.getMatchDatetime()));
 			ps.setInt(2, match.getMatchId());
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -375,6 +354,7 @@ public class CricketDAO {
 	}
 	
 	public void updateMatchStats(MatchStats matchStats) {
+		logger.info("Entered updateMatchStats (DAO)");
 		PreparedStatement ps = null;
 		Connection con = connector.openConnection();
 		ResultSet rs = null;
@@ -405,6 +385,7 @@ public class CricketDAO {
 			logger.info("Exception caught at updateMatchStats(): " + e);
 		} finally {
 			connector.closeConnection(con, rs, ps);
+			logger.info("Exited updateMatchStats (DAO)");
 		}
 	}
 	
@@ -446,7 +427,7 @@ public class CricketDAO {
 		}
 	}
 	
-	public ArrayList<Player> fetchTeamPlayers(Team team) {
+	public ArrayList<Player> fetchTeamPlayers(int teamId) {
 		PreparedStatement ps = null;
 		Connection con = connector.openConnection();
 		ResultSet rs = null;
@@ -454,7 +435,7 @@ public class CricketDAO {
 		
 		try {
 			ps = con.prepareStatement(Queries.FETCH_TEAM_PLAYERS);
-			ps.setInt(1, team.getTeamId());
+			ps.setInt(1, teamId);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				Player newPlayer = new Player();
@@ -473,6 +454,7 @@ public class CricketDAO {
 	}
 	
 	public User fetchUser(User user) {
+		logger.info("Entered fetchUser (dao)");
 		PreparedStatement ps = null;
 		Connection con = connector.openConnection();
 		ResultSet rs = null;
@@ -489,8 +471,8 @@ public class CricketDAO {
 					user.setName(rs.getString("name"));
 					user.setEmail(rs.getString("email"));
 					user.setUserId(rs.getInt("user_id"));
-					user.setPlayers(fetchPlayers(user));
-					user.setTeams(fetchTeams(user));
+					user.setPlayers(fetchPlayers(user.getUserId()));
+					user.setTeams(fetchTeams(user.getUserId()));
 					user.setMatches(fetchMatches(user));
 				} else {
 					user = null;
@@ -503,11 +485,12 @@ public class CricketDAO {
 			logger.info("Exception caught at fetchUser(): " + e);
 		} finally {
 			connector.closeConnection(con, rs, ps);
+			logger.info("Exited fetchUser (dao)");
 		}
 		return user;
 	}
 
-	public ArrayList<Player> fetchPlayers(User user) {
+	public ArrayList<Player> fetchPlayers(int userId) {
 		PreparedStatement ps = null;
 		Connection con = connector.openConnection();
 		ResultSet rs = null;
@@ -515,7 +498,7 @@ public class CricketDAO {
 		
 		try {
 			ps = con.prepareStatement(Queries.FETCH_USER_PLAYERS);
-			ps.setInt(1, user.getUserId());
+			ps.setInt(1, userId);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				Player player = new Player();
@@ -533,6 +516,7 @@ public class CricketDAO {
 		return playerList;
 	}
 	
+	//To be used for line up players
 	public ArrayList<Player> fetchPlayers(ArrayList<Integer> players) {
 		PreparedStatement ps = null;
 		Connection con = connector.openConnection();
@@ -597,7 +581,7 @@ public class CricketDAO {
 				team.setTeamId(rs.getInt("team_id"));
 				team.setAbbreviation(rs.getString("abbreviation"));
 				team.setTeamName(rs.getString("team_name"));
-				team.setPlayers(fetchTeamPlayers(team));
+				team.setPlayers(fetchTeamPlayers(team.getTeamId()));
 			}
 		} catch (SQLException e) {
 			logger.info("Exception caught at fetchTeam(): " + e);
@@ -607,7 +591,8 @@ public class CricketDAO {
 		return team;
 	}
 	
-	public ArrayList<Team> fetchTeams(User user) {
+	public ArrayList<Team> fetchTeams(int userId) {
+		logger.info("Entered fetchTeams (dao)");
 		PreparedStatement ps = null;
 		Connection con = connector.openConnection();
 		ResultSet rs = null;
@@ -615,20 +600,21 @@ public class CricketDAO {
 
 		try {
 			ps = con.prepareStatement(Queries.FETCH_TEAMS);
-			ps.setInt(1, user.getUserId());
+			ps.setInt(1, userId);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				Team newTeam = new Team();
 				newTeam.setTeamId(rs.getInt("team_id"));
 				newTeam.setAbbreviation(rs.getString("abbreviation"));
 				newTeam.setTeamName(rs.getString("team_name"));
-				newTeam.setPlayers(fetchTeamPlayers(newTeam));
+				newTeam.setPlayers(fetchTeamPlayers(newTeam.getTeamId()));
 				teamList.add(newTeam);
 			}
 		} catch (SQLException e) {
 			logger.info("Exception caught at fetchTeams(): " + e);
 		} finally {
 			connector.closeConnection(con, rs, ps);
+			logger.info("Exited fetchTeams (dao)");
 		}
 		return teamList;
 	}
@@ -646,6 +632,7 @@ public class CricketDAO {
 			match = new Match();
 			while (rs.next()) {
 				match.setMatchId(rs.getInt(1));
+				System.out.println("Executing (fetchMatch) setMatchDatetime...");
 				match.setMatchDatetime(rs.getTimestamp(2));
 				match.setVenue(rs.getString(3));
 				
@@ -677,6 +664,7 @@ public class CricketDAO {
 	}
 	
 	public ArrayList<Match> fetchMatches(User user) {
+		logger.info("Entered fetchMatches (dao)");
 		PreparedStatement ps = null;
 		Connection con = connector.openConnection();
 		ResultSet rs = null;
@@ -710,6 +698,7 @@ public class CricketDAO {
 			logger.info("Exception caught at fetchMatches(): " + e);
 		} finally {
 			connector.closeConnection(con, rs, ps);
+			logger.info("Exited fetchMatches (dao)");
 		}
 		return matchList;
 	}

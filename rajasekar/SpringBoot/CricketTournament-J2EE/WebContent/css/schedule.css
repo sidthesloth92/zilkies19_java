@@ -1,0 +1,219 @@
+.header {
+    background-color: gray;
+    display: flex;
+    justify-content: space-between;
+    position:fixed;
+    top:0px;
+    width:100%;
+}
+
+.header__left-option {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+
+.header__right-option {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-evenly;
+}
+
+.user-container {
+	margin-top:80px;
+}
+
+.border {
+	margin-top:130px;
+}
+
+.explorer {
+    padding-left: 30px;
+}
+
+.logo {
+    padding-left: 10px;
+}
+
+.login {
+    padding-right: 30px;
+}
+
+.signup {
+    padding-right: 10px;
+}
+
+.tournament-container__sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 90px;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.tournament-container__sidenav a {
+    padding: 10px 6px 50px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+
+.tournament-container__sidenav a:hover {
+    color: white;
+}
+
+.login i {
+    font-size: 40px;
+}
+
+.teams {
+    margin-left: 220px;
+}
+
+.teams {
+    margin-top: 10px;
+    border: 5px solid gray;
+    display: flex;
+    flex-direction: column;
+}
+
+.team-container {
+    flex-grow: 1;
+}
+
+.team-container {
+    margin: 10px;
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.team-view {
+    flex-grow: 1;
+}
+
+.team,.view {
+	color:black;
+	text-align: center;
+}
+
+.team {
+	align:center;
+	width:30%;
+}
+
+.view {
+	align:center;
+	width:40%;
+}
+
+.team-container-dropdown {
+    margin: 10px;
+    display: flex;
+    margin-left: 220px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.scorecard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+}
+
+.team-1,
+.team-2 {
+    flex-grow: 1;
+}
+
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
+}
+
+button:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.team-1,
+.team-2 {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.team-name,
+.score {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.scorecard {
+    display: none;
+}
+
+.close {
+    margin-left: 250px;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.card {
+    background-color: gray;
+    border: 1px solid black;
+    padding: 20px;
+}
+form button {
+	padding 0px;
+	line-height:3px;
+}
+
+.form-element button {
+    background-color: Red;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    border: 2px solid red;
+    line-height:3px;
+}
+
+.login h3{
+	margin-bottom: 0.5em;
+}
+
+.form-element button:hover {
+    background-color: red;
+    color: white;
+}

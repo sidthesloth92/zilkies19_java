@@ -15,6 +15,7 @@ import io.ztech.cricalertfe.beans.Team;
 import io.ztech.cricalertfe.beans.User;
 import io.ztech.cricalertfe.constants.Regex;
 import io.ztech.cricalertfe.constants.UserMessages;
+import io.ztech.cricalertfe.delegates.PlayerDelegate;
 import io.ztech.cricalertfe.delegates.TeamDelegate;
 import io.ztech.cricalertfe.delegates.Validator;
 import io.ztech.cricalertfe.exceptions.InvalidNameException;
@@ -59,7 +60,7 @@ public class AddPlayer extends HttpServlet {
 		logger.info("Entered AddPlayer doGet");
 		Validator validator = new Validator();
 		User user = (User) request.getSession(false).getAttribute("user");
-		TeamDelegate teamDelegate = new TeamDelegate();
+		PlayerDelegate playerDelegate = new PlayerDelegate();
 		Player player = new Player();
 		String firstName = request.getParameter("fname");
 	    String lastName = request.getParameter("lname");
@@ -74,7 +75,7 @@ public class AddPlayer extends HttpServlet {
 				throw new InvalidNameException(UserMessages.INVALID_NAME_EXCEPTION);
 			}
 			user.addPlayer(player);
-			teamDelegate.addNewPlayer(user);
+			playerDelegate.addNewPlayer(player);
 	    	request.getRequestDispatcher("/Players").forward(request, response);
 	    } catch(InvalidNameException e) {
 	    	System.out.println("Exception caught!");

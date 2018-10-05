@@ -7,7 +7,7 @@ import io.ztech.cricalertbe.constants.MatchResult;
 public class Match {
 	private int matchId;
 	private User user;
-	private Timestamp matchDatetime;
+	private String matchDatetime;
 	private Team teamA, teamB;
 	private LineUp teamALineUp, teamBLineUp;
 	private String status, venue;
@@ -86,12 +86,12 @@ public class Match {
 		this.teamB = teamB;
 	}
 
-	public Timestamp getMatchDatetime() {
+	public String getMatchDatetime() {
 		return matchDatetime;
 	}
 
 	public void setMatchDatetime(Timestamp matchDatetime) {
-		this.matchDatetime = matchDatetime;
+		this.matchDatetime = matchDatetime.toString();
 	}
 
 	public String getStatus() {

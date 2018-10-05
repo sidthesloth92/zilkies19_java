@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+.department {
+	font-size: 15px;
+	justify-content: center;
+}
+
+.empty {
+	display: flex;
+	justify-content: center;
+	margin: 30px;
+	text-align: center;
+	color: white;
+	background-color: #03a9f4;
+	text-align: center;
+}
+
+.department>label {
+	font-weight: 600;
+	display: none;
+}
+
+.button--submit {
+	background: none;
+	padding: 0px;
+	border: none;
+}
+
+.fa-eye {
+	color: #4a90e2;
+	align-self: flex-start;
+}
+
+.button-container {
+	justify-content: flex-start;
+}
+
+.content__jobs {
+	border-radius: 0em;
+	background-color: rgb(177, 173, 173);
+}
+
+@media screen and (max-width: 600px) {
+	.department {
+		justify-content: flex-start;
+	}
+}
+
+h1 {
+	align-self: center;
+	color: #4a90e2;
+}
+
+.content__header {
+	justify-content: center;
+}

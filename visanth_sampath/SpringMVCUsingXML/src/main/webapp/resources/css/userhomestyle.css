@@ -1,0 +1,63 @@
+
+/* to be removed */
+
+.header {
+    height: 100px;
+}
+
+/* to be removed */
+
+.team-logo {
+    /* height: auto; */
+    margin-left: 3%;
+    width: 60%;
+    height: auto;
+    border-radius: 40%;
+}
+
+.match-card {
+    background-color: #b55522;
+
+    /* #D9E5D6; */
+    border-radius: 2%;
+    margin-top: 2%;
+}
+
+.team-name {
+    color: white;
+    text-align: center;
+    padding: 10%;
+}
+
+.upcomming-matches_container {
+	height: 80vh;
+	overflow: scroll;
+}
+
+.button-container {
+	position: relative;
+}
+
+.pick-team_button {
+	position: absolute;
+	background: none;
+	padding: 10px;
+	font-size: 18px;
+	color: yellow;
+	border: 0;
+	border-radius: 5%;
+	cursor: pointer;
+	height: 100%;
+}
+
+.view-team_button {
+	position: absolute;
+	background: none;
+	font-size: 18px;
+	padding: 10px;
+	color: greenyellow;
+	border: 0;
+	border-radius: 5%;
+	cursor: pointer;
+	height: 100%;
+}

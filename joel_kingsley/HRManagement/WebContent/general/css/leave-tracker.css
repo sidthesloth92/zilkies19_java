@@ -33,7 +33,7 @@
     height: 90px;
     box-sizing: border-box;
     margin: 10px;
-    cursor: crosshair;
+    cursor: pointer !important;
     text-align: center;
     box-shadow: 0 5px #999;
 }

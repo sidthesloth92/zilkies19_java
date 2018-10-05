@@ -2,79 +2,69 @@ package io.ztech.cricalertbe.controllers;
 
 import java.util.ArrayList;
 
-import io.ztech.cricalertfe.beans.Player;
-import io.ztech.cricalertfe.beans.Team;
-import io.ztech.cricalertfe.beans.User;
-import io.ztech.cricalertfe.constants.Regex;
-import io.ztech.cricalertfe.constants.UserMessages;
-import io.ztech.cricalertfe.delegates.TeamDelegate;
-import io.ztech.cricalertfe.exceptions.InvalidNameException;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import io.ztech.cricalertbe.beans.Player;
+import io.ztech.cricalertbe.beans.Team;
+import io.ztech.cricalertbe.beans.UpdateTeam;
+import io.ztech.cricalertbe.delegates.TeamDelegate;
+
+@RestController
+@RequestMapping("/CricAlertBE/teams")
 public class TeamController {
-
-	TeamDelegate teamDelegate;
-	Validator validator;
-
-	public TeamController() {
-		teamDelegate = new TeamDelegate();
-		validator = new Validator();
-	}
-
-	public ArrayList<Team> fetchTeams(User user) {
-		return teamDelegate.fetchTeams(user);
-	}
-
-	public void createTeam(Team newTeam, User user) throws InvalidNameException {
-		for (Player player : newTeam.getPlayers()) {
-			if (!(validator.validateInput(Regex.nameRegex, player.getFirstName(), UserMessages.INVALID_FIRST_NAME)
-					&& validator.validateInput(Regex.nameRegex, player.getLastName(), UserMessages.INVALID_LAST_NAME))) {
-				throw new InvalidNameException(UserMessages.INVALID_NAME_EXCEPTION);
-			}
-		}
-		
-		user.addTeam(newTeam);
-		user.addPlayer(newTeam.getPlayers());
-		
-		teamDelegate.createTeam(user);
-	}
 	
-	/*public boolean searchTeam(int teamId, User user) {
-		return teamDelegate.searchTeam(teamId, user);
-	}*/
-	
-	public void addNewPlayer(Player player, User user) throws InvalidNameException {
-		if (!(validator.validateInput(Regex.nameRegex, player.getFirstName(), UserMessages.INVALID_FIRST_NAME)
-				&& validator.validateInput(Regex.nameRegex, player.getLastName(), UserMessages.INVALID_LAST_NAME))) {
-			throw new InvalidNameException(UserMessages.INVALID_NAME_EXCEPTION);
-		}
-		user.addPlayer(player);
-		teamDelegate.addNewPlayer(user);
-	}
-	
-	public void updateTeamName(Team team) throws InvalidNameException {
-		if (!(validator.validateInput(Regex.nameRegex, team.getTeamName(), UserMessages.INVALID_NAME))) {
-			throw new InvalidNameException(UserMessages.INVALID_NAME_EXCEPTION);
-		}
-		teamDelegate.updateTeamName(team);
-	}
-	
-	public void updateTeamPlayers(ArrayList<Player> playerList, Team team) {
-		teamDelegate.updateTeamPlayers(playerList, team);
-	}
-	
-	public Team fetchTeam(int teamId) {
+	@GetMapping("/{id}")
+	public Team fetchTeam(@PathVariable ("id") int teamId) {
+		TeamDelegate teamDelegate = new TeamDelegate();
 		return teamDelegate.fetchTeam(teamId);
 	}
 	
-	public ArrayList<Player> fetchTeamPlayers(Team team) {
-		return teamDelegate.fetchTeamPlayers(team);
+	@GetMapping("/user/{id}")
+	public ArrayList<Team> fetchTeams(@PathVariable ("id") int userId) {
+		TeamDelegate teamDelegate = new TeamDelegate();
+		return teamDelegate.fetchTeams(userId);
 	}
 	
-	public boolean isTeamCreated(User user) {
-		return teamDelegate.isTeamCreated(user);
+	@GetMapping("/{id}/players")
+	public ArrayList<Player> fetchTeamPlayers(@PathVariable ("id") int teamId) {
+		TeamDelegate teamDelegate = new TeamDelegate();
+		return teamDelegate.fetchTeamPlayers(teamId);
+	}
+
+	@PostMapping("/")
+	public void createTeam(@RequestBody Team team) {
+		TeamDelegate teamDelegate = new TeamDelegate();
+		teamDelegate.createTeam(team);
 	}
 	
-	public void removeTeam(Team team) {
+	@PutMapping("/{id}")
+	public void updateTeam(@RequestBody UpdateTeam updateTeam) {
+		TeamDelegate teamDelegate = new TeamDelegate();
+		teamDelegate.updateTeam(updateTeam);
+	}
+	
+	/*@PutMapping("/{id}/name")
+	public void updateTeamName(@RequestBody Team team) {
+		TeamDelegate teamDelegate = new TeamDelegate();
+		teamDelegate.updateTeamName(team);
+	}
+	
+	@PutMapping("/{id}/players")
+	public void updateTeamPlayers(ArrayList<Player> playerList, Team team) {
+		TeamDelegate teamDelegate = new TeamDelegate();
+		teamDelegate.updateTeamPlayers(playerList, team);
+	}*/
+	
+	@DeleteMapping("/{id}")
+	public void removeTeam(@RequestBody Team team) {
+		TeamDelegate teamDelegate = new TeamDelegate();
 		teamDelegate.removeTeam(team);
 	}
 }
