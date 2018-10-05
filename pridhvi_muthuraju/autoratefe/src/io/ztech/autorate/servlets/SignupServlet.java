@@ -20,8 +20,8 @@ import io.ztech.autorate.delegates.LoginDelegate;
 public class SignupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	ArrayList<String> errorMessages;
-	LoginDelegate loginService = new LoginDelegate();
+	ArrayList<String> errorMessages = new ArrayList<>();
+	LoginDelegate loginDelegate = new LoginDelegate();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -50,7 +50,6 @@ public class SignupServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8");
-		errorMessages = new ArrayList<>();
 		String firstName = request.getParameter("firstname");
 		validateFirstName(request, firstName);
 		String lastName = request.getParameter("lastname");
@@ -63,10 +62,9 @@ public class SignupServlet extends HttpServlet {
 		validatePassword(request, password);
 		String confirmPassword = request.getParameter("confirm-password");
 		validateConfirmPassword(request, confirmPassword, password);
-		
-		
-		for(String error:errorMessages) {
-			if(error.contains("a")) {
+
+		for (String error : errorMessages) {
+			if (error.contains("a")) {
 				request.setAttribute("errorMessages", errorMessages);
 				request.getRequestDispatcher("WEB-INF/pages/signup.jsp").forward(request, response);
 				return;
@@ -80,7 +78,7 @@ public class SignupServlet extends HttpServlet {
 		user.setEmailId(emailId);
 		user.setPassword(password);
 		try {
-			if (!loginService.signup(user)) {
+			if (!loginDelegate.signup(user)) {
 				String message = "Signup Error! Try Again";
 				response.sendRedirect("WEB-INF/pages/signup.jsp?message=" + URLEncoder.encode(message, "UTF-8"));
 				return;
@@ -119,14 +117,26 @@ public class SignupServlet extends HttpServlet {
 	}
 
 	protected boolean validateUsername(HttpServletRequest request, String username) {
-		String usernameRegex = "^[a-zA-Z0-9._-]{3,}$";
-		if (!Validator.validate(usernameRegex, username)) {
-			errorMessages.add("Invalid Username");
+		User user=new User();
+		user.setUsername(username);
+		try {
+			if (loginDelegate.isUser(user)) {
+				errorMessages.add("Username already present!");
+				return false;
+			} else {
+				String usernameRegex = "^[a-zA-Z0-9._-]{3,}$";
+				if (!Validator.validate(usernameRegex, username)) {
+					errorMessages.add("Invalid Username");
+					return false;
+				} else {
+					errorMessages.add("");
+					return true;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
-		} else {
-			errorMessages.add("");
 		}
-		return true;
 	}
 
 	protected boolean validateEmailId(HttpServletRequest request, String emailId) {

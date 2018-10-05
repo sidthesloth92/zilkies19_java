@@ -16,7 +16,7 @@ import io.ztech.autorate.beans.Request;
 import io.ztech.autorate.beans.Specification;
 import io.ztech.autorate.beans.User;
 import io.ztech.autorate.constants.AppConstants;
-import io.ztech.autorate.services.AddRatingService;
+import io.ztech.autorate.delegate.AddRatingDelegate;
 import io.ztech.autorate.services.FetchDetailsService;
 
 /**
@@ -62,11 +62,11 @@ public class CarServlet extends HttpServlet {
 
 		Rating rating = null;
 		if (request.getSession().getAttribute("status") != null) {
-			AddRatingService addRatingService = new AddRatingService();
+			AddRatingDelegate addRatingDelegate = new AddRatingDelegate();
 			User user = new User();
 			user.setUsername(request.getSession().getAttribute("username").toString());
 			try {
-				if (addRatingService.isRating(carBean, user)) {
+				if (addRatingDelegate.isRating(carBean, user)) {
 					rating = fetchdetailsService.getRating(carBean, user);
 				}
 			} catch (SQLException e1) {

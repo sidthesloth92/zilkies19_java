@@ -49,7 +49,7 @@ public class FetchCarsServlet extends HttpServlet {
 		ArrayList<Specification> cars = new ArrayList<>();
 		try {
 			cars = fetchdetailsDelegate.getCars(make, carType);
-		} catch (Exception e) {
+		} catch (Exception e) {System.out.println("fetchcarsservlet"+e);
 			logger.info(AppConstants.ERROR_DATA);
 		}
 

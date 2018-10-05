@@ -7,7 +7,7 @@
 
 .container {
 	height: 100vh;
-	background: url(../images/background-image-car-2.jpeg);
+	background: url(../images/background-image-main.jpeg);
 	background-position: 0;
 	background-size: cover;
 	background-attachment: fixed;
@@ -19,7 +19,7 @@
 	width: 100%;
 	display: flex;
 	justify-content: space-around;
-	background-color: rgb(123, 138, 151);
+	background-color: #1F2731;
 	position: fixed;
 	z-index: 1;
 }
@@ -118,8 +118,10 @@
 	border: none;
 }
 
-.login input:hover {
-	box-shadow: 2px 2px 3px 3px black;
+.login input:hover,
+.login input:focus
+{
+	box-shadow: 0 0 100px black;
 }
 
 .login button {
@@ -144,16 +146,17 @@
 	display: flex;
 	justify-content: flex-end;
 	padding-right: 8%;
-	color: black;
+	color: white;
 }
 
 .signup a {
 	text-decoration: none;
-	color: black;
+	color: white;
 }
 
 .signup a:hover {
 	color: wheat;
+	cursor: pointer;
 }
 
 ::-webkit-scrollbar {
@@ -177,93 +180,124 @@
 	height: -webkit-calc(100% - 70px);
 	position: absolute;
 	top: 70px;
-	width: 100%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .inner-container-main {
-	height: 100%;
+	min-height: 100%;
 	width: 100%;
-	background: url(../images/background-image-main.jpeg);
-	background-position: 0;
-	background-size: cover;
-	background-attachment: fixed;
-	background-repeat: no-repeat;
-	display: flex;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-around; */
+    align-items: center;
 	flex-wrap: wrap;
-	padding-bottom: 10px;
+    /* padding-bottom: 10px; */
+    background-color: rgba(0, 0, 0, 0.575);
 }
 
 .inner-container-main-options {
+    margin-top: 50px;
 	width: 100%;
-	height: 40%;
-	display: flex;
+	height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
-.inner-container-main-options a {
-	display: block;
-}
-
-.inner-container-main-options>div {
-	width: 50%;
+.inner-container-main-options>button {
+	width: 10%;
 	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-family: 'Permanent Marker', cursive;
+	background-color: transparent;
+    border: 1px solid white;
+    /* border: none; */
+    border-radius: 20px;
+    color: white;
+    transition: 800ms ease all;
+    box-shadow: 0 0 30px black;
 }
 
-.inner-container-main-options>div button {
-	width: 50%;
-	height: 50%;
-	background-color: rgba(0, 0, 0, 0.4);
-	border: none;
+.inner-container-main-options>button p {
+    font-family: 'Arvo', serif;
+    font-size: 25px;
 }
 
 .button--hover:hover {
-	background-color: rgba(0, 0, 0, 0.7);
-	cursor: pointer;
-}
-
-.inner-container-main-options>div button p {
-	font-size: 40px;
-	font-family: 'Permanent Marker', cursive;
+	background-color: rgb(0, 0, 0);
+    cursor: pointer;
+    color: white;
 }
 
 .inner-container-main-list {
+    margin-top: 50px;
 	width: 90%;
-	height: 60%;
-	margin: auto;
+	/* height: 80%; */
+	/* margin: auto; */
 	display: flex;
 	/* flex-direction: column; */
 	flex-wrap: wrap;
 	justify-content: space-around;
 	align-items: center;
-	background-color: rgba(0, 0, 0, 0.4);
 	color: wheat;
-	overflow-y: scroll;
-	padding: 15px;
+	/* overflow-y: scroll; */
+	/* padding: 15px; */
 }
 
 .inner-container-main-list div {
 	list-style-type: none;
 	width: 100px;
 	height: 50px;
-	background-color: rgba(0, 0, 0, 0.329);
+	/* background-color: rgba(0, 0, 0, 0.329); */
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	color: white;
+}
+
+.inner-container-main-list div:hover {
+    color: wheat;
+    cursor: pointer;
+}
+
+.inner-container-main-search {
+	width: 90%;
+	height: 40px;
+	margin-top: 100px;
+	display:flex;
+	justify-content: center;
+}
+
+.inner-container-main-search>input {
+	width: 50%;
+	background-color: transparent;
+	color: white;
+	border: 1px solid white;
+	padding: 5px;
+}
+
+.inner-container-main-search>input:hover {
+	box-shadow: 0 0 30px white;
 }
 
 .inner-container-cars {
+    width: 100%;
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
-	justify-content: space-around;
+    background: url(../images/background-image-car-2.jpeg);
+	background-position: 0;
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
 }
 
 .inner-container-cars-car-header {
+	height: 100px;
 	text-align: center;
-	padding: 50px 80px;
 	background-color: #282e34;
 	color: #dddddd;
 }
@@ -308,5 +342,4 @@ footer {
 	font-size: 15px;
 	text-align: center;
 	bottom: 0;
-	margin-top: 10px;
 }

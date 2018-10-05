@@ -7,6 +7,7 @@ public class SQLConstants {
 	public static String SELECT_ALL_CAR_TYPE_MAKE = "select * from car_type where car_type_id in(select car_type_id from car where make_id=";
 	public static String ALL_CARS = "select * from specification";
 	public static String SELECT_ALL_CARS_TYPE = "select * from specification where car_id in(select car_id from car where car_type_id=?)";
+	public static String SELECT_ALL_CARS_MAKE = "select * from specification where car_id in(select car_id from car where make_id=?)";
 	public static String SELECT_ALL_CAR = "select * from specification where car_id in(select car_id from car where make_id=? and car_type_id=?)";
 	public static String DELETE_CAR = "delete from specification where car_id=?";
 	public static String INSERT_CAR = "insert into specification (car_name,engine_type,cylinder,displacement,transmission,"
@@ -31,6 +32,7 @@ public class SQLConstants {
 	public static String DELETE_REQUEST = "delete from request where request_id=?";
 	public static String INSERT_STATISTICS = "insert into statistics(car_id,statistics_year,sale_count) values (?,?,?)";
 	public static String IS_USER = "select count(*) from users where user_name=? and user_password=?";
+	public static String IS_USERNAME = "select count(*) from users where user_name=?";
 	public static String IS_ADMIN = "select count(*) from users where user_name=? and"
 			+ " user_password=? and admin_status='ADMIN'";
 

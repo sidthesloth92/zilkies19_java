@@ -33,7 +33,7 @@ public class FetchCarsDAO {
 				make.setMakeName(res.getString(AppConstants.MAKE_NAME));
 				makes.add(make);
 			}
-		} catch (SQLException e) {
+		} catch (SQLException e) {e.printStackTrace();
 			throw new SQLException();
 		} finally {
 			DBUtils.closeConnection(con, pst, res);
@@ -111,7 +111,7 @@ public class FetchCarsDAO {
 			System.out.println(e);
 			throw new SQLException();
 		} finally {
-			DBUtils.closeConnection(con, pst, null);
+			DBUtils.closeConnection(con, pst, res);
 		}
 		return rating;
 	}
@@ -121,11 +121,14 @@ public class FetchCarsDAO {
 		ArrayList<Specification> cars = new ArrayList<Specification>();
 		try {
 			con = DBUtils.getConnection();
-			if (makeId == 0) {
+			if (makeId == 0 && carTypeId == 0) {
+				pst = con.prepareStatement(SQLConstants.ALL_CARS);
+			} else if (makeId == 0) {
 				pst = con.prepareStatement(SQLConstants.SELECT_ALL_CARS_TYPE);
 				pst.setInt(1, carTypeId);
-			} else if (makeId == 0 && carTypeId == 0) {
-				pst = con.prepareStatement(SQLConstants.ALL_CARS);
+			} else if (carTypeId == 0) {
+				pst = con.prepareStatement(SQLConstants.SELECT_ALL_CARS_MAKE);
+				pst.setInt(1, makeId);
 			} else {
 				pst = con.prepareStatement(SQLConstants.SELECT_ALL_CAR);
 				pst.setInt(1, makeId);

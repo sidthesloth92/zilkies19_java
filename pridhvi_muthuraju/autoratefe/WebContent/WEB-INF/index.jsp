@@ -13,10 +13,9 @@
 	href="${pageContext.request.contextPath}/css/index.css">
 
 <link
-	href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Indie+Flower|Jua|Metamorphous|Permanent+Marker"
+	href="https://fonts.googleapis.com/css?family=Lato|Arvo"
 	rel="stylesheet">
-
-<body onload="getMakes()">
+<body onload="getCarsSearch();">
 
 	<div class="container">
 
@@ -82,34 +81,39 @@
 
 				<div class="inner-container-main-options">
 
-					<div>
 
-						<button onclick="getMakes()" class="button--hover">
-							<p>Makes</p>
-						</button>
+					<button onclick="getMakesButton()" class="button--hover">
+						<p>Makes</p>
+					</button>
 
-					</div>
 
-					<div>
 
-						<button onclick="getTypes()" class="button--hover">
-							<p>Types</p>
-						</button>
+					<button onclick="getTypesButton()" class="button--hover">
+						<p>Types</p>
+					</button>
 
-					</div>
-					
-					<div>
 
-						<button onclick="window.location='/autoratefe/FetchStatisticsServlet';" class="button--hover">
-							<p>Statistics</p>
-						</button>
 
-					</div>
+					<button
+						onclick="window.location='/autoratefe/FetchStatisticsServlet';"
+						class="button--hover">
+						<p>Statistics</p>
+					</button>
+
 
 
 				</div>
 
 				<div class="inner-container-main-list"></div>
+
+				<div class="inner-container-main-search">
+
+					<input placeholder="Search Cars" list="search-cars">
+					<datalist id="search-cars">
+						
+					</datalist>
+
+				</div>
 
 			</div>
 

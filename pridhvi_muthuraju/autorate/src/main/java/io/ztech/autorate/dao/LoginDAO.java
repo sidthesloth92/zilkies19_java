@@ -44,9 +44,15 @@ public class LoginDAO {
 		boolean flag = true;
 		try {
 			con = DBUtils.getConnection();
-			pst = con.prepareStatement(SQLConstants.IS_USER);
-			pst.setString(1, user.getUsername());
-			pst.setString(2, user.getPassword());
+			if(user.getPassword().equals("")) {
+				pst = con.prepareStatement(SQLConstants.IS_USERNAME);
+				pst.setString(1, user.getUsername());
+			}
+			else {
+				pst = con.prepareStatement(SQLConstants.IS_USER);
+				pst.setString(1, user.getUsername());
+				pst.setString(2, user.getPassword());
+			}
 			res = pst.executeQuery();
 			res.next();
 			if (res.getInt(1) == 0)
